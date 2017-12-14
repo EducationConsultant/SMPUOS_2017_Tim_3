@@ -20,8 +20,10 @@ Implementacija sadrži sledeće zadatke:
 Realizacija je izvršena korišćenjem REST mikroservisnih softverskih arhitektura. Za implementaciju pojedinačnih mikroservisa korišćeni su:
 - Programski jezik: Java
 - Razvojna okruženja i alati: Spring, Spring Data, Spring Cloud i Netflix OSS
-- SUBP: MySQL
+- SUBP: MongoDB
 - Komunikacija: HTTP protokol i REST API
 
-## Pokretanje aplikacije
-U fazi izrade...
+## Pokretanje modela i aplikacije
+Modeli su rađeni u aplikacijama:
+- PowerDesigner 15: UML dijagrami slučajeva korišćenja i UML dijagrami klasa
+- Yaoqiang 5.3.12: BPMN dijagrami
