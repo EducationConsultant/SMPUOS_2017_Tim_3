@@ -6,7 +6,7 @@
       <yaoqiang:pageFormat height="841.8897637795276" imageableHeight="831.8897637795276" imageableWidth="588.1102362204724" imageableX="5.0" imageableY="5.0" orientation="0" width="598.1102362204724"/>
       <yaoqiang:page background="#FFFFFF" horizontalCount="1" verticalCount="1"/>
     </extensionElements>
-    <participant id="_2" name="Aktivacija korisnika" processRef="PROCESS_1">
+    <participant id="_2" name="Bioskop" processRef="PROCESS_1">
       <extensionElements>
         <yaoqiang:style whiteSpace="wrap"/>
       </extensionElements>
@@ -111,7 +111,7 @@
       <bpmndi:BPMNShape bpmnElement="_2" id="Yaoqiang-_2" isExpanded="true" isHorizontal="true">
         <dc:Bounds height="239.0" width="990.0" x="50.0" y="219.5"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="141.0" width="23.61" x="55.7" y="268.5"/>
+          <dc:Bounds height="63.0" width="23.61" x="55.7" y="307.5"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_15" id="Yaoqiang-_15">
@@ -159,13 +159,13 @@
       <bpmndi:BPMNShape bpmnElement="_13" id="Yaoqiang-_13">
         <dc:Bounds height="32.0" width="32.0" x="512.1963321692537" y="371.3522140161932"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="34.84" width="91.0" x="482.7" y="403.91"/>
+          <dc:Bounds height="34.84" width="91.0" x="482.7" y="403.89"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape bpmnElement="_17" id="Yaoqiang-_17">
         <dc:Bounds height="32.0" width="32.0" x="896.8872132059219" y="277.8868512051409"/>
         <bpmndi:BPMNLabel>
-          <dc:Bounds height="19.84" width="87.0" x="869.39" y="317.97"/>
+          <dc:Bounds height="19.84" width="87.0" x="869.39" y="317.95"/>
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge bpmnElement="_18" id="Yaoqiang-_18">
