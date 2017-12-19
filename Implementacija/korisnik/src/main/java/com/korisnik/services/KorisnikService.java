@@ -21,5 +21,7 @@ public interface KorisnikService {
 
 	public Korisnik deaktivacijaKorisnika(Long id);
 
-	public Korisnik findOne(Long id);
+	public List<Korisnik> aktivniKorisnici();
+
+	public List<Korisnik> dektiviraniKorisnici();
 }

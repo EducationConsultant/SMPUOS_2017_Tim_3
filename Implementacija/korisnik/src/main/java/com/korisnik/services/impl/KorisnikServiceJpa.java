@@ -1,5 +1,6 @@
 package com.korisnik.services.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -84,9 +85,31 @@ public class KorisnikServiceJpa implements KorisnikService {
 	}
 
 	@Override
-	public Korisnik findOne(Long id) {
-		Korisnik korisnik = korisnikRepository.findOne(id);
-		return korisnik;
+	public List<Korisnik> aktivniKorisnici() {
+		List<Korisnik> sviKorisnici = korisnikRepository.findAll();
+		List<Korisnik> aktivniKorisnici = new ArrayList<Korisnik>();
+
+		for (Korisnik korisnik : sviKorisnici) {
+			if (korisnik.getStatusKorisnika().equals(TipStatusaKorisnika.AKTIVIRAN)) {
+				aktivniKorisnici.add(korisnik);
+			}
+		}
+
+		return aktivniKorisnici;
+	}
+
+	@Override
+	public List<Korisnik> dektiviraniKorisnici() {
+		List<Korisnik> sviKorisnici = korisnikRepository.findAll();
+		List<Korisnik> deaktiviraniKorisnici = new ArrayList<Korisnik>();
+
+		for (Korisnik korisnik : sviKorisnici) {
+			if (korisnik.getStatusKorisnika().equals(TipStatusaKorisnika.DEAKTIVIRAN)) {
+				deaktiviraniKorisnici.add(korisnik);
+			}
+		}
+
+		return deaktiviraniKorisnici;
 	}
 
 }

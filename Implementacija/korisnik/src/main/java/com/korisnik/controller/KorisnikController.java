@@ -75,4 +75,16 @@ public class KorisnikController {
 		return new ResponseEntity<Korisnik>(dekativiraniKorisnik, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/pregledAktivnih", method = RequestMethod.GET)
+	public ResponseEntity<List<Korisnik>> pregledAktivnih() {
+		List<Korisnik> aktivniKorisnici = korisnikService.aktivniKorisnici();
+		return new ResponseEntity<List<Korisnik>>(aktivniKorisnici, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/pregledDeaktiviranih", method = RequestMethod.GET)
+	public ResponseEntity<List<Korisnik>> pregledDeaktiviranih() {
+		List<Korisnik> deaktiviraniKorisnici = korisnikService.dektiviraniKorisnici();
+		return new ResponseEntity<List<Korisnik>>(deaktiviraniKorisnici, HttpStatus.OK);
+	}
+
 }
