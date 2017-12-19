@@ -37,10 +37,8 @@ public class Bioskop {
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "adresaBioskopa_id", referencedColumnName = "adresa_id")
-	private Adresa adresaBioskopa;
+	private Adresa adresa;
 	
-	@Column(nullable = false)
-	@NotNull
 	private Long ocena;
 	
 	// nema info o svojim salama
@@ -83,13 +81,19 @@ public class Bioskop {
 		this.naziv = naziv;
 	}
 
-	public Adresa getAdresaBioskopa() {
-		return adresaBioskopa;
+	
+
+	public Adresa getAdresa() {
+		return adresa;
 	}
 
-	public void setAdresaBioskopa(Adresa adresaBioskopa) {
-		this.adresaBioskopa = adresaBioskopa;
+
+
+	public void setAdresa(Adresa adresa) {
+		this.adresa = adresa;
 	}
+
+
 
 	public Long getOcena() {
 		return ocena;
