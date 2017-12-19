@@ -1,5 +1,10 @@
 package com.bioskop.models;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,14 +14,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name = "bioskop")
+@Table
 public class Bioskop {
 	
 	@Id
@@ -37,9 +43,29 @@ public class Bioskop {
 	@NotNull
 	private Long ocena;
 	
+	// nema info o svojim salama
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bioskop", fetch = FetchType.EAGER)
+	@JsonIgnore
+	private List<Sala> sale = new ArrayList<Sala>();
+	
+	
 	public Bioskop() {
 		
 	}
+
+	
+	
+	public List<Sala> getSale() {
+		return sale;
+	}
+
+
+
+	public void setSale(List<Sala> sale) {
+		this.sale = sale;
+	}
+
+
 
 	public Long getId() {
 		return id;
