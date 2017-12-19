@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.bioskop.models.Adresa;
 import com.bioskop.models.Bioskop;
+import com.bioskop.models.Sala;
 
 public interface BioskopService {
 
@@ -21,5 +22,6 @@ public interface BioskopService {
 	// rangiranje bioskopa po oceni
 	// pregled bioskopa i njegovih sala
 	public Bioskop saveOcena(Bioskop bioskop, Long id);
+
 	
 }

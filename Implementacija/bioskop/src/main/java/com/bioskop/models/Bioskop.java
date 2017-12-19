@@ -21,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
+
 @Entity
 @Table
 public class Bioskop {
@@ -41,17 +42,15 @@ public class Bioskop {
 	
 	private Long ocena;
 	
-	// nema info o svojim salama
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "bioskop", fetch = FetchType.EAGER)
-	@JsonIgnore
-	private List<Sala> sale = new ArrayList<Sala>();
 	
+	// bioskop ima sale
+	@OneToMany(mappedBy = "bioskop", fetch = FetchType.EAGER)
+	private List<Sala> sale;
 	
 	public Bioskop() {
 		
 	}
 
-	
 	
 	public List<Sala> getSale() {
 		return sale;

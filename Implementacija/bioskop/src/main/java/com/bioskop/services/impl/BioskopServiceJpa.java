@@ -7,8 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.bioskop.models.Adresa;
 import com.bioskop.models.Bioskop;
+import com.bioskop.models.Sala;
 import com.bioskop.repository.AdresaRepository;
 import com.bioskop.repository.BioskopRepository;
+import com.bioskop.repository.SalaRepository;
 import com.bioskop.services.BioskopService;
 
 @Service
@@ -37,17 +39,17 @@ public class BioskopServiceJpa implements BioskopService {
 		bioskop.setAdresa(sacuvanaAdresa);
 		return repository.save(bioskop);
 	}
+	
+
 
 	@Override
 	public void delete(Bioskop bioskop) {
-		Bioskop bioskopUbazi = repository.findOne(bioskop.getId());
 		repository.delete(bioskop);
 		
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		Bioskop bioskopUbazi = repository.findOne(id);
 		repository.delete(id);
 	}
 
@@ -81,6 +83,7 @@ public class BioskopServiceJpa implements BioskopService {
 	public List<Bioskop> findByAdresa(Adresa adresa) {
 		return repository.findByAdresa(adresa);
 	}
+
 
 
 

@@ -20,7 +20,6 @@ import com.bioskop.models.Adresa;
 import com.bioskop.models.Bioskop;
 import com.bioskop.services.BioskopService;
 
-
 @RestController
 @RequestMapping("/api/bioskop")
 public class BioskopController {
@@ -46,14 +45,14 @@ public class BioskopController {
 
 	// insert
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Bioskop> insertComponent(@Valid @RequestBody Bioskop bioskop) {
-
-		Bioskop bioskopUBazi = bioskopService.findByNaziv(bioskop.getNaziv());
+	public ResponseEntity<Bioskop> insertBioskop(@Valid @RequestBody Bioskop bioskop) {
 
 		Bioskop sacuvanBioskop = bioskopService.save(bioskop);
 		return new ResponseEntity<Bioskop>(sacuvanBioskop, HttpStatus.CREATED);
 
 	}
+
+
 
 	// delete
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -74,7 +73,7 @@ public class BioskopController {
 		return new ResponseEntity<Bioskop>(savedBioskop, HttpStatus.OK);
 
 	}
-	
+
 	// ocenjivanje
 	@RequestMapping(value = "/ocena/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Bioskop> insertComment(@PathVariable Long id, @RequestBody Bioskop bioskop) {
@@ -104,7 +103,5 @@ public class BioskopController {
 	//
 	// return new ResponseEntity<List<Bioskop>>(bioskopi, HttpStatus.OK);
 	// }
-
-
 
 }

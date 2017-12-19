@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 
 
@@ -45,10 +49,12 @@ public class Sala {
 	@NotNull
 	private SalaTip tip;
 	
-	//ima info o bioskopu
+	
 	@ManyToOne
-	@JoinColumn(name="bioskop", referencedColumnName = "bioskop_id")
+	@JoinColumn(name = "bioskop_id")
+	@JsonBackReference
 	private Bioskop bioskop;
+	
 	
 	
 	public Sala() {

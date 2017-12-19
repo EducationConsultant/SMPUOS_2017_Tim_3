@@ -2,55 +2,35 @@ package com.bioskop.services.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bioskop.models.Bioskop;
 import com.bioskop.models.Sala;
+import com.bioskop.repository.BioskopRepository;
+import com.bioskop.repository.SalaRepository;
 import com.bioskop.services.SalaService;
 
 @Service
 public class SalaServiceJpa implements SalaService {
 
+	@Autowired
+	private BioskopRepository bioskopRepository;
+	
+	@Autowired
+	private SalaRepository salaRepository;
+	
 	@Override
-	public Sala findOne(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Sala> find() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Sala save(Sala sala) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(Sala sala) {
-		// TODO Auto-generated method stub
+	public Bioskop saveSala(Long id, Sala sala) {
+		Bioskop bioskop = bioskopRepository.findOne(id);
+		List<Sala> sale = bioskop.getSale();
+		salaRepository.save(sala);
+		sale.add(sala);
+		bioskop.setSale(sale);
 		
+		return bioskopRepository.save(bioskop);
 	}
 
-	@Override
-	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void update(Sala novaSala, Long salaId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Sala> findByBioskop(Bioskop bioskop) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
