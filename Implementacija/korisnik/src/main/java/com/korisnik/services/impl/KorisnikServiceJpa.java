@@ -112,4 +112,18 @@ public class KorisnikServiceJpa implements KorisnikService {
 		return deaktiviraniKorisnici;
 	}
 
+	@Override
+	public List<Korisnik> findByImeAndPrezime(String ime, String prezime) {
+		List<Korisnik> sviKorisnici = korisnikRepository.findAll();
+		List<Korisnik> korisnici = new ArrayList<Korisnik>();
+
+		for (Korisnik k : sviKorisnici) {
+			if (k.getIme().equals(ime) && k.getPrezime().equals(prezime)) {
+				korisnici.add(k);
+			}
+		}
+
+		return korisnici;
+	}
+
 }

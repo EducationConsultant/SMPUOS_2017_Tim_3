@@ -87,4 +87,14 @@ public class KorisnikController {
 		return new ResponseEntity<List<Korisnik>>(deaktiviraniKorisnici, HttpStatus.OK);
 	}
 
+	// koriscen je KorisnikLogin, da bi se izbeglo kreiranje jos jednog modela
+	// sa atributima ime i prezime
+	@RequestMapping(value = "/filterImePrezime", method = RequestMethod.PUT)
+	public ResponseEntity<List<Korisnik>> pregledPoImenuPrezimenu(@RequestBody KorisnikLogin korisnik) {
+		List<Korisnik> pronadjeniKorisnici = korisnikService.findByImeAndPrezime(korisnik.getKorisnickoIme(),
+				korisnik.getLozinka());
+
+		return new ResponseEntity<List<Korisnik>>(pronadjeniKorisnici, HttpStatus.OK);
+	}
+
 }

@@ -24,4 +24,6 @@ public interface KorisnikService {
 	public List<Korisnik> aktivniKorisnici();
 
 	public List<Korisnik> dektiviraniKorisnici();
+
+	public List<Korisnik> findByImeAndPrezime(String ime, String prezime);
 }
