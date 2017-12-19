@@ -57,6 +57,13 @@ public class KorisnikController {
 		return new ResponseEntity<Korisnik>(ulogovaniKorisnik, HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "/logout", method = RequestMethod.PUT)
+	public ResponseEntity<Korisnik> logout(@RequestBody KorisnikLogin korisnikLogin) {
+		Korisnik ulogovaniKorisnik = korisnikService.logout(korisnikLogin);
+
+		return new ResponseEntity<Korisnik>(ulogovaniKorisnik, HttpStatus.OK);
+	}
+
 	// id korisnika kog aktiviram
 	@RequestMapping(value = "/aktivacija/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Korisnik> aktivacija(@PathVariable Long id) {

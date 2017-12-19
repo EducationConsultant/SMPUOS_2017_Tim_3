@@ -66,6 +66,15 @@ public class KorisnikServiceJpa implements KorisnikService {
 	}
 
 	@Override
+	public Korisnik logout(KorisnikLogin korisnikLogin) {
+		Korisnik korisnikUbazi = korisnikRepository.findByKorisnickoImeAndLozinka(korisnikLogin.getKorisnickoIme(),
+				korisnikLogin.getLozinka());
+		korisnikUbazi.setUlogovan(false);
+		korisnikRepository.save(korisnikUbazi);
+		return korisnikUbazi;
+	}
+
+	@Override
 	public Korisnik aktivacijaKorisnika(Long id) {
 		Korisnik korisnik = korisnikRepository.findOne(id);
 		korisnik.setStatusKorisnika(TipStatusaKorisnika.AKTIVIRAN);
