@@ -65,8 +65,7 @@ public class BioskopController {
 
 	// update
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Bioskop> updateComponent(@PathVariable Long id, @Valid @RequestBody Bioskop bioskop) { // takes
-		// sent
+	public ResponseEntity<Bioskop> updateBioskop(@PathVariable Long id, @Valid @RequestBody Bioskop bioskop) { 
 
 		Bioskop savedBioskop = bioskopService.update(bioskop, id);
 
@@ -76,7 +75,7 @@ public class BioskopController {
 
 	// ocenjivanje
 	@RequestMapping(value = "/ocena/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Bioskop> insertComment(@PathVariable Long id, @RequestBody Bioskop bioskop) {
+	public ResponseEntity<Bioskop> insertOcena(@PathVariable Long id, @RequestBody Bioskop bioskop) {
 
 		Bioskop ocenaZaBioskop = bioskopService.saveOcena(bioskop, id);
 
