@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.korisnik.models.Adresa;
 import com.korisnik.models.Korisnik;
+import com.korisnik.models.KorisnikLogin;
 import com.korisnik.models.TipKorisnika;
 import com.korisnik.models.TipStatusaKorisnika;
 import com.korisnik.repository.AdresaRepository;
@@ -52,6 +53,40 @@ public class KorisnikServiceJpa implements KorisnikService {
 	public List<Korisnik> findAll() {
 		List<Korisnik> korisnici = korisnikRepository.findAll();
 		return korisnici;
+	}
+
+	@Override
+	public Korisnik login(KorisnikLogin korisnikLogin) {
+		Korisnik korisnikUbazi = korisnikRepository.findByKorisnickoImeAndLozinka(korisnikLogin.getKorisnickoIme(),
+				korisnikLogin.getLozinka());
+		korisnikUbazi.setUlogovan(true);
+		korisnikRepository.save(korisnikUbazi);
+		return korisnikUbazi;
+	}
+
+	@Override
+	public Korisnik aktivacijaKorisnika(Long id) {
+		Korisnik korisnik = korisnikRepository.findOne(id);
+		korisnik.setStatusKorisnika(TipStatusaKorisnika.AKTIVIRAN);
+		Korisnik aktiviranKorisnik = korisnikRepository.save(korisnik);
+
+		return aktiviranKorisnik;
+	}
+
+	@Override
+	public Korisnik deaktivacijaKorisnika(Long id) {
+		Korisnik korisnik = korisnikRepository.findOne(id);
+		korisnik.setStatusKorisnika(TipStatusaKorisnika.DEAKTIVIRAN);
+
+		Korisnik deaktiviraniKorisnik = korisnikRepository.save(korisnik);
+
+		return deaktiviraniKorisnik;
+	}
+
+	@Override
+	public Korisnik findOne(Long id) {
+		Korisnik korisnik = korisnikRepository.findOne(id);
+		return korisnik;
 	}
 
 }

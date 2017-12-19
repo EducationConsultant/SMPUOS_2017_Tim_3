@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.korisnik.models.Adresa;
 import com.korisnik.models.Korisnik;
+import com.korisnik.models.KorisnikLogin;
 import com.korisnik.services.AdresaService;
 import com.korisnik.services.KorisnikService;
 
@@ -41,13 +42,37 @@ public class KorisnikController {
 
 		return new ResponseEntity<Korisnik>(savedKorisnik, HttpStatus.CREATED);
 	}
-	
+
 	@RequestMapping(value = "/korisnici", method = RequestMethod.GET)
 	public ResponseEntity<List<Korisnik>> getKorisnici() {
 		List<Korisnik> korisnici = korisnikService.findAll();
 		return new ResponseEntity<List<Korisnik>>(korisnici, HttpStatus.OK);
 
 	}
-	
-	
+
+	@RequestMapping(value = "/login", method = RequestMethod.PUT)
+	public ResponseEntity<Korisnik> login(@RequestBody KorisnikLogin korisnikLogin) {
+		Korisnik ulogovaniKorisnik = korisnikService.login(korisnikLogin);
+
+		return new ResponseEntity<Korisnik>(ulogovaniKorisnik, HttpStatus.OK);
+	}
+
+	// id korisnika kog aktiviram
+	@RequestMapping(value = "/aktivacija/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Korisnik> aktivacija(@PathVariable Long id) {
+
+		Korisnik aktiviraniKorisnik = korisnikService.aktivacijaKorisnika(id);
+
+		return new ResponseEntity<Korisnik>(aktiviraniKorisnik, HttpStatus.OK);
+	}
+
+	// id korisnika kog dekativiram
+	@RequestMapping(value = "/deaktivacija/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Korisnik> deaktivacija(@PathVariable Long id) {
+
+		Korisnik dekativiraniKorisnik = korisnikService.deaktivacijaKorisnika(id);
+
+		return new ResponseEntity<Korisnik>(dekativiraniKorisnik, HttpStatus.OK);
+	}
+
 }
