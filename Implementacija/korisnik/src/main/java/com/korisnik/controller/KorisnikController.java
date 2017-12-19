@@ -1,15 +1,53 @@
 package com.korisnik.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.korisnik.models.Adresa;
+import com.korisnik.models.Korisnik;
+import com.korisnik.services.AdresaService;
+import com.korisnik.services.KorisnikService;
 
 @RestController
 @RequestMapping("/api/korisnik")
 public class KorisnikController {
 
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public String hello() {
-		return "Hello!";
+	@Autowired
+	private KorisnikService korisnikService;
+
+	@Autowired
+	private AdresaService adresaService;
+
+	@RequestMapping(value = "/adrese/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Adresa> getAdresa(@PathVariable Long id) {
+		Adresa adresa = adresaService.findOnde(id);
+		return new ResponseEntity<Adresa>(adresa, HttpStatus.OK);
+
 	}
+
+	@RequestMapping(value = "/registracija", method = RequestMethod.POST)
+	public ResponseEntity<Korisnik> registracija(@Valid @RequestBody Korisnik korisnik) {
+		Korisnik savedKorisnik = korisnikService.save(korisnik);
+
+		return new ResponseEntity<Korisnik>(savedKorisnik, HttpStatus.CREATED);
+	}
+	
+	@RequestMapping(value = "/korisnici", method = RequestMethod.GET)
+	public ResponseEntity<List<Korisnik>> getKorisnici() {
+		List<Korisnik> korisnici = korisnikService.findAll();
+		return new ResponseEntity<List<Korisnik>>(korisnici, HttpStatus.OK);
+
+	}
+	
+	
 }

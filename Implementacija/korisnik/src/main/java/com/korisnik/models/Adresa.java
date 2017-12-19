@@ -13,6 +13,7 @@ public class Adresa {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "adresa_id", nullable = false, unique = true)
 	private Long id;
 
 	@Column(nullable = false)
@@ -25,6 +26,14 @@ public class Adresa {
 	private int broj;
 
 	public Adresa() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNazivNaseljenogMesta() {
