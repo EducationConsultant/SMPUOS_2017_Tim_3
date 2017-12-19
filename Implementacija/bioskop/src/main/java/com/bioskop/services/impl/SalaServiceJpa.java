@@ -31,6 +31,18 @@ public class SalaServiceJpa implements SalaService {
 		return bioskopRepository.save(bioskop);
 	}
 
+	@Override
+	public Bioskop deleteSala(Long id, Long idSale) {
+		Bioskop bioskop = bioskopRepository.findOne(id);
+		List<Sala> sale = bioskop.getSale();
+		Sala salaZaObrisati = salaRepository.findOne(idSale);
+		salaRepository.delete(salaZaObrisati);
+		sale.remove(salaZaObrisati);
+		bioskop.setSale(sale);
+		
+		return bioskopRepository.save(bioskop);
+	}
+
 
 
 }

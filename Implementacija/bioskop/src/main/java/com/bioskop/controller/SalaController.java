@@ -26,11 +26,23 @@ public class SalaController {
 
 	// unos sale u okviru bioskopa
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
-	public ResponseEntity<Bioskop> insertComment(@PathVariable Long id, @RequestBody Sala sala) {
+	public ResponseEntity<Bioskop> insertSala(@PathVariable Long id, @RequestBody Sala sala) {
 
 		Bioskop bioskopZaIzmenu = salaService.saveSala(id, sala);
 
 		return new ResponseEntity<Bioskop>(bioskopZaIzmenu, HttpStatus.CREATED);
 
 	}
+	
+	
+	// unos sale u okviru bioskopa
+	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.DELETE)
+	public ResponseEntity<Bioskop> deleteSala(@PathVariable Long idBioskopa,@PathVariable Long idSale) {
+
+		Bioskop bioskopZaIzmenu = salaService.deleteSala(idBioskopa, idSale);
+
+		return new ResponseEntity<Bioskop>(bioskopZaIzmenu, HttpStatus.CREATED);
+
+	}
+	
 }
