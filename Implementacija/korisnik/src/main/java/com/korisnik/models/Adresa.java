@@ -25,6 +25,12 @@ public class Adresa {
 	@Column(nullable = false)
 	private int broj;
 
+	@Column(nullable = false)
+	private String geoDuzina;
+
+	@Column(nullable = false)
+	private String geoSirina;
+
 	public Adresa() {
 	}
 
@@ -58,6 +64,22 @@ public class Adresa {
 
 	public void setBroj(int broj) {
 		this.broj = broj;
+	}
+
+	public String getGeoDuzina() {
+		return geoDuzina;
+	}
+
+	public void setGeoDuzina(String geoDuzina) {
+		this.geoDuzina = geoDuzina;
+	}
+
+	public String getGeoSirina() {
+		return geoSirina;
+	}
+
+	public void setGeoSirina(String geoSirina) {
+		this.geoSirina = geoSirina;
 	}
 
 }
