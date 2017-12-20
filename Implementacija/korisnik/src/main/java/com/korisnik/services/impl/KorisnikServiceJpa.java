@@ -127,12 +127,17 @@ public class KorisnikServiceJpa implements KorisnikService {
 		List<Korisnik> korisnici = new ArrayList<Korisnik>();
 
 		for (Korisnik k : sviKorisnici) {
-			if (k.getIme().equals(ime) && k.getPrezime().equals(prezime)) {
+			if (k.getIme().contains(ime) && k.getPrezime().contains(prezime)) {
 				korisnici.add(k);
 			}
 		}
 
 		return korisnici;
+	}
+
+	@Override
+	public Korisnik findOne(Long id) {
+		return korisnikRepository.findOne(id);
 	}
 
 }

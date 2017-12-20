@@ -29,20 +29,22 @@ public class KorisnikController {
 	@Autowired
 	private AdresaService adresaService;
 
-	@RequestMapping(value = "/adrese/{id}", method = RequestMethod.GET)
+	// findOne adresa
+	@RequestMapping(value = "/adresa/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Adresa> getAdresa(@PathVariable Long id) {
-		Adresa adresa = adresaService.findOnde(id);
+		Adresa adresa = adresaService.findOne(id);
 		return new ResponseEntity<Adresa>(adresa, HttpStatus.OK);
 
 	}
 
 	@RequestMapping(value = "/registracija", method = RequestMethod.POST)
-	public ResponseEntity<Korisnik> registracija(@Valid @RequestBody Korisnik korisnik) {
+	public ResponseEntity<Korisnik> insertKorisnik(@Valid @RequestBody Korisnik korisnik) {
 		Korisnik savedKorisnik = korisnikService.save(korisnik);
 
 		return new ResponseEntity<Korisnik>(savedKorisnik, HttpStatus.CREATED);
 	}
 
+	// findAll korisnici
 	@RequestMapping(value = "/korisnici", method = RequestMethod.GET)
 	public ResponseEntity<List<Korisnik>> getKorisnici() {
 		List<Korisnik> korisnici = korisnikService.findAll();
@@ -102,6 +104,15 @@ public class KorisnikController {
 				korisnik.getLozinka());
 
 		return new ResponseEntity<List<Korisnik>>(pronadjeniKorisnici, HttpStatus.OK);
+	}
+
+	// pregled korisnika po identifikatoru korisnika
+	@RequestMapping(value = "/findOne/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Korisnik> getKorisnik(@PathVariable Long id) {
+
+		Korisnik pronadjeniKorisnik = korisnikService.findOne(id);
+
+		return new ResponseEntity<Korisnik>(pronadjeniKorisnik, HttpStatus.OK);
 	}
 
 }

@@ -14,7 +14,7 @@ public class AdresaServiceJpa implements AdresaService {
 	private AdresaRepository adresaRepository;
 
 	@Override
-	public Adresa findOnde(Long id) {
+	public Adresa findOne(Long id) {
 		return adresaRepository.findOne(id);
 	}
 

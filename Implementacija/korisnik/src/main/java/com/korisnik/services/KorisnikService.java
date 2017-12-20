@@ -16,7 +16,7 @@ public interface KorisnikService {
 	public List<Korisnik> findAll();
 
 	public Korisnik login(KorisnikLogin korisnikLogin);
-	
+
 	public Korisnik logout(KorisnikLogin korisnikLogin);
 
 	public Korisnik aktivacijaKorisnika(Long id);
@@ -28,4 +28,6 @@ public interface KorisnikService {
 	public List<Korisnik> dektiviraniKorisnici();
 
 	public List<Korisnik> findByImeAndPrezime(String ime, String prezime);
+
+	public Korisnik findOne(Long id);
 }

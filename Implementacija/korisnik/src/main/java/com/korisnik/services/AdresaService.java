@@ -4,6 +4,6 @@ import com.korisnik.models.Adresa;
 
 public interface AdresaService {
 
-	public Adresa findOnde(Long id);
+	public Adresa findOne(Long id);
 
 }
