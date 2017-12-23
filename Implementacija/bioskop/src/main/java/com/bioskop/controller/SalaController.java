@@ -18,7 +18,7 @@ import com.bioskop.services.SalaService;
 
 
 @RestController
-@RequestMapping("/api/sala")
+@RequestMapping("sala")
 public class SalaController {
 
 	@Autowired

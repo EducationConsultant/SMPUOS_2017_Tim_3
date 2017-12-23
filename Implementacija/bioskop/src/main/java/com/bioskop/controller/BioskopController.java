@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import com.bioskop.models.Adresa;
 import com.bioskop.models.Bioskop;
 import com.bioskop.services.BioskopService;
+
 
 @RestController
 @RequestMapping("bioskop")
@@ -84,6 +86,8 @@ public class BioskopController {
 		return new ResponseEntity<Bioskop>(ocenaZaBioskop, HttpStatus.CREATED);
 
 	}
+	
+	
 
 	// find by naziv
 	// localhost:8091/api/bioskop/naziv?naziv=Cinema
