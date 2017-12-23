@@ -21,7 +21,7 @@ import com.bioskop.models.Bioskop;
 import com.bioskop.services.BioskopService;
 
 @RestController
-@RequestMapping("/api/bioskop")
+@RequestMapping("bioskop")
 public class BioskopController {
 
 	@Autowired
@@ -77,6 +77,8 @@ public class BioskopController {
 	@RequestMapping(value = "/ocena/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Bioskop> insertOcena(@PathVariable Long id, @RequestBody Bioskop bioskop) {
 
+		// kod usera
+		//Boolean isProductsOK = c.postS("http://localhost:8765/bioskop-service/bioskop/insertOcena", id.toString());
 		Bioskop ocenaZaBioskop = bioskopService.saveOcena(bioskop, id);
 
 		return new ResponseEntity<Bioskop>(ocenaZaBioskop, HttpStatus.CREATED);
