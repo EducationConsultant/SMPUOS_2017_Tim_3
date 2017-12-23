@@ -20,7 +20,7 @@ import com.korisnik.services.AdresaService;
 import com.korisnik.services.KorisnikService;
 
 @RestController
-@RequestMapping("/api/korisnik")
+@RequestMapping("korisnik")
 public class KorisnikController {
 
 	@Autowired

@@ -1,0 +1,43 @@
+Registrovanje servisa 
+
+1. U svojoj aplikaciji (bioskop) zakomentarisati sve u application.properties
+2. Dodati fajl bootstrap.properties i popuniti ga
+3. Dodati u pom.xml dependency za eureku
+
+--------------------------------------------------------------------------------
+4. U projektu Zuul registrovati servis u application.properties
+5. Svuci sa repozitorijuma     https://github.com/SvetlanaDjuric/ConfigRepo.git  
+ folder sa konfiguracionim fajlovima i dodaj fajl za svoj servis
+6. Okaci to ponovo na taj isti repozitorijum i tek onda mozes da pokrenes projekat
+7. Dodati anotacije:
+
+	@EnableAutoConfiguration
+	@EnableDiscoveryClient
+	@SpringBootApplication
+	public class BioskopApplication {
+
+		public static void main(String[] args) {
+			SpringApplication.run(BioskopApplication.class, args);
+		}
+	}
+-------------------------------------------------------------------------------
+Pokretanje:
+1. Pokrenuti EurecaService
+2. Pokrenuti ZuulService
+3. Pokrenuti ConfigurationService
+4. Pokrenuti Bioskop
+
+--------------------------------------------------------------------------------
+proveriti na localhost:8761 da li je servis regostrovan u Eureci, ako jeste onda u Postmanu:
+
+					localhost:8765/bioskop-service/bioskop
+					
+					ako izadje neka greska da je vreme isteklo, samo F5 i proradice (dok se ne otkrije bag :) )
+					
+-ne pristupa se vise direktno apliakciji, nego preko Zuul-a (njegov port je 8765) , 
+zatim naziv servisa, pa parametar koji se nalazi iznad imena klase i onda
+ukoliko metoda ima parametre stavljaju se i oni (kao inace sto se radi)
+
+
+
+P.S. Proveriti sifru za bazu, kod Milene i mene je sifra cecemilena
