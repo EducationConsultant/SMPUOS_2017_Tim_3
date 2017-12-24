@@ -1,10 +1,15 @@
 package com.korisnik.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -26,10 +31,14 @@ public class Adresa {
 	private int broj;
 
 	@Column(nullable = false)
-	private String geoDuzina;
+	private float geoDuzina;
 
 	@Column(nullable = false)
-	private String geoSirina;
+	private float geoSirina;
+
+	// mora zbog pregleda korisnika na osnovu koordinata mesta stanovanja
+	@OneToMany(mappedBy = "adresaStanovanja", fetch = FetchType.EAGER)
+	private Set<Korisnik> korisnici = new HashSet<>();
 
 	public Adresa() {
 	}
@@ -66,20 +75,28 @@ public class Adresa {
 		this.broj = broj;
 	}
 
-	public String getGeoDuzina() {
+	public float getGeoDuzina() {
 		return geoDuzina;
 	}
 
-	public void setGeoDuzina(String geoDuzina) {
+	public void setGeoDuzina(float geoDuzina) {
 		this.geoDuzina = geoDuzina;
 	}
 
-	public String getGeoSirina() {
+	public float getGeoSirina() {
 		return geoSirina;
 	}
 
-	public void setGeoSirina(String geoSirina) {
+	public void setGeoSirina(float geoSirina) {
 		this.geoSirina = geoSirina;
+	}
+
+	public Set<Korisnik> getKorisnici() {
+		return korisnici;
+	}
+
+	public void setKorisnici(Set<Korisnik> korisnici) {
+		this.korisnici = korisnici;
 	}
 
 }

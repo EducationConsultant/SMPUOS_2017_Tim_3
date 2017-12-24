@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.korisnik.models.Adresa;
+import com.korisnik.models.AdresaKoordinate;
 import com.korisnik.models.Korisnik;
 import com.korisnik.models.KorisnikLogin;
 import com.korisnik.models.TipKorisnika;
@@ -138,6 +139,37 @@ public class KorisnikServiceJpa implements KorisnikService {
 	@Override
 	public Korisnik findOne(Long id) {
 		return korisnikRepository.findOne(id);
+	}
+
+	@Override
+	public List<Korisnik> findByLocation(AdresaKoordinate adresaKoordinate) {
+		float geoDuzinaCentar = adresaKoordinate.getGeoDuzinaCentar();
+		float geoSirinaCentar = adresaKoordinate.getGeoSirinaCentar();
+		float poluprecnik = adresaKoordinate.getPoluprecnik();
+
+		List<Adresa> adrese = adresaRepository.findAll();
+		List<Korisnik> korisnici = new ArrayList<Korisnik>();
+		for (Adresa adresa : adrese) {
+			// (x2-x1)^2 + (y2-y1)^2 <= r^2
+			// x1,y1 - centar
+			// x2,y2 - tacka
+			// y - geografka sirina
+			// x - geografksa duzina
+
+			double xOduzimanje = Math.pow((adresa.getGeoDuzina() - geoDuzinaCentar), 2);
+			double yOduzimanje = Math.pow((adresa.getGeoSirina() - geoSirinaCentar), 2);
+			double r = Math.pow(poluprecnik, 2);
+
+			double xPlusy = xOduzimanje + yOduzimanje;
+
+			if (xPlusy <= r) {
+				for (Korisnik k : adresa.getKorisnici()) {
+					korisnici.add(k);
+				}
+			}
+		}
+
+		return korisnici;
 	}
 
 }

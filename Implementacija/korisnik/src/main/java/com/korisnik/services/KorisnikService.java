@@ -2,6 +2,7 @@ package com.korisnik.services;
 
 import java.util.List;
 
+import com.korisnik.models.AdresaKoordinate;
 import com.korisnik.models.Korisnik;
 import com.korisnik.models.KorisnikLogin;
 
@@ -30,4 +31,6 @@ public interface KorisnikService {
 	public List<Korisnik> findByImeAndPrezime(String ime, String prezime);
 
 	public Korisnik findOne(Long id);
+
+	public List<Korisnik> findByLocation(AdresaKoordinate adresaKoordinate);
 }

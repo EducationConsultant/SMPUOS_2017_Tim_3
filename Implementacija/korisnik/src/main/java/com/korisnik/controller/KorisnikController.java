@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.korisnik.models.Adresa;
+import com.korisnik.models.AdresaKoordinate;
 import com.korisnik.models.Korisnik;
 import com.korisnik.models.KorisnikLogin;
 import com.korisnik.services.AdresaService;
@@ -113,6 +114,13 @@ public class KorisnikController {
 		Korisnik pronadjeniKorisnik = korisnikService.findOne(id);
 
 		return new ResponseEntity<Korisnik>(pronadjeniKorisnik, HttpStatus.OK);
+	}
+
+	// pregled korisnika na osnovu koordinata mesta stanovanja
+	@RequestMapping(value = "/koordinate", method = RequestMethod.PUT)
+	public ResponseEntity<List<Korisnik>> getLocation(@RequestBody AdresaKoordinate adresaKoordinate) {
+		List<Korisnik> korisnici = korisnikService.findByLocation(adresaKoordinate);
+		return new ResponseEntity<List<Korisnik>>(korisnici, HttpStatus.OK);
 	}
 
 }
