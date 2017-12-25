@@ -5,6 +5,8 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,13 +24,6 @@ import com.film.services.FilmService;
 public class FilmController {
 	@Autowired
 	private FilmService filmService;
-
-	// getAll
-	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Film>> getFilmovi() {
-		List<Film> filmovi = filmService.findAll();
-		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
-	}
 
 	// getOne
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -65,6 +60,17 @@ public class FilmController {
 	public ResponseEntity<Film> saveOcena(@PathVariable Long id, @Valid @RequestBody Film film) {
 		Film ocenjeniFilm = filmService.saveOcena(film, id);
 		return new ResponseEntity<Film>(ocenjeniFilm, HttpStatus.OK);
+	}
+
+	// pregled svih filmova - paginirano
+	// localhost:8090/film/filmovi?page=0&size=3
+	// Ne prosledjujem RequestParams.
+	// Kada pogodim /filmovi?page=0&size=3 Spring automatski preuzima parametre
+	// i kreira Pageable instancu.
+	@RequestMapping(value = "filmovi", method = RequestMethod.GET)
+	public ResponseEntity<Page<Film>> getFilmovi(Pageable pageable) {
+		Page<Film> filmovi = filmService.findAllByPage(pageable);
+		return new ResponseEntity<Page<Film>>(filmovi, HttpStatus.OK);
 	}
 
 	// pregled aktuelnih filmova
