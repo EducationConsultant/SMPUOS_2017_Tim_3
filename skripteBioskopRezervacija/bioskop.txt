@@ -1,0 +1,119 @@
+SVI BIOSKOPI
+
+localhost:8765/bioskop-service/bioskop   GET
+-------------------------------------------------------
+UNOS BIOSKOPA
+
+localhost:8765/bioskop-service/bioskop POST
+
+{
+	"naziv" : "Arena",
+	"adresaBioskopa": {
+		"nazivNaseljenogMesta" : "Zrenjanin",
+		"nazivUlice" : "Aleksandra kralja",
+		"broj" : 35,
+		"geoDuzina" : 100,
+		"geoSirina" : 80
+	}
+	
+}
+
+------------------------------------------------------
+IZMENA BIOSKOPA
+
+localhost:8765/bioskop-service/bioskop/1 PUT
+	 {
+        "id": 1,
+        "naziv": "Biskop decji Igraliste",
+        "ocena": null,
+        "sale": []
+    }
+	
+
+
+-------------------------------------------------------
+
+PRETRAGA PO NAZIVU
+localhost:8765/bioskop-service/bioskop/naziv?naziv=Biskop decji Igraliste  GET
+
+-------------------------------------------------------
+PRETRAGA BIOSKOPA PO KOORDINATAMA
+
+localhost:8765/bioskop-service/bioskop/koordinate PUT
+
+{
+	"geoDuzinaCentar" :100 ,
+	"geoSirinaCentar":80,
+	"poluprecnik": 50
+	
+	
+}
+
+---------------------------------------------------------
+OCENA BIOSKOPA
+
+localhost:8765/bioskop-service/bioskop/ocena/1 PUT
+
+ {
+        "id": 1,
+        "naziv": "Biskop decji Igraliste",
+        "sale": [],
+    	"ocena": 8
+ }
+------------------------------------------------------------------------------------
+UNOS SALE
+
+localhost:8765/bioskop-service/sala/1 POST
+
+{
+	"oznakaSale": "sala 1",
+	"kapacitet": 200,
+	"brojSedistaRedovi": 20,
+	"brojSedistaKolone" : 10,
+	"tip" : "ZA3D",
+	"bioskop":   {
+        "id": 2,
+        "naziv": "Biskop decji",
+        "ocena": null,
+        "sale": []
+    }
+    
+}
+
+---------------------------------------------------------------------------------------
+BRISANJE SALE
+
+localhost:8765/bioskop-service/sala/2/1 DELETE
+
+
+---------------------------------------------------------------------------------------
+IZMENA SALE
+
+localhost:8765/bioskop-service/sala/2/3 PUT
+
+{
+     "id": 3,
+     "oznakaSale": "sala 1",
+    "kapacitet": 200,
+    "brojSedistaRedovi": 20,
+    "brojSedistaKolone": 10,
+    "tip": "ZA3D"
+	
+}
+
+--------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -27,7 +27,6 @@ public class SalaServiceJpa implements SalaService {
 		salaRepository.save(sala);
 		sale.add(sala);
 		bioskop.setSale(sale);
-		
 		return bioskopRepository.save(bioskop);
 	}
 
@@ -39,7 +38,6 @@ public class SalaServiceJpa implements SalaService {
 		salaRepository.delete(salaZaObrisati);
 		sale.remove(salaZaObrisati);
 		bioskop.setSale(sale);
-		
 		return bioskopRepository.save(bioskop);
 	}
 
@@ -47,8 +45,6 @@ public class SalaServiceJpa implements SalaService {
 	public Bioskop updateSala(Long idBioskopa, Long idSale, Sala sala) {
 		Bioskop bioskopZaIzmenu = bioskopRepository.findOne(idBioskopa);
 		List<Sala> sale = bioskopZaIzmenu.getSale();
-
-		
 		for (Sala s : sale) {
 			if(s.getId().equals(idSale)) {
 				s.setBrojSedistaKolone(sala.getBrojSedistaKolone());
@@ -57,14 +53,8 @@ public class SalaServiceJpa implements SalaService {
 				s.setOznakaSale(sala.getOznakaSale());
 				s.setTip(sala.getTip());
 				salaRepository.save(s);
-			
 			}
 		}
-		
-		
 		return 	bioskopRepository.save(bioskopZaIzmenu);
 	}
-
-
-
 }

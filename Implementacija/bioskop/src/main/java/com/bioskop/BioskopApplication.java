@@ -7,7 +7,6 @@ import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
 
-
 @EnableAutoConfiguration
 @EnableDiscoveryClient
 @SpringBootApplication

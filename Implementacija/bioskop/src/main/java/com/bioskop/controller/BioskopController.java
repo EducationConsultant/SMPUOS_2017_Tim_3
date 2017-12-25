@@ -34,7 +34,6 @@ public class BioskopController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Bioskop>> getBioskopi() {
 		List<Bioskop> bioskopi = bioskopService.find();
-
 		return new ResponseEntity<List<Bioskop>>(bioskopi, HttpStatus.OK);
 	}
 
@@ -42,17 +41,14 @@ public class BioskopController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Bioskop> getBioskop(@PathVariable Long id) {
 		Bioskop bioskop = bioskopService.findOne(id);
-
 		return new ResponseEntity<Bioskop>(bioskop, HttpStatus.OK);
 	}
 
 	// insert
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Bioskop> insertBioskop(@Valid @RequestBody Bioskop bioskop) {
-
 		Bioskop sacuvanBioskop = bioskopService.save(bioskop);
 		return new ResponseEntity<Bioskop>(sacuvanBioskop, HttpStatus.CREATED);
-
 	}
 
 	// delete
@@ -61,52 +57,29 @@ public class BioskopController {
 		Bioskop bioskop = bioskopService.findOne(id);
 		bioskopService.delete(bioskop);
 		return new ResponseEntity<Bioskop>(bioskop, HttpStatus.OK);
-
 	}
 
 	// update
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Bioskop> updateBioskop(@PathVariable Long id, @Valid @RequestBody Bioskop bioskop) {
-
 		Bioskop savedBioskop = bioskopService.update(bioskop, id);
-
 		return new ResponseEntity<Bioskop>(savedBioskop, HttpStatus.OK);
-
 	}
 
 	// ocenjivanje
 	@RequestMapping(value = "/ocena/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Bioskop> insertOcena(@PathVariable Long id, @RequestBody Bioskop bioskop) {
-
-		// kod usera
-		// Boolean isProductsOK =
-		// c.postS("http://localhost:8765/bioskop-service/bioskop/insertOcena",
-		// id.toString());
 		Bioskop ocenaZaBioskop = bioskopService.saveOcena(bioskop, id);
-
 		return new ResponseEntity<Bioskop>(ocenaZaBioskop, HttpStatus.CREATED);
-
 	}
 
 	// find by naziv
 	// localhost:8091/api/bioskop/naziv?naziv=Cinema
 	@RequestMapping(value = "/naziv", method = RequestMethod.GET)
 	public ResponseEntity<Bioskop> findByNaziv(@RequestParam(value = "naziv") String naziv) {
-
 		Bioskop bioskop = bioskopService.findByNaziv(naziv);
-
 		return new ResponseEntity<Bioskop>(bioskop, HttpStatus.OK);
 	}
-
-	// find by adresa
-	// @RequestMapping(value = "/adresa", method = RequestMethod.GET)
-	// public ResponseEntity<List<Bioskop>> findByAdresa(@RequestBody Adresa
-	// adresa) {
-	//
-	// List<Bioskop> bioskopi = bioskopService.findByAdresa(adresa);
-	//
-	// return new ResponseEntity<List<Bioskop>>(bioskopi, HttpStatus.OK);
-	// }
 
 	// pregled korisnika na osnovu koordinata mesta stanovanja
 	@RequestMapping(value = "/koordinate", method = RequestMethod.PUT)
