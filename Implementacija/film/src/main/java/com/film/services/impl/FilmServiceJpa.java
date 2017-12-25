@@ -110,4 +110,24 @@ public class FilmServiceJpa implements FilmService {
 		return pronadjeniFilmovi;
 	}
 
+	@Override
+	public List<Film> findByGodinaPremijere(int godinaPremijere) {
+		List<Film> pronadjeniFilmovi = new ArrayList<Film>();
+		List<Film> sviFilmovi = filmRepository.findAll();
+
+		for (Film film : sviFilmovi) {
+			Date datumPremijere = film.getDatumPremijere();
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String dateString = formatter.format(datumPremijere);
+
+			String[] parts = dateString.split("-");
+			int godina = Integer.parseInt(parts[0]);
+
+			if (godina == godinaPremijere) {
+				pronadjeniFilmovi.add(film);
+			}
+		}
+		return pronadjeniFilmovi;
+	}
+
 }

@@ -16,4 +16,6 @@ public interface FilmService {
 	public void delete(Film film);
 
 	public List<Film> findAktuelniFilmovi();
+
+	public List<Film> findByGodinaPremijere(int godinaPremijere);
 }

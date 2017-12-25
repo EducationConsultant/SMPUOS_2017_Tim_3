@@ -63,4 +63,10 @@ public class FilmController {
 		List<Film> filmovi = filmService.findAktuelniFilmovi();
 		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/pregledPoGodini/{godina}", method = RequestMethod.GET)
+	public ResponseEntity<List<Film>> findByGodinaPremijere(@PathVariable int godina) {
+		List<Film> filmovi = filmService.findByGodinaPremijere(godina);
+		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
+	}
 }
