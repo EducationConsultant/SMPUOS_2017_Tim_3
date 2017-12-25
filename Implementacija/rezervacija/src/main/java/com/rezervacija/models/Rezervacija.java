@@ -6,14 +6,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +26,6 @@ import javax.persistence.TemporalType;
 @Table
 public class Rezervacija {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "rezervacija_id", nullable = false, unique = true)
@@ -30,37 +33,7 @@ public class Rezervacija {
 	
 	@Column(nullable = false)
 	@NotNull
-	private Long idFilma;
-	
-	@Column(nullable = false)
-	@NotNull
-	private String nazivFilma;
-	
-	@Column(nullable = false)
-	@NotNull
-	private Long idBioskopa;
-	
-	@Column(nullable = false)
-	@NotNull
-	private String nazivBioskopa;
-	
-	@Column(nullable = false)
-	@NotNull
-	private Long idSale;
-	
-	@Column(nullable = false)
-	@NotNull
-	private String oznakaSale;
-	
-	@Column(nullable = false)
-	@NotNull
 	private Long idKorisnika;
-	
-	@Temporal(TemporalType.DATE)
-	@Column(nullable = false)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotNull
-	private Date datumProjekcije;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
@@ -80,6 +53,7 @@ public class Rezervacija {
 	@NotNull
 	private RezervacijaTip tip;
 	
+	
 	@Column(nullable = false)
 	@NotNull
 	private int brojSedista;
@@ -87,6 +61,11 @@ public class Rezervacija {
 	@Column(nullable = false)
 	@NotNull
 	private int brojRedaSedista;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "projekcija_id")
+	@JsonIgnore
+	private Projekcija projekcija;
 	
 	public Rezervacija() {
 	}
@@ -99,68 +78,12 @@ public class Rezervacija {
 		this.id = id;
 	}
 
-	public Long getIdFilma() {
-		return idFilma;
-	}
-
-	public void setIdFilma(Long idFilma) {
-		this.idFilma = idFilma;
-	}
-
-	public String getNazivFilma() {
-		return nazivFilma;
-	}
-
-	public void setNazivFilma(String nazivFilma) {
-		this.nazivFilma = nazivFilma;
-	}
-
-	public Long getIdBioskopa() {
-		return idBioskopa;
-	}
-
-	public void setIdBioskopa(Long idBioskopa) {
-		this.idBioskopa = idBioskopa;
-	}
-
-	public String getNazivBioskopa() {
-		return nazivBioskopa;
-	}
-
-	public void setNazivBioskopa(String nazivBioskopa) {
-		this.nazivBioskopa = nazivBioskopa;
-	}
-
-	public Long getIdSale() {
-		return idSale;
-	}
-
-	public void setIdSale(Long idSale) {
-		this.idSale = idSale;
-	}
-
-	public String getOznakaSale() {
-		return oznakaSale;
-	}
-
-	public void setOznakaSale(String oznakaSale) {
-		this.oznakaSale = oznakaSale;
-	}
-
 	public Long getIdKorisnika() {
 		return idKorisnika;
 	}
 
 	public void setIdKorisnika(Long idKorisnika) {
 		this.idKorisnika = idKorisnika;
-	}
-
-	public Date getDatumProjekcije() {
-		return datumProjekcije;
-	}
-
-	public void setDatumProjekcije(Date datumProjekcije) {
-		this.datumProjekcije = datumProjekcije;
 	}
 
 	public Date getDatumRezervacije() {
@@ -178,8 +101,6 @@ public class Rezervacija {
 	public void setDatumIstekaRezervacije(Date datumIstekaRezervacije) {
 		this.datumIstekaRezervacije = datumIstekaRezervacije;
 	}
-
-
 
 	public RezervacijaTip getTip() {
 		return tip;
@@ -204,8 +125,15 @@ public class Rezervacija {
 	public void setBrojRedaSedista(int brojRedaSedista) {
 		this.brojRedaSedista = brojRedaSedista;
 	}
+
+	public Projekcija getProjekcija() {
+		return projekcija;
+	}
+
+	public void setProjekcija(Projekcija projekcija) {
+		this.projekcija = projekcija;
+	}
+
 	
-	
-	
-	
+
 }

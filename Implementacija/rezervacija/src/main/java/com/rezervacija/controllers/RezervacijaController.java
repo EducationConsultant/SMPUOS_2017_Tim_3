@@ -27,7 +27,6 @@ public class RezervacijaController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Rezervacija>> getRezervacije() {
 		List<Rezervacija> rezervacije = rezervacijaService.find();
-
 		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
 	}
 
@@ -35,17 +34,14 @@ public class RezervacijaController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Rezervacija> getRezervacija(@PathVariable Long id) {
 		Rezervacija rezervacija = rezervacijaService.findOne(id);
-
 		return new ResponseEntity<Rezervacija>(rezervacija, HttpStatus.OK);
 	}
 
 	// insert
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Rezervacija> insertRezervacija(@Valid @RequestBody Rezervacija rezervacija) {
-
 		Rezervacija sacuvanaRezervacija = rezervacijaService.save(rezervacija);
 		return new ResponseEntity<Rezervacija>(sacuvanaRezervacija, HttpStatus.CREATED);
-
 	}
 
 	// delete
@@ -54,7 +50,6 @@ public class RezervacijaController {
 		Rezervacija rezervacija = rezervacijaService.findOne(id);
 		rezervacijaService.delete(rezervacija);
 		return new ResponseEntity<Rezervacija>(rezervacija, HttpStatus.OK);
-
 	}
 
 	// update
@@ -63,7 +58,6 @@ public class RezervacijaController {
 			@Valid @RequestBody Rezervacija rezervacija) {
 		Rezervacija savedRezervacija = rezervacijaService.update(rezervacija, id);
 		return new ResponseEntity<Rezervacija>(savedRezervacija, HttpStatus.OK);
-
 	}
 
 	// deaktivacija

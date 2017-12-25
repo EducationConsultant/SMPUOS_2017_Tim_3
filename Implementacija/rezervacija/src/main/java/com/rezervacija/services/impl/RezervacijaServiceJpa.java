@@ -51,15 +51,15 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 		rezervacijaZaIzmenu.setBrojRedaSedista(rezervacija.getBrojRedaSedista());
 		rezervacijaZaIzmenu.setBrojSedista(rezervacija.getBrojSedista());
 		rezervacijaZaIzmenu.setDatumIstekaRezervacije(rezervacija.getDatumIstekaRezervacije());
-		rezervacijaZaIzmenu.setDatumProjekcije(rezervacija.getDatumProjekcije());
+		//rezervacijaZaIzmenu.setDatumProjekcije(rezervacija.getDatumProjekcije());
 		rezervacijaZaIzmenu.setDatumRezervacije(rezervacija.getDatumRezervacije());
 		// rezervacijaZaIzmenu.setIdBioskopa(rezervacija.getIdBioskopa());
-		rezervacijaZaIzmenu.setIdFilma(rezervacija.getIdFilma());
-		rezervacijaZaIzmenu.setIdSale(rezervacija.getIdSale());
+		//rezervacijaZaIzmenu.setIdFilma(rezervacija.getIdFilma());
+		//rezervacijaZaIzmenu.setIdSale(rezervacija.getIdSale());
 		// rezervacijaZaIzmenu.setNazivBioskopa(rezervacija.getNazivBioskopa());
-		rezervacijaZaIzmenu.setNazivFilma(rezervacija.getNazivFilma());
-		rezervacijaZaIzmenu.setOznakaSale(rezervacija.getOznakaSale());
-		// rezervacijaZaIzmenu.setIdKorisnika(rezervacija.getIdKorisnika());
+		//rezervacijaZaIzmenu.setNazivFilma(rezervacija.getNazivFilma());
+		//rezervacijaZaIzmenu.setOznakaSale(rezervacija.getOznakaSale());
+	    rezervacijaZaIzmenu.setIdKorisnika(rezervacija.getIdKorisnika());
 
 		Rezervacija sacuvana = repository.save(rezervacijaZaIzmenu);
 		return sacuvana;
