@@ -80,4 +80,19 @@ public class RezervacijaController {
 		List<Rezervacija> rezervacije = rezervacijaService.pregledSvihRezKor(idKorisnika);
 		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
 	}
+	
+	
+	//pregled aktivnih rezervacija po projekcjama  -- MALA NAPOMENA --------------- BITNO!!!
+	// NA FRONTENDU : sto se tice podataka o projekciji, prikazati samo :
+	// datum projekcije, ime filma, ime bioskopa, oznaka sale, broj aktivnih rezervacija
+	// bez id - eva 
+	@RequestMapping(value="/aktivne/projekcije", method = RequestMethod.GET)
+	public ResponseEntity<List<Rezervacija>> pregledSvihAktivnihPoProjekciji() {
+		List<Rezervacija> rezervacije = rezervacijaService.pregledAktivnihPoProjekcijama();
+		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
+		
+	}
+	
+	
+	
 }

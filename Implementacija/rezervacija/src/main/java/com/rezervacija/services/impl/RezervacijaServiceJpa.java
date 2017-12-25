@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rezervacija.models.Projekcija;
 import com.rezervacija.models.Rezervacija;
 import com.rezervacija.models.RezervacijaTip;
+import com.rezervacija.repository.ProjekcijaRepository;
 import com.rezervacija.repository.RezervacijaRepository;
 import com.rezervacija.services.RezervacijaService;
 
@@ -16,6 +18,9 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 
 	@Autowired
 	private RezervacijaRepository repository;
+	
+	@Autowired
+	private ProjekcijaRepository projekcijaRepository;
 
 	@Override
 	public Rezervacija findOne(Long id) {
@@ -51,15 +56,15 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 		rezervacijaZaIzmenu.setBrojRedaSedista(rezervacija.getBrojRedaSedista());
 		rezervacijaZaIzmenu.setBrojSedista(rezervacija.getBrojSedista());
 		rezervacijaZaIzmenu.setDatumIstekaRezervacije(rezervacija.getDatumIstekaRezervacije());
-		//rezervacijaZaIzmenu.setDatumProjekcije(rezervacija.getDatumProjekcije());
+		// rezervacijaZaIzmenu.setDatumProjekcije(rezervacija.getDatumProjekcije());
 		rezervacijaZaIzmenu.setDatumRezervacije(rezervacija.getDatumRezervacije());
 		// rezervacijaZaIzmenu.setIdBioskopa(rezervacija.getIdBioskopa());
-		//rezervacijaZaIzmenu.setIdFilma(rezervacija.getIdFilma());
-		//rezervacijaZaIzmenu.setIdSale(rezervacija.getIdSale());
+		// rezervacijaZaIzmenu.setIdFilma(rezervacija.getIdFilma());
+		// rezervacijaZaIzmenu.setIdSale(rezervacija.getIdSale());
 		// rezervacijaZaIzmenu.setNazivBioskopa(rezervacija.getNazivBioskopa());
-		//rezervacijaZaIzmenu.setNazivFilma(rezervacija.getNazivFilma());
-		//rezervacijaZaIzmenu.setOznakaSale(rezervacija.getOznakaSale());
-	    rezervacijaZaIzmenu.setIdKorisnika(rezervacija.getIdKorisnika());
+		// rezervacijaZaIzmenu.setNazivFilma(rezervacija.getNazivFilma());
+		// rezervacijaZaIzmenu.setOznakaSale(rezervacija.getOznakaSale());
+		rezervacijaZaIzmenu.setIdKorisnika(rezervacija.getIdKorisnika());
 
 		Rezervacija sacuvana = repository.save(rezervacijaZaIzmenu);
 		return sacuvana;
@@ -90,5 +95,23 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	public List<Rezervacija> pregledSvihRezKor(Long idKorisnika) {
 		List<Rezervacija> rezervacije = repository.findByIdKorisnika(idKorisnika);
 		return rezervacije;
+	}
+	
+
+	@Override
+	public List<Rezervacija> pregledAktivnihPoProjekcijama() {
+		List<Rezervacija> rezervacije = repository.findAll();
+		List<Rezervacija> aktivne = new ArrayList<Rezervacija>();
+		List<Projekcija> projekcije = new ArrayList<Projekcija>();
+		List<Rezervacija> pregledRezervacije = new ArrayList<Rezervacija>();
+		
+		for (Rezervacija r : rezervacije) {
+			if (r.getTip() == RezervacijaTip.AKTIVNA) {
+				aktivne.add(r);
+			}
+		}
+		
+		
+		return aktivne;
 	}
 }

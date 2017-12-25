@@ -44,7 +44,7 @@ public class Bioskop {
 	private Adresa adresaBioskopa;
 	
 	private Long ocena;
-	
+
 	
 	// bioskop ima sale
 	@OneToMany(mappedBy = "bioskop", fetch = FetchType.EAGER)

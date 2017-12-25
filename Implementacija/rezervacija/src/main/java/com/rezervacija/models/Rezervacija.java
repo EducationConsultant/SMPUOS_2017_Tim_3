@@ -2,6 +2,7 @@ package com.rezervacija.models;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -17,7 +18,9 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -62,9 +65,10 @@ public class Rezervacija {
 	@NotNull
 	private int brojRedaSedista;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	
+	@ManyToOne
 	@JoinColumn(name = "projekcija_id")
-	@JsonIgnore
+	//@JsonBackReference
 	private Projekcija projekcija;
 	
 	public Rezervacija() {

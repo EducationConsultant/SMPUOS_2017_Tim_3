@@ -3,6 +3,7 @@ package com.rezervacija.models;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +18,9 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Projekcija {
@@ -24,7 +28,7 @@ public class Projekcija {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "projekcija_id", nullable = false, unique = true)
 	private Long id;
-	
+
 	
 	@Column(nullable = false)
 	@NotNull
@@ -58,6 +62,7 @@ public class Projekcija {
 	
 	
 	@OneToMany(mappedBy = "projekcija", fetch = FetchType.EAGER)
+	@JsonBackReference
 	private List<Rezervacija> rezervacije;
 	
 	private int brojAktivnihRezervacija;
