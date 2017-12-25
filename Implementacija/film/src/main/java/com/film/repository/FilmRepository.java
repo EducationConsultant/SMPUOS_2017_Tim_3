@@ -13,4 +13,6 @@ public interface FilmRepository extends JpaRepository<Film, Long> {
 
 	public List<Film> findByKategorija(Kategorija kategorija);
 
+	public List<Film> findByOcena(int ocena);
+
 }

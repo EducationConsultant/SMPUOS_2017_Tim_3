@@ -15,6 +15,8 @@ public interface FilmService {
 
 	public void delete(Film film);
 
+	public Film saveOcena(Film film, Long id);
+
 	public List<Film> findAktuelniFilmovi();
 
 	public List<Film> findByGodinaPremijere(int godinaPremijere);
@@ -25,5 +27,6 @@ public interface FilmService {
 
 	public List<Film> findByGlumac(String ime, String prezime);
 
-	public Film saveOcena(Film film, Long id);
+	public List<Film> findByOcena(int ocena);
+
 }
