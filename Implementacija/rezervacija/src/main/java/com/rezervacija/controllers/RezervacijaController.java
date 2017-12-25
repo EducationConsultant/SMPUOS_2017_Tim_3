@@ -61,9 +61,7 @@ public class RezervacijaController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Rezervacija> updateRezervacija(@PathVariable Long id,
 			@Valid @RequestBody Rezervacija rezervacija) {
-
 		Rezervacija savedRezervacija = rezervacijaService.update(rezervacija, id);
-
 		return new ResponseEntity<Rezervacija>(savedRezervacija, HttpStatus.OK);
 
 	}
@@ -71,10 +69,21 @@ public class RezervacijaController {
 	// deaktivacija
 	@RequestMapping(value = "/deaktivacija/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Rezervacija> deaktivacija(@PathVariable Long id) {
-
 		Rezervacija savedRezervacija = rezervacijaService.deaktivacija(id);
-
 		return new ResponseEntity<Rezervacija>(savedRezervacija, HttpStatus.OK);
+	}
 
+	// pregled aktivnih po idKorisnika
+	@RequestMapping(value = "/aktivne/{idKorisnika}", method = RequestMethod.GET)
+	public ResponseEntity<List<Rezervacija>> pregledAktRezKor(@PathVariable Long idKorisnika) {
+		List<Rezervacija> rezervacije = rezervacijaService.pregledAktRezKor(idKorisnika);
+		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
+	}
+
+	// pregled svih rezervacija po idKorisnika
+	@RequestMapping(value = "/sve/{idKorisnika}", method = RequestMethod.GET)
+	public ResponseEntity<List<Rezervacija>> pregledSvihRezKor(@PathVariable Long idKorisnika) {
+		List<Rezervacija> rezervacije = rezervacijaService.pregledSvihRezKor(idKorisnika);
+		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
 	}
 }

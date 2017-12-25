@@ -1,5 +1,6 @@
 package com.rezervacija.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,10 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 
 	@Autowired
 	private RezervacijaRepository repository;
-	
+
 	@Override
 	public Rezervacija findOne(Long id) {
-		return  repository.findOne(id);
+		return repository.findOne(id);
 	}
 
 	@Override
@@ -34,13 +35,13 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	@Override
 	public void delete(Rezervacija rezervacija) {
 		repository.delete(rezervacija);
-		
+
 	}
 
 	@Override
 	public void deleteById(Long id) {
 		repository.delete(id);
-		
+
 	}
 
 	@Override
@@ -52,14 +53,14 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 		rezervacijaZaIzmenu.setDatumIstekaRezervacije(rezervacija.getDatumIstekaRezervacije());
 		rezervacijaZaIzmenu.setDatumProjekcije(rezervacija.getDatumProjekcije());
 		rezervacijaZaIzmenu.setDatumRezervacije(rezervacija.getDatumRezervacije());
-		//rezervacijaZaIzmenu.setIdBioskopa(rezervacija.getIdBioskopa());
+		// rezervacijaZaIzmenu.setIdBioskopa(rezervacija.getIdBioskopa());
 		rezervacijaZaIzmenu.setIdFilma(rezervacija.getIdFilma());
 		rezervacijaZaIzmenu.setIdSale(rezervacija.getIdSale());
-		//rezervacijaZaIzmenu.setNazivBioskopa(rezervacija.getNazivBioskopa());
+		// rezervacijaZaIzmenu.setNazivBioskopa(rezervacija.getNazivBioskopa());
 		rezervacijaZaIzmenu.setNazivFilma(rezervacija.getNazivFilma());
 		rezervacijaZaIzmenu.setOznakaSale(rezervacija.getOznakaSale());
-		//rezervacijaZaIzmenu.setIdKorisnika(rezervacija.getIdKorisnika());
-		
+		// rezervacijaZaIzmenu.setIdKorisnika(rezervacija.getIdKorisnika());
+
 		Rezervacija sacuvana = repository.save(rezervacijaZaIzmenu);
 		return sacuvana;
 	}
@@ -69,5 +70,25 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 		Rezervacija rezervacija = repository.findOne(id);
 		rezervacija.setTip(RezervacijaTip.OTKAZANA);
 		return repository.save(rezervacija);
+	}
+
+	@Override
+	public List<Rezervacija> pregledAktRezKor(Long idKorisnika) {
+		List<Rezervacija> rezervacije = repository.findByIdKorisnika(idKorisnika);
+		List<Rezervacija> aktivne = new ArrayList<Rezervacija>();
+
+		for (Rezervacija r : rezervacije) {
+			if (r.getTip() == RezervacijaTip.AKTIVNA) {
+				aktivne.add(r);
+			}
+		}
+
+		return aktivne;
+	}
+
+	@Override
+	public List<Rezervacija> pregledSvihRezKor(Long idKorisnika) {
+		List<Rezervacija> rezervacije = repository.findByIdKorisnika(idKorisnika);
+		return rezervacije;
 	}
 }
