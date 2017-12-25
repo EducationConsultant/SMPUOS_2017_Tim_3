@@ -1,0 +1,50 @@
+REGISTRACIJA KORISNIKA:
+.../korisnik/registracija POST
+{
+	"ime":"Milovan",
+	"prezime":"Milic",
+	"datumRodjenja":"1995-04-14",
+	"pol":"M",
+	"adresaStanovanja":
+		 {
+  "id": 2,
+  "nazivNaseljenogMesta": "Novi Sad",
+  "nazivUlice": "Brace Ribnikar",
+  "broj": 13,
+  "geoDuzina": 19.8335,
+  "geoSirina": 45.2671
+},
+	"korisnickoIme":"srecanMilovan",
+	"lozinka":"lozinka",
+	"ulogovan":false
+}
+
+******************************************************************************************
+LOGOVANJE KORISNIKA:
+.../korisnik/login/2 PUT
+{
+  "korisnickoIme":"srecanMilovan",
+  "lozinka":"lozinka"
+  
+}
+******************************************************************************************
+PRETRAGA PO IMENU I PREZIMENU:
+.../korisnik/filterImePrezime PUT
+{
+  "korisnickoIme":"Mil",
+  "lozinka":"Mil"
+  
+}
+******************************************************************************************
+GET LOCATION:
+..../korisnik/koordinate PUT
+{
+	"geoDuzinaCentar":20.457273,
+	"geoSirinaCentar":44.787197,
+	"poluprecnik":5
+}
+******************************************************************************************
+
+
+
+

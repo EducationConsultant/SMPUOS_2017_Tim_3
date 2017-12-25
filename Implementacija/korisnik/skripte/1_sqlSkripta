@@ -1,0 +1,9 @@
+use db_korisnik;
+
+insert into adresa (adresa_id,naziv_naseljenog_mesta,naziv_ulice,broj,geo_duzina,geo_sirina) values (1,'Beograd','Nede Spasojevic',7,20.457273,44.787197);
+insert into adresa (adresa_id,naziv_naseljenog_mesta,naziv_ulice,broj,geo_duzina,geo_sirina) values (2,'Novi Sad','Brace Ribnikar',13,19.833549,45.267136);
+insert into adresa (adresa_id,naziv_naseljenog_mesta,naziv_ulice,broj,geo_duzina,geo_sirina) values (3,'Novi Sad','Maksima Gorkog',15,19.833549,45.267136);
+
+insert into korisnik
+(korisnik_id,datum_registracije,datum_rodjenja,ime,korisnicko_ime,lozinka,pol,prezime,status_korisnika,tip_korisnika,ulogovan,adresa_stanovanja_id)values
+(1,'2008/01/01','1969/01/01','Pera','perica','lozinka','M','Peric','AKTIVIRAN','ADMIN',false,1);
