@@ -131,9 +131,23 @@ public class FilmServiceJpa implements FilmService {
 	}
 
 	@Override
-	public List<Film> findByKategorija(Kategorija kategorija) {
-		Kategorija kat = kategorijaRepository.findByNaziv(kategorija.getNaziv());
+	public List<Film> findByKategorija(String naziv) {
+		Kategorija kat = kategorijaRepository.findByNaziv(naziv);
 		return filmRepository.findByKategorija(kat);
+	}
+
+	@Override
+	public List<Film> findByReditelj(String ime, String prezime) {
+		List<Film> sviFilmovi = filmRepository.findAll();
+		List<Film> filmovi = new ArrayList<Film>();
+
+		for (Film f : sviFilmovi) {
+			Reditelj reditelj = f.getReditelj();
+			if (reditelj.getIme().contains(ime) && reditelj.getPrezime().contains(prezime)) {
+				filmovi.add(f);
+			}
+		}
+		return filmovi;
 	}
 
 }

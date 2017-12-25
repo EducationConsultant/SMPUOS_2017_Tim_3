@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.film.models.Film;
-import com.film.models.Kategorija;
 import com.film.services.FilmService;
 
 @RestController
@@ -73,10 +72,18 @@ public class FilmController {
 		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
 	}
 
-	// pregled prema kategoriji
-	@RequestMapping(value = "/kategorija", method = RequestMethod.PUT)
-	public ResponseEntity<List<Film>> findByKategorija(@Valid @RequestBody Kategorija kategorija) {
-		List<Film> filmovi = filmService.findByKategorija(kategorija);
+	// pregled filmova prema kategoriji
+	@RequestMapping(value = "/kategorija/{naziv}", method = RequestMethod.GET)
+	public ResponseEntity<List<Film>> findByKategorija(@PathVariable("naziv") String naziv) {
+		List<Film> filmovi = filmService.findByKategorija(naziv);
+		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
+	}
+
+	// pregled filmova prema reditelju
+	@RequestMapping(value = "/reditelj/{ime}?{prezime}", method = RequestMethod.GET)
+	public ResponseEntity<List<Film>> findByReditelj(@PathVariable("ime") String ime,
+			@PathVariable("prezime") String prezime) {
+		List<Film> filmovi = filmService.findByReditelj(ime, prezime);
 		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
 	}
 }
