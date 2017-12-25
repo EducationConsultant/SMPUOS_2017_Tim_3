@@ -1,17 +1,20 @@
 package com.bioskop.services.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bioskop.models.Adresa;
+import com.bioskop.models.AdresaKoordinate;
 import com.bioskop.models.Bioskop;
 import com.bioskop.models.Sala;
 import com.bioskop.repository.AdresaRepository;
 import com.bioskop.repository.BioskopRepository;
 import com.bioskop.repository.SalaRepository;
 import com.bioskop.services.BioskopService;
+
 
 @Service
 public class BioskopServiceJpa implements BioskopService {
@@ -36,8 +39,8 @@ public class BioskopServiceJpa implements BioskopService {
 
 	@Override
 	public Bioskop save(Bioskop bioskop) {
-		Adresa sacuvanaAdresa = adresaRepository.save(bioskop.getAdresa());
-		bioskop.setAdresa(sacuvanaAdresa);
+		Adresa sacuvanaAdresa = adresaRepository.save(bioskop.getAdresaBioskopa());
+		bioskop.setAdresaBioskopa(sacuvanaAdresa);
 		return repository.save(bioskop);
 	}
 	
@@ -57,7 +60,7 @@ public class BioskopServiceJpa implements BioskopService {
 	@Override
 	public Bioskop update(Bioskop bioskop, Long id) {
 		Bioskop bioskopZaIzmenu = repository.findOne(id);
-		bioskopZaIzmenu.setAdresa(bioskop.getAdresa());
+		bioskopZaIzmenu.setAdresaBioskopa(bioskop.getAdresaBioskopa());
 		bioskopZaIzmenu.setNaziv(bioskop.getNaziv());
 		bioskopZaIzmenu.setSale(bioskop.getSale());
 		
@@ -81,13 +84,44 @@ public class BioskopServiceJpa implements BioskopService {
 	}
 
 	@Override
-	public List<Bioskop> findByAdresa(Adresa adresa) {
-		return repository.findByAdresa(adresa);
+	public List<Bioskop> findByAdresaBioskopa(Adresa adresa) {
+		return repository.findByAdresaBioskopa(adresa);
 	}
 
 	@Override
 	public List<Bioskop> rangiranje() {
 		List<Bioskop> bioskopi = repository.findAllByOrderByOcenaDesc();
+		return bioskopi;
+	}
+
+	@Override
+	public List<Bioskop> findByLocation(AdresaKoordinate adresaKoordinate) {
+		float geoDuzinaCentar = adresaKoordinate.getGeoDuzinaCentar();
+		float geoSirinaCentar = adresaKoordinate.getGeoSirinaCentar();
+		float poluprecnik = adresaKoordinate.getPoluprecnik();
+		List<Adresa> adrese = adresaRepository.findAll();
+		List<Bioskop> bioskopi = new ArrayList<Bioskop>();
+		
+		for (Adresa adresa : adrese) {
+			// (x2-x1)^2 + (y2-y1)^2 <= r^2
+			// x1,y1 - centar
+			// x2,y2 - tacka
+			// y - geografka sirina
+			// x - geografksa duzina
+
+			double xOduzimanje = Math.pow((adresa.getGeoDuzina() - geoDuzinaCentar), 2);
+			double yOduzimanje = Math.pow((adresa.getGeoSirina() - geoSirinaCentar), 2);
+			double r = Math.pow(poluprecnik, 2);
+
+			double xPlusy = xOduzimanje + yOduzimanje;
+
+			if (xPlusy <= r) {
+				for (Bioskop k : adresa.getBioskopi()) {
+					bioskopi.add(k);
+				}
+			}
+		}
+
 		return bioskopi;
 	}
 

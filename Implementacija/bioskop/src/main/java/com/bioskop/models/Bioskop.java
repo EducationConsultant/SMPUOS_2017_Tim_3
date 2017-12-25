@@ -18,7 +18,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 
@@ -36,9 +38,10 @@ public class Bioskop {
 	@NotNull
 	private String naziv;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "adresaBioskopa_id", referencedColumnName = "adresa_id")
-	private Adresa adresa;
+	@JsonBackReference
+	private Adresa adresaBioskopa;
 	
 	private Long ocena;
 	
@@ -82,16 +85,14 @@ public class Bioskop {
 
 	
 
-	public Adresa getAdresa() {
-		return adresa;
+	public Adresa getAdresaBioskopa() {
+		return adresaBioskopa;
 	}
 
 
-
-	public void setAdresa(Adresa adresa) {
-		this.adresa = adresa;
+	public void setAdresaBioskopa(Adresa adresaBioskopa) {
+		this.adresaBioskopa = adresaBioskopa;
 	}
-
 
 
 	public Long getOcena() {

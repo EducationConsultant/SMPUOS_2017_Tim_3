@@ -20,6 +20,7 @@ import org.springframework.web.client.RestTemplate;
 import com.bioskop.models.Adresa;
 import com.bioskop.models.Bioskop;
 import com.bioskop.services.BioskopService;
+import com.bioskop.models.AdresaKoordinate;
 
 
 @RestController
@@ -54,8 +55,6 @@ public class BioskopController {
 
 	}
 
-
-
 	// delete
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Bioskop> deleteBioskop(@PathVariable Long id) {
@@ -67,7 +66,7 @@ public class BioskopController {
 
 	// update
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Bioskop> updateBioskop(@PathVariable Long id, @Valid @RequestBody Bioskop bioskop) { 
+	public ResponseEntity<Bioskop> updateBioskop(@PathVariable Long id, @Valid @RequestBody Bioskop bioskop) {
 
 		Bioskop savedBioskop = bioskopService.update(bioskop, id);
 
@@ -80,14 +79,14 @@ public class BioskopController {
 	public ResponseEntity<Bioskop> insertOcena(@PathVariable Long id, @RequestBody Bioskop bioskop) {
 
 		// kod usera
-		//Boolean isProductsOK = c.postS("http://localhost:8765/bioskop-service/bioskop/insertOcena", id.toString());
+		// Boolean isProductsOK =
+		// c.postS("http://localhost:8765/bioskop-service/bioskop/insertOcena",
+		// id.toString());
 		Bioskop ocenaZaBioskop = bioskopService.saveOcena(bioskop, id);
 
 		return new ResponseEntity<Bioskop>(ocenaZaBioskop, HttpStatus.CREATED);
 
 	}
-	
-	
 
 	// find by naziv
 	// localhost:8091/api/bioskop/naziv?naziv=Cinema
@@ -108,5 +107,12 @@ public class BioskopController {
 	//
 	// return new ResponseEntity<List<Bioskop>>(bioskopi, HttpStatus.OK);
 	// }
+
+	// pregled korisnika na osnovu koordinata mesta stanovanja
+	@RequestMapping(value = "/koordinate", method = RequestMethod.PUT)
+	public ResponseEntity<List<Bioskop>> getLocation(@RequestBody AdresaKoordinate adresaKoordinate) {
+		List<Bioskop> bioskopi = bioskopService.findByLocation(adresaKoordinate);
+		return new ResponseEntity<List<Bioskop>>(bioskopi, HttpStatus.OK);
+	}
 
 }

@@ -1,10 +1,15 @@
 package com.bioskop.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +29,16 @@ public class Adresa {
 
 	@Column(nullable = false)
 	private int broj;
+
+	@Column(nullable = false)
+	private float geoDuzina;
+
+	@Column(nullable = false)
+	private float geoSirina;
+
+	// mora zbog pregleda bioskopa na osnovu koordinata
+	@OneToMany(mappedBy = "adresaBioskopa", fetch = FetchType.EAGER)
+	private Set<Bioskop> bioskopi = new HashSet<>();
 
 	public Adresa() {
 	}
@@ -60,5 +75,30 @@ public class Adresa {
 		this.broj = broj;
 	}
 
-}
+	public float getGeoDuzina() {
+		return geoDuzina;
+	}
 
+	public void setGeoDuzina(float geoDuzina) {
+		this.geoDuzina = geoDuzina;
+	}
+
+	public float getGeoSirina() {
+		return geoSirina;
+	}
+
+	public void setGeoSirina(float geoSirina) {
+		this.geoSirina = geoSirina;
+	}
+
+	public Set<Bioskop> getBioskopi() {
+		return bioskopi;
+	}
+
+	public void setBioskopi(Set<Bioskop> bioskopi) {
+		this.bioskopi = bioskopi;
+	}
+	
+	
+
+}
