@@ -14,4 +14,6 @@ public interface FilmService {
 	public Film update(Film film, Long id);
 
 	public void delete(Film film);
+
+	public List<Film> findAktuelniFilmovi();
 }

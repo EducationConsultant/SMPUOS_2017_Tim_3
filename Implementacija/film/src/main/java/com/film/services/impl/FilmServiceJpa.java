@@ -1,5 +1,10 @@
 package com.film.services.impl;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,6 +82,32 @@ public class FilmServiceJpa implements FilmService {
 	@Override
 	public void delete(Film film) {
 		filmRepository.delete(film);
+	}
+
+	@Override
+	public List<Film> findAktuelniFilmovi() {
+		List<Film> pronadjeniFilmovi = new ArrayList<Film>();
+		List<Film> sviFilmovi = filmRepository.findAll();
+
+		Date dateNow = new Date();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(dateNow);
+		int yearNow = cal.get(Calendar.YEAR);
+
+		for (Film film : sviFilmovi) {
+			Date datumPremijere = film.getDatumPremijere();
+			Format formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String dateString = formatter.format(datumPremijere);
+
+			String[] parts = dateString.split("-");
+			int godinaPremijere = Integer.parseInt(parts[0]);
+
+			if (yearNow == godinaPremijere) {
+				pronadjeniFilmovi.add(film);
+			}
+		}
+
+		return pronadjeniFilmovi;
 	}
 
 }

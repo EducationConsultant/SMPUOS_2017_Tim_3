@@ -57,4 +57,10 @@ public class FilmController {
 		filmService.delete(film);
 		return new ResponseEntity<Film>(film, HttpStatus.OK);
 	}
+
+	@RequestMapping(value = "/pregledAktuelnih", method = RequestMethod.GET)
+	public ResponseEntity<List<Film>> findAktuelniFilmovi() {
+		List<Film> filmovi = filmService.findAktuelniFilmovi();
+		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
+	}
 }
