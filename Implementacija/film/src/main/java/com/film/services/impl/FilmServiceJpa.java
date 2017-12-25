@@ -74,4 +74,9 @@ public class FilmServiceJpa implements FilmService {
 		return sacuvan;
 	}
 
+	@Override
+	public void delete(Film film) {
+		filmRepository.delete(film);
+	}
+
 }

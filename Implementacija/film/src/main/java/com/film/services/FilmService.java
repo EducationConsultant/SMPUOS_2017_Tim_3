@@ -12,4 +12,6 @@ public interface FilmService {
 	public List<Film> findAll();
 
 	public Film update(Film film, Long id);
+
+	public void delete(Film film);
 }

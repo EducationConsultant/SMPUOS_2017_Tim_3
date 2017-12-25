@@ -3,7 +3,6 @@ package com.film.models;
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -45,11 +44,11 @@ public class Film {
 	@NotNull
 	private Date datumPremijere;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "jezik_id", referencedColumnName = "jezik_id")
 	private Jezik jezik;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "reditelj_id", referencedColumnName = "reditelj_id")
 	private Reditelj reditelj;
 
@@ -57,7 +56,7 @@ public class Film {
 	@JoinTable(name = "film_glumci", joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"), inverseJoinColumns = @JoinColumn(name = "glumac_id", referencedColumnName = "glumac_id"))
 	private Set<Glumac> glumci;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "kategorija_id", referencedColumnName = "kategorija_id")
 	private Kategorija kategorija;
 

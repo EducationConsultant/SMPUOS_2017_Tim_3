@@ -36,15 +36,25 @@ public class FilmController {
 		return new ResponseEntity<Film>(film, HttpStatus.OK);
 	}
 
+	// insert
 	@RequestMapping(value = "/dodaj", method = RequestMethod.POST)
 	public ResponseEntity<Film> save(@Valid @RequestBody Film film) {
 		Film savedFilm = filmService.save(film);
 		return new ResponseEntity<Film>(savedFilm, HttpStatus.CREATED);
 	}
 
+	// update
 	@RequestMapping(value = "/izmeni/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Film> update(@PathVariable Long id, @Valid @RequestBody Film film) {
 		Film izmenjenFilm = filmService.update(film, id);
 		return new ResponseEntity<Film>(izmenjenFilm, HttpStatus.OK);
+	}
+
+	// delete
+	@RequestMapping(value = "/obrisi/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Film> delete(@PathVariable Long id) {
+		Film film = filmService.findOne(id);
+		filmService.delete(film);
+		return new ResponseEntity<Film>(film, HttpStatus.OK);
 	}
 }
