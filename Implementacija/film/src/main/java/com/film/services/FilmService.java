@@ -2,6 +2,9 @@ package com.film.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.film.models.Film;
 
 public interface FilmService {
@@ -16,6 +19,8 @@ public interface FilmService {
 	public void delete(Film film);
 
 	public Film saveOcena(Film film, Long id);
+
+	public Page<Film> findAllByPage(Pageable pageable);
 
 	public List<Film> findAktuelniFilmovi();
 
