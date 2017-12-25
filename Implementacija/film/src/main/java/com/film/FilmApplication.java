@@ -1,8 +1,12 @@
 package com.film;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+@EnableAutoConfiguration
+@EnableDiscoveryClient
 @SpringBootApplication
 public class FilmApplication {
 
@@ -10,3 +14,4 @@ public class FilmApplication {
 		SpringApplication.run(FilmApplication.class, args);
 	}
 }
+
