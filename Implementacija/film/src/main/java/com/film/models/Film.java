@@ -1,6 +1,7 @@
 package com.film.models;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -52,6 +55,10 @@ public class Film {
 	@JoinColumn(name = "reditelj_id", referencedColumnName = "reditelj_id")
 	@JsonBackReference
 	private Reditelj reditelj;
+
+	@ManyToMany
+	@JoinTable(name = "film_glumci", joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"), inverseJoinColumns = @JoinColumn(name = "glumac_id", referencedColumnName = "glumac_id"))
+	private Set<Glumac> glumci;
 
 	// private float prosjecnaOcjena;
 	// public java.util.Collection<Glumac> glumac;
@@ -114,6 +121,14 @@ public class Film {
 
 	public void setReditelj(Reditelj reditelj) {
 		this.reditelj = reditelj;
+	}
+
+	public Set<Glumac> getGlumci() {
+		return glumci;
+	}
+
+	public void setGlumci(Set<Glumac> glumci) {
+		this.glumci = glumci;
 	}
 
 }
