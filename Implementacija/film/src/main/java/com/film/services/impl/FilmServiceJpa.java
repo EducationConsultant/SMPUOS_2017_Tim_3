@@ -46,9 +46,32 @@ public class FilmServiceJpa implements FilmService {
 	}
 
 	@Override
+	public Film findOne(Long id) {
+		Film film = filmRepository.findOne(id);
+		return film;
+	}
+
+	@Override
 	public List<Film> findAll() {
 		List<Film> filmovi = filmRepository.findAll();
 		return filmovi;
+	}
+
+	@Override
+	public Film update(Film film, Long id) {
+		Film filmZaIzmenu = this.findOne(id);
+		filmZaIzmenu.setNaziv(film.getNaziv());
+		filmZaIzmenu.setOpis(film.getOpis());
+		filmZaIzmenu.setTrajanje(film.getTrajanje());
+		filmZaIzmenu.setDatumPremijere(film.getDatumPremijere());
+		filmZaIzmenu.setJezik(film.getJezik());
+		filmZaIzmenu.setReditelj(film.getReditelj());
+		filmZaIzmenu.setGlumci(film.getGlumci());
+		filmZaIzmenu.setKategorija(film.getKategorija());
+
+		Film sacuvan = filmRepository.save(filmZaIzmenu);
+
+		return sacuvan;
 	}
 
 }

@@ -18,8 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 @Entity
 @Table
 public class Film {
@@ -53,19 +51,15 @@ public class Film {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "reditelj_id", referencedColumnName = "reditelj_id")
-	@JsonBackReference(value = "reditelj_filmovi")
 	private Reditelj reditelj;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "film_glumci", joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"), inverseJoinColumns = @JoinColumn(name = "glumac_id", referencedColumnName = "glumac_id"))
 	private Set<Glumac> glumci;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "kategorija_id", referencedColumnName = "kategorija_id")
-	@JsonBackReference(value = "kategorija_filmovi")
 	private Kategorija kategorija;
-
-	// private float prosjecnaOcjena;
 
 	public Film() {
 	}

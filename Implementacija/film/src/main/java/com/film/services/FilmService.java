@@ -7,5 +7,9 @@ import com.film.models.Film;
 public interface FilmService {
 	public Film save(Film film);
 
+	public Film findOne(Long id);
+
 	public List<Film> findAll();
+
+	public Film update(Film film, Long id);
 }
