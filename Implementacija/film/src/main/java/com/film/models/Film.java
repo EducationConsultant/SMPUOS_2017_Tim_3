@@ -53,16 +53,19 @@ public class Film {
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "reditelj_id", referencedColumnName = "reditelj_id")
-	@JsonBackReference
+	@JsonBackReference(value = "reditelj_filmovi")
 	private Reditelj reditelj;
 
 	@ManyToMany
 	@JoinTable(name = "film_glumci", joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"), inverseJoinColumns = @JoinColumn(name = "glumac_id", referencedColumnName = "glumac_id"))
 	private Set<Glumac> glumci;
 
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "kategorija_id", referencedColumnName = "kategorija_id")
+	@JsonBackReference(value = "kategorija_filmovi")
+	private Kategorija kategorija;
+
 	// private float prosjecnaOcjena;
-	// public java.util.Collection<Glumac> glumac;
-	// public Kategorija kategorija;
 
 	public Film() {
 	}
@@ -129,6 +132,14 @@ public class Film {
 
 	public void setGlumci(Set<Glumac> glumci) {
 		this.glumci = glumci;
+	}
+
+	public Kategorija getKategorija() {
+		return kategorija;
+	}
+
+	public void setKategorija(Kategorija kategorija) {
+		this.kategorija = kategorija;
 	}
 
 }

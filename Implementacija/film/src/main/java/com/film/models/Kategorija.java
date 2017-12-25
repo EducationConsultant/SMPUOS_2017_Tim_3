@@ -16,28 +16,23 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table
-public class Reditelj {
+public class Kategorija {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false, unique = true, name = "reditelj_id")
+	@Column(nullable = false, unique = true, name = "kategorija_id")
 	private Long id;
 
 	@Column(nullable = false)
 	@NotNull
-	@Size(min = 3, max = 40)
-	private String ime;
+	@Size(min = 3, max = 30)
+	private String naziv;
 
-	@Column(nullable = false)
-	@NotNull
-	@Size(min = 3, max = 40)
-	private String prezime;
-
-	@OneToMany(mappedBy = "reditelj")
-	@JsonManagedReference(value = "reditelj_filmovi")
+	@OneToMany(mappedBy = "kategorija")
+	@JsonManagedReference(value = "kategorija_filmovi")
 	private Set<Film> filmovi;
 
-	public Reditelj() {
+	public Kategorija() {
 	}
 
 	public Long getId() {
@@ -48,20 +43,12 @@ public class Reditelj {
 		this.id = id;
 	}
 
-	public String getIme() {
-		return ime;
+	public String getNaziv() {
+		return naziv;
 	}
 
-	public void setIme(String ime) {
-		this.ime = ime;
-	}
-
-	public String getPrezime() {
-		return prezime;
-	}
-
-	public void setPrezime(String prezime) {
-		this.prezime = prezime;
+	public void setNaziv(String naziv) {
+		this.naziv = naziv;
 	}
 
 	public Set<Film> getFilmovi() {
