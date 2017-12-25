@@ -1,0 +1,104 @@
+SVE REZERVACIJE
+
+localhost:8765/rezervacija-service/rezervacija GET
+--------------------------------------------------------------
+UNOS REZERVACIJE
+
+localhost:8765/rezervacija-service/rezervacija POST
+{
+
+	"idKorisnika" : 2,
+	"datumRezervacije" : "2017-06-10",
+	"datumIstekaRezervacije" : "2017-06-10",
+	"tip":"AKTIVNA",
+	"brojSedista":1,
+	"brojRedaSedista" :1,
+	"projekcija" : {
+	     "id": 1,
+    	"idFilma": 1,
+	    "nazivFilma": "Magic",
+        "idBioskopa": 1,
+        "nazivBioskopa": "Arena",
+        "idSale": 1,
+        "oznakaSale": "Sala 2",
+        "datumProjekcije": 1497052800000,
+        "rezervacije": null,
+        "brojAktivnihRezervacija": 0
+	}
+	
+	
+}
+---------------------------------------------------------------
+PRETRAGA PO ID
+localhost:8765/rezervacija-service/rezervacija/1 GET
+
+--------------------------------------------------------------
+UPDATE
+
+localhost:8765/rezervacija-service/rezervacija/2 PUT
+--------------------------------------------------------------
+DELETE
+
+localhost:8765/rezervacija-service/rezervacija/1 DELETE
+--------------------------------------------------------------
+PREGLED OTKAZANIH REZERVACIJA PO PROJEKCIJAMA
+
+localhost:8765/rezervacija-service/rezervacija/otkazane/projekcije GET
+----------------------------------------------------------------------------
+PREGLED AKTIVNIH PO PROJEKCIJI
+
+localhost:8765/rezervacija-service/rezervacija/aktivne/projekcije GET
+----------------------------------------------------------------------------
+PREGLED AKTIVNIH PO ID KORISNIKA
+
+localhost:8765/rezervacija-service/rezervacija/aktivne/3
+----------------------------------------------------------------------------
+DEAKTIVACIJA REZERVACIJE
+
+localhost:8765/rezervacija-service/rezervacija/deaktivacija/1 PUT
+----------------------------------------------------------------------------
+SVE PROJEKCIJE
+
+localhost:8765/rezervacija-service/projekcija
+----------------------------------------------------------------------------
+UNOS PROJEKCIJE
+
+localhost:8765/rezervacija-service/projekcija POST
+
+{
+	"idFilma" : 1,
+	"nazivFilma" : "Magic",
+	"idBioskopa" : 1,
+	"nazivBioskopa" : "Arena",
+	"idSale" : 1,
+	"oznakaSale" : "Sala 2",
+	"datumProjekcije" :  "2017-06-10"
+}
+----------------------------------------------------------------------------
+BRISANJE PROJEKCIJE
+
+localhost:8765/rezervacija-service/projekcija/2
+----------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
