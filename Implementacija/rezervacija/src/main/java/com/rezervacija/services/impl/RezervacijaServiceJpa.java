@@ -18,9 +18,6 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 
 	@Autowired
 	private RezervacijaRepository repository;
-	
-	@Autowired
-	private ProjekcijaRepository projekcijaRepository;
 
 	@Override
 	public Rezervacija findOne(Long id) {
@@ -56,16 +53,8 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 		rezervacijaZaIzmenu.setBrojRedaSedista(rezervacija.getBrojRedaSedista());
 		rezervacijaZaIzmenu.setBrojSedista(rezervacija.getBrojSedista());
 		rezervacijaZaIzmenu.setDatumIstekaRezervacije(rezervacija.getDatumIstekaRezervacije());
-		// rezervacijaZaIzmenu.setDatumProjekcije(rezervacija.getDatumProjekcije());
 		rezervacijaZaIzmenu.setDatumRezervacije(rezervacija.getDatumRezervacije());
-		// rezervacijaZaIzmenu.setIdBioskopa(rezervacija.getIdBioskopa());
-		// rezervacijaZaIzmenu.setIdFilma(rezervacija.getIdFilma());
-		// rezervacijaZaIzmenu.setIdSale(rezervacija.getIdSale());
-		// rezervacijaZaIzmenu.setNazivBioskopa(rezervacija.getNazivBioskopa());
-		// rezervacijaZaIzmenu.setNazivFilma(rezervacija.getNazivFilma());
-		// rezervacijaZaIzmenu.setOznakaSale(rezervacija.getOznakaSale());
 		rezervacijaZaIzmenu.setIdKorisnika(rezervacija.getIdKorisnika());
-
 		Rezervacija sacuvana = repository.save(rezervacijaZaIzmenu);
 		return sacuvana;
 	}
@@ -100,24 +89,35 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 
 	@Override
 	public List<Rezervacija> pregledAktivnihPoProjekcijama() {
+		int brojacAktivnih = 0;
 		List<Rezervacija> rezervacije = repository.findAll();
 		List<Rezervacija> aktivne = new ArrayList<Rezervacija>();
 		for (Rezervacija r : rezervacije) {
 			if (r.getTip() == RezervacijaTip.AKTIVNA) {
 				aktivne.add(r);
+				brojacAktivnih++;
 			}
 		}
+		for(Rezervacija r : aktivne) {
+			r.getProjekcija().setBrojAktivnihRezervacija(brojacAktivnih);
+		}
+		
 		return aktivne;
 	}
 
 	@Override
 	public List<Rezervacija> pregledOtkazanihPoProjekcijama() {
+		int brojacOtkazanih = 0;
 		List<Rezervacija> rezervacije = repository.findAll();
 		List<Rezervacija> otkazane = new ArrayList<Rezervacija>();
 		for (Rezervacija r : rezervacije) {
 			if (r.getTip() == RezervacijaTip.OTKAZANA) {
 				otkazane.add(r);
+				brojacOtkazanih++;
 			}
+		}
+		for(Rezervacija r : otkazane) {
+			r.getProjekcija().setBrojOtkazanihRezervacija(brojacOtkazanih);
 		}
 		return otkazane;
 	}

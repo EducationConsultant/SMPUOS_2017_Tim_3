@@ -66,6 +66,7 @@ public class Projekcija {
 	private List<Rezervacija> rezervacije;
 	
 	private int brojAktivnihRezervacija;
+	private int brojOtkazanihRezervacija;
 	
 	public Projekcija() {
 		
@@ -149,6 +150,14 @@ public class Projekcija {
 
 	public void setRezervacije(List<Rezervacija> rezervacije) {
 		this.rezervacije = rezervacije;
+	}
+
+	public int getBrojOtkazanihRezervacija() {
+		return brojOtkazanihRezervacija;
+	}
+
+	public void setBrojOtkazanihRezervacija(int brojOtkazanihRezervacija) {
+		this.brojOtkazanihRezervacija = brojOtkazanihRezervacija;
 	}
 	
 	

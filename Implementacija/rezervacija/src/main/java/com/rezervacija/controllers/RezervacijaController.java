@@ -85,7 +85,7 @@ public class RezervacijaController {
 	//pregled aktivnih rezervacija po projekcjama  -- MALA NAPOMENA --------------- BITNO!!!
 	// NA FRONTENDU : sto se tice podataka o projekciji, prikazati samo :
 	// datum projekcije, ime filma, ime bioskopa, oznaka sale, broj aktivnih rezervacija
-	// bez id - eva 
+	// bez id - eva i bez broja otkazanih rezervacija
 	@RequestMapping(value="/aktivne/projekcije", method = RequestMethod.GET)
 	public ResponseEntity<List<Rezervacija>> pregledSvihAktivnihPoProjekciji() {
 		List<Rezervacija> rezervacije = rezervacijaService.pregledAktivnihPoProjekcijama();
@@ -94,6 +94,7 @@ public class RezervacijaController {
 	}
 	
 	//pregled otkazanih rezervacija po projekcjama  -- MALA NAPOMENA---- ISTO KAO GORE
+	// bez broja aktivnih rezervacija
 	@RequestMapping(value="/otkazane/projekcije", method = RequestMethod.GET)
 	public ResponseEntity<List<Rezervacija>> pregledSvihOtkazanihPoProjekciji() {
 		List<Rezervacija> rezervacije = rezervacijaService.pregledOtkazanihPoProjekcijama();
