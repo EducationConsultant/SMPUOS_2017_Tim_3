@@ -30,7 +30,8 @@ public class BioskopServiceJpa implements BioskopService {
 
 	@Override
 	public List<Bioskop> find() {
-		return repository.findAll();
+		//return repository.findAll();
+		return repository.findAllByOrderByOcenaDesc();
 	}
 
 	@Override
@@ -82,6 +83,12 @@ public class BioskopServiceJpa implements BioskopService {
 	@Override
 	public List<Bioskop> findByAdresa(Adresa adresa) {
 		return repository.findByAdresa(adresa);
+	}
+
+	@Override
+	public List<Bioskop> rangiranje() {
+		List<Bioskop> bioskopi = repository.findAllByOrderByOcenaDesc();
+		return bioskopi;
 	}
 
 

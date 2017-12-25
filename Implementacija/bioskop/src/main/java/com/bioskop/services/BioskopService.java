@@ -20,6 +20,7 @@ public interface BioskopService {
 	public List<Bioskop> findByAdresa(Adresa adresa);  // i bioskope i sale prikazi
 	// rangiranje bioskopa po oceni
 	public Bioskop saveOcena(Bioskop bioskop, Long id);
+	public List<Bioskop> rangiranje();
 
 	
 }

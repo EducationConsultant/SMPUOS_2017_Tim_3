@@ -13,5 +13,6 @@ public interface BioskopRepository extends JpaRepository<Bioskop, Long>{
 
 	public Bioskop findByNaziv(String ime);
 	public List<Bioskop> findByAdresa(Adresa adresa);
+	public List<Bioskop> findAllByOrderByOcenaDesc();
 
 }
