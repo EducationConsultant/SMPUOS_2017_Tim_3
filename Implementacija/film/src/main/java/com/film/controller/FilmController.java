@@ -58,6 +58,14 @@ public class FilmController {
 		return new ResponseEntity<Film>(film, HttpStatus.OK);
 	}
 
+	// ocenjivanje filma
+	// id - id filma koji ocenjujemo
+	@RequestMapping(value = "/ocenjivanje/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Film> saveOcena(@PathVariable Long id, @Valid @RequestBody Film film) {
+		Film ocenjeniFilm = filmService.saveOcena(film, id);
+		return new ResponseEntity<Film>(ocenjeniFilm, HttpStatus.OK);
+	}
+
 	// pregled aktuelnih filmova
 	@RequestMapping(value = "/aktuelni", method = RequestMethod.GET)
 	public ResponseEntity<List<Film>> findAktuelniFilmovi() {

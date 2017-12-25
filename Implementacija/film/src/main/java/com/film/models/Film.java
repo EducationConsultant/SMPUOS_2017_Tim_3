@@ -44,6 +44,8 @@ public class Film {
 	@NotNull
 	private Date datumPremijere;
 
+	private int ocena;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "jezik_id", referencedColumnName = "jezik_id")
 	private Jezik jezik;
@@ -101,6 +103,14 @@ public class Film {
 
 	public void setDatumPremijere(Date datumPremijere) {
 		this.datumPremijere = datumPremijere;
+	}
+
+	public int getOcena() {
+		return ocena;
+	}
+
+	public void setOcena(int ocena) {
+		this.ocena = ocena;
 	}
 
 	public Jezik getJezik() {

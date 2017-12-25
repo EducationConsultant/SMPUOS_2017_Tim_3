@@ -24,4 +24,6 @@ public interface FilmService {
 	public List<Film> findByReditelj(String ime, String prezime);
 
 	public List<Film> findByGlumac(String ime, String prezime);
+
+	public Film saveOcena(Film film, Long id);
 }

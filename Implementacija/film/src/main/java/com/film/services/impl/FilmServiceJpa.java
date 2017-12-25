@@ -169,4 +169,14 @@ public class FilmServiceJpa implements FilmService {
 		return filmovi;
 	}
 
+	@Override
+	public Film saveOcena(Film film, Long id) {
+		Film filmZaOcenu = filmRepository.findOne(id);
+		filmZaOcenu.setOcena(film.getOcena());
+
+		filmRepository.save(filmZaOcenu);
+
+		return filmZaOcenu;
+	}
+
 }
