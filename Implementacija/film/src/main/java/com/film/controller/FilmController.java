@@ -86,4 +86,12 @@ public class FilmController {
 		List<Film> filmovi = filmService.findByReditelj(ime, prezime);
 		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
 	}
+
+	// pregled filmova prema glumcima
+	@RequestMapping(value = "/glumac/{ime}?{prezime}", method = RequestMethod.GET)
+	public ResponseEntity<List<Film>> findByGlumac(@PathVariable("ime") String ime,
+			@PathVariable("prezime") String prezime) {
+		List<Film> filmovi = filmService.findByGlumac(ime, prezime);
+		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
+	}
 }

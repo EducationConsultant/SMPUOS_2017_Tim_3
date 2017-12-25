@@ -22,4 +22,6 @@ public interface FilmService {
 	public List<Film> findByKategorija(String naziv);
 
 	public List<Film> findByReditelj(String ime, String prezime);
+
+	public List<Film> findByGlumac(String ime, String prezime);
 }

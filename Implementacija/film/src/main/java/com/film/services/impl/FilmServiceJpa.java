@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.film.models.Film;
+import com.film.models.Glumac;
 import com.film.models.Jezik;
 import com.film.models.Kategorija;
 import com.film.models.Reditelj;
@@ -145,6 +147,23 @@ public class FilmServiceJpa implements FilmService {
 			Reditelj reditelj = f.getReditelj();
 			if (reditelj.getIme().contains(ime) && reditelj.getPrezime().contains(prezime)) {
 				filmovi.add(f);
+			}
+		}
+		return filmovi;
+	}
+
+	@Override
+	public List<Film> findByGlumac(String ime, String prezime) {
+		List<Film> sviFilmovi = filmRepository.findAll();
+		List<Film> filmovi = new ArrayList<Film>();
+
+		for (Film f : sviFilmovi) {
+			Set<Glumac> glumci = f.getGlumci();
+
+			for (Glumac g : glumci) {
+				if (g.getIme().contains(ime) && g.getPrezime().contains(prezime)) {
+					filmovi.add(f);
+				}
 			}
 		}
 		return filmovi;
