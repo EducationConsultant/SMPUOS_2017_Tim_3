@@ -8,4 +8,6 @@ import com.film.models.Kategorija;
 @Repository
 public interface KategorijaRepository extends JpaRepository<Kategorija, Long> {
 
+	public Kategorija findByNaziv(String naziv);
+
 }

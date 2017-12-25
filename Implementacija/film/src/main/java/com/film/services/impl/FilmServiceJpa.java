@@ -130,4 +130,10 @@ public class FilmServiceJpa implements FilmService {
 		return pronadjeniFilmovi;
 	}
 
+	@Override
+	public List<Film> findByKategorija(Kategorija kategorija) {
+		Kategorija kat = kategorijaRepository.findByNaziv(kategorija.getNaziv());
+		return filmRepository.findByKategorija(kat);
+	}
+
 }
