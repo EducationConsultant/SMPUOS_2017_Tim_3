@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +13,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -71,9 +74,11 @@ public class Rezervacija {
 	@NotNull
 	private Date datumIstekaRezervacije;
 	
+
 	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
 	@NotNull
-	private Boolean aktivna;
+	private RezervacijaTip tip;
 	
 	@Column(nullable = false)
 	@NotNull
@@ -174,12 +179,14 @@ public class Rezervacija {
 		this.datumIstekaRezervacije = datumIstekaRezervacije;
 	}
 
-	public Boolean getAktivna() {
-		return aktivna;
+
+
+	public RezervacijaTip getTip() {
+		return tip;
 	}
 
-	public void setAktivna(Boolean aktivna) {
-		this.aktivna = aktivna;
+	public void setTip(RezervacijaTip tip) {
+		this.tip = tip;
 	}
 
 	public int getBrojSedista() {

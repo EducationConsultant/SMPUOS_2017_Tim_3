@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rezervacija.models.Rezervacija;
+import com.rezervacija.models.RezervacijaTip;
 import com.rezervacija.repository.RezervacijaRepository;
 import com.rezervacija.services.RezervacijaService;
 
@@ -45,7 +46,7 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	@Override
 	public Rezervacija update(Rezervacija rezervacija, Long id) {
 		Rezervacija rezervacijaZaIzmenu = repository.findOne(id);
-		rezervacijaZaIzmenu.setAktivna(rezervacija.getAktivna());
+		rezervacijaZaIzmenu.setTip(rezervacija.getTip());
 		rezervacijaZaIzmenu.setBrojRedaSedista(rezervacija.getBrojRedaSedista());
 		rezervacijaZaIzmenu.setBrojSedista(rezervacija.getBrojSedista());
 		rezervacijaZaIzmenu.setDatumIstekaRezervacije(rezervacija.getDatumIstekaRezervacije());
@@ -61,5 +62,12 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 		
 		Rezervacija sacuvana = repository.save(rezervacijaZaIzmenu);
 		return sacuvana;
+	}
+
+	@Override
+	public Rezervacija deaktivacija(Long id) {
+		Rezervacija rezervacija = repository.findOne(id);
+		rezervacija.setTip(RezervacijaTip.OTKAZANA);
+		return repository.save(rezervacija);
 	}
 }

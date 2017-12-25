@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.rezervacija.models.Rezervacija;
 import com.rezervacija.services.RezervacijaService;
 
@@ -49,8 +48,6 @@ public class RezervacijaController {
 
 	}
 
-	
-
 	// delete
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	public ResponseEntity<Rezervacija> deleteRezervacija(@PathVariable Long id) {
@@ -62,9 +59,20 @@ public class RezervacijaController {
 
 	// update
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Rezervacija> updateRezervacija(@PathVariable Long id, @Valid @RequestBody Rezervacija rezervacija) { 
+	public ResponseEntity<Rezervacija> updateRezervacija(@PathVariable Long id,
+			@Valid @RequestBody Rezervacija rezervacija) {
 
 		Rezervacija savedRezervacija = rezervacijaService.update(rezervacija, id);
+
+		return new ResponseEntity<Rezervacija>(savedRezervacija, HttpStatus.OK);
+
+	}
+
+	// deaktivacija
+	@RequestMapping(value = "/deaktivacija/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Rezervacija> deaktivacija(@PathVariable Long id) {
+
+		Rezervacija savedRezervacija = rezervacijaService.deaktivacija(id);
 
 		return new ResponseEntity<Rezervacija>(savedRezervacija, HttpStatus.OK);
 

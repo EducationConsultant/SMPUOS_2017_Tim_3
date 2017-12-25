@@ -12,5 +12,6 @@ public interface RezervacijaService {
 	public void delete(Rezervacija rezervacija);
 	public void deleteById(Long id);
 	public Rezervacija update(Rezervacija novaRezevacija, Long id);
+	public Rezervacija deaktivacija(Long id);
 	
 }
