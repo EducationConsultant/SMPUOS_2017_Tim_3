@@ -93,6 +93,14 @@ public class RezervacijaController {
 		
 	}
 	
+	//pregled otkazanih rezervacija po projekcjama  -- MALA NAPOMENA---- ISTO KAO GORE
+	@RequestMapping(value="/otkazane/projekcije", method = RequestMethod.GET)
+	public ResponseEntity<List<Rezervacija>> pregledSvihOtkazanihPoProjekciji() {
+		List<Rezervacija> rezervacije = rezervacijaService.pregledOtkazanihPoProjekcijama();
+		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
+		
+	}
+	
 	
 	
 }

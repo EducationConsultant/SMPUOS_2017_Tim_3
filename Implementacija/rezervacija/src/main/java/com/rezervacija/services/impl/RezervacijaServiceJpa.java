@@ -102,16 +102,23 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	public List<Rezervacija> pregledAktivnihPoProjekcijama() {
 		List<Rezervacija> rezervacije = repository.findAll();
 		List<Rezervacija> aktivne = new ArrayList<Rezervacija>();
-		List<Projekcija> projekcije = new ArrayList<Projekcija>();
-		List<Rezervacija> pregledRezervacije = new ArrayList<Rezervacija>();
-		
 		for (Rezervacija r : rezervacije) {
 			if (r.getTip() == RezervacijaTip.AKTIVNA) {
 				aktivne.add(r);
 			}
 		}
-		
-		
 		return aktivne;
+	}
+
+	@Override
+	public List<Rezervacija> pregledOtkazanihPoProjekcijama() {
+		List<Rezervacija> rezervacije = repository.findAll();
+		List<Rezervacija> otkazane = new ArrayList<Rezervacija>();
+		for (Rezervacija r : rezervacije) {
+			if (r.getTip() == RezervacijaTip.OTKAZANA) {
+				otkazane.add(r);
+			}
+		}
+		return otkazane;
 	}
 }
