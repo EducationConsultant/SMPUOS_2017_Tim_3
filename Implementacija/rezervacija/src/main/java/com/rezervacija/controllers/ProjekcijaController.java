@@ -45,9 +45,9 @@ public class ProjekcijaController {
 	public ResponseEntity<Projekcija> insertProjekcija(@Valid @RequestBody Projekcija projekcija) {
 		projekcijaService.save(projekcija);
 		//String idBioskopa = Long.toString(projekcija.getIdBioskopa());
-		//String nazivBioskopa = projekcijaService.checkBioskop(idBioskopa);
-		//projekcija.setNazivBioskopa(nazivBioskopa);
-		//projekcijaService.save(projekcija);
+		String nazivBioskopa = projekcijaService.checkBioskop(projekcija.getIdBioskopa());
+		projekcija.setNazivBioskopa(nazivBioskopa);
+		projekcijaService.save(projekcija);
 		return new ResponseEntity<Projekcija>(projekcija, HttpStatus.CREATED);
 
 	}
@@ -71,7 +71,7 @@ public class ProjekcijaController {
 	@FeignClient("bioskop-service")//the application.name for the user service
 	public interface BioskopServiceClient {
 		@RequestMapping(value = "bioskop/checkBioskop", method = RequestMethod.GET)// the endpoint which will be balanced over
-		String checkBioskop(@RequestParam(name="bioskopId") String bioskopId);// the method specification must be the same as for users/checkUser
+		String checkBioskop(@RequestParam(name="bioskopId") Long bioskopId);// the method specification must be the same as for users/checkUser
 	}
 	
 

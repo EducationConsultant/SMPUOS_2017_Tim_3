@@ -12,5 +12,5 @@ public interface ProjekcijaService {
 	public void delete(Projekcija projekcija);
 	public void deleteById(Long id);
 	public Projekcija update(Projekcija projekcija, Long id);
-	public String checkBioskop(String idBioskopa);
+	public String checkBioskop(Long idBioskopa);
 }

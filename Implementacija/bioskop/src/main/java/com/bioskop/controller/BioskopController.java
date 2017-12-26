@@ -92,12 +92,12 @@ public class BioskopController {
 	
 	//localhost:8765/bioskop-service/bioskop/checkBioskop?bioskopId=1
 	@RequestMapping(value = "/checkBioskop", method = RequestMethod.GET)
-	public String checkBioskop(@RequestParam(name="bioskopId") String bioskopId){
-		Long bioskopIdL = Long.parseLong(bioskopId);
-		System.err.println("ID BIOSKOPA parametar: " + bioskopIdL);
-		Bioskop bioskop = bioskopService.findOne(bioskopIdL);
-		System.err.println("ID BIOSKOPA : " + bioskop );
-		System.err.println("NAZIV BIOSKOPA JE" + bioskop.getNaziv());
+	public String checkBioskop(@RequestParam(name="bioskopId") Long bioskopId){
+		//Long bioskopIdL = Long.parseLong(bioskopId);
+		//System.err.println("ID BIOSKOPA parametar: " + bioskopIdL);
+		Bioskop bioskop = bioskopService.findOne(bioskopId);
+		//System.err.println("ID BIOSKOPA : " + bioskop );
+		//System.err.println("NAZIV BIOSKOPA JE" + bioskop.getNaziv());
 		return bioskop.getNaziv();
 	}
 	

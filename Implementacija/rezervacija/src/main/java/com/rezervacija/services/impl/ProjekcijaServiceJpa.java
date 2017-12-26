@@ -63,14 +63,14 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 	/*USING LOAD-BALANCING*/
 	@Override
 	@HystrixCommand(fallbackMethod="fallbackCheckBioskop")
-	public String checkBioskop(String idBioskopa) {
-		System.err.println("idbioskopa U PROJEKCIJA SERVICE JE:" + idBioskopa);
+	public String checkBioskop(Long idBioskopa) {
+		//System.err.println("idbioskopa U PROJEKCIJA SERVICE JE:" + idBioskopa);
 		String nazivBioskopa = bioskopServiceClient.checkBioskop(idBioskopa);
-		System.err.println("NAZIV BIOSKOPA U PROJEKCIJA SERVICE JE:" + nazivBioskopa);
+		//System.err.println("NAZIV BIOSKOPA U PROJEKCIJA SERVICE JE:" + nazivBioskopa);
 		return nazivBioskopa;
 	}
 
-	public String fallbackCheckBioskop(String bioskopId){
+	public String fallbackCheckBioskop(Long bioskopId){
 		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		return "!!!";
 	}
