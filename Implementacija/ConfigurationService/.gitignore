@@ -1,1 +1,2 @@
-/target/
+target/classes/META-INF/MANIFEST.MF
+target/classes/META-INF/maven/rs.uns.asc.ftn/ConfigurationService/pom.properties
