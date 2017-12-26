@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.rezervacija.controllers.ProjekcijaController.BioskopServiceClient;
 import com.rezervacija.models.Projekcija;
 import com.rezervacija.repository.ProjekcijaRepository;
 import com.rezervacija.services.ProjekcijaService;
@@ -15,6 +17,9 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 	@Autowired
 	private ProjekcijaRepository repository;
 
+	@Autowired
+	private BioskopServiceClient bioskopServiceClient; // feign client
+	
 	@Override
 	public Projekcija findOne(Long id) {
 		return repository.findOne(id);
@@ -55,4 +60,18 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 		return repository.save(projekcijaZaIzmenu);
 	}
 
+	/*USING LOAD-BALANCING*/
+	@Override
+	@HystrixCommand(fallbackMethod="fallbackCheckBioskop")
+	public String checkBioskop(Long idBioskopa) {
+		//System.err.println("idbioskopa U PROJEKCIJA SERVICE JE:" + idBioskopa);
+		String nazivBioskopa = bioskopServiceClient.checkBioskop(idBioskopa);
+		//System.err.println("NAZIV BIOSKOPA U PROJEKCIJA SERVICE JE:" + nazivBioskopa);
+		return nazivBioskopa;
+	}
+
+	public String fallbackCheckBioskop(Long bioskopId){
+		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		return "!!!";
+	}
 }
