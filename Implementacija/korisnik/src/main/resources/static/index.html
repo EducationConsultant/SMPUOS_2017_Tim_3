@@ -1,0 +1,66 @@
+<html ng-app="korisnikApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Korisnik App</title>
+
+    <script src='/korisnik-service/webjars/jquery/2.1.1/jquery.js'></script>
+    <script src='/korisnik-service/webjars/angularjs/1.4.3/angular.js'></script>
+    <script src='/korisnik-service/webjars/angularjs/1.4.3/angular-animate.js'></script>
+    <script src='/korisnik-service/webjars/angularjs/1.4.3/angular-aria.js'></script>
+    <script src='/korisnik-service/webjars/angularjs/1.4.3/angular-messages.js'></script>
+    <script src='/korisnik-service/webjars/angularjs/angular-route.js'></script>
+    <link rel="stylesheet" href="/korisnik-service/webjars/angular-material/angular-material.css">
+    <script src='/korisnik-service/webjars/angular-material/1.1.4/angular-material.js'></script>
+    <script src='/korisnik-service/webjars/ngStorage/0.3.0/ngStorage.js'></script>
+    
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/services.js"></script>
+    <script src="js/directives.js"></script>
+    <script src="js/routes.js"></script>
+
+    <!-- Controllers -->
+	<script src="js/controllers/navigationController.js"></script>
+
+    <!-- Factories -->
+    <script src="js/services/loginService.js"></script>
+
+
+    <link rel="stylesheet" href="css/myStyle.css">
+</head>
+<body>
+	<div ng-controller="NavigationController">
+        <md-toolbar md-scroll-shrink>
+            <div class="md-toolbar-tools">
+                Bioskop
+
+                <span flex></span>
+                <md-button class="md-raised" aria-label="Prijavi se" ng-click="openPrijavaDijalog($event)" ng-if="!showOdjaviSe">
+                    Prijavi se
+                </md-button>
+                <md-button class="md-raised" aria-label="Odjavi se" ng-click="odjaviSe()" ng-if="showOdjaviSe">
+                    Odjavi se
+                </md-button>
+
+            </div>
+        </md-toolbar>
+
+        <div ng-cloak class="navigationBarClass">
+            <md-content class="md-padding" >
+                <md-nav-bar
+                        md-selected-nav-item="currentNavItem"
+                        nav-bar-aria-label="navigation links"
+                        >
+                    <md-nav-item md-nav-href="#/" name="Pocetna" ng-click="saveNav('Pocetna')">Početna</md-nav-item>
+                </md-nav-bar>
+                <div class="ext-content">
+                    <div ng-view>
+
+                    </div>
+                </div>
+            </md-content>
+        </div>
+    </div>
+</body>
+</html>
