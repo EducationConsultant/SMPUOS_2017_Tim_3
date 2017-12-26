@@ -1,9 +1,15 @@
 Manifest-Version: 1.0
 Implementation-Title: ConfigurationService
 Implementation-Version: 0.0.1-SNAPSHOT
+<<<<<<< HEAD
 Built-By: Marko
 Implementation-Vendor-Id: rs.uns.acs.ftn
 Build-Jdk: 1.8.0_151
+=======
+Built-By: Milena
+Implementation-Vendor-Id: rs.uns.acs.ftn
+Build-Jdk: 1.8.0_131
+>>>>>>> e9e8804f4f69bc4791b1eabdffd71ac6d2b95275
 Implementation-URL: http://maven.apache.org
 Created-By: Maven Integration for Eclipse
 Implementation-Vendor: Pivotal Software, Inc.
