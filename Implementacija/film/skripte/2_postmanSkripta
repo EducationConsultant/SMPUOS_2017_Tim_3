@@ -1,0 +1,118 @@
+UNOS FILMA:
+.../film/dodaj POST
+{
+	"naziv":"Ferdinand - Sinh",
+	"opis":"Od reditelja Karlosa Sandane, koji nam je doneo omiljene svetske hitove Rio i Ledeno doba, stiže Ferdinand, film o velikom biku sa još većim srcem.",
+	"trajanje":108,
+	"datumPremijere":"2017-12-21",
+	"jezik":{
+		"id":2,
+		"naziv":"engleski"
+	},
+	"reditelj":{
+		"id":7,
+		"ime":"Carlos",
+		"prezime":"Saldanha"
+	},
+	"glumci":[
+		{
+			"id":11,
+			"ime":"Aleksandar",
+			"prezime":"Radojičić"
+		},
+		{
+			"id":12,
+			"ime":"Tamara",
+			"prezime":"Krcunović"
+		},
+		{
+			"id":13,
+			"ime":"Ivona",
+			"prezime":"Rambosek"
+		}
+	],
+	"kategorija":{
+		"id":3,
+		"naziv":"animirani"
+	}
+}
+
+******************************************************************************************
+IZMENA FILMA:
+.../film/izmeni/3 PUT
+{
+  "naziv": "Stado",
+  "opis": "Srpski film.",
+  "trajanje": 120,
+  "datumPremijere": 1513814400000,
+  "ocena": 2,
+  "jezik": {
+    "id": 1,
+    "naziv": "srpski"
+  },
+  "reditelj": {
+    "id": 4,
+    "ime": "Amanda",
+    "prezime": "Sthers"
+  },
+  "glumci": [
+    {
+      "id": 4,
+      "ime": "Toni",
+      "prezime": "Collette"
+    },
+    {
+      "id": 5,
+      "ime": "Harvey",
+      "prezime": "Keitel"
+    }
+  ],
+  "kategorija": {
+    "id": 5,
+    "naziv": "komedija"
+  }
+}
+******************************************************************************************
+OCENJIVANJE FILMA:
+.../film/ocenjivanje/3 PUT
+{
+      "id": 3,
+      "naziv": "Stado",
+      "opis": "Srpski film.",
+      "trajanje": 120,
+      "datumPremijere": 1513814400000,
+      "ocena": 5,
+      "jezik": {
+        "id": 1,
+        "naziv": "srpski"
+      },
+      "reditelj": {
+        "id": 4,
+        "ime": "Amanda",
+        "prezime": "Sthers"
+      },
+      "glumci": [
+        {
+          "id": 5,
+          "ime": "Harvey",
+          "prezime": "Keitel"
+        },
+        {
+          "id": 4,
+          "ime": "Toni",
+          "prezime": "Collette"
+        }
+      ],
+      "kategorija": {
+        "id": 5,
+        "naziv": "komedija"
+      }
+    }
+******************************************************************************************
+GET FILMOVI:
+..../film/filmovi?page=0&size=3 GET
+******************************************************************************************
+
+
+
+
