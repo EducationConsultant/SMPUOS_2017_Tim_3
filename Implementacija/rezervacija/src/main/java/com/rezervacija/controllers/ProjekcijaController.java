@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+
 import com.rezervacija.models.Projekcija;
 import com.rezervacija.services.ProjekcijaService;
 
@@ -41,8 +43,12 @@ public class ProjekcijaController {
 	// insert
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Projekcija> insertProjekcija(@Valid @RequestBody Projekcija projekcija) {
-		Projekcija sacuvanaProjekcija = projekcijaService.save(projekcija);
-		return new ResponseEntity<Projekcija>(sacuvanaProjekcija, HttpStatus.CREATED);
+		projekcijaService.save(projekcija);
+		//String idBioskopa = Long.toString(projekcija.getIdBioskopa());
+		//String nazivBioskopa = projekcijaService.checkBioskop(idBioskopa);
+		//projekcija.setNazivBioskopa(nazivBioskopa);
+		//projekcijaService.save(projekcija);
+		return new ResponseEntity<Projekcija>(projekcija, HttpStatus.CREATED);
 
 	}
 
@@ -62,10 +68,11 @@ public class ProjekcijaController {
 		return new ResponseEntity<Projekcija>(savedProjekcija, HttpStatus.OK);
 	}
 	
-//	@FeignClient("bioskop-service")//the application.name for the user service
-//	public interface UserServiceClient {
-//		@RequestMapping(value = "bioskop/checkBioskop", method = RequestMethod.GET)// the endpoint which will be balanced over
-//		Boolean checkUser(@RequestParam(name = "bioskopId") Long bioskopId);// the method specification must be the same as for users/checkUser
-//	}
+	@FeignClient("bioskop-service")//the application.name for the user service
+	public interface BioskopServiceClient {
+		@RequestMapping(value = "bioskop/checkBioskop", method = RequestMethod.GET)// the endpoint which will be balanced over
+		String checkBioskop(@RequestParam(name="bioskopId") String bioskopId);// the method specification must be the same as for users/checkUser
+	}
+	
 
 }

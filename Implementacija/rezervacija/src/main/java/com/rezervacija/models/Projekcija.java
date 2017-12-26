@@ -28,30 +28,25 @@ public class Projekcija {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "projekcija_id", nullable = false, unique = true)
 	private Long id;
-
 	
 	@Column(nullable = false)
 	@NotNull
 	private Long idFilma;
 	
-	@Column(nullable = false)
-	@NotNull
+	
 	private String nazivFilma;
 	
 	@Column(nullable = false)
 	@NotNull
 	private Long idBioskopa;
-	
-	@Column(nullable = false)
-	@NotNull
+
 	private String nazivBioskopa;
 	
 	@Column(nullable = false)
 	@NotNull
 	private Long idSale;
 	
-	@Column(nullable = false)
-	@NotNull
+
 	private String oznakaSale;
 	
 	@Temporal(TemporalType.DATE)

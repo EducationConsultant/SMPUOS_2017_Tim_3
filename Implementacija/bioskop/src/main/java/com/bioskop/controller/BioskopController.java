@@ -20,6 +20,8 @@ import org.springframework.web.client.RestTemplate;
 import com.bioskop.models.Adresa;
 import com.bioskop.models.Bioskop;
 import com.bioskop.services.BioskopService;
+
+
 import com.bioskop.models.AdresaKoordinate;
 
 
@@ -74,7 +76,7 @@ public class BioskopController {
 	}
 
 	// find by naziv
-	// localhost:8091/api/bioskop/naziv?naziv=Cinema
+	// localhost:8765/bioskop-service/bioskop/naziv?naziv=Cinema
 	@RequestMapping(value = "/naziv", method = RequestMethod.GET)
 	public ResponseEntity<Bioskop> findByNaziv(@RequestParam(value = "naziv") String naziv) {
 		Bioskop bioskop = bioskopService.findByNaziv(naziv);
@@ -87,5 +89,18 @@ public class BioskopController {
 		List<Bioskop> bioskopi = bioskopService.findByLocation(adresaKoordinate);
 		return new ResponseEntity<List<Bioskop>>(bioskopi, HttpStatus.OK);
 	}
+	
+	//localhost:8765/bioskop-service/bioskop/checkBioskop?bioskopId=1
+	@RequestMapping(value = "/checkBioskop", method = RequestMethod.GET)
+	public String checkBioskop(@RequestParam(name="bioskopId") String bioskopId){
+		Long bioskopIdL = Long.parseLong(bioskopId);
+		System.err.println("ID BIOSKOPA parametar: " + bioskopIdL);
+		Bioskop bioskop = bioskopService.findOne(bioskopIdL);
+		System.err.println("ID BIOSKOPA : " + bioskop );
+		System.err.println("NAZIV BIOSKOPA JE" + bioskop.getNaziv());
+		return bioskop.getNaziv();
+	}
+	
+
 
 }
