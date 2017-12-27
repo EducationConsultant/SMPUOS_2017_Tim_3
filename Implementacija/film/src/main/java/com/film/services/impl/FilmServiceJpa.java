@@ -91,7 +91,15 @@ public class FilmServiceJpa implements FilmService {
 	@Override
 	public Film saveOcena(Film film, Long id) {
 		Film filmZaOcenu = filmRepository.findOne(id);
-		filmZaOcenu.setOcena(film.getOcena());
+
+		int suma = filmZaOcenu.getSumaOcena() + film.getOcena();
+		filmZaOcenu.setSumaOcena(suma);
+
+		int brojac = filmZaOcenu.getBrojac() + 1;
+		filmZaOcenu.setBrojac(brojac);
+
+		float prosek = (float) suma / (float) brojac;
+		filmZaOcenu.setProsecnaOcena(prosek);
 
 		filmRepository.save(filmZaOcenu);
 
@@ -187,8 +195,8 @@ public class FilmServiceJpa implements FilmService {
 	}
 
 	@Override
-	public List<Film> findByOcena(int ocena) {
-		List<Film> filmovi = filmRepository.findByOcena(ocena);
+	public List<Film> findByProsecnaOcena(float prosecnaOcena) {
+		List<Film> filmovi = filmRepository.findByProsecnaOcena(prosecnaOcena);
 		return filmovi;
 	}
 

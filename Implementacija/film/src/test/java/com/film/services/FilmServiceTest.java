@@ -91,7 +91,7 @@ public class FilmServiceTest {
 		film1.setOpis("Opis filma");
 		film1.setTrajanje(98);
 		film1.setDatumPremijere(new Date());
-		film1.setOcena(5);
+		film1.setProsecnaOcena(5.0f);
 		film1.setJezik(jezik1);
 		film1.setReditelj(reditelj1);
 		film1.setGlumci(glumci1);
@@ -136,14 +136,13 @@ public class FilmServiceTest {
 		film2.setOpis("Opis filma");
 		film2.setTrajanje(150);
 		film2.setDatumPremijere(new Date());
-		film2.setOcena(4);
+		film2.setProsecnaOcena(3.5f);
 		film2.setJezik(jezik2);
 		film2.setReditelj(reditelj2);
 		film2.setGlumci(glumci2);
 		film2.setKategorija(kategorija2);
 
 		// film 3
-
 		Reditelj reditelj3 = new Reditelj();
 		reditelj3.setId(null);
 		reditelj3.setIme("Zoran");
@@ -179,7 +178,7 @@ public class FilmServiceTest {
 		film3.setOpis("Opis filma");
 		film3.setTrajanje(103);
 		film3.setDatumPremijere(new Date());
-		film3.setOcena(5);
+		film3.setProsecnaOcena(5.0f);
 		film3.setJezik(jezik1);
 		film3.setReditelj(reditelj3);
 		film3.setGlumci(glumci3);
@@ -215,7 +214,7 @@ public class FilmServiceTest {
 		List<Film> glumac = filmService.findByGlumac("Dragomir", "Bojanic");
 		Assert.assertEquals(1, glumac.size());
 
-		List<Film> ocena = filmService.findByOcena(5);
+		List<Film> ocena = filmService.findByProsecnaOcena(5.0f);
 		Assert.assertEquals(2, ocena.size());
 
 	}

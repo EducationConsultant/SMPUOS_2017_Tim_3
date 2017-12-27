@@ -32,6 +32,6 @@ public interface FilmService {
 
 	public List<Film> findByGlumac(String ime, String prezime);
 
-	public List<Film> findByOcena(int ocena);
+	public List<Film> findByProsecnaOcena(float prosecnaOcena);
 
 }

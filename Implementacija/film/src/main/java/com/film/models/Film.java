@@ -46,6 +46,12 @@ public class Film {
 
 	private int ocena;
 
+	private int sumaOcena;
+
+	private int brojac;
+
+	private float prosecnaOcena;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "jezik_id", referencedColumnName = "jezik_id")
 	private Jezik jezik;
@@ -111,6 +117,30 @@ public class Film {
 
 	public void setOcena(int ocena) {
 		this.ocena = ocena;
+	}
+
+	public int getSumaOcena() {
+		return sumaOcena;
+	}
+
+	public void setSumaOcena(int sumaOcena) {
+		this.sumaOcena = sumaOcena;
+	}
+
+	public int getBrojac() {
+		return brojac;
+	}
+
+	public void setBrojac(int brojac) {
+		this.brojac = brojac;
+	}
+
+	public float getProsecnaOcena() {
+		return prosecnaOcena;
+	}
+
+	public void setProsecnaOcena(float prosecnaOcena) {
+		this.prosecnaOcena = prosecnaOcena;
 	}
 
 	public Jezik getJezik() {

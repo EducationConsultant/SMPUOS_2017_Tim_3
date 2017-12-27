@@ -57,7 +57,7 @@ public class FilmController {
 	// ocenjivanje filma
 	// id - id filma koji ocenjujemo
 	@RequestMapping(value = "/ocenjivanje/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Film> saveOcena(@PathVariable Long id, @Valid @RequestBody Film film) {
+	public ResponseEntity<Film> saveOcena(@PathVariable Long id, @RequestBody Film film) {
 		Film ocenjeniFilm = filmService.saveOcena(film, id);
 		return new ResponseEntity<Film>(ocenjeniFilm, HttpStatus.OK);
 	}
@@ -67,7 +67,7 @@ public class FilmController {
 	// Ne prosledjujem RequestParams.
 	// Kada pogodim /filmovi?page=0&size=3 Spring automatski preuzima parametre
 	// i kreira Pageable instancu.
-	@RequestMapping(value = "filmovi", method = RequestMethod.GET)
+	@RequestMapping(value = "/filmovi", method = RequestMethod.GET)
 	public ResponseEntity<Page<Film>> getFilmovi(Pageable pageable) {
 		Page<Film> filmovi = filmService.findAllByPage(pageable);
 		return new ResponseEntity<Page<Film>>(filmovi, HttpStatus.OK);
@@ -113,8 +113,8 @@ public class FilmController {
 	// pregled filmova prema oceni
 	// localhost:8090/film/ocena?ocena=5
 	@RequestMapping(value = "/ocena", method = RequestMethod.GET)
-	public ResponseEntity<List<Film>> findByOcena(@RequestParam("ocena") int ocena) {
-		List<Film> filmovi = filmService.findByOcena(ocena);
+	public ResponseEntity<List<Film>> findByOcena(@RequestParam("ocena") float prosecnaOcena) {
+		List<Film> filmovi = filmService.findByProsecnaOcena(prosecnaOcena);
 		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
 	}
 }
