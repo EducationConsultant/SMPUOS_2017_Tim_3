@@ -2,7 +2,12 @@ angular.module('korisnikApp.KorisniciController',[])
     .controller('KorisniciController', function ($scope, $location, $rootScope, $mdDialog, KorisniciService, $localStorage, $mdToast) {
     	
     	$scope.statusKorisnika = "Aktivirani";
-    	$scope.showAktivirani = true;
+    	$scope.showAktivirani = function(k){
+    		if($scope.statusKorisnika == "Aktivirani" && $localStorage.logged.korisnickoIme != k.korisnickoIme)
+    			return true;
+    		else
+    			return false;
+    	}
     	$scope.showDeaktivirani = false;
     	
     	$scope.korisnici = [];
@@ -18,13 +23,11 @@ angular.module('korisnikApp.KorisniciController',[])
         	if($scope.statusKorisnika == "Aktivirani"){
         		KorisniciService.pregledAktivnih().success(function (data) {
                     $scope.korisnici = data;
-                    $scope.showAktivirani = true;
                     $scope.showDeaktivirani = false;
                 });
         	}else{
         		KorisniciService.pregledDeaktiviranih().success(function (data) {
                     $scope.korisnici = data;
-                    $scope.showAktivirani = false;
                     $scope.showDeaktivirani = true;
                 });
         	}

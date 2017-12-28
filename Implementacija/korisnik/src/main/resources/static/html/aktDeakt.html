@@ -7,7 +7,7 @@
     	</md-radio-group>
     	
     	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm>
-    		<md-subheader class="md-no-sticky" ng-if="showAktivirani">Aktivirani korisnici:</md-subheader>
+    		<md-subheader class="md-no-sticky" ng-if="!showDeaktivirani">Aktivirani korisnici:</md-subheader>
     		<md-subheader class="md-no-sticky" ng-if="showDeaktivirani">Deaktivirani korisnici:</md-subheader>
             <md-divider style="border-top: 1px solid black !important;"></md-divider>
         	<md-list-item class="md-3-line" ng-repeat="k in korisnici">
@@ -20,7 +20,7 @@
 				        <p><b>Tip korisnika:</b> {{k.tipKorisnika}}, <b>Datum registracije:</b> {{k.datumRegistracije | date:'dd.MM.yyyy.'}}</p>
 				    </div>
 	                <div>
-	                    <md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="deaktivacija(k)" ng-if="showAktivirani">
+	                    <md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="deaktivacija(k)" ng-if="showAktivirani(k)">
 	                        <md-icon md-svg-icon="icons/ic_power_settings_new_white_36px.svg"></md-icon>
 	                    </md-button>
 	                    <md-button class="md-fab md-mini md-raised md-hue-2" style="background-color:green; !important;" ng-click="aktivacija(k)" ng-if="showDeaktivirani">
