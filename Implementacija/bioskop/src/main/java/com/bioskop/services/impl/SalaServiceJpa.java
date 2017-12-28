@@ -57,4 +57,19 @@ public class SalaServiceJpa implements SalaService {
 		}
 		return 	bioskopRepository.save(bioskopZaIzmenu);
 	}
+
+	@Override
+	public Sala findSalaPoBioskopu(Long idBioskopa, Long idSale) {
+		Bioskop bioskop = bioskopRepository.findOne(idBioskopa);
+		List<Sala> saleUBioskopu = bioskop.getSale();
+		Sala zeljenaSala = new Sala();
+		
+		for(Sala s : saleUBioskopu) {
+			if(s.getId() == idSale) {
+				zeljenaSala = s;
+				break;
+			}
+		}
+		return zeljenaSala;
+	}
 }

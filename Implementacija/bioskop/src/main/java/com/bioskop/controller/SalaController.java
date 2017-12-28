@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bioskop.models.Bioskop;
@@ -43,6 +44,21 @@ public class SalaController {
 	public ResponseEntity<Bioskop> updateSala(@PathVariable Long idBioskopa, @PathVariable Long idSale, @Valid @RequestBody Sala sala) { 
 		Bioskop savedBioskop = salaService.updateSala(idBioskopa, idSale, sala);
 		return new ResponseEntity<Bioskop>(savedBioskop, HttpStatus.OK);
+	}
+	
+	// pregled sale u okviru bioskopa
+	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.GET)
+	public ResponseEntity<Sala> getSala(@PathVariable Long idBioskopa, @PathVariable Long idSale) { 
+		Sala sala = salaService.findSalaPoBioskopu(idBioskopa, idSale);
+		return new ResponseEntity<Sala>(sala, HttpStatus.OK);
+	}
+	
+	// na osnovu idSale vraca njenu oznaku, potrebno za uvezivanje sa rezervacijom
+	//localhost:8765/sala-service/sala/checkSala?bioskopId=1&salaId=2
+	@RequestMapping(value = "/checkSala", method = RequestMethod.GET)
+	public String checkSala(@RequestParam(name="bioskopId") Long bioskopId,@RequestParam(name="salaId") Long salaId){
+		Sala sala = salaService.findSalaPoBioskopu(bioskopId, salaId);
+		return sala.getOznakaSale();
 	}
 	
 }

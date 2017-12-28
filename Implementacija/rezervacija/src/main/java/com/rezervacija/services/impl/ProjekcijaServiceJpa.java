@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.rezervacija.controllers.ProjekcijaController.BioskopServiceClient;
 import com.rezervacija.controllers.ProjekcijaController.FilmServiceClient;
+import com.rezervacija.controllers.ProjekcijaController.SalaServiceClient;
 import com.rezervacija.models.Projekcija;
 import com.rezervacija.repository.ProjekcijaRepository;
 import com.rezervacija.services.ProjekcijaService;
@@ -22,7 +23,10 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 	private BioskopServiceClient bioskopServiceClient; // feign client
 	
 	@Autowired
-	private FilmServiceClient filmServiceClient;
+	private FilmServiceClient filmServiceClient; // feign client
+	
+	@Autowired
+	private SalaServiceClient salaServiceClient; // feign client
 	
 	@Override
 	public Projekcija findOne(Long id) {
@@ -92,4 +96,21 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 		String nazivFilma = "film";
 		return nazivFilma;
 	}
+	
+	/*USING LOAD-BALANCING FOR SALA*/
+	@Override
+	@HystrixCommand(fallbackMethod="fallbackCheckSala")
+	public String checkSala(Long idBioskopa, Long idSale) {
+		String oznakaSale = salaServiceClient.checkSala(idBioskopa, idSale);
+		return oznakaSale;
+	}
+
+	public String fallbackCheckSala(Long bioskopId, Long idSale){
+		System.out.println("sala");  // difoltni naziv sale
+		String nazivSale = "sala";
+		return nazivSale;
+	}
+
+	
+	
 }

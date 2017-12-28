@@ -13,6 +13,8 @@ public interface SalaService {
 	public Bioskop deleteSala(Long idBioskopa, Long idSale);
 
 	public Bioskop updateSala(Long idBioskopa, Long idSale, Sala sala);
+
+	public Sala findSalaPoBioskopu(Long idBioskopa, Long idSale);
 	
 	
 }

@@ -14,4 +14,5 @@ public interface ProjekcijaService {
 	public Projekcija update(Projekcija projekcija, Long id);
 	public String checkBioskop(Long idBioskopa);
 	public String checkFilm(Long idFilma);
+	public String checkSala(Long idBioskopa, Long idSale);
 }
