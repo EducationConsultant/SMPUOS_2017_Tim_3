@@ -19,7 +19,6 @@ import com.bioskop.models.Sala;
 import com.bioskop.services.BioskopService;
 import com.bioskop.services.SalaService;
 
-
 @RestController
 @RequestMapping("sala")
 public class SalaController {
@@ -37,39 +36,60 @@ public class SalaController {
 
 	// brisanje sale u okviru bioskopa
 	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.DELETE)
-	public ResponseEntity<Bioskop> deleteSala(@PathVariable Long idBioskopa,@PathVariable Long idSale) {
+	public ResponseEntity<Bioskop> deleteSala(@PathVariable Long idBioskopa, @PathVariable Long idSale) {
 		Bioskop bioskopZaIzmenu = salaService.deleteSala(idBioskopa, idSale);
 		return new ResponseEntity<Bioskop>(bioskopZaIzmenu, HttpStatus.OK);
 	}
-	
+
 	// update sale u okviru bioskopa
 	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.PUT)
-	public ResponseEntity<Bioskop> updateSala(@PathVariable Long idBioskopa, @PathVariable Long idSale, @Valid @RequestBody Sala sala) { 
+	public ResponseEntity<Bioskop> updateSala(@PathVariable Long idBioskopa, @PathVariable Long idSale,
+			@Valid @RequestBody Sala sala) {
 		Bioskop savedBioskop = salaService.updateSala(idBioskopa, idSale, sala);
 		return new ResponseEntity<Bioskop>(savedBioskop, HttpStatus.OK);
 	}
-	
+
 	// pregled svih sala u okviru bioskopa
 	@RequestMapping(value = "/{idBioskopa}", method = RequestMethod.GET)
-	public ResponseEntity<List<Sala>> getSveSale(@PathVariable Long idBioskopa) { 
+	public ResponseEntity<List<Sala>> getSveSale(@PathVariable Long idBioskopa) {
 		List<Sala> sale = salaService.findSveSalePoBioskopu(idBioskopa);
 		return new ResponseEntity<List<Sala>>(sale, HttpStatus.OK);
 	}
-	
-	
+
 	// pregled sale u okviru bioskopa
 	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.GET)
-	public ResponseEntity<Sala> getSala(@PathVariable Long idBioskopa, @PathVariable Long idSale) { 
+	public ResponseEntity<Sala> getSala(@PathVariable Long idBioskopa, @PathVariable Long idSale) {
 		Sala sala = salaService.findSalaPoBioskopu(idBioskopa, idSale);
 		return new ResponseEntity<Sala>(sala, HttpStatus.OK);
 	}
-	
-	// na osnovu idSale vraca njenu oznaku, potrebno za uvezivanje sa rezervacijom
-	//localhost:8765/sala-service/sala/checkSala?bioskopId=1&salaId=2
+
+	// na osnovu idSale vraca njenu oznaku, potrebno za uvezivanje sa
+	// rezervacijom
+	// localhost:8765/sala-service/sala/checkSala?bioskopId=1&salaId=2
 	@RequestMapping(value = "/checkSala", method = RequestMethod.GET)
-	public String checkSala(@RequestParam(name="bioskopId") Long bioskopId,@RequestParam(name="salaId") Long salaId){
+	public String checkSala(@RequestParam(name = "bioskopId") Long bioskopId,
+			@RequestParam(name = "salaId") Long salaId) {
 		Sala sala = salaService.findSalaPoBioskopu(bioskopId, salaId);
 		return sala.getOznakaSale();
 	}
+
+
+		                        /* SEDISTA   */
+	// vraca broj sedista po redovima u sali u okviru bioskopa
+	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.GET)
+	public int getBrojPoRedu(@PathVariable Long idBioskopa, @PathVariable Long idSale) {
+		Sala sala = salaService.findSalaPoBioskopu(idBioskopa, idSale);
+		return sala.getBrojSedistaRedovi();
+	}
 	
+	// vraca broj sedista po kolonama u sali u okviru bioskopa
+	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.GET)
+	public int getBrojPoKoloni(@PathVariable Long idBioskopa, @PathVariable Long idSale) {
+		Sala sala = salaService.findSalaPoBioskopu(idBioskopa, idSale);
+		return sala.getBrojSedistaKolone();
+	}
+	
+	
+	
+
 }
