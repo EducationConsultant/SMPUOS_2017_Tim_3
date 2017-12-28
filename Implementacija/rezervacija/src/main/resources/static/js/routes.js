@@ -4,5 +4,9 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
     $routeProvider
         .when('/',{
             templateUrl : 'html/pocetna.html'
-        });
+        })
+    
+    	.when('/pregled',{
+    		templateUrl : 'html/pregledRezervacija.html'
+    	});
 }]);

@@ -1,8 +1,12 @@
 angular.module('rezervacijaApp.RezervacijaService', [])
-	.factory('RezervacijaService', function() {
+	.factory('RezervacijaService', function($http) {
 		
 		var factory = {};  //factory je jedan od nacina za kreiranje servisa
 		
+		factory.findAll = function() {
+			return $http.get('/rezervacija-service/rezervacija/');
+			
+		}
 		//factory.metoda1 = function(...){...}
 		//u okviru ovih fja pozivamo http.get itd 
 		//sintaksa je return $http.post('url', objekat);
