@@ -1,4 +1,4 @@
-package com.ftn.bioskop.bioskop;
+package com.bioskop;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
