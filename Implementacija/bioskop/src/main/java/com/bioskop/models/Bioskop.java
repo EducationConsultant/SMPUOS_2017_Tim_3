@@ -44,7 +44,11 @@ public class Bioskop {
 	private Adresa adresaBioskopa;
 	
 	private Long ocena;
-
+	private float prosecnaOcena;
+	private int brojac;
+	private float sumaOcena;
+	 
+	
 	
 	// bioskop ima sale
 	@OneToMany(mappedBy = "bioskop", fetch = FetchType.EAGER)
@@ -99,12 +103,44 @@ public class Bioskop {
 		return ocena;
 	}
 
+
 	public void setOcena(Long ocena) {
 		this.ocena = ocena;
 	}
+
+
+	public float getProsecnaOcena() {
+		return prosecnaOcena;
+	}
+
+
+	public void setProsecnaOcena(float prosecnaOcena) {
+		this.prosecnaOcena = prosecnaOcena;
+	}
+
+
+	public int getBrojac() {
+		return brojac;
+	}
+
+
+	public void setBrojac(int brojac) {
+		this.brojac = brojac;
+	}
+
+
+	public float getSumaOcena() {
+		return sumaOcena;
+	}
+
+
+	public void setSumaOcena(float sumaOcena) {
+		this.sumaOcena = sumaOcena;
+	}
+
 	
-	
-	
+
+
 	
 
 

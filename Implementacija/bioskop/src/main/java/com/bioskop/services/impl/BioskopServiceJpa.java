@@ -31,16 +31,21 @@ public class BioskopServiceJpa implements BioskopService {
 		return  repository.findOne(id);
 	}
 
+	// rangiran prikaz
 	@Override
 	public List<Bioskop> find() {
 		//return repository.findAll();
-		return repository.findAllByOrderByOcenaDesc();
+		return repository.findAllByOrderByProsecnaOcenaDesc();
 	}
 
 	@Override
 	public Bioskop save(Bioskop bioskop) {
 		Adresa sacuvanaAdresa = adresaRepository.save(bioskop.getAdresaBioskopa());
 		bioskop.setAdresaBioskopa(sacuvanaAdresa);
+	//	bioskop.setOcena(new Long(0));
+		bioskop.setBrojac(0);
+	//	bioskop.setProsecnaOcena(0);
+
 		return repository.save(bioskop);
 	}
 	
@@ -73,6 +78,16 @@ public class BioskopServiceJpa implements BioskopService {
 	@Override
 	public Bioskop saveOcena(Bioskop bioskop, Long id) {
 		Bioskop bioskopZaOCeniti = repository.findOne(id);
+		
+		float sumaOcena = bioskopZaOCeniti.getSumaOcena() + bioskop.getOcena();
+		bioskopZaOCeniti.setSumaOcena(sumaOcena);
+		
+		int brojac = bioskopZaOCeniti.getBrojac() + 1;
+		bioskopZaOCeniti.setBrojac(brojac);
+		
+		float prosecna = sumaOcena / (float) brojac;
+		bioskopZaOCeniti.setProsecnaOcena(prosecna);
+		
 		bioskopZaOCeniti.setOcena(bioskop.getOcena());
 		
 		return repository.save(bioskopZaOCeniti);
@@ -90,7 +105,7 @@ public class BioskopServiceJpa implements BioskopService {
 
 	@Override
 	public List<Bioskop> rangiranje() {
-		List<Bioskop> bioskopi = repository.findAllByOrderByOcenaDesc();
+		List<Bioskop> bioskopi = repository.findAllByOrderByProsecnaOcenaDesc();
 		return bioskopi;
 	}
 

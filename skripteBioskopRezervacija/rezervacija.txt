@@ -67,11 +67,11 @@ localhost:8765/rezervacija-service/projekcija POST
 
 {
 	"idFilma" : 1,
-	"nazivFilma" : "Magic",
+	
 	"idBioskopa" : 1,
-	"nazivBioskopa" : "Arena",
+	
 	"idSale" : 1,
-	"oznakaSale" : "Sala 2",
+	
 	"datumProjekcije" :  "2017-06-10"
 }
 ----------------------------------------------------------------------------

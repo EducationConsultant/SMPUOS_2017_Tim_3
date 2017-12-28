@@ -31,7 +31,8 @@ public class BioskopController {
 
 	@Autowired
 	private BioskopService bioskopService;
-
+	
+	// rangirani su vec po prosecnoj oceni,ne treba prikazivati i polje ocena, samo prosecna ocena
 	// find all
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Bioskop>> getBioskopi() {
@@ -90,6 +91,7 @@ public class BioskopController {
 		return new ResponseEntity<List<Bioskop>>(bioskopi, HttpStatus.OK);
 	}
 	
+	// uvezivanje sa rezervacijom
 	//localhost:8765/bioskop-service/bioskop/checkBioskop?bioskopId=1
 	@RequestMapping(value = "/checkBioskop", method = RequestMethod.GET)
 	public String checkBioskop(@RequestParam(name="bioskopId") Long bioskopId){
