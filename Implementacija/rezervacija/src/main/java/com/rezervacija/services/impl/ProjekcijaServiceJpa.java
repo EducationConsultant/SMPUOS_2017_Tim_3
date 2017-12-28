@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.rezervacija.controllers.ProjekcijaController.BioskopServiceClient;
+import com.rezervacija.controllers.ProjekcijaController.FilmServiceClient;
 import com.rezervacija.models.Projekcija;
 import com.rezervacija.repository.ProjekcijaRepository;
 import com.rezervacija.services.ProjekcijaService;
@@ -19,6 +20,9 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 
 	@Autowired
 	private BioskopServiceClient bioskopServiceClient; // feign client
+	
+	@Autowired
+	private FilmServiceClient filmServiceClient;
 	
 	@Override
 	public Projekcija findOne(Long id) {
@@ -60,18 +64,32 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 		return repository.save(projekcijaZaIzmenu);
 	}
 
-	/*USING LOAD-BALANCING*/
+	/*USING LOAD-BALANCING FOR BIOSKOP*/
 	@Override
 	@HystrixCommand(fallbackMethod="fallbackCheckBioskop")
 	public String checkBioskop(Long idBioskopa) {
-		//System.err.println("idbioskopa U PROJEKCIJA SERVICE JE:" + idBioskopa);
 		String nazivBioskopa = bioskopServiceClient.checkBioskop(idBioskopa);
-		//System.err.println("NAZIV BIOSKOPA U PROJEKCIJA SERVICE JE:" + nazivBioskopa);
 		return nazivBioskopa;
 	}
 
 	public String fallbackCheckBioskop(Long bioskopId){
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-		return "!!!";
+		System.out.println("bioskop");  // difoltni naziv bioskopa
+		String nazivBioskopa = "bioskop";
+		return nazivBioskopa;
+	}
+
+	
+	/*USING LOAD-BALANCING FOR FILM*/
+	@Override
+	@HystrixCommand(fallbackMethod="fallbackCheckFilm")
+	public String checkFilm(Long idFilma) {
+		String nazivFilma = filmServiceClient.checkBioskop(idFilma);
+		return nazivFilma;
+	}
+	
+	public String fallbackCheckFilm(Long filmId){
+		System.out.println("film"); // difoltni naziv filma
+		String nazivFilma = "film";
+		return nazivFilma;
 	}
 }

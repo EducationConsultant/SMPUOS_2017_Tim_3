@@ -44,9 +44,13 @@ public class ProjekcijaController {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Projekcija> insertProjekcija(@Valid @RequestBody Projekcija projekcija) {
 		projekcijaService.save(projekcija);
-		//String idBioskopa = Long.toString(projekcija.getIdBioskopa());
+		
 		String nazivBioskopa = projekcijaService.checkBioskop(projekcija.getIdBioskopa());
 		projekcija.setNazivBioskopa(nazivBioskopa);
+		
+		String nazivFilma = projekcijaService.checkFilm(projekcija.getIdFilma());
+		projekcija.setNazivFilma(nazivFilma);
+		
 		projekcijaService.save(projekcija);
 		return new ResponseEntity<Projekcija>(projekcija, HttpStatus.CREATED);
 
@@ -72,6 +76,12 @@ public class ProjekcijaController {
 	public interface BioskopServiceClient {
 		@RequestMapping(value = "bioskop/checkBioskop", method = RequestMethod.GET)// the endpoint which will be balanced over
 		String checkBioskop(@RequestParam(name="bioskopId") Long bioskopId);// the method specification must be the same as for users/checkUser
+	}
+	
+	@FeignClient("film-service")//the application.name for the user service
+	public interface FilmServiceClient {
+		@RequestMapping(value = "film/checkFilm", method = RequestMethod.GET)// the endpoint which will be balanced over
+		String checkBioskop(@RequestParam(name="filmId") Long filmId);// the method specification must be the same as for users/checkUser
 	}
 	
 

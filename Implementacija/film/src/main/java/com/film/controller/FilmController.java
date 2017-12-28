@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.film.models.Film;
 import com.film.services.FilmService;
 
@@ -116,5 +117,13 @@ public class FilmController {
 	public ResponseEntity<List<Film>> findByOcena(@RequestParam("ocena") float prosecnaOcena) {
 		List<Film> filmovi = filmService.findByProsecnaOcena(prosecnaOcena);
 		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
+	}
+	
+	// za povezivanje sa projekcijom
+	//localhost:8765/film-service/film/checkFilm?filmId=1
+	@RequestMapping(value = "/checkFilm", method = RequestMethod.GET)
+	public String checkFilm(@RequestParam(name="filmId") Long filmId){
+		Film film = filmService.findOne(filmId);
+		return film.getNaziv();
 	}
 }
