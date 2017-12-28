@@ -121,6 +121,11 @@ public class BioskopSeviceTest {
 		List<Sala> sale = salaService.findSveSalePoBioskopu(new Long(1));
 		Assert.assertEquals(1, sale.size());
 		
+		Long ocena = new Long(2);
+		bioskop.setOcena(ocena);
+		Bioskop bioskopZaOceniti = bioskopService.saveOcena(bioskop, new Long(1));
+		Assert.assertEquals(2, bioskopZaOceniti.getBrojac());
+		
 		Sala s = salaService.findSalaPoBioskopu(new Long(1), new Long(1));
 		Assert.assertEquals("Sala 1", s.getOznakaSale());
 		
