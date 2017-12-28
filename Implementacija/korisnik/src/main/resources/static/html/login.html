@@ -1,0 +1,27 @@
+<md-dialog aria-label="Login Dialog">
+    <md-dialog-content layout-padding>
+        <div>
+            <form name="loginForm">
+                <h3 layout-gt-md="" layout-align="center center" style="color: blue">Prijava na sistem</h3>
+
+                <div layout-gt-md="">
+                    <md-input-container class="md-block" flex-gt-md>
+                        <label>Korisničko ime</label>
+                        <input ng-model="user.korisnickoIme" md-autofocus>
+                    </md-input-container>
+
+                    <md-input-container class="md-block" flex-gt-md>
+                        <label>Lozinka</label>
+                        <input type="password" ng-model="user.lozinka">
+                    </md-input-container>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+
+
+    <md-dialog-actions>
+        <md-button ng-click="login()" class="md-primary">Prijavi se</md-button>
+        <md-button ng-click="cancel()" class="md-primary">Izađi</md-button>
+    </md-dialog-actions>
+</md-dialog>

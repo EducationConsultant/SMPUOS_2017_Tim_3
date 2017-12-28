@@ -3,7 +3,7 @@ angular.module('korisnikApp.LoginService', [])
         var factory = {};
 
         factory.login = function (tempUser) {
-            return $http.post('/login', tempUser);
+            return $http.put('/korisnik-service/korisnik/login', tempUser);
         }
 
         return factory;
