@@ -1,3 +1,4 @@
 angular.module('korisnikApp.controllers',[
-    'korisnikApp.NavigationController'
+    'korisnikApp.NavigationController',
+    'korisnikApp.KorisniciController'
 ]);

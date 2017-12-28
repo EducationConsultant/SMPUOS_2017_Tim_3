@@ -1,0 +1,35 @@
+<div>
+    <div ng-controller="KorisniciController">
+    	
+    	<md-radio-group ng-model="statusKorisnika" layout="row" style="padding: 1%" layout-align="center center" ng-change="promenaStatusa()">
+        	<md-radio-button value="Aktivirani" class="md-primary">Aktivirani</md-radio-button>
+        	<md-radio-button value="Deaktivirani" class="md-primary">Deaktivirani</md-radio-button>
+    	</md-radio-group>
+    	
+    	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm>
+    		<md-subheader class="md-no-sticky" ng-if="showAktivirani">Aktivirani korisnici:</md-subheader>
+    		<md-subheader class="md-no-sticky" ng-if="showDeaktivirani">Deaktivirani korisnici:</md-subheader>
+            <md-divider style="border-top: 1px solid black !important;"></md-divider>
+        	<md-list-item class="md-3-line" ng-repeat="k in korisnici">
+        		<div layout="row" layout-align="start center" flex>
+				    <div class="md-list-item-text" layout="column" flex>
+				        <h3><b>Korisnik {{k.id}}</b></h3>
+				        <h4><b>Ime i prezime:</b> {{k.ime}} {{k.prezime}}, <b>Korisničko ime:</b> {{k.korisnickoIme}}</h4>
+				        <p><b>Pol:</b> {{k.pol}}, <b>Datum rođenja:</b> {{k.datumRodjenja | date:'dd.MM.yyyy.'}}</p>
+				        <p><b>Adresa stanovanja:</b> </p>
+				        <p><b>Tip korisnika:</b> {{k.tipKorisnika}}, <b>Datum registracije:</b> {{k.datumRegistracije | date:'dd.MM.yyyy.'}}</p>
+				    </div>
+	                <div>
+	                    <md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="deaktivacija(k)" ng-if="showAktivirani">
+	                        <md-icon md-svg-icon="icons/ic_power_settings_new_white_36px.svg"></md-icon>
+	                    </md-button>
+	                    <md-button class="md-fab md-mini md-raised md-hue-2" style="background-color:green; !important;" ng-click="aktivacija(k)" ng-if="showDeaktivirani">
+	                        <md-icon md-svg-icon="icons/ic_done_white_36px.svg"></md-icon>
+	                    </md-button>
+	                </div>
+                </div>
+               <md-divider style="border-top: 1px solid black !important;"></md-divider>
+		    </md-list-item>
+    	</md-list>
+    </div>
+</div>

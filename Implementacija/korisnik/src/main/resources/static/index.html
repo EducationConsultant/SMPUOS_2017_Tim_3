@@ -22,9 +22,11 @@
 
     <!-- Controllers -->
 	<script src="js/controllers/navigationController.js"></script>
+	<script src="js/controllers/korisniciController.js"></script>
 
     <!-- Factories -->
     <script src="js/services/loginService.js"></script>
+	<script src="js/services/korisniciService.js"></script>
 
 
     <link rel="stylesheet" href="css/myStyle.css">
@@ -56,6 +58,7 @@
                         nav-bar-aria-label="navigation links"
                         >
                     <md-nav-item md-nav-href="#/" name="Pocetna" ng-click="saveNav('Pocetna')">Početna</md-nav-item>
+                    <md-nav-item md-nav-href="#/AktDeakt" name="AktDeakt" ng-click="saveNav('AktDeakt')">Pregled korisnika po aktivnosti</md-nav-item>
                 </md-nav-bar>
                 <div class="ext-content">
                     <div ng-view>
