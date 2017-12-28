@@ -68,6 +68,7 @@ public class RezervacijaServiceTest {
 		datumRezervacije1.set(2017, 1, 8);
 		Calendar datumIstekaRezervacije1 = Calendar.getInstance();
 		datumIstekaRezervacije1.set(2017, 1, 8);
+		RezervacijaTip tip = RezervacijaTip.AKTIVNA;
 
 		Rezervacija r = new Rezervacija();
 		r.setId(null);
@@ -76,6 +77,7 @@ public class RezervacijaServiceTest {
 		r.setBrojSedista(brojSedista1);
 		r.setDatumIstekaRezervacije(datumIstekaRezervacije1.getTime());
 		r.setDatumRezervacije(datumRezervacije1.getTime());
+		r.setTip(tip);
 		rezervacijaRepository.save(r);
 	}
 
@@ -88,17 +90,11 @@ public class RezervacijaServiceTest {
 		List<Rezervacija> rezAktivneKorisnika = rezervacijaService.pregledAktRezKor(new Long(1));
 		Assert.assertEquals(1, rezAktivneKorisnika.size());
 		
-		Rezervacija r = rezervacijaService.deaktivacija(new Long(1));
-		Assert.assertEquals(RezervacijaTip.OTKAZANA, r.getTip());
-		
 		List<Rezervacija> sveRez = rezervacijaService.pregledSvihRezKor(new Long(1));
 		Assert.assertEquals(1, sveRez.size());
 		
 		List<Rezervacija> otkazaneRez = rezervacijaService.pregledOtkazanihPoProjekcijama();
-		Assert.assertEquals(1, otkazaneRez.size());
-		
-		List<Rezervacija> aktivnePoProjekcijama = rezervacijaService.pregledAktivnihPoProjekcijama();
-		Assert.assertEquals(0, aktivnePoProjekcijama.size());
+		Assert.assertEquals(0, otkazaneRez.size());
 		
 		List<Projekcija> projekcije = projekcijaService.find();
 		Assert.assertEquals(1, projekcije.size());

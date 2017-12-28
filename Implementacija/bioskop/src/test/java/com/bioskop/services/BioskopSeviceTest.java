@@ -1,6 +1,7 @@
 package com.bioskop.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -108,6 +109,12 @@ public class BioskopSeviceTest {
 		sala2.setId(null);
 		sala2.setTip(tip2);
 		salaService.saveSala(new Long(2), sala2);
+		
+		List<Sala> sale = new ArrayList<Sala>();
+		sale.add(sala1);
+		sale.add(sala2);
+		bioskop1.setSale(sale);
+		bioskopService.save(bioskop1);
 	}
 	
 	@Test
@@ -115,18 +122,18 @@ public class BioskopSeviceTest {
 		List<Bioskop> bioskopiFindAll = bioskopService.find();
 		Assert.assertEquals(2, bioskopiFindAll.size());
 		
-		Bioskop bioskop = bioskopService.findByNaziv("Luna bioskop");
-		Assert.assertEquals(new Long(2), bioskop.getId());
+		Bioskop bioskop = bioskopService.findByNaziv("Zabavni bioskop");
 		
-		List<Sala> sale = salaService.findSveSalePoBioskopu(new Long(1));
-		Assert.assertEquals(1, sale.size());
+		
+		List<Sala> sale = salaService.findSveSalePoBioskopu(bioskop.getId());
+		Assert.assertEquals(2, sale.size());
 		
 		Long ocena = new Long(2);
 		bioskop.setOcena(ocena);
-		Bioskop bioskopZaOceniti = bioskopService.saveOcena(bioskop, new Long(1));
+		Bioskop bioskopZaOceniti = bioskopService.saveOcena(bioskop, bioskop.getId());
 		Assert.assertEquals(2, bioskopZaOceniti.getBrojac());
 		
-		Sala s = salaService.findSalaPoBioskopu(new Long(1), new Long(1));
+		Sala s = salaService.findSalaPoBioskopu(bioskop.getId(), new Long(1) );
 		Assert.assertEquals("Sala 1", s.getOznakaSale());
 		
 		
