@@ -22,6 +22,11 @@ public class SalaServiceJpa implements SalaService {
 	
 	@Override
 	public Bioskop saveSala(Long id, Sala sala) {
+		salaRepository.save(sala);
+		int kapacitet = 0;
+		kapacitet = sala.getBrojSedistaKolone() + sala.getBrojSedistaRedovi();
+		sala.setKapacitet(kapacitet);
+		
 		Bioskop bioskop = bioskopRepository.findOne(id);
 		List<Sala> sale = bioskop.getSale();
 		salaRepository.save(sala);

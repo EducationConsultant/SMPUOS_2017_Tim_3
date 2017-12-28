@@ -1,0 +1,53 @@
+<md-dialog aria-label="Registracija Dialog" flex="50">
+    <md-dialog-content layout-padding>
+        <div class="md-dialog-content" >
+            <form name="newUserForm">
+                <h3 layout-gt-md layout-align="center center" style="color: blue">Registracija korisnika</h3>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Ime</label>
+                        <input type="text" ng-model="user.ime" md-autofocus md-maxlength="30" minlength="2" required/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Prezime</label>
+                        <input type="text" ng-model="user.prezime" md-maxlength="30" minlength="2" required/>
+                    </md-input-container>
+                </div>
+                
+                <div layout="row" layout-align="space-around">
+                    <md-input-container class="md-block">
+                        <label>Datum rođenja</label>
+                        <md-datepicker ng-model="user.datumRodjenja" required></md-datepicker>
+                    </md-input-container>
+
+                    
+                    <md-input-container class="md-block" >
+                        <label>Pol</label>
+                        <md-select ng-model="user.pol" required>
+				          <md-option value="M">M</md-option>
+				          <md-option value="Ž">Ž</md-option>
+				        </md-select>
+                    </md-input-container>
+                </div>
+
+                <div layout-gt-sm="row">
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Korisničko ime</label>
+                        <input type="text" ng-model="user.korisnickoIme" md-maxlength="30" minlength="5" required ng-change="proveraImena(user.korisnickoIme)"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex-gt-sm>
+                        <label>Lozinka</label>
+                        <input type="password" ng-model="user.lozinka" md-maxlength="30" minlength="5" required/>
+                    </md-input-container>
+                </div>
+            </form>
+        </div>
+    </md-dialog-content>
+
+
+    <md-dialog-actions>
+        <md-button ng-click="registrovanje()" class="md-primary">Registruj se</md-button>
+        <md-button ng-click="cancel()" class="md-primary">Izađi</md-button>
+    </md-dialog-actions>
+</md-dialog>

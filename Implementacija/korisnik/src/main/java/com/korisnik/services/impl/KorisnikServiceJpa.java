@@ -43,8 +43,8 @@ public class KorisnikServiceJpa implements KorisnikService {
 		korisnik.setStatusKorisnika(TipStatusaKorisnika.AKTIVIRAN);
 		korisnik.setUlogovan(false);
 
-		Adresa adresa = adresaRepository.findOne(korisnik.getAdresaStanovanja().getId());
-		korisnik.setAdresaStanovanja(adresa);
+		//Adresa adresa = adresaRepository.findOne(korisnik.getAdresaStanovanja().getId());
+		//korisnik.setAdresaStanovanja(adresa);
 
 		korisnikRepository.save(korisnik);
 

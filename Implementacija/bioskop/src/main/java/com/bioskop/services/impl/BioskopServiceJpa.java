@@ -42,19 +42,13 @@ public class BioskopServiceJpa implements BioskopService {
 	public Bioskop save(Bioskop bioskop) {
 		Adresa sacuvanaAdresa = adresaRepository.save(bioskop.getAdresaBioskopa());
 		bioskop.setAdresaBioskopa(sacuvanaAdresa);
-	//	bioskop.setOcena(new Long(0));
 		bioskop.setBrojac(0);
-	//	bioskop.setProsecnaOcena(0);
-
 		return repository.save(bioskop);
 	}
 	
-
-
 	@Override
 	public void delete(Bioskop bioskop) {
 		repository.delete(bioskop);
-		
 	}
 
 	@Override
@@ -68,9 +62,7 @@ public class BioskopServiceJpa implements BioskopService {
 		bioskopZaIzmenu.setAdresaBioskopa(bioskop.getAdresaBioskopa());
 		bioskopZaIzmenu.setNaziv(bioskop.getNaziv());
 		bioskopZaIzmenu.setSale(bioskop.getSale());
-		
 		Bioskop sacuvan = repository.save(bioskopZaIzmenu);
-		
 		return sacuvan;
 	}
 	

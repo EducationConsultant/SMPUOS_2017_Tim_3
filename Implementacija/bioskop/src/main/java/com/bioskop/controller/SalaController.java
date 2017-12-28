@@ -28,6 +28,7 @@ public class SalaController {
 	private SalaService salaService;
 
 	// unos sale u okviru bioskopa
+	// izostaviti kapacitet, sam se izracunava!
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public ResponseEntity<Bioskop> insertSala(@PathVariable Long id, @RequestBody Sala sala) {
 		Bioskop bioskopZaIzmenu = salaService.saveSala(id, sala);
