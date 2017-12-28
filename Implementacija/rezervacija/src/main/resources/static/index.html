@@ -33,15 +33,7 @@
 	<div ng-controller="NavigationController">
         <md-toolbar md-scroll-shrink>
             <div class="md-toolbar-tools">
-                indexxxxxx
-
-                <span flex></span>
-                <md-button class="md-raised" aria-label="Prijavi se" ng-click="openPrijavaDijalog($event)" ng-if="!showOdjaviSe">
-                    Prijavi se
-                </md-button>
-                <md-button class="md-raised" aria-label="Odjavi se" ng-click="odjaviSe()" ng-if="showOdjaviSe">
-                    Odjavi se
-                </md-button>
+                Rezervacije
 
             </div>
         </md-toolbar>
@@ -52,8 +44,9 @@
                         md-selected-nav-item="currentNavItem"
                         nav-bar-aria-label="navigation links"
                         >
-                    <md-nav-item md-nav-href="#/" name="Pocetna" ng-click="saveNav('Pocetna')">Početna-index</md-nav-item>
-                    <md-nav-item md-nav-href="#/pregled" name="Pocetna" ng-click="saveNav('Pregled')">Pregled</md-nav-item>
+                    <md-nav-item md-nav-href="#/" name="Pocetna" ng-click="saveNav('Pocetna')">Početna</md-nav-item>
+                    <md-nav-item md-nav-href="#/pregled" name="Pregled" ng-click="saveNav('Pregled')">Pregled</md-nav-item>
+                    <md-nav-item md-nav-href="#/pregledAktivnih" name="PregledAktivnih" ng-click="saveNav('PregledAktivnih')">Pregled aktivnih</md-nav-item>
                 </md-nav-bar>
                 <div class="ext-content">
                     <div ng-view>

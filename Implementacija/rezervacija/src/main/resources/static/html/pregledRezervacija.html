@@ -3,17 +3,15 @@
 	<md-list> 
 		<md-list-item class="md-3-line" ng-repeat="rez in listaRezervacija"> 
 	<div class="md-list-item-text" layout="column">
-		<h3>Rezervacija {{rez.id}}</h3>
+		<h3><b>Rezervacija {{rez.id}}</b></h3>
 		<h4>Bioskop: {{rez.projekcija.nazivBioskopa}}, Sala: {{rez.projekcija.oznakaSale}}</h4>
 		<h4>Film: {{rez.projekcija.nazivFilma}}</h4>
-		<h4>Datum: {{rez.projekcija.datumProjekcije}}</h4>
+		<h4>Datum projekcije: {{rez.projekcija.datumProjekcije}}</h4>
 		<p>Status: {{rez.tip}}</p>
 		<p>Broj reda sedišta: {{rez.brojSedista}}, Broj sedišta: {{rez.brojSedista}}</p>
 		<p>Datum rezervacije: {{rez.datumRezervacije}}</p>
 		<p>Datum isteka rezervacije: {{rez.datumIstekaRezervacije}}</p>
 	</div>
 	</md-list-item> </md-list>
-
-
 
 </div>
