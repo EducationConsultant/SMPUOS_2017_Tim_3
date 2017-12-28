@@ -72,4 +72,11 @@ public class SalaServiceJpa implements SalaService {
 		}
 		return zeljenaSala;
 	}
+
+	@Override
+	public List<Sala> findSveSalePoBioskopu(Long idBioskopa) {
+		Bioskop bioskop = bioskopRepository.findOne(idBioskopa);
+		List<Sala> saleUBioskopu = bioskop.getSale();
+		return saleUBioskopu;
+	}
 }

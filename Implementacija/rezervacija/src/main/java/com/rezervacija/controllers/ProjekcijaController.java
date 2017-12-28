@@ -41,6 +41,8 @@ public class ProjekcijaController {
 	}
 
 	// insert
+	// unosi se samo idBioskopa, idFilma, idSale u okviru bioskopa, datumprojekcije
+	// ostala polja se sama popune (povezivanje aplikacija)
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Projekcija> insertProjekcija(@Valid @RequestBody Projekcija projekcija) {
 		projekcijaService.save(projekcija);

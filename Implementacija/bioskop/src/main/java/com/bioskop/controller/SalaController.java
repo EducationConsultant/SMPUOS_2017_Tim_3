@@ -1,5 +1,7 @@
 package com.bioskop.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +47,14 @@ public class SalaController {
 		Bioskop savedBioskop = salaService.updateSala(idBioskopa, idSale, sala);
 		return new ResponseEntity<Bioskop>(savedBioskop, HttpStatus.OK);
 	}
+	
+	// pregled svih sala u okviru bioskopa
+	@RequestMapping(value = "/{idBioskopa}", method = RequestMethod.GET)
+	public ResponseEntity<List<Sala>> getSveSale(@PathVariable Long idBioskopa) { 
+		List<Sala> sale = salaService.findSveSalePoBioskopu(idBioskopa);
+		return new ResponseEntity<List<Sala>>(sale, HttpStatus.OK);
+	}
+	
 	
 	// pregled sale u okviru bioskopa
 	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.GET)

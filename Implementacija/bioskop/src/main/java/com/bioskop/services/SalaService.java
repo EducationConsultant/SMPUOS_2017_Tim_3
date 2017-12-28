@@ -15,6 +15,8 @@ public interface SalaService {
 	public Bioskop updateSala(Long idBioskopa, Long idSale, Sala sala);
 
 	public Sala findSalaPoBioskopu(Long idBioskopa, Long idSale);
+
+	public List<Sala> findSveSalePoBioskopu(Long idBioskopa);
 	
 	
 }
