@@ -1,4 +1,4 @@
-package com.ftn.rezervacija;
+package com.rezervacija;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
