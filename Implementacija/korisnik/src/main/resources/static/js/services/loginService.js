@@ -13,6 +13,10 @@ angular.module('korisnikApp.LoginService', [])
         factory.registrovanje = function (tempUser) {
             return $http.post('/korisnik-service/korisnik/registracija', tempUser);
         }
+        
+        factory.findByKorisnickoIme = function (ime) {
+            return $http.get('/korisnik-service/korisnik/findByKorisnickoIme/' + ime);
+        }
 
         return factory;
     });

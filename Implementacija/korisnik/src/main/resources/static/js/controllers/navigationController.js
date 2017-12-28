@@ -108,6 +108,15 @@ angular.module('korisnikApp.NavigationController',[])
             };
         }
         
+        /*$scope.korisnici = [];
+        function getKorisnici(){
+        	LoginService.korisnici().success(function (data) {
+                $scope.korisnici = data;
+            });
+        }
+
+        getKorisnici();*/
+        
         $scope.openRegistracijaDijalog = function(ev) {
             $mdDialog.show({
                 controller: RegistracijaController,
@@ -136,6 +145,19 @@ angular.module('korisnikApp.NavigationController',[])
             		statusKorisnika:null,
             		ulogovan:null
             };
+            
+            $scope.proveraImena = function(ime){
+            	LoginService.findByKorisnickoIme(ime).success(function(data){
+                    if(data){
+                    	$mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Korisničko ime već postoji!')
+                                .hideDelay(3000)
+                                .position('top center')
+                                .theme('error-toast')
+                        );
+                    }})
+            };
          
             $scope.registrovanje = function(){
             	$scope.user.tipKorisnika='REGKORISNIK';
@@ -157,7 +179,7 @@ angular.module('korisnikApp.NavigationController',[])
                     .error(function(data){
                         $mdToast.show(
                             $mdToast.simple()
-                                .textContent('Niste uneli sve podatke!')
+                                .textContent('Proverite unesene podatke!')
                                 .hideDelay(3000)
                                 .position('top center')
                                 .theme('error-toast')

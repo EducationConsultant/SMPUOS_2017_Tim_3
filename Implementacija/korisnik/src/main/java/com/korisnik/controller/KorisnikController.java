@@ -122,5 +122,15 @@ public class KorisnikController {
 		List<Korisnik> korisnici = korisnikService.findByLocation(adresaKoordinate);
 		return new ResponseEntity<List<Korisnik>>(korisnici, HttpStatus.OK);
 	}
+	
+	
+	@RequestMapping(value = "/findByKorisnickoIme/{ime}", method = RequestMethod.GET)
+	public ResponseEntity<Boolean> findByKorisnickoIme(@PathVariable String ime) {
+		Korisnik pronadjeniKorisnik = korisnikService.findByKorisnickoIme(ime);
+		if(pronadjeniKorisnik != null)
+			return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+		else
+			return new ResponseEntity<Boolean>(false, HttpStatus.OK);
 
+	}
 }

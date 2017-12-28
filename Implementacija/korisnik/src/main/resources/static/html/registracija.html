@@ -34,7 +34,7 @@
                 <div layout-gt-sm="row">
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Korisničko ime</label>
-                        <input type="text" ng-model="user.korisnickoIme" md-maxlength="30" minlength="5" required/>
+                        <input type="text" ng-model="user.korisnickoIme" md-maxlength="30" minlength="5" required ng-change="proveraImena(user.korisnickoIme)"/>
                     </md-input-container>
                     <md-input-container class="md-block" flex-gt-sm>
                         <label>Lozinka</label>
