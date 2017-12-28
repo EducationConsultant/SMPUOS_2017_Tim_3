@@ -60,7 +60,6 @@ public class ProjekcijaController {
 		
 		projekcijaService.save(projekcija);
 		return new ResponseEntity<Projekcija>(projekcija, HttpStatus.CREATED);
-
 	}
 
 	// delete
@@ -79,22 +78,22 @@ public class ProjekcijaController {
 		return new ResponseEntity<Projekcija>(savedProjekcija, HttpStatus.OK);
 	}
 	
-	@FeignClient("bioskop-service")//the application.name for the user service
+	@FeignClient("bioskop-service")//the application.name for the bioskop service
 	public interface BioskopServiceClient {
 		@RequestMapping(value = "bioskop/checkBioskop", method = RequestMethod.GET)// the endpoint which will be balanced over
-		String checkBioskop(@RequestParam(name="bioskopId") Long bioskopId);// the method specification must be the same as for users/checkUser
+		String checkBioskop(@RequestParam(name="bioskopId") Long bioskopId);// the method specification must be the same as for bioskop/checkBioskop
 	}
 	
-	@FeignClient("film-service")//the application.name for the user service
+	@FeignClient("film-service")//the application.name for the film service
 	public interface FilmServiceClient {
 		@RequestMapping(value = "film/checkFilm", method = RequestMethod.GET)// the endpoint which will be balanced over
-		String checkBioskop(@RequestParam(name="filmId") Long filmId);// the method specification must be the same as for users/checkUser
+		String checkBioskop(@RequestParam(name="filmId") Long filmId);// the method specification must be the same as for film/checkFilm
 	}
 	
-	@FeignClient("bioskop-service")//the application.name for the user service
+	@FeignClient("bioskop-service")//the application.name for the bioskop service
 	public interface SalaServiceClient {
 		@RequestMapping(value = "sala/checkSala", method = RequestMethod.GET)// the endpoint which will be balanced over
-		String checkSala(@RequestParam(name="bioskopId") Long bioskopId, @RequestParam(name="salaId") Long salaId );// the method specification must be the same as for users/checkUser
+		String checkSala(@RequestParam(name="bioskopId") Long bioskopId, @RequestParam(name="salaId") Long salaId );// the method specification must be the same as for sala/checkSala
 	}
 	
 

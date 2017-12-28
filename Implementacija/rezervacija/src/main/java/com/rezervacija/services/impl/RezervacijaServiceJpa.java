@@ -18,6 +18,9 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 
 	@Autowired
 	private RezervacijaRepository repository;
+	
+	@Autowired
+	private ProjekcijaRepository projekcijaRepository;
 
 	@Override
 	public Rezervacija findOne(Long id) {
@@ -31,19 +34,22 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 
 	@Override
 	public Rezervacija save(Rezervacija rezervacija) {
+		Projekcija p = rezervacija.getProjekcija();
+		int brojacP = p.getBrojAktivnihRezervacija() + 1;
+		p.setBrojAktivnihRezervacija(brojacP);
+		projekcijaRepository.save(p);
+		
 		return repository.save(rezervacija);
 	}
 
 	@Override
 	public void delete(Rezervacija rezervacija) {
 		repository.delete(rezervacija);
-
 	}
 
 	@Override
 	public void deleteById(Long id) {
 		repository.delete(id);
-
 	}
 
 	@Override
@@ -63,6 +69,9 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	public Rezervacija deaktivacija(Long id) {
 		Rezervacija rezervacija = repository.findOne(id);
 		rezervacija.setTip(RezervacijaTip.OTKAZANA);
+		int brojacAktivnih = rezervacija.getProjekcija().getBrojAktivnihRezervacija() - 1;
+		rezervacija.getProjekcija().setBrojAktivnihRezervacija(brojacAktivnih);
+		projekcijaRepository.save(rezervacija.getProjekcija());
 		return repository.save(rezervacija);
 	}
 
@@ -70,13 +79,11 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	public List<Rezervacija> pregledAktRezKor(Long idKorisnika) {
 		List<Rezervacija> rezervacije = repository.findByIdKorisnika(idKorisnika);
 		List<Rezervacija> aktivne = new ArrayList<Rezervacija>();
-
 		for (Rezervacija r : rezervacije) {
 			if (r.getTip() == RezervacijaTip.AKTIVNA) {
 				aktivne.add(r);
 			}
 		}
-
 		return aktivne;
 	}
 
@@ -108,12 +115,14 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	@Override
 	public List<Rezervacija> pregledOtkazanihPoProjekcijama() {
 		int brojacOtkazanih = 0;
+
 		List<Rezervacija> rezervacije = repository.findAll();
 		List<Rezervacija> otkazane = new ArrayList<Rezervacija>();
 		for (Rezervacija r : rezervacije) {
 			if (r.getTip() == RezervacijaTip.OTKAZANA) {
 				otkazane.add(r);
 				brojacOtkazanih++;
+				
 			}
 		}
 		for(Rezervacija r : otkazane) {
