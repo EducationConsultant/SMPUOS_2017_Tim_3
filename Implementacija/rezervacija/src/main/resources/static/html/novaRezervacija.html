@@ -1,0 +1,85 @@
+<div ng-controller="RezervacijaController">
+	
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container class="md-block" flex-gt-sm>
+            	<label>Bioskop</label>
+            	<md-select ng-model="filter.bioskop" ng-change="odaberiBioskop()">
+              		<md-option ng-repeat="b in bioskopi" value="{{b.id}}">
+                		{{b.naziv}}
+              		</md-option>
+            	</md-select>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+
+	<div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container class="md-block" flex-gt-sm>
+            	<label>Sala</label>
+            	<md-select ng-model="filter.sala" ng-change="odaberiSalu()">
+              		<md-option ng-repeat="s in sale" value="{{s.id}}">
+                		{{s.oznakaSale}}
+              		</md-option>
+            	</md-select>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+	 
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container class="md-block" flex-gt-sm>
+ 				<md-datepicker ng-model="filter.datum" md-placeholder="Datum" ng-change="odaberiDatum()"></md-datepicker>
+ 			</md-input-container>
+ 		</md-content>
+	 </div>
+ 
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container class="md-block" flex-gt-sm>
+            	<label>Projekcija</label>
+            	<md-select ng-model="filter.projekcija" ng-change="promenaStatusaFilter()">
+              		<md-option ng-repeat="p in projekcije" value="{{p.id}}">
+                		{{p.nazivFilma}} {{p.datumProjekcije}} 
+              		</md-option>
+            	</md-select>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+	 
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 		<div layout='row'>
+ 			<md-input-container class="md-block" flex-gt-sm >
+            	<label>Broj reda sedišta: </label>
+            	<input ng-model="filter.brojRedaSedista" type="number" step="1" 
+            			min=1 max={{ogranicenjeBrojSedista}}
+            			ng-readonly="filter.salaObjekat==null" ng-change="brojSlobodnihMesta=null">
+            </md-input-container>
+            <md-button ng-click="pronadjiSlobodnaMesta()" class="md-primary"
+            ng-disabled="filter.projekcija==null">Pronađi slobodna mesta</md-button>
+            </div>
+          	<div><b>Broj slobodnih mesta u traženom redu:</b> {{brojSlobodnihMesta}}</div>
+ 		</md-content>
+	 </div>
+	 
+	  <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 		<div layout='row'>
+ 			<md-input-container class="md-block" flex-gt-sm >
+            	<label>Željeni broj sedišta: </label>
+            	<input ng-model="filter.zeljeniBrojSedista" type="number" step="1" 
+            			min=1 max={{brojSlobodnihMesta}}
+            			ng-readonly="brojSlobodnihMesta==null">
+            </md-input-container>
+            </div>
+            <md-button ng-click="rezervisi()" class="md-primary"
+            ng-disabled="filter.zeljeniBrojSedista==0 || filter.zeljeniBrojSedista==null">Rezerviši!</md-button>
+ 		</md-content>
+ 		
+	 </div>
+	 
+	 
+
+
+ </div>

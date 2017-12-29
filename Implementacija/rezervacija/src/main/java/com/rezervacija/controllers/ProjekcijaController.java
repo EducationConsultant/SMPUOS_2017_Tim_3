@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.rezervacija.models.Projekcija;
+import com.rezervacija.models.Rezervacija;
 import com.rezervacija.services.ProjekcijaService;
 
 @RestController
@@ -97,4 +98,12 @@ public class ProjekcijaController {
 	}
 	
 
+	//metoda koja vraca broj zauzetih mesta u datom redu za tu projekciju
+	@RequestMapping(value="/zauzeta/{projekcijaId}/{red}", method = RequestMethod.GET)
+	public ResponseEntity<Integer> getBrojZauzetihMesta(@PathVariable Long projekcijaId,
+			@PathVariable int red) {
+		int brojZauzetihMesta = projekcijaService.getBrojZauzetihMesta(projekcijaId, red);
+		return new ResponseEntity<Integer>(brojZauzetihMesta, HttpStatus.OK);
+		
+	}
 }

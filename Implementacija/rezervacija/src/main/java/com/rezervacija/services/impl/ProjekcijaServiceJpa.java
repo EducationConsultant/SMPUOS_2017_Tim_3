@@ -10,6 +10,8 @@ import com.rezervacija.controllers.ProjekcijaController.BioskopServiceClient;
 import com.rezervacija.controllers.ProjekcijaController.FilmServiceClient;
 import com.rezervacija.controllers.ProjekcijaController.SalaServiceClient;
 import com.rezervacija.models.Projekcija;
+import com.rezervacija.models.Rezervacija;
+import com.rezervacija.models.RezervacijaTip;
 import com.rezervacija.repository.ProjekcijaRepository;
 import com.rezervacija.services.ProjekcijaService;
 
@@ -109,6 +111,22 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 		System.out.println("sala");  // difoltni naziv sale
 		String nazivSale = "sala";
 		return nazivSale;
+	}
+
+	@Override
+	public int getBrojZauzetihMesta(Long idProjekcije, int red) {
+		Projekcija p = repository.findOne(idProjekcije);
+		int brojZauzetihMesta=0;
+		for (Rezervacija rez : p.getRezervacije()) {
+			if(rez.getTip().equals(RezervacijaTip.AKTIVNA)){
+				if(p.getDatumProjekcije().before(rez.getDatumIstekaRezervacije())){
+					if(rez.getBrojRedaSedista()==red){
+						brojZauzetihMesta+=rez.getBrojSedista();
+					}
+				}
+			}
+		}
+		return brojZauzetihMesta;
 	}
 
 	

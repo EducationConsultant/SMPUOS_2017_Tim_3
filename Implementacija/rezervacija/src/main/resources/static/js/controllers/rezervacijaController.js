@@ -1,6 +1,6 @@
 angular.module('rezervacijaApp.RezervacijaController',[])
     .controller('RezervacijaController', function ($scope, $location, $rootScope, $mdDialog, 
-    		RezervacijaService, BioskopService, KorisnikService, $localStorage, $mdToast) {
+    		RezervacijaService, BioskopService, KorisnikService, ProjekcijaService, $localStorage, $mdToast) {
  
 		$scope.statusRezervacije="Aktivne";
 		$scope.statusFilter="Aktivne";
@@ -10,8 +10,11 @@ angular.module('rezervacijaApp.RezervacijaController',[])
     
 		$scope.filter = {};
 		$scope.filterRezervacija = [];
+		$scope.filter.brojRedaSedista=1;
+		$scope.filter.salaObjekat = null;
 		$scope.projekcije = [];
 		$scope.listaRezervacijaKorisnika = [];
+		$scope.ogranicenjeBrojSedista = 1;
 		
 		$scope.prikaziRezervacije = function() {
 			RezervacijaService.findAll()
@@ -121,6 +124,9 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			$scope.filterRezervacija = [];
 			$scope.filter.datum = null;
 			$scope.filter.projekcija = null;
+			$scope.filter.salaObjekat = null;
+			$scope.ogranicenjeBrojSedista = 1;
+			$scope.filter.brojRedaSedista = 1;
 		}
     
 		$scope.odaberiSalu = function(){
@@ -131,6 +137,15 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			$scope.filterRezervacija = [];
 			$scope.filter.datum = null;
 			$scope.filter.projekcija = null;
+			$scope.filter.brojRedaSedista = 1;
+			for(i=0; i<$scope.sale.length; i++){
+				if($scope.sale[i].id==$scope.filter.sala){
+					$scope.filter.salaObjekat = $scope.sale[i];
+					$scope.ogranicenjeBrojSedista = $scope.sale[i].brojSedistaRedovi;
+					break;
+				}
+			}
+			
 		}
 		
 		$scope.odaberiDatum = function(){
@@ -178,5 +193,55 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 					}
 				}
 			})
+		}
+		
+		$scope.pronadjiSlobodnaMesta = function(){
+			ProjekcijaService.getBrojZauzetihMestaPoRedu($scope.filter.projekcija, $scope.filter.brojRedaSedista)
+				.success(function(data){
+					$scope.brojSlobodnihMesta = $scope.filter.salaObjekat.brojSedistaKolone - data;
+			});
+		}
+		
+		$scope.rezervisi = function() {
+			if($scope.filter.zeljeniBrojSedista == 0 || $scope.filter.zeljeniBrojSedista == null){
+				$mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Unesite broj sedišta!')
+                            .hideDelay(3000)
+                            .position('top center')
+                            .theme('warning-toast')
+                    );
+				return;
+			}
+			
+			
+			var rezervacija = {};
+			rezervacija.idKorisnika = $localStorage.logged.id;
+			rezervacija.datumRezervacije = new Date();
+			
+			rezervacija.tip = "AKTIVNA";
+			rezervacija.brojSedista = $scope.filter.zeljeniBrojSedista;
+			rezervacija.brojRedaSedista = $scope.filter.brojRedaSedista;
+			
+			var p;
+			
+			for(i=0; i<$scope.projekcije.length; i++){
+				if($scope.projekcije[i].id == $scope.filter.projekcija){
+					p = $scope.projekcije[i];
+					break;
+				}
+			}
+			rezervacija.projekcija = p;
+			rezervacija.datumIstekaRezervacije = new Date("2018-12-12"); //???
+			
+			RezervacijaService.kreirajRezervaciju(rezervacija).success(function(data) {
+				$mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Uspešno kreirana rezervacija!')
+                            .hideDelay(3000)
+                            .position('top center')
+                            .theme('success-toast')
+                    );
+			});
 		}
 });

@@ -39,6 +39,12 @@ angular.module('rezervacijaApp.RezervacijaService', [])
 			return $http.put('/rezervacija-service/rezervacija/deaktivacija/'+rezervacijaId);	
 		}
 		
+		factory.kreirajRezervaciju = function(rezervacija){
+			return $http.post('/rezervacija-service/rezervacija', rezervacija);
+			
+		}
+		
+		
 		return factory;
 			
 	});
