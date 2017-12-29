@@ -12,22 +12,7 @@ angular.module('rezervacijaApp.NavigationController', []).controller(
 				$localStorage.curNav = data;
 			}
 
-			$scope.prikaziRezervacije = function() {
-				RezervacijaService.findAll()
-					.success(
-						function(data) {
-							$scope.listaRezervacija = data;
-					})
-			};
 			
 			
-			$scope.prikaziRezervacije();
 			
-			$scope.obrisiRezervaciju = function(id) {
-				alert(id);
-				RezervacijaService.obrisiRezervaciju(id).success(function(data){
-					$scope.prikaziRezervacije();
-				})
-			}
-
 		});

@@ -31,6 +31,10 @@ angular.module('rezervacijaApp.RezervacijaService', [])
 			return $http.delete('/rezervacija-service/rezervacija/'+rezervacijaId);	
 		}
 		
+		factory.izmeniRezervaciju = function(rezervacija){
+			return $http.put('/rezervacija-service/rezervacija/'+rezervacija.id, rezervacija);	
+		}
+		
 		return factory;
 			
 	});

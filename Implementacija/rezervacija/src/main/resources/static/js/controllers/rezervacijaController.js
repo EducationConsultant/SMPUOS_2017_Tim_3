@@ -1,6 +1,6 @@
 angular.module('rezervacijaApp.RezervacijaController',[])
     .controller('RezervacijaController', function ($scope, $location, $rootScope, $mdDialog, 
-    		RezervacijaService, BioskopService, $localStorage, $mdToast) {
+    		RezervacijaService, BioskopService, KorisnikService, $localStorage, $mdToast) {
  
 		$scope.statusRezervacije="Aktivne";
 		$scope.statusFilter="Aktivne";
@@ -11,6 +11,20 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 		$scope.filterRezervacija = [];
 		$scope.projekcije = [];
 		
+		$scope.prikaziRezervacije = function() {
+			RezervacijaService.findAll()
+				.success(
+					function(data) {
+						$scope.listaRezervacija = data;
+				})
+		};
+		
+		$scope.getKorisnici = function() {
+			KorisnikService.getKorisnici().success(function(data) {
+				$scope.korisnici = data;
+			})
+		}
+		
     	$scope.prikaziAktivneRezervacije = function() {
 			RezervacijaService.pregledAktivnihRezervacija()
 				.success(
@@ -19,8 +33,40 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 				})
 		};
 				
-
+		$scope.prikaziRezervacije();
+		$scope.getKorisnici();
 		$scope.prikaziAktivneRezervacije();
+		
+		$scope.obrisiRezervaciju = function(id) {
+			RezervacijaService.obrisiRezervaciju(id).success(function(data){
+				$scope.prikaziRezervacije();
+			})
+		}
+		
+		$scope.izmeniRezervaciju = function(rez, e) {
+			var temp=angular.copy(rez);
+			$mdDialog.show({
+				locals:{data: temp},
+                controller: IzmenaController,
+                templateUrl: 'html/izmenaRezervacije.html',
+                parent: angular.element(document.body),
+                targetEvent: e,
+                clickOutsideToClose:false
+            });
+		}
+		
+        function IzmenaController($scope, $mdDialog, data) {
+        	$scope.menjanaRezervacija = data;
+            $scope.prihvatiIzmenu = function(){
+                RezervacijaService.izmeniRezervaciju($scope.menjanaRezervacija).success(function(data){
+                	$mdDialog.cancel();
+                })
+            };
+
+            $scope.cancel = function() {
+                $mdDialog.cancel();
+            };
+        }
 		
 		$scope.promenaStatusa = function(){
 			if($scope.statusRezervacije == "Aktivne"){

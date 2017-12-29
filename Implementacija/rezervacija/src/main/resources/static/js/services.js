@@ -1,4 +1,5 @@
 angular.module('rezervacijaApp.services',[
     'rezervacijaApp.RezervacijaService',
-    'rezervacijaApp.BioskopService'
+    'rezervacijaApp.BioskopService',
+    'rezervacijaApp.KorisnikService'
 ]);
