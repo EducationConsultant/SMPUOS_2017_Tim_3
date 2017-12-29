@@ -27,4 +27,8 @@ public class AdresaServiceJpa implements AdresaService {
 		return adresaRepository.findByGeoDuzinaAndGeoSirina(geoDuzina, geoSirina);
 	}
 
+	@Override
+	public Adresa findByNazivNaseljenogMestaAndNazivUliceAndBroj(String nazivNaseljenogMesta, String nazivUlice, int broj) {
+		return adresaRepository.findByNazivNaseljenogMestaAndNazivUliceAndBroj(nazivNaseljenogMesta, nazivUlice, broj);
+	}
 }
