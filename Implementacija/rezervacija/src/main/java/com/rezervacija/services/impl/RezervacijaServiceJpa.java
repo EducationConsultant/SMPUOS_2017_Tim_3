@@ -130,4 +130,16 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 		}
 		return otkazane;
 	}
+
+	@Override
+	public List<Rezervacija> getAktivneRezervacijeZaProjekciju(Long idProjekcije) {
+		Projekcija projekcija = projekcijaRepository.findOne(idProjekcije);
+		return repository.findByProjekcijaAndTip(projekcija, RezervacijaTip.AKTIVNA);	
+	}
+
+	@Override
+	public List<Rezervacija> getOtkazaneRezervacijeZaProjekciju(Long idProjekcije) {
+		Projekcija projekcija = projekcijaRepository.findOne(idProjekcije);
+		return repository.findByProjekcijaAndTip(projekcija, RezervacijaTip.OTKAZANA);
+	}
 }

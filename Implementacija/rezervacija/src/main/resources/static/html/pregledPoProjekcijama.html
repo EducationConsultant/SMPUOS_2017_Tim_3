@@ -1,0 +1,73 @@
+<div ng-controller="RezervacijaController">
+	
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container class="md-block" flex-gt-sm>
+            	<label>Bioskop</label>
+            	<md-select ng-model="filter.bioskop" ng-change="odaberiBioskop()">
+              		<md-option ng-repeat="b in bioskopi" value="{{b.id}}">
+                		{{b.naziv}}
+              		</md-option>
+            	</md-select>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+
+	<div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container class="md-block" flex-gt-sm>
+            	<label>Sala</label>
+            	<md-select ng-model="filter.sala" ng-change="odaberiSalu()">
+              		<md-option ng-repeat="s in sale" value="{{s.id}}">
+                		{{s.oznakaSale}}
+              		</md-option>
+            	</md-select>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+	 
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container class="md-block" flex-gt-sm>
+ 				<md-datepicker ng-model="filter.datum" md-placeholder="Datum" ng-change="odaberiDatum()"></md-datepicker>
+ 			</md-input-container>
+ 		</md-content>
+	 </div>
+ 
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container class="md-block" flex-gt-sm>
+            	<label>Projekcija</label>
+            	<md-select ng-model="filter.projekcija" ng-change="promenaStatusaFilter()">
+              		<md-option ng-repeat="p in projekcije" value="{{p.id}}">
+                		{{p.nazivFilma}} {{p.datumProjekcije}} 
+              		</md-option>
+            	</md-select>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+
+	 <div>
+     	<md-radio-group ng-model="statusFilter" layout="row" style="padding: 1%" layout-align="center center" ng-change="promenaStatusaFilter()">
+        	<md-radio-button value="Aktivne" class="md-primary" >Aktivne</md-radio-button>
+        	<md-radio-button value="Otkazane" class="md-primary" >Otkazane</md-radio-button>
+    	</md-radio-group>
+ </div>
+
+
+	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
+		<p><b>Ukupno:</b>{{filterRezervacija.length}}</p>
+		<md-divider style="border-top: 1px solid black !important"></md-divider>
+		<md-list-item class="md-3-line" ng-repeat="rez in filterRezervacija"> 
+			<div class="md-list-item-text" layout="column">
+				<h3><b>Rezervacija {{rez.id}}</b></h3>
+				<h4><b>Bioskop:</b> {{rez.projekcija.nazivBioskopa}},
+					 <b>Sala: </b>{{rez.projekcija.oznakaSale}}</h4>
+				<h4><b>Film:</b> {{rez.projekcija.nazivFilma}}</h4>
+				<h4><b>Datum projekcije:</b> {{rez.projekcija.datumProjekcije}}</h4>
+			</div>
+		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		</md-list-item> 
+	</md-list>
+
+</div>

@@ -17,6 +17,7 @@ public interface RezervacijaService {
 	public List<Rezervacija> pregledSvihRezKor(Long idKorisnika);
 	public List<Rezervacija> pregledAktivnihPoProjekcijama();
 	public List<Rezervacija> pregledOtkazanihPoProjekcijama();
-	
+	public List<Rezervacija> getAktivneRezervacijeZaProjekciju(Long idProjekcije);
+	public List<Rezervacija> getOtkazaneRezervacijeZaProjekciju(Long idProjekcije);
 	
 }

@@ -12,5 +12,11 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
     	
     	.when('/pregledAktivnih',{
     		templateUrl : 'html/pregledAktivnihOtkazanih.html'
+    	})
+    	
+    	.when('/pregledPoProjekcijama',{
+    		templateUrl : 'html/pregledPoProjekcijama.html'
     	});
+    
+    
 }]);

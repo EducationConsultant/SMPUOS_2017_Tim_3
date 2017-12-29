@@ -102,6 +102,20 @@ public class RezervacijaController {
 		
 	}
 	
+	//metoda koja vraca aktivne rezervacije za projekciju
+	@RequestMapping(value="/aktivne/projekcija/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Rezervacija>> getAktivneRezervacijeZaProjekciju(@PathVariable Long id) {
+		List<Rezervacija> rezervacije = rezervacijaService.getAktivneRezervacijeZaProjekciju(id);
+		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
+		
+	}
 	
+	//metoda koja vraca otkazane rezervacije za projekciju
+	@RequestMapping(value="/otkazane/projekcija/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Rezervacija>> getOtkazaneRezervacijeZaProjekciju(@PathVariable Long id) {
+		List<Rezervacija> rezervacije = rezervacijaService.getOtkazaneRezervacijeZaProjekciju(id);
+		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
+		
+	}
 	
 }

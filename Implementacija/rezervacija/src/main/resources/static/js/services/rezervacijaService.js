@@ -14,7 +14,19 @@ angular.module('rezervacijaApp.RezervacijaService', [])
 		factory.pregledOtkazanihRezervacija = function() {
 			return $http.get('/rezervacija-service/rezervacija/otkazane/projekcije');	
 		}
+		
+		factory.getProjekcije = function(){
+			return $http.get('/rezervacija-service/projekcija/');	
+		}
 
+		factory.getAktivneRezervacijeZaProjekciju = function(projekcijaId) {
+			return $http.get('/rezervacija-service/rezervacija/aktivne/projekcija/'+projekcijaId);	
+		}
+		
+		factory.getOtkazaneRezervacijeZaProjekciju = function(projekcijaId) {
+			return $http.get('/rezervacija-service/rezervacija/otkazane/projekcija/'+projekcijaId);	
+		}
+		
 		return factory;
 			
 	});
