@@ -4,12 +4,14 @@ angular.module('rezervacijaApp.RezervacijaController',[])
  
 		$scope.statusRezervacije="Aktivne";
 		$scope.statusFilter="Aktivne";
+		$scope.statusRezervacijaKorisnika="Aktivne";
 		$scope.showOtkazane = false;
 		$scope.listaAktivnihIliOtkazanihRezervacija = [];
     
 		$scope.filter = {};
 		$scope.filterRezervacija = [];
 		$scope.projekcije = [];
+		$scope.listaRezervacijaKorisnika = [];
 		
 		$scope.prikaziRezervacije = function() {
 			RezervacijaService.findAll()
@@ -33,9 +35,32 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 				})
 		};
 				
+		$scope.prikaziAktivneRezervacijeKorisnika = function() {
+			var id=$localStorage.logged.id;
+			KorisnikService.getAktivneRezervacijeKorisnika(id).success(function(data){
+				$scope.listaRezervacijaKorisnika = data;
+			})
+		}
+		
+
+		$scope.promenaStatusaZaKorisnika = function() {
+			if($scope.statusRezervacijaKorisnika == "Aktivne"){
+				var id=$localStorage.logged.id;
+				KorisnikService.getAktivneRezervacijeKorisnika(id).success(function(data){
+					$scope.listaRezervacijaKorisnika = data;
+				})
+        	}else{
+        		var id=$localStorage.logged.id;
+    			KorisnikService.getSveRezervacijeKorisnika(id).success(function(data){
+    				$scope.listaRezervacijaKorisnika = data;
+    			})
+        	}
+		}
+		
 		$scope.prikaziRezervacije();
 		$scope.getKorisnici();
 		$scope.prikaziAktivneRezervacije();
+		$scope.prikaziAktivneRezervacijeKorisnika();
 		
 		$scope.obrisiRezervaciju = function(id) {
 			RezervacijaService.obrisiRezervaciju(id).success(function(data){

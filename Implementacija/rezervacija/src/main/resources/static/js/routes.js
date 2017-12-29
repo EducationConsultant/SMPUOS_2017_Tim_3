@@ -16,6 +16,10 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
     	
     	.when('/pregledPoProjekcijama',{
     		templateUrl : 'html/pregledPoProjekcijama.html'
+    	})
+    	
+    	.when('/rezervacijeKorisnika',{
+    		templateUrl : 'html/rezervacijeKorisnika.html'
     	});
     
     
