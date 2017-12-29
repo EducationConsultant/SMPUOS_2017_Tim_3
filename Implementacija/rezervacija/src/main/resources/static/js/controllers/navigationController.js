@@ -22,5 +22,12 @@ angular.module('rezervacijaApp.NavigationController', []).controller(
 			
 			
 			$scope.prikaziRezervacije();
+			
+			$scope.obrisiRezervaciju = function(id) {
+				alert(id);
+				RezervacijaService.obrisiRezervaciju(id).success(function(data){
+					$scope.prikaziRezervacije();
+				})
+			}
 
 		});

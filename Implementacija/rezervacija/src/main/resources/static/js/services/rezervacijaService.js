@@ -27,6 +27,10 @@ angular.module('rezervacijaApp.RezervacijaService', [])
 			return $http.get('/rezervacija-service/rezervacija/otkazane/projekcija/'+projekcijaId);	
 		}
 		
+		factory.obrisiRezervaciju = function(rezervacijaId){
+			return $http.delete('/rezervacija-service/rezervacija/'+rezervacijaId);	
+		}
+		
 		return factory;
 			
 	});
