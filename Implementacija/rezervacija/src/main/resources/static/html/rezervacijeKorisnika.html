@@ -23,12 +23,10 @@
 				<b>Datum isteka rezervacije:</b> {{rez.datumIstekaRezervacije}}</p>
 			</div>
 			<div>
- 				<!-- <md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="izmeniRezervaciju(rez, $event)">
-	                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
+ 				 <md-button class="md-fab md-mini md-warn md-raised md-hue-2" 
+ 				 ng-if="rez.tip=='AKTIVNA'" ng-click="deaktivirajRezervaciju(rez.id)">
+	                 <md-icon md-svg-icon="icons/ic_power_settings_new_white_36px.svg"></md-icon>
 	            </md-button> 
-				<md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="obrisiRezervaciju(rez.id)">
-	                 <md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon>
-	            </md-button> -->
 			</div>
 			
 		<md-divider style="border-top: 1px solid black !important;"></md-divider>

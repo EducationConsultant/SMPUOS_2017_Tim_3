@@ -167,4 +167,16 @@ angular.module('rezervacijaApp.RezervacijaController',[])
         }
 		
 		$scope.dobaviBioskope();
+		
+		$scope.deaktivirajRezervaciju = function(id){
+			RezervacijaService.deaktivirajRezervaciju(id).success(function(data){
+				for(i=0;i<$scope.listaRezervacijaKorisnika.length;i++){
+					var r = $scope.listaRezervacijaKorisnika[i];
+					if(r.id==id){
+						r.tip='OTKAZANA';
+						break;
+					}
+				}
+			})
+		}
 });
