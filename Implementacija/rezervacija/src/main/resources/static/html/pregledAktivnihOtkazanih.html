@@ -1,0 +1,46 @@
+<div ng-controller="RezervacijaController">
+<!--  <div class='md-inline-form'>
+ 	<md-content layout-padding>
+ 		<md-input-container class="md-block" flex-gt-sm>
+            <label>Bioskop</label>
+            <md-select ng-model="filter.bioskop">
+              <md-option ng-repeat="b in bioskopi" value="{{b.id}}">
+                {{b.naziv}}
+              </md-option>
+            </md-select>
+          </md-input-container>
+ 	
+ 	</md-content>
+ </div> -->
+ 
+ <div>
+     	<md-radio-group ng-model="statusRezervacije" layout="row" style="padding: 1%" layout-align="center center" ng-change="promenaStatusa()">
+        	<md-radio-button value="Aktivne" class="md-primary" >Aktivne</md-radio-button>
+        	<md-radio-button value="Otkazane" class="md-primary" >Otkazane</md-radio-button>
+    	</md-radio-group>
+ </div>
+ 
+ 
+ <div>
+ 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
+ <!-- 		<md-subheader class="md-no-sticky" ng-if="!showOtkazane">Aktivne rezervacije:</md-subheader>
+    	<md-subheader class="md-no-sticky" ng-if="showOtkazane">Otkazane rezervacije:</md-subheader> -->
+ 		
+ 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+ 		
+		<md-list-item class="md-3-line" ng-repeat="rez in listaAktivnihIliOtkazanihRezervacija"> 
+			<div layout="row" layout-align="start center" flex>
+				    <div class="md-list-item-text" layout="column" flex>
+						<h3><b>Rezervacija {{rez.id}}</b></h3>
+						<h4>Bioskop: {{rez.projekcija.nazivBioskopa}}, 
+								Sala: {{rez.projekcija.oznakaSale}}</h4>
+						<h4>Film: {{rez.projekcija.nazivFilma}}</h4>
+						<h4>Datum projekcije: {{rez.projekcija.datumProjekcije}}</h4>
+						<h4>Broj aktivnih rezervacija: {{rez.projekcija.brojAktivnihRezervacija}}</h4>
+				</div>
+			</div>
+			<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		</md-list-item> 
+	</md-list>	
+</div>
+</div>

@@ -1,3 +1,4 @@
 angular.module('rezervacijaApp.controllers',[
-    'rezervacijaApp.NavigationController'
+    'rezervacijaApp.NavigationController',
+    'rezervacijaApp.RezervacijaController'
 ]);

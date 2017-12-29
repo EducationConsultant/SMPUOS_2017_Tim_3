@@ -1,18 +1,22 @@
 <div>
 	
-	<md-list> 
+	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
+		<md-divider style="border-top: 1px solid black !important;"></md-divider>
 		<md-list-item class="md-3-line" ng-repeat="rez in listaRezervacija"> 
-	<div class="md-list-item-text" layout="column">
-		<h3><b>Rezervacija {{rez.id}}</b></h3>
-		<h4>Bioskop: {{rez.projekcija.nazivBioskopa}}, Sala: {{rez.projekcija.oznakaSale}}</h4>
-		<h4>Film: {{rez.projekcija.nazivFilma}}</h4>
-		<h4>Datum projekcije: {{rez.projekcija.datumProjekcije}}</h4>
-		<p>Status: {{rez.tip}}</p>
-		<p>Broj reda sedišta: {{rez.brojSedista}}, Broj sedišta: {{rez.brojSedista}}</p>
-		<p>Datum rezervacije: {{rez.datumRezervacije}}</p>
-		<p>Datum isteka rezervacije: {{rez.datumIstekaRezervacije}}</p>
-	</div>
-	</md-list-item> 
+			<div class="md-list-item-text" layout="column">
+				<h3><b>Rezervacija {{rez.id}}</b></h3>
+				<h4><b>Bioskop:</b> {{rez.projekcija.nazivBioskopa}},
+					 <b>Sala: </b>{{rez.projekcija.oznakaSale}}</h4>
+				<h4><b>Film:</b> {{rez.projekcija.nazivFilma}}</h4>
+				<h4><b>Datum projekcije:</b> {{rez.projekcija.datumProjekcije}}</h4>
+				<p><b>Status:</b> {{rez.tip}}</p>
+				<p><b>Broj reda sedišta:</b> {{rez.brojSedista}}, 
+					<b>Broj sedišta: </b>{{rez.brojSedista}}</p>
+				<p><b>Datum rezervacije:</b> {{rez.datumRezervacije}}, 
+				<b>Datum isteka rezervacije:</b> {{rez.datumIstekaRezervacije}}</p>
+			</div>
+		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		</md-list-item> 
 	</md-list>
 
 </div>
