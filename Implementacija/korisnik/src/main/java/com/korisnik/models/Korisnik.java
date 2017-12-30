@@ -16,6 +16,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table
@@ -47,7 +50,6 @@ public class Korisnik {
 
 	@ManyToOne
 	@JoinColumn(name = "adresaStanovanja_id", referencedColumnName = "adresa_id")
-	@JsonBackReference
 	private Adresa adresaStanovanja;
 
 	@Column(nullable = false, unique = true)
