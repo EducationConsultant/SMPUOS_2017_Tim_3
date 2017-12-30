@@ -21,6 +21,10 @@ angular.module('korisnikApp.KorisniciService', [])
         factory.getKorisnici = function () {
             return $http.get('/korisnik-service/korisnik/korisnici');
         }
+        
+        factory.getKorisniciPoKoordinatama = function (adresa) {
+            return $http.put('/korisnik-service/korisnik/koordinate', adresa);
+        }
 
         return factory;
     });

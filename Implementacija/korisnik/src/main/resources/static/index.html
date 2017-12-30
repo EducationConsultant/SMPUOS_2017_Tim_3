@@ -24,6 +24,7 @@
 	<script src="js/controllers/navigationController.js"></script>
 	<script src="js/controllers/korisniciController.js"></script>
 	<script src="js/controllers/pregledKorisnikaController.js"></script>
+	<script src="js/controllers/koordinateController.js"></script>
 
     <!-- Factories -->
     <script src="js/services/loginService.js"></script>
@@ -60,6 +61,7 @@
                         >
                     <md-nav-item md-nav-href="#/" name="Pocetna" ng-click="saveNav('Pocetna')">Početna</md-nav-item>
                     <md-nav-item md-nav-href="#/pregledKorisnika" name="pregledKorisnika" ng-click="saveNav('pregledKorisnika')">Pregled korisnika</md-nav-item>
+                    <md-nav-item md-nav-href="#/pregledPoKoordinatama" name="pregledPoKoordinatama" ng-click="saveNav('pregledPoKoordinatama')">Pregled korisnika po koordinatama</md-nav-item>
                     <md-nav-item md-nav-href="#/AktDeakt" name="AktDeakt" ng-click="saveNav('AktDeakt')" ng-if="showAdministrator">Pregled korisnika po statusu</md-nav-item>
                 </md-nav-bar>
                 <div class="ext-content">
