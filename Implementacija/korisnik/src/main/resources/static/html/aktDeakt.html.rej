@@ -1,0 +1,10 @@
+diff a/Implementacija/korisnik/src/main/resources/static/html/aktDeakt.html b/Implementacija/korisnik/src/main/resources/static/html/aktDeakt.html	(rejected hunks)
+@@ -16,7 +16,7 @@
+ 				        <h3><b>Korisnik {{k.id}}</b></h3>
+ 				        <h4><b>Ime i prezime:</b> {{k.ime}} {{k.prezime}}, <b>Korisničko ime:</b> {{k.korisnickoIme}}</h4>
+ 				        <p><b>Pol:</b> {{k.pol}}, <b>Datum rođenja:</b> {{k.datumRodjenja | date:'dd.MM.yyyy.'}}</p>
+-				        <p><b>Adresa stanovanja:</b> </p>
++				        <p><b>Adresa stanovanja:</b> {{k.adresaStanovanja.nazivUlice}} {{k.adresaStanovanja.broj}} {{k.adresaStanovanja.nazivNaseljenogMesta}}</p>
+ 				        <p><b>Tip korisnika:</b> {{k.tipKorisnika}}, <b>Datum registracije:</b> {{k.datumRegistracije | date:'dd.MM.yyyy.'}}</p>
+ 				    </div>
+ 	                <div>
