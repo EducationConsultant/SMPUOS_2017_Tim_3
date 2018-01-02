@@ -8,6 +8,9 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
         .when('/pregledKorisnika',{
             templateUrl : 'html/pregledKorisnika.html'
         })
+        .when('/pregledPoKoordinatama',{
+            templateUrl : 'html/pregledPoKoordinatama.html'
+        })
         .when('/AktDeakt',{
             templateUrl : 'html/aktDeakt.html'
         });

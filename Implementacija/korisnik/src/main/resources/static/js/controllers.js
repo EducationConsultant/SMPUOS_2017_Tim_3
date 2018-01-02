@@ -1,5 +1,6 @@
 angular.module('korisnikApp.controllers',[
     'korisnikApp.NavigationController',
     'korisnikApp.KorisniciController',
-    'korisnikApp.PregledKorisnikaController'
+    'korisnikApp.PregledKorisnikaController',
+    'korisnikApp.KoordinateController'
 ]);
