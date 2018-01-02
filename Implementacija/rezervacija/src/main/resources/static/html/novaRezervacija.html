@@ -56,7 +56,7 @@
             			min=1 max={{ogranicenjeBrojSedista}}
             			ng-readonly="filter.salaObjekat==null" ng-change="brojSlobodnihMesta=null">
             </md-input-container>
-            <md-button ng-click="pronadjiSlobodnaMesta()" class="md-primary"
+            <md-button ng-click="pronadjiSlobodnaMesta()" class="md-raised md-primary"
             ng-disabled="filter.projekcija==null">Pronađi slobodna mesta</md-button>
             </div>
           	<div><b>Broj slobodnih mesta u traženom redu:</b> {{brojSlobodnihMesta}}</div>
@@ -73,7 +73,7 @@
             			ng-readonly="brojSlobodnihMesta==null">
             </md-input-container>
             </div>
-            <md-button ng-click="rezervisi()" class="md-primary"
+            <md-button ng-click="rezervisi()" class="md-raised md-primary"
             ng-disabled="filter.zeljeniBrojSedista==0 || filter.zeljeniBrojSedista==null">Rezerviši!</md-button>
  		</md-content>
  		
