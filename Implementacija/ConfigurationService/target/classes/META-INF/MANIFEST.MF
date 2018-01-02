@@ -1,11 +1,7 @@
 Manifest-Version: 1.0
 Implementation-Title: ConfigurationService
 Implementation-Version: 0.0.1-SNAPSHOT
-<<<<<<< HEAD
 Built-By: Iva
-=======
-Built-By: Biljana
->>>>>>> bf82645eaf2c25047ff4f676a21c818091ebdceb
 Implementation-Vendor-Id: rs.uns.acs.ftn
 Build-Jdk: 1.8.0_151
 Implementation-URL: http://maven.apache.org
