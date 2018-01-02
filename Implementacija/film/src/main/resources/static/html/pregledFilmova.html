@@ -1,0 +1,27 @@
+<div>
+ 
+ 
+ <div>
+ 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
+ <!-- 		<md-subheader class="md-no-sticky" ng-if="!showOtkazane">Aktivne rezervacije:</md-subheader>
+    	<md-subheader class="md-no-sticky" ng-if="showOtkazane">Otkazane rezervacije:</md-subheader> -->
+ 		
+ 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+ 		
+		<md-list-item class="md-3-line" ng-repeat="film in listaFilmova"> 
+			<div layout="row" layout-align="start center" flex>
+				    <div class="md-list-item-text" layout="column" flex>
+						<h3><b>Rezervacija {{rez.id}}</b></h3>
+						<h4>Bioskop: {{rez.projekcija.nazivBioskopa}}, 
+								Sala: {{rez.projekcija.oznakaSale}}</h4>
+						<h4>Film: {{rez.projekcija.nazivFilma}}</h4>
+						<h4>Datum projekcije: {{rez.projekcija.datumProjekcije}}</h4>
+						<h4 ng-if="statusRezervacije=='Aktivne'">Broj aktivnih rezervacija: {{rez.projekcija.brojAktivnihRezervacija}}</h4>
+						<h4 ng-if="statusRezervacije!='Aktivne'">Broj otkazanih rezervacija: {{rez.projekcija.brojOtkazanihRezervacija}}</h4>
+				</div>
+			</div>
+			<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		</md-list-item> 
+	</md-list>	
+</div>
+</div>
