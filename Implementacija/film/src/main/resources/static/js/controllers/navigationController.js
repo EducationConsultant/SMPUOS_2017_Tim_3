@@ -1,5 +1,5 @@
 angular.module('filmApp.NavigationController',[])
-    .controller('NavigationController', function ($scope, $location, $rootScope, $mdDialog, $localStorage, $mdToast) {
+    .controller('NavigationController', function ($scope, $location, $rootScope, $mdDialog, FilmoviService, $localStorage, $mdToast) {
 
         if($localStorage.curNav == null)
             $scope.currentNavItem = 'Pocetna';
@@ -7,7 +7,6 @@ angular.module('filmApp.NavigationController',[])
             $scope.currentNavItem = $localStorage.curNav;
 
         $scope.saveNav = function (data) {
-        	alert("Value "+data)
             $localStorage.curNav = data;
         }
 
