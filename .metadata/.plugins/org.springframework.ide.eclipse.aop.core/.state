@@ -9,6 +9,7 @@
 </aspect-definition>
 </aop-project>
 <aop-project name="korisnik"/>
+<aop-project name="ConfigurationService"/>
 <aop-project name="bioskop"/>
 <aop-project name="EurecaService"/>
 <aop-project name="film"/>
