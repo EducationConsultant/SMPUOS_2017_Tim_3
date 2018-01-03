@@ -55,6 +55,7 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	@Override
 	public Rezervacija update(Rezervacija rezervacija, Long id) {
 		Rezervacija rezervacijaZaIzmenu = repository.findOne(id);
+		rezervacijaZaIzmenu.setProjekcija(rezervacija.getProjekcija());
 		rezervacijaZaIzmenu.setTip(rezervacija.getTip());
 		rezervacijaZaIzmenu.setBrojRedaSedista(rezervacija.getBrojRedaSedista());
 		rezervacijaZaIzmenu.setBrojSedista(rezervacija.getBrojSedista());

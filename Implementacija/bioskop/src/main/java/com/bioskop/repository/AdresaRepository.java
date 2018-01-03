@@ -11,5 +11,6 @@ import com.bioskop.models.Adresa;
 public interface AdresaRepository extends JpaRepository<Adresa, Long> {
 
 	public List<Adresa> findByGeoDuzinaAndGeoSirina(float geoDuzina, float geoSirina);
-
+	public Adresa findByNazivNaseljenogMestaAndNazivUliceAndBroj(String nazivNaseljenogMesta, String nazivUlice, int broj);
+	
 }

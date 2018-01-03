@@ -76,14 +76,14 @@ public class SalaController {
 
 		                        /* SEDISTA   */
 	// vraca broj sedista po redovima u sali u okviru bioskopa
-	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getBrojPoRedu/{idBioskopa}/{idSale}", method = RequestMethod.GET)
 	public int getBrojPoRedu(@PathVariable Long idBioskopa, @PathVariable Long idSale) {
 		Sala sala = salaService.findSalaPoBioskopu(idBioskopa, idSale);
 		return sala.getBrojSedistaRedovi();
 	}
 	
 	// vraca broj sedista po kolonama u sali u okviru bioskopa
-	@RequestMapping(value = "/{idBioskopa}/{idSale}", method = RequestMethod.GET)
+	@RequestMapping(value = "/getBrojPoKoloni/{idBioskopa}/{idSale}", method = RequestMethod.GET)
 	public int getBrojPoKoloni(@PathVariable Long idBioskopa, @PathVariable Long idSale) {
 		Sala sala = salaService.findSalaPoBioskopu(idBioskopa, idSale);
 		return sala.getBrojSedistaKolone();

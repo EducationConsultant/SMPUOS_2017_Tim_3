@@ -10,5 +10,6 @@ public interface AdresaService {
 	public Adresa findOne(Long id);
 
 	public List<Adresa> findByGeoDuzinaAndGeoSirina(float geoDuzina, float geoSirina);
-
+	public Adresa findByNazivNaseljenogMestaAndNazivUliceAndBroj(String nazivNaseljenogMesta, String nazivUlice, int broj);
+	
 }

@@ -1,6 +1,9 @@
 angular.module('korisnikApp.KorisniciController',[])
     .controller('KorisniciController', function ($scope, $location, $rootScope, $mdDialog, KorisniciService, $localStorage, $mdToast) {
     	
+    	if($localStorage.tip != "ADMIN")
+            $location.path("/");
+    	
     	$scope.statusKorisnika = "Aktivirani";
     	$scope.showAktivirani = function(k){
     		if($scope.statusKorisnika == "Aktivirani" && $localStorage.logged.korisnickoIme != k.korisnickoIme)

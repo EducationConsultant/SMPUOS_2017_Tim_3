@@ -21,8 +21,7 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
     	.when('/rezervacijeKorisnika',{
     		templateUrl : 'html/rezervacijeKorisnika.html'
     	})
-    	
-    	
+    	    	
     	.when('/novaRezervacija',{
     		templateUrl : 'html/novaRezervacija.html'
     	});

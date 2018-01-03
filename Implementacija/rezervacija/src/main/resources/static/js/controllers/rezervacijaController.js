@@ -72,6 +72,11 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 		}
 		
 		$scope.izmeniRezervaciju = function(rez, e) {
+			$scope.izmenaRez = rez.projekcija.idBioskopa;
+			//alert($scope.filter.bioskop);
+			//$scope.filter.sala = rez.projekcija.idSale;
+			//$scope.filter.datum = rez.projekcija.datumProjekcije;
+			//$scope.filter.film = rez.projekcija.idFilma;
 			var temp=angular.copy(rez);
 			$mdDialog.show({
 				locals:{data: temp},
@@ -84,16 +89,82 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 		}
 		
         function IzmenaController($scope, $mdDialog, data) {
+			$scope.iniciraoIzmenuProjekcije = true;
         	$scope.menjanaRezervacija = data;
-            $scope.prihvatiIzmenu = function(){
+        	$scope.sveProjekcijeIzmena = [];
+        	
+        	$scope.projekcijeIzmena = [];
+			
+        	//Popunjavanje combo box-eva i postavljanje inicijalnih vrednosti
+        	BioskopService.getBioskopi().success(function (data) {
+				$scope.bioskopiIzmena = data;
+			});
+        	
+			BioskopService.getSaleZaBioskop($scope.menjanaRezervacija.projekcija.idBioskopa).success(function (data) {
+				$scope.saleIzmena = data;
+			});
+			
+			RezervacijaService.getProjekcije().success(function(data) {
+				$scope.sveProjekcijeIzmena = data;
+				for (i = 0; i < $scope.sveProjekcijeIzmena.length; i++) { 
+					var p = $scope.sveProjekcijeIzmena[i];
+					if(p.idBioskopa == $scope.menjanaRezervacija.projekcija.idBioskopa 
+			    			&& p.idSale == $scope.menjanaRezervacija.projekcija.idSale){
+			    		var dbDate = new Date(p.datumProjekcije);
+			    		var filterDate = new Date($scope.menjanaRezervacija.projekcija.datumProjekcije);
+			    		filterDate.setHours(1);
+			    		dbDate.setHours(1);
+			    		//ovde ce biti potrebno za dbDate podesiti 01:00:00
+			    		if(dbDate.getTime()===filterDate.getTime()){
+			    			$scope.projekcijeIzmena.push($scope.sveProjekcijeIzmena[i]);
+			    		}
+			    	}
+			    }
+			});
+
+			$scope.odaberiBioskopIzmena = function(){
+				BioskopService.getSaleZaBioskop($scope.menjanaRezervacija.projekcija.idBioskopa).success(function (data) {
+					$scope.saleIzmena = data;
+				});
+				$scope.menjanaRezervacija.projekcija.idSale = null;
+				$scope.menjanaRezervacija.projekcija.datumProjekcije = null;
+				$scope.menjanaRezervacija.projekcija.id = null;
+				$scope.projekcijeIzmena = [];
+			}
+			
+			$scope.odaberiSaluIzmena = function() {
+				$scope.menjanaRezervacija.projekcija.id = null;
+				$scope.projekcijeIzmena = [];
+				for (i = 0; i < $scope.sveProjekcijeIzmena.length; i++) { 
+					var p = $scope.sveProjekcijeIzmena[i];
+					if(p.idBioskopa == $scope.menjanaRezervacija.projekcija.idBioskopa 
+			    			&& p.idSale == $scope.menjanaRezervacija.projekcija.idSale){
+						var dbDate = new Date(p.datumProjekcije);
+			    		var filterDate = new Date($scope.menjanaRezervacija.projekcija.datumProjekcije);
+			    		filterDate.setHours(1);
+			    		dbDate.setHours(1);
+			    		//ovde ce biti potrebno za dbDate podesiti 01:00:00
+			    		if(dbDate.getTime()===filterDate.getTime()){
+			    			$scope.projekcijeIzmena.push($scope.sveProjekcijeIzmena[i]);
+			    		}
+			    	}
+			    }
+			}
+						
+        	$scope.prihvatiIzmenu = function(){
+        		alert('p '+$scope.menjanaRezervacija.projekcija.id+' r '+$scope.menjanaRezervacija.id);
                 RezervacijaService.izmeniRezervaciju($scope.menjanaRezervacija).success(function(data){
                 	$mdDialog.cancel();
                 })
             };
 
             $scope.cancel = function() {
-                $mdDialog.cancel();
+            	$mdDialog.cancel();
             };
+            
+            $scope.izmeniProjekciju = function() {
+            	$scope.iniciraoIzmenuProjekcije = true;
+            }
         }
 		
 		$scope.promenaStatusa = function(){

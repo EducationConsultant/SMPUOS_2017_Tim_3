@@ -10,13 +10,13 @@
     		<md-subheader class="md-no-sticky" ng-if="!showDeaktivirani">Aktivirani korisnici:</md-subheader>
     		<md-subheader class="md-no-sticky" ng-if="showDeaktivirani">Deaktivirani korisnici:</md-subheader>
             <md-divider style="border-top: 1px solid black !important;"></md-divider>
-        	<md-list-item class="md-3-line" ng-repeat="k in korisnici">
+        	<md-list-item class="md-3-line" ng-repeat="k in korisnici | orderBy: ['prezime', 'ime']">
         		<div layout="row" layout-align="start center" flex>
 				    <div class="md-list-item-text" layout="column" flex>
 				        <h3><b>Korisnik {{k.id}}</b></h3>
-				        <h4><b>Ime i prezime:</b> {{k.ime}} {{k.prezime}}, <b>Korisničko ime:</b> {{k.korisnickoIme}}</h4>
+				        <h4><b>Prezime i ime:</b> {{k.prezime}} {{k.ime}}, <b>Korisničko ime:</b> {{k.korisnickoIme}}</h4>
 				        <p><b>Pol:</b> {{k.pol}}, <b>Datum rođenja:</b> {{k.datumRodjenja | date:'dd.MM.yyyy.'}}</p>
-				        <p><b>Adresa stanovanja:</b> </p>
+				        <p><b>Adresa stanovanja:</b> {{k.adresaStanovanja.nazivUlice}} {{k.adresaStanovanja.broj}} {{k.adresaStanovanja.nazivNaseljenogMesta}}</p>
 				        <p><b>Tip korisnika:</b> {{k.tipKorisnika}}, <b>Datum registracije:</b> {{k.datumRegistracije | date:'dd.MM.yyyy.'}}</p>
 				    </div>
 	                <div>

@@ -137,7 +137,14 @@ angular.module('korisnikApp.NavigationController',[])
             		prezime:null,
             		datumRodjenja:null,
             		pol:null,
-            		adresaStanovanja:null,
+            		adresaStanovanja:{
+            			id:null,
+            			nazivNaseljenogMesta:null,
+            			nazivUlice:null,
+            			broj:null,
+            			geoDuzina:null,
+            			geoSirina:null
+            		},
             		korisnickoIme:null,
             		lozinka:null,
             		tipKorisnika:null,

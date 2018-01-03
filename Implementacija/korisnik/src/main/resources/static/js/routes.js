@@ -5,6 +5,12 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
         .when('/',{
             templateUrl : 'html/pocetna.html'
         })
+        .when('/pregledKorisnika',{
+            templateUrl : 'html/pregledKorisnika.html'
+        })
+        .when('/pregledPoKoordinatama',{
+            templateUrl : 'html/pregledPoKoordinatama.html'
+        })
         .when('/AktDeakt',{
             templateUrl : 'html/aktDeakt.html'
         });
