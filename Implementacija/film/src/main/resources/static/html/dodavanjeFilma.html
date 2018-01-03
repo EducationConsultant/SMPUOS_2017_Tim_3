@@ -1,5 +1,5 @@
 <div>
-		
+<div  ng-controller="FilmController" data-ng-init="init()">
 	 <div class='md-inline-form'>
  		<md-content layout-padding>
  			<md-input-container  flex-gt-md>
@@ -26,25 +26,25 @@
  			<md-input-container  flex-gt-sm>
             	<label>Jezik</label>
             	<md-select ng-model="noviFilm.jezik" >
-              		<!-- <md-option ng-repeat="b in bioskopi" value="{{b.id}}">
-                		{{b.naziv}}
-              		</md-option>  -->
+              		<md-option ng-repeat="jezik in listaJezika" >
+                		{{jezik.naziv}}
+              		</md-option>  
             	</md-select>
           	</md-input-container>
           	<md-input-container  flex-gt-sm>
             	<label>Kategorija</label>
-            	<md-select ng-model="noviFilm.kategorija" >
-              		<!-- <md-option ng-repeat="b in bioskopi" value="{{b.id}}">
-                		{{b.naziv}}
-              		</md-option>  -->
+            	<md-select ng-model="noviFilm.kategorija"  >
+              		 <md-option ng-repeat="kategorija in listaKategorija">
+                		{{kategorija.naziv}}
+              		</md-option>  
             	</md-select>
           	</md-input-container>
           	<md-input-container  flex-gt-sm>
             	<label>Reditelj</label>
             	<md-select ng-model="noviFilm.reditelj" >
-              		<!-- <md-option ng-repeat="b in bioskopi" value="{{b.id}}">
-                		{{b.naziv}}
-              		</md-option>  -->
+              		<md-option ng-repeat="reditelj in listaReditelja" >
+                		{{reditelj.ime}} {{reditelj.prezime}}
+              		</md-option>  
             	</md-select>
           	</md-input-container>
  		</md-content>
@@ -56,10 +56,11 @@
             	<label>Glumci</label>
             <!-- 	<input ng-model="noviFilm.naziv" type="text" required md-maxlength="100"></input>  -->
           	</md-input-container>
-          <!-- 	<md-input-container  flex-gt-sm>
+          <!--  	<md-input-container  flex-gt-sm>
             	<label>Trajanje(min)</label>
             	<input ng-model="noviFilm.trajanje" type="number" required ></input>
           	</md-input-container>
  		</md-content>  -->
 	 </div>
+</div>
 </div>

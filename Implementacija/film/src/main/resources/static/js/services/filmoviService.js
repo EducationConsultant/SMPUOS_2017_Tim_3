@@ -18,11 +18,24 @@ angular.module('filmApp.FilmoviService', [])
             return $http.delete('/film-service/film/obrisi/' + id);
         }
         
-        factory.getKorisnici = function () {
+        factory.filmoviPoKategorijama = function () {
             return $http.get('/film-service/film/kategorija/'+naziv);
         }
         
+       factory.jezici=function(){
+    	   return $http.get("/film-service/filmPomocni/jezici");
+       }
        
+       factory.kategorije=function(){
+    	   return $http.get("/film-service/filmPomocni/kategorije")
+       }
+       
+       factory.reditelji=function(){
+    	   return $http.get("/film-service/filmPomocni/reditelji")
+       }
 
+       factory.glumci=function(){
+    	   return $http.get("/film-service/filmPomocni/glumci")
+       }
         return factory;
     });
