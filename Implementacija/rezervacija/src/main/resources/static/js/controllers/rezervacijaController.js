@@ -152,8 +152,7 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			}
 						
         	$scope.prihvatiIzmenu = function(){
-        		alert('p '+$scope.menjanaRezervacija.projekcija.id+' r '+$scope.menjanaRezervacija.id);
-                RezervacijaService.izmeniRezervaciju($scope.menjanaRezervacija).success(function(data){
+        		RezervacijaService.izmeniRezervaciju($scope.menjanaRezervacija).success(function(data){
                 	$mdDialog.cancel();
                 })
             };
