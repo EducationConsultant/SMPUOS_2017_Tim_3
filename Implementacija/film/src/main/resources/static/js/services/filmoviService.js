@@ -6,7 +6,7 @@ angular.module('filmApp.FilmoviService', [])
             return $http.get('/film-service/film/filmovi');
         }
         
-        factory.pregledDeaktiviranih = function () {
+        factory.pregledAktuelnihFilmova = function () {
             return $http.get('/film-service/film/aktuelni');
         }
         
@@ -14,7 +14,7 @@ angular.module('filmApp.FilmoviService', [])
             return $http.put('/film-service/film/godinaPremijere/' + godina);
         }
         
-        factory.deaktivacija = function (id) {
+        factory.brisanje = function (id) {
             return $http.delete('/film-service/film/obrisi/' + id);
         }
         

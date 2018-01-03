@@ -1,3 +1,65 @@
 <div>
-	<h1>Dodavanje filma</h1>
+		
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container  flex-gt-md>
+            	<label>Naziv</label>
+            	<input ng-model="noviFilm.naziv" type="text" required md-maxlength="100"></input>
+          	</md-input-container>
+          	<md-input-container  flex-gt-sm>
+            	<label>Trajanje(min)</label>
+            	<input ng-model="noviFilm.trajanje" type="number" required ></input>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+	 
+	 <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container  flex-gt-sm>
+            	<label>Opis</label>
+            	<input ng-model="noviFilm.opis" type="text"></input>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+	  <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container  flex-gt-sm>
+            	<label>Jezik</label>
+            	<md-select ng-model="noviFilm.jezik" >
+              		<!-- <md-option ng-repeat="b in bioskopi" value="{{b.id}}">
+                		{{b.naziv}}
+              		</md-option>  -->
+            	</md-select>
+          	</md-input-container>
+          	<md-input-container  flex-gt-sm>
+            	<label>Kategorija</label>
+            	<md-select ng-model="noviFilm.kategorija" >
+              		<!-- <md-option ng-repeat="b in bioskopi" value="{{b.id}}">
+                		{{b.naziv}}
+              		</md-option>  -->
+            	</md-select>
+          	</md-input-container>
+          	<md-input-container  flex-gt-sm>
+            	<label>Reditelj</label>
+            	<md-select ng-model="noviFilm.reditelj" >
+              		<!-- <md-option ng-repeat="b in bioskopi" value="{{b.id}}">
+                		{{b.naziv}}
+              		</md-option>  -->
+            	</md-select>
+          	</md-input-container>
+ 		</md-content>
+	 </div>
+	 
+	  <div class='md-inline-form'>
+ 		<md-content layout-padding>
+ 			<md-input-container  flex-gt-md>
+            	<label>Glumci</label>
+            <!-- 	<input ng-model="noviFilm.naziv" type="text" required md-maxlength="100"></input>  -->
+          	</md-input-container>
+          <!-- 	<md-input-container  flex-gt-sm>
+            	<label>Trajanje(min)</label>
+            	<input ng-model="noviFilm.trajanje" type="number" required ></input>
+          	</md-input-container>
+ 		</md-content>  -->
+	 </div>
 </div>

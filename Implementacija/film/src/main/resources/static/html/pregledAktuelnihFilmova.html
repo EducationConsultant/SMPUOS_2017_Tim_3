@@ -1,7 +1,7 @@
 <div>
  
  
- <div ng-controller="FilmController">
+ <div ng-controller="AktuelniController">
  	<span>{{title}}</span>
  	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
  <!-- 		<md-subheader class="md-no-sticky" ng-if="!showOtkazane">Aktivne rezervacije:</md-subheader>
@@ -9,10 +9,10 @@
  		
  		<md-divider style="border-top: 1px solid black !important;"></md-divider>
  		
-		<md-list-item class="md-3-line" ng-repeat="film in listaFilmova"> 
+		<md-list-item class="md-3-line" ng-repeat="film in listaAktuelnihFilmova"> 
 			<div layout="row" layout-align="start center" flex>
-				    <div class="md-list-item-text" layout="column"  flex>
-				    <div style="text-align: center;">
+				    <div class="md-list-item-text" layout="column" flex>
+						   <div style="text-align: center;">
 						<div  style="float: left; width: 70%; text-align: left">
 							<h3><b>{{film.naziv}}</b></h3>	
 							<h4>Kategorija: {{film.kategorija.naziv}} </h4>

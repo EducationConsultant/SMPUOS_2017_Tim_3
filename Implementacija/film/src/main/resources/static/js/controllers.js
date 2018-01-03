@@ -1,4 +1,5 @@
 angular.module('filmApp.controllers',[
     'filmApp.NavigationController',
-    'filmApp.FilmController'
+    'filmApp.FilmController',
+    'filmApp.AktuelniController'
 ]);
