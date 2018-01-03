@@ -6,8 +6,15 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
             templateUrl : 'html/pocetna.html'
         })
         
-        
-        
+        .when('/pregledBioskopa',{
+    		templateUrl : 'html/pregledBioskopa.html'
+    	})
+    	
+    	.when('/pregledSala',{
+    		templateUrl : 'html/pregledSala.html'
+    	})
+    	
+   
         
         
         

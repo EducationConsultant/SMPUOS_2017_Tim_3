@@ -6,7 +6,13 @@ angular.module('bioskopApp.BioskopService', [])
 			return $http.get('/bioskop-service/bioskop/');	
 		}
         
-       
+        factory.obrisiBioskop = function(bioskopId){
+			return $http.delete('/bioskop-service/bioskop/'+bioskopId);	
+		}
+		
+		factory.izmeniBioskop = function(bioskop){
+			return $http.put('/bioskop-service/bioskop/'+bioskop.id, bisokop);	
+		}
 
         return factory;
     });
