@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 4 elements to &apos;icons&apos;&#x0D;&#x0A;- Original project: &apos;korisnik&apos;&#x0D;&#x0A;- Destination element: &apos;icons&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     ic_done_white_36px.svg&#x0D;&#x0A;     ic_delete_forever_white_36px.svg&#x0D;&#x0A;     ic_update_white_36px.svg&#x0D;&#x0A;     ic_power_settings_new_white_36px.svg" description="Copy files" element1="src/main/resources/static/icons/ic_done_white_36px.svg" element2="src/main/resources/static/icons/ic_delete_forever_white_36px.svg" element3="src/main/resources/static/icons/ic_update_white_36px.svg" element4="src/main/resources/static/icons/ic_power_settings_new_white_36px.svg" files="4" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1514981027883" target="/bioskop/src/main/resources/static/icons" units="0" version="1.0"/>
+</session>
