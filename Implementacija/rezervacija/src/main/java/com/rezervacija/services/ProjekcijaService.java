@@ -16,4 +16,5 @@ public interface ProjekcijaService {
 	public String checkFilm(Long idFilma);
 	public String checkSala(Long idBioskopa, Long idSale);
 	public int getBrojZauzetihMesta(Long idProjekcije, int red);
+	public int getBrojZauzetihMestaIzmena(Long rezervacijaId, Long projekcijaId, int red);
 }

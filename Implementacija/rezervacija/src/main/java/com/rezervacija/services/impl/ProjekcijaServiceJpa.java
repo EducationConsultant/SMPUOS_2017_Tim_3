@@ -129,6 +129,24 @@ public class ProjekcijaServiceJpa implements ProjekcijaService {
 		return brojZauzetihMesta;
 	}
 
+	@Override
+	public int getBrojZauzetihMestaIzmena(Long rezervacijaId, Long projekcijaId, int red) {
+		Projekcija p = repository.findOne(projekcijaId);
+		int brojZauzetihMesta=0;
+		for (Rezervacija rez : p.getRezervacije()) {
+			if(rez.getId() != rezervacijaId){
+				if(rez.getTip().equals(RezervacijaTip.AKTIVNA)){
+					if(p.getDatumProjekcije().before(rez.getDatumIstekaRezervacije())){
+						if(rez.getBrojRedaSedista()==red){
+							brojZauzetihMesta+=rez.getBrojSedista();
+						}
+					}
+				}
+			}
+		}
+		return brojZauzetihMesta;
+	}
+
 	
 	
 }
