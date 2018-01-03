@@ -1,0 +1,15 @@
+angular.module('bioskopApp.BioskopController',[])
+.controller('BioskopController', function ($scope, $location, $rootScope, $mdDialog, BioskopService, $localStorage, $mdToast) {
+	
+	
+	$scope.prikaziBioskope = function() {
+		BioskopService.findAll()
+			.success(
+				function(data) {
+					$scope.listaBioskopa = data;
+			})
+	};
+	
+	$scope.prikaziBioskope();
+	
+});

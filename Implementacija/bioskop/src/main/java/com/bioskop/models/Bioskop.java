@@ -40,7 +40,6 @@ public class Bioskop {
 	
 	@ManyToOne
 	@JoinColumn(name = "adresaBioskopa_id", referencedColumnName = "adresa_id")
-	@JsonBackReference
 	private Adresa adresaBioskopa;
 	
 	private Long ocena;

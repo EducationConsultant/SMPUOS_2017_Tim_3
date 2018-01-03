@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table
 public class Adresa {
@@ -38,6 +40,7 @@ public class Adresa {
 
 	// mora zbog pregleda bioskopa na osnovu koordinata
 	@OneToMany(mappedBy = "adresaBioskopa", fetch = FetchType.EAGER)
+	@JsonBackReference
 	private Set<Bioskop> bioskopi = new HashSet<>();
 
 	public Adresa() {
