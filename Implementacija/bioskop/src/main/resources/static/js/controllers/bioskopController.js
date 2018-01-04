@@ -12,4 +12,52 @@ angular.module('bioskopApp.BioskopController',[])
 	
 	$scope.prikaziBioskope();
 	
+	$scope.obrisiBioskop = function(id) {
+		BioskopService.obrisiBioskop(id).success(function(data){
+			$scope.prikaziBioskope();
+		})
+	}
+	
+	$scope.izmeniBioskop = function(rez, e) {
+		var temp=angular.copy(b);
+		$mdDialog.show({
+			locals:{data: temp},
+            controller: IzmenaController,
+            templateUrl: 'html/izmenaBioskopa.html',
+            parent: angular.element(document.body),
+            targetEvent: e,
+            clickOutsideToClose:false
+        });
+	}
+	
+    function IzmenaController($scope, $mdDialog, data) {
+    	$scope.menjanBioskop = data;
+        $scope.prihvatiIzmenu = function(){
+            BisokopService.izmeniBioskop($scope.menjanBioskop).success(function(data){
+            	$mdDialog.cancel();
+            })
+        };
+
+        $scope.cancel = function() {
+            $mdDialog.cancel();
+        };
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    $scope.prihvatiIzmenu = function(){
+		BioskopService.izmeniBioskop($scope.menjanBioskop).success(function(data){
+        	$mdDialog.cancel();
+        })
+    };
+
+    $scope.cancel = function() {
+    	$mdDialog.cancel();
+    };
+	
 });
