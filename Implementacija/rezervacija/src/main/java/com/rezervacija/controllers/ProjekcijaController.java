@@ -106,4 +106,15 @@ public class ProjekcijaController {
 		return new ResponseEntity<Integer>(brojZauzetihMesta, HttpStatus.OK);
 		
 	}
+	
+	//metoda koja vraca broj zauzetih mesta u datom redu za tu projekciju, prilikom izmene rezervacije,
+	//pa ne uzima u obzir mesta rezervisana od strane menjane rezervacije
+	@RequestMapping(value="/zauzetaIzmena/{rezervacijaId}/{projekcijaId}/{red}", method = RequestMethod.GET)
+	public ResponseEntity<Integer> getBrojZauzetihMestaIzmena(@PathVariable Long rezervacijaId,
+			@PathVariable Long projekcijaId,
+			@PathVariable int red) {
+		int brojZauzetihMesta = projekcijaService.getBrojZauzetihMestaIzmena(rezervacijaId, projekcijaId, red);
+		return new ResponseEntity<Integer>(brojZauzetihMesta, HttpStatus.OK);
+		
+	}
 }
