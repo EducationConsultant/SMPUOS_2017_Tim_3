@@ -3,6 +3,7 @@ angular.module('rezervacijaApp.NavigationController', []).controller(
 		function($scope, $location, $rootScope, $mdDialog, RezervacijaService,
 				$localStorage, $mdToast) {
 
+			$scope.currentNavItem1 = 'Rezervacije';
 			if ($localStorage.curNav == null){
 
 		        	$scope.currentNavItem = 'Pocetna';

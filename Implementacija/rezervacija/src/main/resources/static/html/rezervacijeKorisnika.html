@@ -1,6 +1,14 @@
 <div ng-controller="RezervacijaController">
+
+<div ng-show="!korisnikImaRezervacija">
+
+	Trenutno nemate nijednu rezervaciju!
+
+</div>
+
 	
-		 <div>
+<div ng-show="korisnikImaRezervacija">
+	<div>
      	<md-radio-group ng-model="statusRezervacijaKorisnika" layout="row" style="padding: 1%" layout-align="center center" ng-change="promenaStatusaZaKorisnika()">
         	<md-radio-button value="Aktivne" class="md-primary" >Aktivne</md-radio-button>
         	<md-radio-button value="Sve" class="md-primary" >Sve</md-radio-button>
@@ -32,5 +40,5 @@
 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
 		</md-list-item> 
 	</md-list>
-
+</div>
 </div>

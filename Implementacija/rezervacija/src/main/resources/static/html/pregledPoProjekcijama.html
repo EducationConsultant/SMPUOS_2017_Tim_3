@@ -56,7 +56,10 @@
 
 
 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
-		<p><b>Ukupno:</b>{{filterRezervacija.length}}</p>
+		<p><b>
+			<p ng-if="statusFilter=='Aktivne'"> Ukupno aktivnih:</p>
+			<p ng-if="statusFilter=='Otkazane'"> Ukupno otkazanih:</p>
+			</b>{{filterRezervacija.length}}</p>
 		<md-divider style="border-top: 1px solid black !important"></md-divider>
 		<md-list-item class="md-3-line" ng-repeat="rez in filterRezervacija"> 
 			<div class="md-list-item-text" layout="column">
