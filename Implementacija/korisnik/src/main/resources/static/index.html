@@ -37,7 +37,7 @@
 	<div ng-controller="NavigationController">
         <md-toolbar md-scroll-shrink>
             <div class="md-toolbar-tools">
-                Bioskop
+                Korisnici
 
                 <span flex></span>
                 <md-button class="md-raised" aria-label="Registruj se" ng-click="openRegistracijaDijalog($event)" ng-if="!showOdjaviSe">
@@ -55,6 +55,12 @@
 
         <div ng-cloak class="navigationBarClass">
             <md-content class="md-padding" >
+            	<md-nav-bar
+                        md-selected-nav-item="currentNavItem1"
+                        nav-bar-aria-label="navigation links1"
+                        >
+                    <md-nav-item md-nav-href="http://localhost:8765/rezervacija-service/#/" name="Rezervacije">Rezervacije</md-nav-item>
+                </md-nav-bar>
                 <md-nav-bar
                         md-selected-nav-item="currentNavItem"
                         nav-bar-aria-label="navigation links"
