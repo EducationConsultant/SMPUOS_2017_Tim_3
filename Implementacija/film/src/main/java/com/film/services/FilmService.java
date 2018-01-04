@@ -1,5 +1,6 @@
 package com.film.services;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -33,5 +34,7 @@ public interface FilmService {
 	public List<Film> findByGlumac(String ime, String prezime);
 
 	public List<Film> findByProsecnaOcena(float prosecnaOcena);
+	
+	public List<Film> findByDatumPremijereBetween();
 
 }

@@ -78,6 +78,7 @@ public class FilmController {
 	@RequestMapping(value = "/aktuelni", method = RequestMethod.GET)
 	public ResponseEntity<List<Film>> findAktuelniFilmovi() {
 		List<Film> filmovi = filmService.findAktuelniFilmovi();
+		//filmovi=filmService.findByDatumPremijereBetween();
 		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
 	}
 

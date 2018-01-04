@@ -11,5 +11,8 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
         .when('/pregledFilmova',{
             templateUrl : 'html/pregledFilmova.html'
         })
+        .when('/pregledAktuelnihFilmova',{
+        		templateUrl : 'html/pregledAktuelnihFilmova.html'
+        })
         
 }]);

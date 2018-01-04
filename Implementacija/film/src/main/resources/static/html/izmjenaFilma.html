@@ -1,5 +1,5 @@
 <div>
-<div  ng-controller="FilmController" data-ng-init="init()">
+<div  ng-controller="FilmController" data-ng-init="initIzmjena()">
 	 <div class='md-inline-form'>
  		<md-content layout-padding>
  			<md-input-container  flex-gt-md>
@@ -30,7 +30,7 @@
  			<md-input-container  flex-gt-sm>
             	<label>Jezik</label>
             	<md-select ng-model="noviFilm.jezik" >
-              		<md-option ng-repeat="jezik in listaJezika" ng-value="jezik" >
+              		<md-option ng-repeat="jezik in listaJezika" ng-value="jezik"  ng-selected="noviFilm.jezik">
                 		{{jezik.naziv}}
               		</md-option>  
             	</md-select>
@@ -39,7 +39,7 @@
           	<md-input-container  flex-gt-sm>
             	<label>Kategorija</label>
             	<md-select ng-model="noviFilm.kategorija"  >
-              		 <md-option ng-repeat="kategorija in listaKategorija" ng-value="kategorija">
+              		 <md-option ng-repeat="kategorija in listaKategorija" ng-value="kategorija" ng-selected="noviFilm.kategorija">
                 		{{kategorija.naziv}}
               		</md-option>  
             	</md-select>
@@ -48,7 +48,7 @@
           	<md-input-container  flex-gt-sm>
             	<label>Reditelj</label>
             	<md-select ng-model="noviFilm.reditelj" >
-              		<md-option ng-repeat="reditelj in listaReditelja" ng-value="reditelj" >
+              		<md-option ng-repeat="reditelj in listaReditelja" ng-value="reditelj" ng-selected="noviFilm.jezik">
                 		{{reditelj.ime}} {{reditelj.prezime}}
               		</md-option>  
             	</md-select>
@@ -81,7 +81,7 @@
 	  <div class='md-inline-form'>
  		<md-content layout-padding>
  			<md-input-container  flex-gt-md>
-            	<md-button ng-click="dodajNoviFilm(noviFilm)"  ng-disabled="noviFilm.naziv==null || noviFilm.trajanje==null || noviFilm.trajanje<=0  || noviFilm.datumPremijere==null" required clas="md-primary"> Dodaj</md-button>
+            	<md-button ng-click="potvrdaIzmjene(noviFilm)"  ng-disabled="noviFilm.naziv==null || noviFilm.trajanje==null || noviFilm.trajanje<=0  || noviFilm.datumPremijere==null" required clas="md-primary"> Potvrdi izmjenu</md-button>
           	</md-input-container>
          </md-content>
 	 </div>

@@ -1,31 +1,127 @@
 <div>
  
- 
  <div ng-controller="FilmController">
- 	<span>{{title}}</span>
- 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
- <!-- 		<md-subheader class="md-no-sticky" ng-if="!showOtkazane">Aktivne rezervacije:</md-subheader>
-    	<md-subheader class="md-no-sticky" ng-if="showOtkazane">Otkazane rezervacije:</md-subheader> -->
+ <div style="text-align: center">
+ 	<md-radio-group ng-model="kriterijum" ng-change="izaberiKriterijum(kriterijum)" layout="row" style="text-align: center;">
+
+      <md-radio-button value="svi" class="md-primary">Svi</md-radio-button>
+      <md-radio-button value="aktuelni"> Aktuelni </md-radio-button>
+      <md-radio-button value="kategorija">Kategorija</md-radio-button>
+	 <md-radio-button value="godinaPremijere">Godina premijere</md-radio-button>
+	 <md-radio-button value="reditelj">Reditelj</md-radio-button>
+	 <md-radio-button value="glumac">Glumac</md-radio-button>
+	 <md-radio-button value="ocjena">Ocjena</md-radio-button>
+    </md-radio-group>
+  </div>  
+    
+ <div class="selekcijaVrijednostiZaPregled">	
+          <div style="text-align: center;" class='md-inline-form'>	
+          	<md-input-container  flex-gt-sm ng-if="izabraniKriterijum =='kategorija'" >
+            	<div style="display: inline-block">
+            	<label>Kategorija</label>
+            	<md-select ng-model="kategorijaSearch" >
+              		 <md-option ng-repeat="kategorija in listaKategorija" ng-value="kategorija">
+                		{{kategorija.naziv}}
+              		</md-option>  
+            	</md-select>
+            	</div>
+            	<div style="display: inline-block">
+            	<button ng-click="pregledPoKategoriji(kategorijaSearch)"><md-icon md-svg-icon="icons/ic_search_black_24px.svg"></md-icon></button>
+            	</div>
+          	</md-input-container>
+          	
+          	<md-input-container  flex-gt-sm ng-if="izabraniKriterijum == 'reditelj'">
+            	<label>Reditelj</label>
+            	<div style="display: inline-block">
+            	<md-select ng-model="rediteljSearch" >
+              		<md-option ng-repeat="reditelj in listaReditelja" ng-value="reditelj" >
+                		{{reditelj.ime}} {{reditelj.prezime}}
+              		</md-option>  
+            	</md-select>
+            	</div>
+            	<div style="display: inline-block">
+            	<button ng-click="pregledPoReditelju(rediteljSearch)"><md-icon md-svg-icon="icons/ic_search_black_24px.svg"></md-icon></button>
+            	</div>
+          	</md-input-container>
  		
- 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+ 			<md-input-container  flex-gt-md ng-if="izabraniKriterijum == 'glumac'">
+            	<label>Glumci</label>
+            	<div style="display: inline-block">
+            		<md-select ng-model="selectedGlumac" ng-change="dodajGlumca(selectedGlumac)">
+              		<md-option ng-repeat="glumac in listaGlumaca" ng-value="glumac"  >
+                		{{glumac.ime}} {{glumac.prezime}}
+              		</md-option>  
+              	
+            	</md-select>
+            	</div>
+            	<div style="display: inline-block">
+            	<button ng-click="pregledPoGlumcu(selectedGlumac)"><md-icon md-svg-icon="icons/ic_search_black_24px.svg"></md-icon></button>
+            	</div>
+          	</md-input-container>
+          	
+          	<md-input-container flex-gt-md ng-if="izabraniKriterijum == 'godinaPremijere'">
+            	
+            	<label>Datum premijere</label>
+            	<div style="display: inline-block">
+            	<input ng-model="godinaSearch" type="number"></input>
+            	</div>
+            	<div style="display: inline-block">
+            	<button ng-click="pregledPoGodiniPremijere(godinaSearch)"><md-icon md-svg-icon="icons/ic_search_black_24px.svg"></md-icon></button>
+            	</div>
+          	</md-input-container>
+          	
+          	
+          	<md-input-container  flex-gt-md ng-if="izabraniKriterijum == 'ocjena'">
+            	<label>Ocjena</label>
+            	<div style="display: inline-block">
+            	<input ng-model="ocjena" type="number"></input>
+            	</div>
+            	<div style="display: inline-block">
+            	<button ng-click="pregledPoOcjeni(ocjena)"><md-icon md-svg-icon="icons/ic_search_black_24px.svg"></md-icon></button>
+            	</div>
+          	</md-input-container>
+          </div>
+ </div>
+          	<br>
+ 	
+ 	<div ng-if="listaFilmova == null || listaFilmova.length == 0">
+ 		Nisu pronađeni filmovi po zadatom kriterijumu.
+ 	</div>
+ 	<div ng-if="listaFilmova != null || listaFilmova.length > 0">
+ 	<md-list style="border: 1px solid black !important;" class="md-block"   flex-gt-sm> 
+ 
+ 		
+ 		<md-divider style="border-top: 1px solid black !important;" ng-if="listaFilmova != null || listaFilmova.length > 0"></md-divider>
  		
 		<md-list-item class="md-3-line" ng-repeat="film in listaFilmova"> 
 			<div layout="row" layout-align="start center" flex>
-				    <div class="md-list-item-text" layout="column" flex>
-						<h3><b>{{film.naziv}}</b></h3>
-						
-						<h4>Kategorija: {{film.kategorija.naziv}} </h4>
-						<h4>Opis: {{film.opis}}</h4>
-						<h4>Trajanje: {{film.trajanje}}</h4>
-						<h4>Jezik: {{film.jezik.naziv}}</h4>
-						<h4>Reditelj: {{film.reditelj.ime}} {{film.reditelj.prezime}}</h4>
-						<h4>Glumci: <span ng-repeat="glumac in film.glumci" >
-							{{glumac.ime}} {{glumac.prezime}} ,
-						</span> ... </h4>
+				    <div class="md-list-item-text" layout="column"  flex>
+				    <div style="text-align: center;">
+						<div  style="float: left; width: 70%; text-align: left">
+							<h3><b>{{film.naziv}}</b></h3>	
+							<h4>Kategorija: {{film.kategorija.naziv}} </h4>
+							<h4>Opis: {{film.opis}}</h4>
+							<h4>Datum premijere: {{film.datumPremijere | date:'dd.MM.yyyy.'}}</h4>
+							<h4>Trajanje: {{film.trajanje}}</h4>
+							<h4>Jezik: {{film.jezik.naziv}}</h4>
+							<h4>Reditelj: {{film.reditelj.ime}} {{film.reditelj.prezime}}</h4>
+							<h4>Glumci: <span ng-repeat="glumac in film.glumci" >
+								{{glumac.ime}} {{glumac.prezime}} ,
+							</span> ... </h4>
+						</div>
+						<div style="float: right; width: 30%; text-align: center; vertical-align: middle" style="margin: 55px;" >
+							<md-button style="margin: 55px;" ng-if="isAdmin" ng-click="obrisiFilm(film.id)"><md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon></md-button>
+							<md-button  ng-if="isAdmin" ng-click="izmjeniFilm(film)"><md-icon md-svg-icon="icons/ic_edit_black_24px.svg"></md-icon></md-button>
+						</div>
+					<!-- 	<div style="float: right; width: 30%; text-align: center; vertical-align: middle" >
+							<md-button  ng-if="isAdmin" ><md-icon md-svg-icon="icons/ic_edit_black_24px.svg"></md-icon></md-button>
+						</div>  -->
+					</div>
 				</div>
 			</div>
-			<md-divider style="border-top: 1px solid black !important;"></md-divider>
+			<md-divider style="border-top: 1px solid black !important;"  ng-if="listaFilmova != null || listaFilmova.length > 0"></md-divider>
 		</md-list-item> 
 	</md-list>	
+	</div>
 </div>
 </div>

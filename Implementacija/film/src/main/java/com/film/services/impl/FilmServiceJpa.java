@@ -200,4 +200,27 @@ public class FilmServiceJpa implements FilmService {
 		return filmovi;
 	}
 
+	@Override
+	public List<Film> findByDatumPremijereBetween() {
+		// TODO Auto-generated method stub
+		Date currentDate=new Date();
+		int currentYear=currentDate.getYear();
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.YEAR, currentYear-1);
+		cal.set(Calendar.MONTH, 11); // 11 = december
+		cal.set(Calendar.DAY_OF_MONTH, 31);
+		  
+		Date start = cal.getTime();
+		
+		
+		cal.set(Calendar.YEAR, currentYear+1);
+		cal.set(Calendar.DAY_OF_YEAR, 1);   // 11 = december
+		
+		Date end=cal.getTime();
+		
+		List<Film> aktuelniFilmovi=filmRepository.findByDatumPremijereBetween(start, end);
+		
+		return  aktuelniFilmovi;
+	}
+
 }
