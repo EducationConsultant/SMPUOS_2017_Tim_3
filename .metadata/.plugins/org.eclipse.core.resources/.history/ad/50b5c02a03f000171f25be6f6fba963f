@@ -1,0 +1,30 @@
+<div ng-controller="BioskopController">
+		
+	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
+		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		<md-list-item class="md-3-line" ng-repeat="b in listaBioskopa"> 
+			<div class="md-list-item-text" layout="column">
+				<h3><b>Bioskop {{b.id}}</b></h3>
+				<h4><b>Naziv</b> {{b.naziv}}</h4>
+				<h4><b>Adresa:</b> {{bioskop.adresa.nazivFilma}}</h4>
+				<h4><b>Datum projekcije:</b> {{rez.projekcija.datumProjekcije}}</h4>
+				<p><b>Status:</b> {{rez.tip}}</p>
+				<p><b>Broj reda sedišta:</b> {{rez.brojRedaSedista}}, 
+					<b>Broj sedišta: </b>{{rez.brojSedista}}</p>
+				<p><b>Datum rezervacije:</b> {{rez.datumRezervacije}}, 
+				<b>Datum isteka rezervacije:</b> {{rez.datumIstekaRezervacije}}</p>
+			</div>
+			<div>
+ 				<md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="izmeniBioskop(b, $event)">
+	                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
+	            </md-button> 
+				<md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="obrisiBioskop(b.id)">
+	                 <md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon>
+	            </md-button>
+			</div>
+			
+		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		</md-list-item> 
+	</md-list>
+
+</div>

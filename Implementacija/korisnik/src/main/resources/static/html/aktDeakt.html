@@ -30,6 +30,12 @@
                 </div>
                <md-divider style="border-top: 1px solid black !important;"></md-divider>
 		    </md-list-item>
+		    
+		    <md-list-item class="md-1-line" ng-if="korisnici.length == 0">
+                <div class="md-list-item-text">
+                    <h3>Nema deaktiviranih korisnika</h3>
+                </div>
+            </md-list-item>
     	</md-list>
     </div>
 </div>
