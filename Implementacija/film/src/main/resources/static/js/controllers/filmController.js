@@ -3,7 +3,6 @@ angular.module('filmApp.FilmController',[])
 	
 	$scope.title="Filmovi";
 	$scope.isAdmin=false;
-	$scope.izabraniGlumci=[];
 	$scope.izabraniKriterijum="svi";
 	$scope.pregledFilmova = function() {
 		
@@ -15,8 +14,14 @@ angular.module('filmApp.FilmController',[])
 	};
 	
 	$scope.obrisiFilm=function(id){
-		FilmoviService.brisanje(id);
-		var foundElement=-1;
+	
+		var confirm = $mdDialog.confirm()
+        .title('Da li ste sigurni da želite obrisati film?')
+        .ok('Da')
+        .cancel('Ne');
+     $mdDialog.show(confirm).then(function() {
+        $scope.status = 'Record deleted successfully!';
+        var foundElement=-1;
 		angular.forEach($scope.listaFilmova, function(value,index){
 			if(value.id==id){
 				foundElement=index;
@@ -26,11 +31,19 @@ angular.module('filmApp.FilmController',[])
 		if(foundElement!=-1){
 			$scope.listaFilmova.splice(foundElement,1);
 		}
+     }, function() {
+        $scope.status = 'You decided to keep your record.';
+     });
 	};
 	
 	$scope.izaberiKriterijum=function(kriterijum){
-		alert("Izabrani kriterijum je "+ kriterijum);
+		
 		$scope.izabraniKriterijum=kriterijum;
+		if(kriterijum!='aktuelni'){
+			$scope.pregledFilmova();
+		}else{
+			$scope.pregledAktuelnihFilmova();
+		}
 	}
 	
 	$scope.getJezici=function(){
@@ -70,14 +83,34 @@ angular.module('filmApp.FilmController',[])
 	$scope.dodajNoviFilm = function(noviFilm){
 		
 		var film=noviFilm;
+		$scope.izabraniGlumci=[];
 		noviFilm.glumci=$scope.izabraniGlumci;
 		FilmoviService.dodavanjeFilma(noviFilm)
 		.success(
 			function(data) {
 				var filmId=data.id;
+				$scope.noviFilm={};
+				$mdDialog.show (
+		                  $mdDialog.alert()
+		                     .parent(angular.element(document.querySelector('#dialogContainer')))
+		                     .clickOutsideToClose(true)
+		                     .title('Uspiješno dodavanje filma.')
+		                     .ok('Ok!')
+		               );
 		});
 	}
 	
+	$scope.potvrdaIzmjene=function(film){
+		alert("Film datum premijere "+film.datumPremijere );
+		FilmoviService.izmjenaFilma(film)
+		.success(
+			function(data) {
+				alert("Uspijesna izmjena filma");
+				var filmId=data.id;
+				$scope.noviFilm={};
+		
+		});
+	}
 	$scope.dodajGlumca=function(glumac){
 		$scope.izabraniGlumci.push(glumac);
 	}
@@ -88,7 +121,7 @@ angular.module('filmApp.FilmController',[])
 	};
 	
 	$scope.ukloniGlumca=function(glumac){
-		//alert("Ukloni glumca "+ glumac.ime);
+		
 		var foundElement=-1;
 		angular.forEach($scope.izabraniGlumci, function(value,index){
 			if(value.id==glumac.id){
@@ -109,6 +142,23 @@ angular.module('filmApp.FilmController',[])
 		$scope.getJezici();
 	}
 	
+	
+	$scope.izmjeniFilm=function(film){
+		$scope.noviFilm=film;
+		$scope.noviFilm.reditelj=film.reditelj;
+		$scope.noviFilm.datumPremijere=new Date(film.datumPremijere);
+		$scope.izabraniGlumci=film.glumci;
+		$mdDialog.show({
+		    scope               : $scope,
+		    preserveScope       : true,
+		    templateUrl         : 'html/izmjenaFilma.html',
+		    
+		    clickOutsideToClose : true,
+		    fullscreen          : true,
+		  
+		}); 
+	}
+	
 	$scope.pregledPoKategoriji=function(kategorija){
 		var naziv=kategorija.naziv;
 		FilmoviService.filmoviPoKategorijama(naziv)
@@ -125,6 +175,42 @@ angular.module('filmApp.FilmController',[])
 					$scope.listaFilmova=data;
 			});
 	}
+	
+	$scope.pregledPoGlumcu=function(glumac){
+		FilmoviService.filmoviPoGlumcu(glumac.ime, glumac.prezime)
+		.success(
+				function(data) {
+					$scope.listaFilmova=data;
+			});
+	}
+	
+	$scope.pregledPoOcjeni=function(ocjena){
+		alert("Ocjena "+ocjena);
+		FilmoviService.filmoviPoOcjeni(ocjena)
+		.success(
+				function(data) {
+					$scope.listaFilmova=data;
+			});
+	}
+	
+	
+	$scope.pregledPoGodiniPremijere=function(godina){
+		FilmoviService.filmoviPoGodiniPremijere(godina)
+		.success(
+				function(data) {
+					$scope.listaFilmova=data;
+			});
+	}
+	$scope.pregledAktuelnihFilmova = function() {
+		console.log("Tip prijavljenog korisnika "+$localStorage.tip);
+		FilmoviService.pregledAktuelnihFilmova()
+			.success(
+				function(data) {
+					$scope.listaFilmova = data;
+					var lista = $scope.listaAktuelnihFilmova;
+				
+			})
+	};
 	
 	isAdmin();
 	$scope.init();

@@ -22,10 +22,27 @@ angular.module('filmApp.FilmoviService', [])
             return $http.get('/film-service/film/kategorija/'+naziv);
         }
         factory.filmoviPoReditelju= function(ime, prezime){
-        	 return $http.get('/film-service/film/reditelj/'+ime+prezime);
+        	return $http.get('/film-service/film/reditelj/'+ime+'?'+prezime);
         }
+        
+        factory.filmoviPoGlumcu = function(ime, prezime){
+        	return $http.get('/film-service/film/glumac/'+ime+'?'+prezime);
+        }
+        
+        factory.filmoviPoOcjeni = function(ocjena){
+        	return $http.get('/film-service/film/ocena?ocena='+ocjena);
+        }
+        
+        factory.filmoviPoGodiniPremijere = function(godina){
+        	return $http.get('/film-service/film/godinaPremijere/'+ godina);
+        }
+        
         factory.dodavanjeFilma = function(noviFilm){
         	return $http.post('/film-service/film/dodaj', noviFilm);
+        }
+        
+        factory.izmjenaFilma= function(film){
+        	return $http.put('/film-service/film//izmeni/'+film.id, film);
         }
         
        factory.jezici=function(){
