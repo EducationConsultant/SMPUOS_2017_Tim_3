@@ -10,7 +10,7 @@ angular.module('filmApp.FilmoviService', [])
             return $http.get('/film-service/film/aktuelni');
         }
         
-        factory.aktivacija = function (id) {
+        factory.pregledPoGodiniPremijere = function (id) {
             return $http.put('/film-service/film/godinaPremijere/' + godina);
         }
         
@@ -20,6 +20,10 @@ angular.module('filmApp.FilmoviService', [])
         
         factory.filmoviPoKategorijama = function () {
             return $http.get('/film-service/film/kategorija/'+naziv);
+        }
+        
+        factory.dodavanjeFilma = function(noviFilm){
+        	return $http.post('/film-service/film/dodaj', noviFilm);
         }
         
        factory.jezici=function(){

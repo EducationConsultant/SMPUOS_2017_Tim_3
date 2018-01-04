@@ -3,6 +3,7 @@ angular.module('filmApp.FilmController',[])
 	
 	$scope.title="Filmovi";
 	$scope.isAdmin=false;
+	$scope.izabraniGlumci=[];
 	$scope.pregledFilmova = function() {
 		
 		FilmoviService.pregledFilmova()
@@ -13,8 +14,17 @@ angular.module('filmApp.FilmController',[])
 	};
 	
 	$scope.obrisiFilm=function(id){
-		alert("Brisanje filma "+ id);
 		FilmoviService.brisanje(id);
+		var foundElement=-1;
+		angular.forEach($scope.listaFilmova, function(value,index){
+			if(value.id==id){
+				foundElement=index;
+			}
+		});
+		
+		if(foundElement!=-1){
+			$scope.listaFilmova.splice(foundElement,1);
+		}
 	};
 	
 	$scope.getJezici=function(){
@@ -47,14 +57,43 @@ angular.module('filmApp.FilmController',[])
 		FilmoviService.glumci()
 		.success(
 			function(data) {
-				$scope.listaGlumaca = data.content;
-		})
+				$scope.listaGlumaca = data;
+		});
 	};
+	
+	$scope.dodajNoviFilm = function(noviFilm){
+		
+		var film=noviFilm;
+		noviFilm.glumci=$scope.izabraniGlumci;
+		FilmoviService.dodavanjeFilma(noviFilm)
+		.success(
+			function(data) {
+				var filmId=data.id;
+		});
+	}
+	
+	$scope.dodajGlumca=function(glumac){
+		$scope.izabraniGlumci.push(glumac);
+	}
 	
 	isAdmin=function(){
 		$scope.isAdmin= $localStorage.tip =='ADMIN';
 		var value=$scope.isAdmin;
 	};
+	
+	$scope.ukloniGlumca=function(glumac){
+		//alert("Ukloni glumca "+ glumac.ime);
+		var foundElement=-1;
+		angular.forEach($scope.izabraniGlumci, function(value,index){
+			if(value.id==glumac.id){
+				foundElement=index;
+			}
+		});
+		
+		if(foundElement!=-1){
+			$scope.izabraniGlumci.splice(foundElement,1);
+		}
+	}
 	
 	$scope.init=function(){
 		$scope.getGlumci();
