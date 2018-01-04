@@ -18,10 +18,12 @@ angular.module('filmApp.FilmoviService', [])
             return $http.delete('/film-service/film/obrisi/' + id);
         }
         
-        factory.filmoviPoKategorijama = function () {
+        factory.filmoviPoKategorijama = function (naziv) {
             return $http.get('/film-service/film/kategorija/'+naziv);
         }
-        
+        factory.filmoviPoReditelju= function(ime, prezime){
+        	 return $http.get('/film-service/film/reditelj/'+ime+prezime);
+        }
         factory.dodavanjeFilma = function(noviFilm){
         	return $http.post('/film-service/film/dodaj', noviFilm);
         }

@@ -4,6 +4,7 @@ angular.module('filmApp.FilmController',[])
 	$scope.title="Filmovi";
 	$scope.isAdmin=false;
 	$scope.izabraniGlumci=[];
+	$scope.izabraniKriterijum="svi";
 	$scope.pregledFilmova = function() {
 		
 		FilmoviService.pregledFilmova()
@@ -26,6 +27,11 @@ angular.module('filmApp.FilmController',[])
 			$scope.listaFilmova.splice(foundElement,1);
 		}
 	};
+	
+	$scope.izaberiKriterijum=function(kriterijum){
+		alert("Izabrani kriterijum je "+ kriterijum);
+		$scope.izabraniKriterijum=kriterijum;
+	}
 	
 	$scope.getJezici=function(){
 		FilmoviService.jezici()
@@ -95,6 +101,7 @@ angular.module('filmApp.FilmController',[])
 		}
 	}
 	
+	
 	$scope.init=function(){
 		$scope.getGlumci();
 		$scope.getKategorije();
@@ -102,8 +109,25 @@ angular.module('filmApp.FilmController',[])
 		$scope.getJezici();
 	}
 	
-	isAdmin();
+	$scope.pregledPoKategoriji=function(kategorija){
+		var naziv=kategorija.naziv;
+		FilmoviService.filmoviPoKategorijama(naziv)
+		.success(
+				function(data) {
+					$scope.listaFilmova=data;
+			});
+	}
 	
+	$scope.pregledPoReditelju=function(reditelj){
+		FilmoviService.filmoviPoReditelju(reditelj.ime, reditelj.prezime)
+		.success(
+				function(data) {
+					$scope.listaFilmova=data;
+			});
+	}
+	
+	isAdmin();
+	$scope.init();
 	$scope.pregledFilmova();
 	
 });
