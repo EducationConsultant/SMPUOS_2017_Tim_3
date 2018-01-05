@@ -20,6 +20,8 @@
 				    <div style="text-align: center;">
 						<div  style="float: left; width: 70%; text-align: left">
 							<h3><b>{{film.naziv}}</b></h3>	
+							<h4>{{film.prosecnaOcena}}</h4>
+							
 							<h4>Kategorija: {{film.kategorija.naziv}} </h4>
 							<h4>Opis: {{film.opis}}</h4>
 							<h4>Datum premijere: {{film.datumPremijere | date:'dd.MM.yyyy.'}}</h4>
@@ -29,10 +31,21 @@
 							<h4>Glumci: <span ng-repeat="glumac in film.glumci" >
 								{{glumac.ime}} {{glumac.prezime}} ,
 							</span> ... </h4>
-						</div>
+							<div ng-if="isRegular">
+								 <md-slider-container >
+							      
+							      <div style="width: 100px; padding: 2px;">
+							      <md-slider flex min="0" max="10" ng-model="color.red" aria-label="red" id="red-slider" style="width: 30px;">
+							      </md-slider>
+							      </div>
+							      <md-input-container>
+							        <input flex type="number" ng-model="color.red" aria-label="red" aria-controls="red-slider">
+							      </md-input-container>
+	    						</md-slider-container>  
+							</div>
 						<div style="float: right; width: 30%; text-align: center; vertical-align: middle" style="margin: 55px;" >
-							<md-button  class="md-fab md-mini md-primary md-raised md-hue-2" style="margin: 55px;" ng-if="isAdmin" ng-click="obrisiFilm(film.id)"><md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon></md-button>
-							<md-button class="md-fab md-mini md-primary md-raised md-hue-2" ng-if="isAdmin" ng-click="izmjeniFilm(film)"><md-icon md-svg-icon="icons/ic_edit_black_24px.svg"></md-icon></md-button>
+							<md-button class="md-fab md-mini md-primary md-raised md-hue-2" ng-if="isAdmin" ng-click="izmjeniFilm(film)"><md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon></md-button>
+							<md-button  class="md-fab md-mini md-warn md-raised md-hue-2" style="margin: 55px;" ng-if="isAdmin" ng-click="obrisiFilm(film.id)"><md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon></md-button>
 						</div>
 				
 					</div>
@@ -42,7 +55,7 @@
 		</md-list-item> 
 	</md-list>	
 	</div>
-
+	</div>
 	<div ng-include="'html/pager.html'"></div>
 </div>
 </div>

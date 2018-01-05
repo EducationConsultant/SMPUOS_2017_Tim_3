@@ -69,7 +69,7 @@ angular.module('filmApp.FilmController',[])
 	
 	
 	$scope.getKategorije=function(){
-		
+		$scope.listaKategorija=[];
 		FilmoviService.kategorije()
 		.success(
 			function(data) {
@@ -78,6 +78,7 @@ angular.module('filmApp.FilmController',[])
 	};
 	
 	$scope.getReditelji=function(){
+		$scope.listaReditelja=[];
 		FilmoviService.reditelji()
 		.success(
 			function(data) {
@@ -86,6 +87,7 @@ angular.module('filmApp.FilmController',[])
 	};
 	
 	$scope.getGlumci=function(){
+		$scope.listaGlumaca=[];
 		FilmoviService.glumci()
 		.success(
 			function(data) {
@@ -121,7 +123,7 @@ angular.module('filmApp.FilmController',[])
 				alert("Uspijesna izmjena filma");
 				var filmId=data.id;
 				$scope.noviFilm={};
-		
+				$scope.izmjeniDialog.close();
 		});
 	}
 	
@@ -134,6 +136,10 @@ angular.module('filmApp.FilmController',[])
 		var value=$scope.isAdmin;
 	};
 	
+	idRegUser=function(){
+		$scope.isRegular = $localStorage.tip == 'REGKORISNIK';
+	}
+	idRegUser();
 	$scope.ukloniGlumca=function(glumac){
 		
 		var foundElement=-1;
@@ -158,11 +164,11 @@ angular.module('filmApp.FilmController',[])
 	
 	
 	$scope.izmjeniFilm=function(film){
-		$scope.noviFilm=film;
-		$scope.noviFilm.reditelj=film.reditelj;
-		$scope.noviFilm.datumPremijere=new Date(film.datumPremijere);
+		$scope.izmjenaFilm=angular.copy(film);
+		;
+		$scope.izmjenaFilm.datumPremijere=new Date(film.datumPremijere);
 		$scope.izabraniGlumciIzmjena=film.glumci;
-		$mdDialog.show({
+		$scope.izmjeniDialog=$mdDialog.show({
 		    scope               : $scope,
 		    preserveScope       : true,
 		    templateUrl         : 'html/izmjenaFilma.html',
@@ -241,7 +247,7 @@ angular.module('filmApp.FilmController',[])
 	
 	
 	isAdmin();
-	$scope.init();
+	//$scope.init();
 	
 		
 	$scope.slececaStrana=function(){
