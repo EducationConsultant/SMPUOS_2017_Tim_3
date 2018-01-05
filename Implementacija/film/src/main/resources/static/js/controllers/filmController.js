@@ -23,7 +23,9 @@ angular.module('filmApp.FilmController',[])
 			})
 	};
 	
-	
+	$scope.ocjeniFilm=function(ocjena){
+		
+	}
 	$scope.obrisiFilm=function(id){
 	
 		var confirm = $mdDialog.confirm()
@@ -139,6 +141,7 @@ angular.module('filmApp.FilmController',[])
 	idRegUser=function(){
 		$scope.isRegular = $localStorage.tip == 'REGKORISNIK';
 	}
+	
 	idRegUser();
 	$scope.ukloniGlumca=function(glumac){
 		
