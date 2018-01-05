@@ -73,8 +73,8 @@
     <div class='md-inline-form'>
     <md-content layout-padding>
     	<div ng-repeat="gl in izabraniGlumci">
-    	<div style="display: inline-block">{{gl.ime}} {{gl.prezime}} </div>
-    	<div style="display: inline-block">
+    	<div style="display: inline-block; width: 200px;" >{{gl.ime}} {{gl.prezime}} </div>
+    	<div style="display: inline-block; width: 70px;" >
     		<md-button ng-click="ukloniGlumca(gl)"><md-icon md-svg-icon="icons/ic_delete_black_24px.svg"></md-icon></md-button> 
     	</div>
     	</div>
@@ -84,8 +84,12 @@
 	  <div class='md-inline-form'>
  		<md-content layout-padding>
  			<md-input-container  flex-gt-md>
-            	<md-button ng-click="potvrdaIzmjene(izmjenaFilm)"  ng-disabled="izmjenaFilm.naziv==null || izmjenaFilm.trajanje==null || izmjenaFilm.trajanje<=0  || izmjenaFilm.datumPremijere==null" required clas="md-primary"> Potvrdi izmjenu</md-button>
-            	<md-button ng-click="izmjeniDialog.close()"  ng-disabled="izmjenaFilm.naziv==null || izmjenaFilm.trajanje==null || izmjenaFilm.trajanje<=0  || izmjenaFilm.datumPremijere==null" required clas="md-primary">Odustaniu</md-button>
+            	<md-button class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="potvrdaIzmjene(izmjenaFilm)"  ng-disabled="izmjenaFilm.naziv==null || izmjenaFilm.trajanje==null || izmjenaFilm.trajanje<=0  || izmjenaFilm.datumPremijere==null" required clas="md-primary"> 
+            		<md-icon md-svg-icon="icons/ic_done_white_24px.svg"></md-icon>
+				</md-button>
+            	<md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="izmjeniDialog.close()"  ng-disabled="izmjenaFilm.naziv==null || izmjenaFilm.trajanje==null || izmjenaFilm.trajanje<=0  || izmjenaFilm.datumPremijere==null" required clas="md-primary">
+            		<md-icon md-svg-icon="icons/ic_clear_white_24px.svg"></md-icon>
+				</md-button>
           	</md-input-container>
          </md-content>
 	 </div>

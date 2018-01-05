@@ -1,0 +1,20 @@
+<div ng-if="isRegular">
+								<div style="text-align: center;">
+									<div style="float:left;">	
+									<md-slider-container >
+										<div style="width: 100px; padding: 2px;  ">
+											<md-slider flex min="0" max="10" step="1" ng-model="film.ocena" aria-label="red" id="red-slider" style="width: 30px;" >
+											</md-slider>
+										 </div>
+															      
+										<md-input-container >
+											<input flex type="number" ng-model="film.ocena" aria-label="red" aria-controls="red-slider">
+										</md-input-container>
+															     
+									</md-slider-container> 
+									</div> 
+									<div style="float: right;">
+										<md-button class="md-fab md-mini md-primary md-raised md-hue-2"  ng-click="ocjeniFilm(film)"><md-icon md-svg-icon="icons/ic_done_white_24px.svg"></md-icon></md-button>
+									</div>  
+								</div> 
+							</div>  

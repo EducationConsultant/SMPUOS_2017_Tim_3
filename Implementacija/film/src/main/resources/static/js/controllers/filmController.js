@@ -5,7 +5,7 @@ angular.module('filmApp.FilmController',[])
 	$scope.title="Filmovi";
 	$scope.isAdmin=false;
 	$scope.izabraniKriterijum="svi";
-	$scope.izabraniGlumci=[];
+	//$scope.izabraniGlumci=[];
 	$scope.brojStavki=5;
 	$scope.trenutnaStranica = 1;
 	$scope.ukupanBrojStrana = 1;
@@ -136,12 +136,12 @@ angular.module('filmApp.FilmController',[])
 		FilmoviService.ocjeniFilm(film)
 			.success(
 				function(data){
-					alert("Uspjesno ocjenjivanje");
+					
 				});
 	}
 	
 	$scope.dodajGlumca=function(glumac){
-		alert("Glumac ime "+glumac.ime);
+		
 		$scope.izabraniGlumci.push(glumac);
 	}
 	
@@ -171,6 +171,7 @@ angular.module('filmApp.FilmController',[])
 	
 	
 	$scope.init=function(){
+		$scope.izabraniGlumci=[];
 		$scope.getGlumci();
 		$scope.getKategorije();
 		$scope.getReditelji();
@@ -182,7 +183,7 @@ angular.module('filmApp.FilmController',[])
 		$scope.izmjenaFilm=angular.copy(film);
 		$scope.init();
 		$scope.izmjenaFilm.datumPremijere=new Date(film.datumPremijere);
-		$scope.izabraniGlumci = film.glumci;
+		$scope.izabraniGlumci = $scope.izmjenaFilm.glumci;
 		$scope.izmjeniDialog=$mdDialog.show({
 		    scope               : $scope,
 		    preserveScope       : true,
@@ -226,7 +227,7 @@ angular.module('filmApp.FilmController',[])
 	}
 	
 	$scope.pregledPoOcjeni=function(ocjena){
-		alert("Ocjena "+ocjena);
+		
 		FilmoviService.filmoviPoOcjeni(ocjena)
 		.success(
 				function(data) {
@@ -248,7 +249,7 @@ angular.module('filmApp.FilmController',[])
 	}
 	
 	$scope.pregledAktuelnihFilmova = function() {
-		console.log("Tip prijavljenog korisnika "+$localStorage.tip);
+		
 		FilmoviService.pregledAktuelnihFilmova()
 			.success(
 				function(data) {
