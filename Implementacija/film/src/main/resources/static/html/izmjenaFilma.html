@@ -1,5 +1,5 @@
 <div>
-<div  ng-controller="FilmController" data-ng-init="init()">
+<div  ng-controller="FilmController" >
 	 <div class='md-inline-form' style="text-align: center">
  		<md-content layout-padding>
  			<md-input-container  flex-gt-md style="width: 30%">
@@ -23,7 +23,7 @@
  			<md-input-container  flex-gt-sm style="width: 30%">
             	<label>Jezik</label>
             	<md-select ng-model="izmjenaFilm.jezik" >
-              		<md-option ng-repeat="jezik in listaJezika" ng-value="jezik"  ng-selected="izmjenaFilm.jezik">
+              		<md-option ng-repeat="jezik in listaJezika" ng-value="jezik" ng-selected="izmjenaFilm.jezik.id == jezik.id">
                 		{{jezik.naziv}}
               		</md-option>  
             	</md-select>
@@ -32,7 +32,7 @@
           	<md-input-container  flex-gt-sm style="width: 30%">
             	<label>Kategorija</label>
             	<md-select ng-model="izmjenaFilm.kategorija"  >
-              		 <md-option ng-repeat="kategorija in listaKategorija" ng-value="kategorija" ng-selected="izmjenaFilm.kategorija">
+              		 <md-option ng-repeat="kategorija in listaKategorija" ng-value="kategorija" ng-selected="izmjenaFilm.kategorija.id == kategorija.id">
                 		{{kategorija.naziv}}
               		</md-option>  
             	</md-select>
@@ -41,7 +41,7 @@
           	<md-input-container  flex-gt-sm style="width: 30%">
             	<label>Reditelj</label>
             	<md-select ng-model="izmjenaFilm.reditelj" >
-              		<md-option ng-repeat="reditelj in listaReditelja" ng-value="reditelj" ng-selected="izmjenaFilm.jezik">
+              		<md-option ng-repeat="reditelj in listaReditelja" ng-value="reditelj" ng-selected=" izmjenaFilm.reditelj.id == reditelj.id">
                 		{{reditelj.ime}} {{reditelj.prezime}}
               		</md-option>  
             	</md-select>
@@ -72,7 +72,7 @@
 
     <div class='md-inline-form'>
     <md-content layout-padding>
-    	<div ng-repeat="gl in izabraniGlumciIzmjena">
+    	<div ng-repeat="gl in izabraniGlumci">
     	<div style="display: inline-block">{{gl.ime}} {{gl.prezime}} </div>
     	<div style="display: inline-block">
     		<md-button ng-click="ukloniGlumca(gl)"><md-icon md-svg-icon="icons/ic_delete_black_24px.svg"></md-icon></md-button> 
@@ -84,8 +84,8 @@
 	  <div class='md-inline-form'>
  		<md-content layout-padding>
  			<md-input-container  flex-gt-md>
-            	<md-button ng-click="potvrdaIzmjene(noviFilm)"  ng-disabled="noviFilm.naziv==null || noviFilm.trajanje==null || noviFilm.trajanje<=0  || noviFilm.datumPremijere==null" required clas="md-primary"> Potvrdi izmjenu</md-button>
-            	<md-button ng-click="izmjeniDialog.close()"  ng-disabled="noviFilm.naziv==null || noviFilm.trajanje==null || noviFilm.trajanje<=0  || noviFilm.datumPremijere==null" required clas="md-primary">Odustaniu</md-button>
+            	<md-button ng-click="potvrdaIzmjene(izmjenaFilm)"  ng-disabled="izmjenaFilm.naziv==null || izmjenaFilm.trajanje==null || izmjenaFilm.trajanje<=0  || izmjenaFilm.datumPremijere==null" required clas="md-primary"> Potvrdi izmjenu</md-button>
+            	<md-button ng-click="izmjeniDialog.close()"  ng-disabled="izmjenaFilm.naziv==null || izmjenaFilm.trajanje==null || izmjenaFilm.trajanje<=0  || izmjenaFilm.datumPremijere==null" required clas="md-primary">Odustaniu</md-button>
           	</md-input-container>
          </md-content>
 	 </div>

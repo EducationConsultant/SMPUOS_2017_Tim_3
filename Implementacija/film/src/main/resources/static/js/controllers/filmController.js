@@ -24,8 +24,9 @@ angular.module('filmApp.FilmController',[])
 	};
 	
 	$scope.ocjeniFilm=function(ocjena){
-		
+		alert("Ocjenjivanje "+ ocjena);
 	}
+	
 	$scope.obrisiFilm=function(id){
 	
 		var confirm = $mdDialog.confirm()
@@ -119,6 +120,7 @@ angular.module('filmApp.FilmController',[])
 	
 	$scope.potvrdaIzmjene=function(film){
 		alert("Film datum premijere "+film.datumPremijere );
+		film.glumci=$scope.izabraniGlumci;
 		FilmoviService.izmjenaFilma(film)
 		.success(
 			function(data) {
@@ -129,7 +131,17 @@ angular.module('filmApp.FilmController',[])
 		});
 	}
 	
+	$scope.ocjeniFilm=function(film){
+		alert("Ocjena filma "+ film.ocena);
+		FilmoviService.ocjeniFilm(film)
+			.success(
+				function(data){
+					alert("Uspjesno ocjenjivanje");
+				});
+	}
+	
 	$scope.dodajGlumca=function(glumac){
+		alert("Glumac ime "+glumac.ime);
 		$scope.izabraniGlumci.push(glumac);
 	}
 	
@@ -168,9 +180,9 @@ angular.module('filmApp.FilmController',[])
 	
 	$scope.izmjeniFilm=function(film){
 		$scope.izmjenaFilm=angular.copy(film);
-		;
+		$scope.init();
 		$scope.izmjenaFilm.datumPremijere=new Date(film.datumPremijere);
-		$scope.izabraniGlumciIzmjena=film.glumci;
+		$scope.izabraniGlumci = film.glumci;
 		$scope.izmjeniDialog=$mdDialog.show({
 		    scope               : $scope,
 		    preserveScope       : true,
@@ -234,6 +246,7 @@ angular.module('filmApp.FilmController',[])
 					$scope.stavkeZaPrikaz();
 			});
 	}
+	
 	$scope.pregledAktuelnihFilmova = function() {
 		console.log("Tip prijavljenog korisnika "+$localStorage.tip);
 		FilmoviService.pregledAktuelnihFilmova()
@@ -316,4 +329,18 @@ angular.module('filmApp.FilmController',[])
 		$scope.listaFilmova=izabraniPodniz;
 	}
 	
+	 $scope.prikaziIzmjenjenSadrzaj=function(data){
+		 var foundIndex=-1;
+		 angular.forEach($scope.listaFilmova, function(value, index){
+			 
+			 if(value.id==data.id){
+				 foundIndex=index;
+			 }
+		 });
+		 
+		 if(foundIndex!=-1){
+			 $scope.listaFilmova.splice(foundIndex,1);
+			 $scope.listaFilmova.splice(foundIndex,0, data);
+		 }
+	 }
 });

@@ -44,6 +44,7 @@ public class FilmController {
 	@RequestMapping(value = "/izmeni/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Film> update(@PathVariable Long id, @Valid @RequestBody Film film) {
 		Film izmenjenFilm = filmService.update(film, id);
+		System.out.println("Izmjena");
 		return new ResponseEntity<Film>(izmenjenFilm, HttpStatus.OK);
 	}
 

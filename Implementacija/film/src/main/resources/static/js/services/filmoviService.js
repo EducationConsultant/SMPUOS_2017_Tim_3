@@ -60,5 +60,9 @@ angular.module('filmApp.FilmoviService', [])
        factory.glumci=function(){
     	   return $http.get("/film-service/filmPomocni/glumci")
        }
+       
+       factory.ocjeniFilm = function(film){
+    	   return $http.put("/film-service/film/ocenjivanje/"+film.id,film );
+       }
         return factory;
     });
