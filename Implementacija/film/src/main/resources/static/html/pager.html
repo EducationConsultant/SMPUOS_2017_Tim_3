@@ -1,0 +1,15 @@
+<div >
+<!-- ng-controller="PagerController" -->
+<div style="text-align: center;">
+	<button ng-click="prvaStrana()"><md-icon md-svg-icon="icons/ic_first_page_black_24px.svg"></md-icon></button>
+	<button ng-click="prethodnaStrana()"><md-icon md-svg-icon="icons/ic_chevron_left_black_24px.svg"></md-icon></button>
+	<input type="number" ng-model="trenutnaStranica" style="heigh: 30 px !important; width: 35px"/>
+	<button ng-click="slececaStrana()"><md-icon md-svg-icon="icons/ic_chevron_right_black_24px.svg"></md-icon></button>
+	<button ng-click="poslednjaStrana()"><md-icon md-svg-icon="icons/ic_last_page_black_24px.svg"></md-icon></button>
+	<select ng-model="brojStavki" ng-change="promjenaBrojaStavki(brojStavki)" style="height: 30px;">
+		<option ng-value="5" ng-selected="true">5</option>
+		<option ng-value="10">10</option>
+		<option ng-value="15">15</option>
+	</select>
+</div>
+</div>

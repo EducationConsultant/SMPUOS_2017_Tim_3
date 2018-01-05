@@ -1,17 +1,28 @@
 angular.module('filmApp.FilmController',[])
 .controller('FilmController', function ($scope, $location, $rootScope, $mdDialog, FilmoviService, $localStorage, $mdToast) {
 	
+	$scope.ucitaniFilmovi=[];
 	$scope.title="Filmovi";
 	$scope.isAdmin=false;
 	$scope.izabraniKriterijum="svi";
+	$scope.izabraniGlumci=[];
+	$scope.brojStavki=5;
+	$scope.trenutnaStranica = 1;
+	$scope.ukupanBrojStrana = 1;
+	
+	
 	$scope.pregledFilmova = function() {
 		
 		FilmoviService.pregledFilmova()
 			.success(
 				function(data) {
 					$scope.listaFilmova = data.content;
+					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.preracunajUkupanBrojStrana();
+					$scope.stavkeZaPrikaz();
 			})
 	};
+	
 	
 	$scope.obrisiFilm=function(id){
 	
@@ -44,6 +55,8 @@ angular.module('filmApp.FilmController',[])
 		}else{
 			$scope.pregledAktuelnihFilmova();
 		}
+		$scope.trenutnaStranica=1;
+		
 	}
 	
 	$scope.getJezici=function(){
@@ -83,7 +96,7 @@ angular.module('filmApp.FilmController',[])
 	$scope.dodajNoviFilm = function(noviFilm){
 		
 		var film=noviFilm;
-		$scope.izabraniGlumci=[];
+		
 		noviFilm.glumci=$scope.izabraniGlumci;
 		FilmoviService.dodavanjeFilma(noviFilm)
 		.success(
@@ -111,6 +124,7 @@ angular.module('filmApp.FilmController',[])
 		
 		});
 	}
+	
 	$scope.dodajGlumca=function(glumac){
 		$scope.izabraniGlumci.push(glumac);
 	}
@@ -147,7 +161,7 @@ angular.module('filmApp.FilmController',[])
 		$scope.noviFilm=film;
 		$scope.noviFilm.reditelj=film.reditelj;
 		$scope.noviFilm.datumPremijere=new Date(film.datumPremijere);
-		$scope.izabraniGlumci=film.glumci;
+		$scope.izabraniGlumciIzmjena=film.glumci;
 		$mdDialog.show({
 		    scope               : $scope,
 		    preserveScope       : true,
@@ -165,6 +179,8 @@ angular.module('filmApp.FilmController',[])
 		.success(
 				function(data) {
 					$scope.listaFilmova=data;
+					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.stavkeZaPrikaz();
 			});
 	}
 	
@@ -173,6 +189,8 @@ angular.module('filmApp.FilmController',[])
 		.success(
 				function(data) {
 					$scope.listaFilmova=data;
+					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.stavkeZaPrikaz();
 			});
 	}
 	
@@ -181,6 +199,8 @@ angular.module('filmApp.FilmController',[])
 		.success(
 				function(data) {
 					$scope.listaFilmova=data;
+					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.stavkeZaPrikaz();
 			});
 	}
 	
@@ -190,6 +210,8 @@ angular.module('filmApp.FilmController',[])
 		.success(
 				function(data) {
 					$scope.listaFilmova=data;
+					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.stavkeZaPrikaz();
 			});
 	}
 	
@@ -199,6 +221,8 @@ angular.module('filmApp.FilmController',[])
 		.success(
 				function(data) {
 					$scope.listaFilmova=data;
+					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.stavkeZaPrikaz();
 			});
 	}
 	$scope.pregledAktuelnihFilmova = function() {
@@ -207,13 +231,80 @@ angular.module('filmApp.FilmController',[])
 			.success(
 				function(data) {
 					$scope.listaFilmova = data;
+					$scope.ucitaniFilmovi=$scope.listaFilmova;
 					var lista = $scope.listaAktuelnihFilmova;
+					$scope.stavkeZaPrikaz();
 				
 			})
 	};
+	 
+	
 	
 	isAdmin();
 	$scope.init();
-	$scope.pregledFilmova();
+	
+		
+	$scope.slececaStrana=function(){
+		
+		if( $scope.trenutnaStranica + 1 <= $scope.ukupanBrojStrana){
+			$scope.trenutnaStranica = $scope.trenutnaStranica + 1;
+			$scope.stavkeZaPrikaz();
+		}
+		
+	}
+	
+	$scope.prethodnaStrana=function(){
+		
+		if($scope.trenutnaStranica>1){
+			$scope.trenutnaStranica = $scope.trenutnaStranica -1;
+			$scope.stavkeZaPrikaz();
+		}
+	}
+	
+	$scope.prvaStrana= function(){
+		$scope.trenutnaStranica =1;
+		$scope.stavkeZaPrikaz();
+	}
+	
+	$scope.poslednjaStrana= function(){
+		
+		$scope.trenutnaStranica=$scope.ukupanBrojStrana;
+		$scope.stavkeZaPrikaz();
+	}
+	
+	$scope.preracunajUkupanBrojStrana=function(){
+		
+		$scope.ukupanBrojStrana=Math.ceil($scope.ucitaniFilmovi.length/$scope.brojStavki);
+		
+		
+	}
+	
+	$scope.promjenaBrojaStavki=function(brojStavki){
+		
+		$scope.brojStavki=brojStavki;
+		$scope.preracunajUkupanBrojStrana();
+		$scope.stavkeZaPrikaz();
+	}
+	
+	$scope.stavkeZaPrikaz=function(){
+	
+		var preuzetaListaFilmova=$scope.ucitaniFilmovi;
+		var izabraniPodniz=[];
+		if($scope.brojStavki==undefined){
+			$scope.brojStavki=5;
+		}
+		var brStavki=parseInt($scope.brojStavki);
+		var indexFirst=($scope.trenutnaStranica-1)*brStavki;
+		var indexLast=indexFirst + brStavki;
+		angular.forEach(preuzetaListaFilmova, function(value, index){
+			if(index>=indexFirst && index<indexLast){
+				izabraniPodniz.push(value);
+			}
+		});
+		
+		var value=$scope.title;
+		$scope.title="Pager";
+		$scope.listaFilmova=izabraniPodniz;
+	}
 	
 });
