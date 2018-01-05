@@ -3,8 +3,11 @@ angular.module('rezervacijaApp.NavigationController', []).controller(
 		function($scope, $location, $rootScope, $mdDialog, RezervacijaService,
 				$localStorage, $mdToast) {
 
-			if ($localStorage.curNav == null)
-				$scope.currentNavItem = 'Pocetna';
+			$scope.currentNavItem1 = 'Rezervacije';
+			if ($localStorage.curNav == null){
+
+		        	$scope.currentNavItem = 'Pocetna';
+			}
 			else
 				$scope.currentNavItem = $localStorage.curNav;
 
@@ -12,7 +15,12 @@ angular.module('rezervacijaApp.NavigationController', []).controller(
 				$localStorage.curNav = data;
 			}
 
-			
-			
+			if($localStorage.tip == 'REGKORISNIK'){
+	            $scope.showRegistrovan = true;
+	            $scope.showAdministrator = false;
+	        }else if($localStorage.tip == 'ADMIN'){
+	            $scope.showRegistrovan = false;
+	            $scope.showAdministrator = true;
+	        }
 			
 		});

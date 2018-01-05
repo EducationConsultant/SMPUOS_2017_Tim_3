@@ -14,6 +14,7 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 		$scope.filter.salaObjekat = null;
 		$scope.projekcije = [];
 		$scope.listaRezervacijaKorisnika = [];
+		//$scope.korisnikImaRezervacija = false;
 		$scope.ogranicenjeBrojSedista = 1;
 		
 		$scope.prikaziRezervacije = function() {
@@ -64,6 +65,11 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			var id=$localStorage.logged.id;
 			KorisnikService.getAktivneRezervacijeKorisnika(id).success(function(data){
 				$scope.listaRezervacijaKorisnika = data;
+				if($scope.listaRezervacijaKorisnika.length > 0){
+					$scope.korisnikImaRezervacija = true;
+				} else {
+					$scope.korisnikImaRezervacija = false;
+				}
 			})
 		}
 		
@@ -107,6 +113,24 @@ angular.module('rezervacijaApp.RezervacijaController',[])
                 parent: angular.element(document.body),
                 targetEvent: e,
                 clickOutsideToClose:false
+            }).then(function(menjanaRezervacija){
+            	if(menjanaRezervacija != null) {
+            		
+            		for(i=0; i<$scope.korisnici.length; i++){
+						if(menjanaRezervacija.idKorisnika == $scope.korisnici[i].id){
+							menjanaRezervacija.korisnickoIme = 
+								$scope.korisnici[i].korisnickoIme;
+						}
+					}
+
+					for(i=0; i<$scope.listaRezervacija.length; i++){
+            			if($scope.listaRezervacija[i].id == menjanaRezervacija.id){
+            				$scope.listaRezervacija[i] = menjanaRezervacija;
+            				break;
+            			}
+            		}
+            	}
+            	
             });
 		}
 		
@@ -129,7 +153,6 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 				for(i=0; i<$scope.saleIzmena.length; i++){
 					if($scope.saleIzmena[i].id==$scope.menjanaRezervacija.projekcija.idSale){
 						$scope.salaObjekatIzmena = $scope.saleIzmena[i];
-						alert(1);
 						break;
 					}
 				}
@@ -226,7 +249,7 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			                    );
 						} else {
 			        		RezervacijaService.izmeniRezervaciju($scope.menjanaRezervacija).success(function(data){
-			                	$mdDialog.cancel();
+			                	$mdDialog.hide($scope.menjanaRezervacija);
 			                })
 						}
 					});
