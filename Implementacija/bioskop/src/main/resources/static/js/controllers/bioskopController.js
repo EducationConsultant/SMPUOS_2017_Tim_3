@@ -124,7 +124,24 @@ angular.module('bioskopApp.BioskopController',[])
 	idRegUser();
 	isAdmin();
 	
-	$scope.obrisiSalu = function(salaId){
-		
+	$scope.obrisiSalu = function(bioskopId, salaId){
+		SalaService.obrisiSalu(bioskopId, salaId)
+			.success(function(data){
+				var bioskopIndex = 0;
+				var salaIndex = 0;
+				angular.forEach($scope.listaBioskopa, function(value, index){
+					 if(value.id==bioskopId){
+						 bioskopIndex=index;	 
+					 }
+				 });
+				
+				angular.forEach($scope.listaBioskopa[bioskopIndex].sale, function(value, index){
+					 if(value.id==salaId){
+						 salaIndex=index;	 
+					 }
+				 });
+				$scope.listaBioskopa[bioskopIndex].sale.splice(salaIndex,1);
+
+			});
 	}
 });
