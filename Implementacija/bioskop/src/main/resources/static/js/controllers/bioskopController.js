@@ -8,17 +8,35 @@ angular.module('bioskopApp.BioskopController',[])
 				function(data) {
 					$scope.listaBioskopa = data;
 			})
-	};
+	}; 
 	
 	$scope.prikaziBioskope();
 	
-	$scope.obrisiBioskop = function(id) {
-		BioskopService.obrisiBioskop(id).success(function(data){
-			$scope.prikaziBioskope();
-		})
+	
+	$scope.obrisiBioskop = function(id){
+		
+		var confirm = $mdDialog.confirm() 
+        .title('Da li ste sigurni da želite obrisati bioskop?')
+        .ok('Da')
+        .cancel('Ne');
+     $mdDialog.show(confirm).then(function() {
+        $scope.status = 'Record deleted successfully!';
+        var foundElement=-1;
+		angular.forEach($scope.listaBioskopa, function(value,index){
+			if(value.id==id){
+				foundElement=index;
+			}
+		});
+		
+		if(foundElement!=-1){
+			$scope.listaBioskopa.splice(foundElement,1);
+		}
+     }, function() {
+        $scope.status = 'You decided to keep your record.';
+     });
 	}
 	
-	$scope.izmeniBioskop = function(rez, e) {
+	$scope.izmeniBioskop = function(b, e) {
 		var temp=angular.copy(b);
 		$mdDialog.show({
 			locals:{data: temp},
