@@ -15,6 +15,10 @@ angular.module('bioskopApp.BioskopService', [])
 			return $http.put('/bioskop-service/bioskop/'+bioskop.id, bioskop);	
 		}
 		
+		factory.getBioskopiPoKoordinatama = function (adresa) {
+            return $http.put('/bioskop-service/bioskop/koordinate', adresa);
+        }
+		
 
         return factory;
     });
