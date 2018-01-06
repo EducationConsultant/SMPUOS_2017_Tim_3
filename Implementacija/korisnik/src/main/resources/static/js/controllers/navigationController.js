@@ -1,14 +1,16 @@
 angular.module('korisnikApp.NavigationController',[])
     .controller('NavigationController', function ($scope, $location, $rootScope, $mdDialog, LoginService, $localStorage, $mdToast) {
 
-        if($localStorage.curNav == null)
-            $scope.currentNavItem = 'Pocetna';
-        else
-            $scope.currentNavItem = $localStorage.curNav;
+        //if($localStorage.curNavK == null)
+            $scope.currentNavItemK = 'Pocetna';
+        /*else{
+            $scope.currentNavItemK = $localStorage.curNavK;
+            $location.path("/" + $localStorage.curNavK);
+        }*/
 
-        $scope.saveNav = function (data) {
-            $localStorage.curNav = data;
-        }
+        /*$scope.saveNav = function (data) {
+            $localStorage.curNavK = data;
+        }*/
         
         $scope.currentNavItem1 = 'Korisnici';
 
@@ -29,8 +31,8 @@ angular.module('korisnikApp.NavigationController',[])
                 if(data){
                     $localStorage.logged = null;
                     $localStorage.tip = null;
-                    $localStorage.curNav = 'Pocetna';
-                    $scope.currentNavItem = 'Pocetna'
+                    $localStorage.curNavK = 'Pocetna';
+                    $scope.currentNavItemK = 'Pocetna'
                     $location.path("/");
 
                     $scope.showOdjaviSe = false;

@@ -4,16 +4,16 @@ angular.module('rezervacijaApp.NavigationController', []).controller(
 				$localStorage, $mdToast) {
 
 			$scope.currentNavItem1 = 'Rezervacije';
-			if ($localStorage.curNav == null){
+			//if ($localStorage.curNavR == null){
 
-		        	$scope.currentNavItem = 'Pocetna';
-			}
-			else
-				$scope.currentNavItem = $localStorage.curNav;
+		        	$scope.currentNavItemR = 'Pocetna';
+			//}
+			//else
+			//	$scope.currentNavItemR = $localStorage.curNavR;
 
-			$scope.saveNav = function(data) {
-				$localStorage.curNav = data;
-			}
+			/*$scope.saveNav = function(data) {
+				$localStorage.curNavR = data;
+			}*/
 
 			if($localStorage.tip == 'REGKORISNIK'){
 	            $scope.showRegistrovan = true;
