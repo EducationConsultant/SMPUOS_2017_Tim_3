@@ -36,5 +36,7 @@ public interface FilmService {
 	public List<Film> findByProsecnaOcena(float prosecnaOcena);
 	
 	public List<Film> findByDatumPremijereBetween();
+	
+	public List<Film> findByProsecnaOcenaBetween(float minOcena, float maxOcena);
 
 }

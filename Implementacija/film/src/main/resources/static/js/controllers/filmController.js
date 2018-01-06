@@ -9,7 +9,8 @@ angular.module('filmApp.FilmController',[])
 	$scope.brojStavki=5;
 	$scope.trenutnaStranica = 1;
 	$scope.ukupanBrojStrana = 1;
-	
+	$scope.ocjenaMin;
+	$scope.ocjenaMax;
 	
 	$scope.pregledFilmova = function() {
 		
@@ -23,9 +24,7 @@ angular.module('filmApp.FilmController',[])
 			})
 	};
 	
-	$scope.ocjeniFilm=function(ocjena){
-		alert("Ocjenjivanje "+ ocjena);
-	}
+	
 	
 	$scope.obrisiFilm=function(id){
 	
@@ -59,6 +58,8 @@ angular.module('filmApp.FilmController',[])
 			$scope.pregledAktuelnihFilmova();
 		}
 		$scope.trenutnaStranica=1;
+		
+		$scope.init();
 		
 	}
 	
@@ -125,7 +126,7 @@ angular.module('filmApp.FilmController',[])
 		FilmoviService.izmjenaFilma(film)
 		.success(
 			function(data) {
-			
+				$scope.prikaziIzmjenjenSadrzaj(data);
 				var filmId=data.id;
 				$scope.noviFilm={};
 				
@@ -139,7 +140,7 @@ angular.module('filmApp.FilmController',[])
 		FilmoviService.ocjeniFilm(film)
 			.success(
 				function(data){
-					
+					$scope.prikaziIzmjenjenSadrzaj(data);
 				});
 	}
 	
@@ -229,9 +230,10 @@ angular.module('filmApp.FilmController',[])
 			});
 	}
 	
-	$scope.pregledPoOcjeni=function(ocjena){
-		
-		FilmoviService.filmoviPoOcjeni(ocjena)
+	$scope.pregledPoOcjeni=function(ocjenaMin,ocjenaMax){
+		//alert("Oc "+$scope.ocjenaMin + " "+ $scope.ocjenaMax);
+		alert("Ocjene "+ ocjenaMin +" "+ ocjenaMax);
+		FilmoviService.filmoviPoOcjeni(ocjenaMin, ocjenaMax)
 		.success(
 				function(data) {
 					$scope.listaFilmova=data;
@@ -345,6 +347,8 @@ angular.module('filmApp.FilmController',[])
 		 if(foundIndex!=-1){
 			 $scope.listaFilmova.splice(foundIndex,1);
 			 $scope.listaFilmova.splice(foundIndex,0, data);
+			 $scope.$applay;
+			// $scope.$applay();
 		 }
 	 }
 });

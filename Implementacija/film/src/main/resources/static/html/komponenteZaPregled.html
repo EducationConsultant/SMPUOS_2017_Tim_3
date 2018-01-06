@@ -71,13 +71,26 @@
           	
           	
           	<md-input-container  flex-gt-md ng-if="izabraniKriterijum == 'ocjena'">
-            	<label>Ocjena</label>
+            	
             	<div style="text-align: center">
 	            	<div style="display: inline-block; float: left">
-	            	<input ng-model="ocjena" type="number"></input>
+	            	<div style="text-align: center;">
+	            		<div style="float: left;">
+	            		<md-input-container>
+	            			<label>Ocjena(min)</label>
+	            			<input ng-model="ocjenaMin" type="number" placeholder="0" style="width: 80px;" min="0" max="10"></input>
+	            		</md-input-container>
+	            		</div>
+	            		<div style="float: right;">
+	            		<md-input-container> 
+	            			<label>Ocjena(max)</label>
+	            			<input ng-model="ocjenaMax" type="number" placeholder="10" style="width: 80px;" min="0" max="10"></input>
+	            		</md-input-container>
+	            		</div>
+	            	</div>
 	            	</div>
 	            	<div style="display: inline-block; float: right">
-	            	<md-button  class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="pregledPoOcjeni(ocjena)"><md-icon md-svg-icon="icons/ic_search_black_24px.svg"></md-icon></button>
+	            	<md-button  class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="pregledPoOcjeni(ocjenaMin, ocjenaMax)"><md-icon md-svg-icon="icons/ic_search_black_24px.svg"></md-icon></button>
 	            	</div>
             	</div>
           	</md-input-container>

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.film.models.Film;
 import com.film.services.FilmService;
 
+
+
 @RestController
 @RequestMapping("film")
 public class FilmController {
@@ -115,12 +117,19 @@ public class FilmController {
 
 	// pregled filmova prema oceni
 	// localhost:8090/film/ocena?ocena=5
-	@RequestMapping(value = "/ocena", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/ocena", method = RequestMethod.GET)
 	public ResponseEntity<List<Film>> findByOcena(@RequestParam("ocena") float prosecnaOcena) {
 		List<Film> filmovi = filmService.findByProsecnaOcena(prosecnaOcena);
 		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
-	}
+	} */
 	
+	@RequestMapping(value = "/ocena", method = RequestMethod.GET)
+	public ResponseEntity<List<Film>> findByOcenaBetween(@RequestParam("minOcena") float minOcena, @RequestParam("maxOcena") float maxOcena){
+		
+		List<Film> filmovi = filmService.findByProsecnaOcenaBetween(new Float(minOcena).floatValue(), new Float(maxOcena).floatValue());
+		
+		return new ResponseEntity<List<Film>>(filmovi, HttpStatus.OK);
+	}
 	// za povezivanje sa projekcijom
 	//localhost:8765/film-service/film/checkFilm?filmId=1
 	@RequestMapping(value = "/checkFilm", method = RequestMethod.GET)

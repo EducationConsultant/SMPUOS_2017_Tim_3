@@ -29,8 +29,11 @@ angular.module('filmApp.FilmoviService', [])
         	return $http.get('/film-service/film/glumac/'+ime+'?'+prezime);
         }
         
-        factory.filmoviPoOcjeni = function(ocjena){
-        	return $http.get('/film-service/film/ocena?ocena='+ocjena);
+        factory.filmoviPoOcjeni = function(ocjenaMin, ocjenaMax){
+
+        	ocjenaMin=parseFloat(ocjenaMin);
+        	ocjenaMax=parseFloat(ocjenaMax);
+        	return $http.get('/film-service/film/ocena?minOcena=' + ocjenaMin + "&maxOcena=" + ocjenaMax);
         }
         
         factory.filmoviPoGodiniPremijere = function(godina){

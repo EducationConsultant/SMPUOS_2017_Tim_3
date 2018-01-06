@@ -223,4 +223,12 @@ public class FilmServiceJpa implements FilmService {
 		return  aktuelniFilmovi;
 	}
 
+	@Override
+	public List<Film> findByProsecnaOcenaBetween(float minOcena, float maxOcena) {
+		// TODO Auto-generated method stub
+		List<Film> filmovi=filmRepository.findByProsecnaOcenaBetween(minOcena, maxOcena);
+		
+		return filmovi;
+	}
+
 }
