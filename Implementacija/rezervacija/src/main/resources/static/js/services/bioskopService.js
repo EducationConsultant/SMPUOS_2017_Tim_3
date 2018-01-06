@@ -1,6 +1,5 @@
 angular.module('rezervacijaApp.BioskopService', [])
 	.factory('BioskopService', function($http) {
-			
 		var factory = {};
 		
 		factory.getBioskopi = function() {
@@ -13,5 +12,5 @@ angular.module('rezervacijaApp.BioskopService', [])
 
 		return factory;
 			
-	});
+});
 	

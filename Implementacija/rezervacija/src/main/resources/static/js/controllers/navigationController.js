@@ -5,7 +5,6 @@ angular.module('rezervacijaApp.NavigationController', []).controller(
 
 			$scope.currentNavItem1 = 'Rezervacije';
 			//if ($localStorage.curNavR == null){
-
 		        	$scope.currentNavItemR = 'Pocetna';
 			//}
 			//else
@@ -18,9 +17,8 @@ angular.module('rezervacijaApp.NavigationController', []).controller(
 			if($localStorage.tip == 'REGKORISNIK'){
 	            $scope.showRegistrovan = true;
 	            $scope.showAdministrator = false;
-	        }else if($localStorage.tip == 'ADMIN'){
+	        } else if($localStorage.tip == 'ADMIN'){
 	            $scope.showRegistrovan = false;
 	            $scope.showAdministrator = true;
 	        }
-			
 		});

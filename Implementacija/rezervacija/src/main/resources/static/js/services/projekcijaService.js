@@ -1,5 +1,6 @@
 angular.module('rezervacijaApp.ProjekcijaService', [])
 	.factory('ProjekcijaService', function($http) {
+		
 		var factory = {};
 		
 		factory.getBrojZauzetihMestaPoRedu = function(projekcijaId, red) {
