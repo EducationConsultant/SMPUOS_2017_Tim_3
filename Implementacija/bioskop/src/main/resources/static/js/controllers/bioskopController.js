@@ -1,5 +1,5 @@
 angular.module('bioskopApp.BioskopController',[])
-.controller('BioskopController', function ($scope, $location, $rootScope, $mdDialog, BioskopService, $localStorage, $mdToast) {
+.controller('BioskopController', function ($scope, $location, $rootScope, $mdDialog, BioskopService, $localStorage, $mdToast, SalaService) {
 	
 	
 	$scope.prikaziBioskope = function() {
@@ -123,4 +123,8 @@ angular.module('bioskopApp.BioskopController',[])
 	 }
 	idRegUser();
 	isAdmin();
+	
+	$scope.obrisiSalu = function(salaId){
+		
+	}
 });
