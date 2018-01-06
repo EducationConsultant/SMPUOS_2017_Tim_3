@@ -12,7 +12,7 @@
 				<h3><b>Bioskop {{b.id}} </b></h3>
 				<h4><b>Naziv:</b> {{b.naziv}} </h4>
 				<h4><b>Adresa:</b> {{b.adresaBioskopa.nazivUlice}} {{b.adresaBioskopa.broj}} {{b.adresaBioskopa.nazivNaseljenogMesta}} </h4>				
-				<h4><b>Ocena:</b> {{b.ocena}} </h4>	
+				<h4><b>Prosečna ocena:</b> {{b.prosecnaOcena | number: 2}} </h4>	
 			 	<br />
 				<h3><b>Sale koje poseduje bioskop {{b.naziv}}:</b></h3>
 				
