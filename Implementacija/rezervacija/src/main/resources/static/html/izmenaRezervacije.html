@@ -1,16 +1,19 @@
-<md-dialog flex="60">
-    <md-dialog-content layout-padding >
+<md-dialog flex="60" >
+    <md-dialog-content layout-padding  >
         <div ng-controller="RezervacijaController">
             <form name="IzmenaRezervacijeForm">
                 <h3 layout-gt-md="" layout-align="center center" style="color: blue">
                 Izmena rezervacije {{menjanaRezervacija.id}}</h3>
 					
-                <div>
+               
                 
                 <div ng-show="iniciraoIzmenuProjekcije">
 	                
+	                
 	                <div class='md-inline-form'>
 	 					<md-content layout-padding>
+	 					
+	 					<div layout="row">
 	 						<md-input-container class="md-block" flex-gt-sm>
 	            				<label>Bioskop</label>
 	            					<md-select ng-model="menjanaRezervacija.projekcija.idBioskopa"
@@ -20,12 +23,9 @@
 	              						</md-option>
 	            					</md-select>
 	          				</md-input-container>
-	 					</md-content>
-		 			</div>
+	 					
 	
-					<div class='md-inline-form'>
-	 					<md-content layout-padding>
-	 						<md-input-container class="md-block" flex-gt-sm>
+							<md-input-container class="md-block" flex-gt-sm>
 	            				<label>Sala</label>
 	            					<md-select ng-model="menjanaRezervacija.projekcija.idSale"
 	            						ng-change="odaberiSaluIzmena()">
@@ -34,21 +34,16 @@
 	              						</md-option>
 	            					</md-select>
 	          				</md-input-container>
-	 					</md-content>
+	 					
 					</div>
 		 
-					 <div class='md-inline-form'>
-				 		<md-content layout-padding>
+					 <div layout="row">
 				 			<md-input-container class="md-block" flex-gt-sm>
 				 				<md-datepicker ng-model="menjanaRezervacija.projekcija.datumProjekcije" 
 				 				md-placeholder="Datum" ng-change="odaberiSaluIzmena()">
 				 				</md-datepicker>
 				 			</md-input-container>
-				 		</md-content>
-					 </div>
-				 
-					 <div class='md-inline-form'>
-				 		<md-content layout-padding>
+
 				 			<md-input-container class="md-block" flex-gt-sm>
 				            	<label>Projekcija</label>
 				            	<md-select ng-model="menjanaRezervacija.projekcija.id"
@@ -58,94 +53,52 @@
 				              		</md-option>
 				            	</md-select>
 				          	</md-input-container>
+				     </div>
 				          	
-				          	
-				          	 <div layout="row">
-			 					<md-input-container class="md-block" flex-gt-sm>
-			            			<label>Broj sedišta: </label>
-			            			<input ng-model="menjanaRezervacija.brojSedista" type="number" step="1"
+				     <div layout="row">
+			 			<md-input-container class="md-block" flex-gt-sm>
+			           		<label>Broj sedišta: </label>
+			           		<input ng-model="menjanaRezervacija.brojSedista" type="number" step="1"
 			            			min=1 max={{salaObjekatIzmena.brojSedistaKolone}}
 			            			ng-readonly="salaObjekatIzmena==null">
-			          			</md-input-container>
+			          	</md-input-container>
 	          					
-			          			<md-input-container class="md-block" flex-gt-sm>
-			            			<label>Broj reda sedišta: </label>
-			            			<input ng-model="menjanaRezervacija.brojRedaSedista" type="number" step="1"
+			          	<md-input-container class="md-block" flex-gt-sm>
+			            	<label>Broj reda sedišta: </label>
+			           		<input ng-model="menjanaRezervacija.brojRedaSedista" type="number" step="1"
 			            			min=1 max={{salaObjekatIzmena.brojSedistaRedovi}}
-            						ng-readonly="salaObjekatIzmena==null"
-			            			>
-			          			</md-input-container>
-	                		</div>
-	                						          	
-				          	<md-input-container class="md-block" flex-gt-sm>
-	            				<label>Status: </label>
-	            				<md-select ng-model="menjanaRezervacija.tip">
-	              					<md-option value="AKTIVNA">Aktivna</md-option>
-	              					<md-option value="OTKAZANA">Otkazana</md-option>
-	            				</md-select>
-	          				</md-input-container>
-	          				
-	          				<md-input-container class="md-block" flex-gt-sm>
-	            				<label>Korisnik: </label>
-	            				<md-select ng-model="menjanaRezervacija.idKorisnika">
-	              					<md-option ng-repeat="k in korisnici" value="{{k.id}}">
-	              						{{k.korisnickoIme}}
-	              					</md-option>
-	            				</md-select>
-	          				</md-input-container>
-	          				
-	          				<md-input-container class="md-block" flex-gt-sm>
-	          					<label>Datum isteka: </label>
-	 							<md-datepicker ng-model="menjanaRezervacija.datumIstekaRezervacije">
-	 							</md-datepicker>
-	 						</md-input-container>
-				 		</md-content>
-					 </div>
-	                
-	                
-	               
-                
-                
-                
-
-                <div ng-show="!iniciraoIzmenuProjekcije">
-	                	
-	          			
-	          			
-	          			
-
-					 	<md-button class="md-raised md-primary" ng-click="izmeniProjekciju()">
-		                	 Izmeni projekciju
-		            	</md-button>
-						
-					
-						<div layout="row">
-	 					<md-input-container class="md-block" flex-gt-sm>
-	            			<label>Broj sedišta: </label>
-	            			<input ng-model="menjanaRezervacija.brojSedista" type="number" step="1">
-	          			</md-input-container>
-	          					
-	          			<md-input-container class="md-block" flex-gt-sm>
-	            			<label>Broj reda sedišta: </label>
-	            			<input ng-model="menjanaRezervacija.brojRedaSedista" type="number" step="1">
-	          			</md-input-container>
-	          			</div>
-	          			<md-input-container class="md-block" flex-gt-sm>
+            						ng-readonly="salaObjekatIzmena==null">
+			          	</md-input-container>
+			          			
+			          	<md-input-container class="md-block" flex-gt-sm>
 	            			<label>Status: </label>
 	            			<md-select ng-model="menjanaRezervacija.tip">
 	              				<md-option value="AKTIVNA">Aktivna</md-option>
 	              				<md-option value="OTKAZANA">Otkazana</md-option>
 	            			</md-select>
 	          			</md-input-container>
-	          			
+	                </div>
+	                						          	
+				          	
+	          		<div layout="row">		
+	          			<md-input-container class="md-block" flex-gt-sm>
+	            			<label>Korisnik: </label>
+	            			<md-select ng-model="menjanaRezervacija.idKorisnika">
+	              				<md-option ng-repeat="k in korisnici" value="{{k.id}}">
+	              					{{k.korisnickoIme}}
+	              				</md-option>
+	            			</md-select>
+	          			</md-input-container>
+	          				
 	          			<md-input-container class="md-block" flex-gt-sm>
 	          				<label>Datum isteka: </label>
 	 						<md-datepicker ng-model="menjanaRezervacija.datumIstekaRezervacije">
 	 						</md-datepicker>
 	 					</md-input-container>
-					
-					</div>
-					
+	 					</div>
+				 	</md-content>
+				</div>
+	
                 </div>
             </form>
         </div>

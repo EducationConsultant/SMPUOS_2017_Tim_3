@@ -9,10 +9,9 @@
  
  <div>
  	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
- <!-- 		<md-subheader class="md-no-sticky" ng-if="!showOtkazane">Aktivne rezervacije:</md-subheader>
-    	<md-subheader class="md-no-sticky" ng-if="showOtkazane">Otkazane rezervacije:</md-subheader> -->
- 		
- 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		
+		<md-divider style="border-top: 1px solid black !important;">
+		</md-divider>
  		
 		<md-list-item class="md-3-line" ng-repeat="rez in listaAktivnihIliOtkazanihRezervacija"> 
 			<div layout="row" layout-align="start center" flex>
@@ -27,10 +26,12 @@
 						<b>Broj sedišta: </b>{{rez.brojSedista}}</p>
 						<p><b>Datum rezervacije:</b> {{rez.datumRezervacije}}, 
 						<b>Datum isteka rezervacije:</b> {{rez.datumIstekaRezervacije}}</p>
-						
 				</div>
 			</div>
-			<md-divider style="border-top: 1px solid black !important;"></md-divider>
+			
+			<md-divider style="border-top: 1px solid black !important;">
+			</md-divider>
+		
 		</md-list-item> 
 	</md-list>	
 </div>
