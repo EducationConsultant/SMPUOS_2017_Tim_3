@@ -6,7 +6,7 @@
     		
 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
-		<md-list-item class="md-3-line" ng-repeat="b in listaBioskopa"> 
+		<md-list-item class="md-3-line" ng-repeat="b in listaBioskopa | orderBy: ['naziv']"> 
 			<div layout="row" layout-align="start center" flex>
 			<div class="md-list-item-text" layout="column">
 				<h3><b>Bioskop {{b.id}} </b></h3>
