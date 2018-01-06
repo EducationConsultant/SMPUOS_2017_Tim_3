@@ -9,6 +9,8 @@ angular.module('korisnikApp.NavigationController',[])
         $scope.saveNav = function (data) {
             $localStorage.curNav = data;
         }
+        
+        $scope.currentNavItem1 = 'Korisnici';
 
         if($localStorage.tip == 'REGKORISNIK'){
             $scope.showRegistrovan = true;
