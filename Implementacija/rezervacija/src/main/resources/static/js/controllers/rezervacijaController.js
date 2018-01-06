@@ -264,38 +264,55 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			}
 						
         	$scope.prihvatiIzmenu = function(){
+        		
+        		if(	$scope.menjanaRezervacija.projekcija == null 
+        		 || $scope.menjanaRezervacija.projekcija.idBioskopa == null
+        	   	 || $scope.menjanaRezervacija.projekcija.idSale == null
+        		 || $scope.menjanaRezervacija.brojRedaSedista == null
+        		 || $scope.menjanaRezervacija.brojSedista == null)
+        		{
+        			$mdToast.show(
+	                        $mdToast.simple()
+	                            .textContent('Molimo Vas da popunite sve parametre.')
+	                            .hideDelay(3000)
+	                            .position('top center')
+	                            .theme('warning-toast')
+	                    );
+        			return;
+        		}
+        		
         		ProjekcijaService.getBrojZauzetihMestaPoReduIzmena
-        				   ($scope.menjanaRezervacija.id,
-        					$scope.menjanaRezervacija.projekcija.id, 
-        					$scope.menjanaRezervacija.brojRedaSedista)
+        				    ($scope.menjanaRezervacija.id,
+        					 $scope.menjanaRezervacija.projekcija.id, 
+        					 $scope.menjanaRezervacija.brojRedaSedista)
 					.success(function(data){
+						
 						var brojSlobodnihMesta = $scope.salaObjekatIzmena.brojSedistaKolone - data;
 												
 						if(brojSlobodnihMesta < $scope.menjanaRezervacija.brojSedista){
 							$mdToast.show(
-			                        $mdToast.simple()
-			                            .textContent('Nema dovoljno mesta u željenom redu!')
-			                            .hideDelay(3000)
-			                            .position('top center')
-			                            .theme('warning-toast')
-			                    );
+			                   $mdToast.simple()
+			                       .textContent('Nema dovoljno mesta u željenom redu!')
+			                       .hideDelay(3000)
+			                       .position('top center')
+			                       .theme('warning-toast')
+			                 );
 						} else {
-			        		RezervacijaService.izmeniRezervaciju($scope.menjanaRezervacija).success(function(data){
-			                	alert($scope.menjanaRezervacija.projekcija.nazivBioskopa);
-			        			$mdDialog.hide($scope.menjanaRezervacija);
+			        		RezervacijaService.izmeniRezervaciju($scope.menjanaRezervacija)
+			        		 .success(function(data){
+			                	$mdDialog.hide($scope.menjanaRezervacija);
 			                })
 						}
 					});
             };
 
+            $scope.izmeniProjekciju = function() {
+            	$scope.iniciraoIzmenuProjekcije = true;
+            }
+            
             $scope.cancel = function() {
             	$mdDialog.cancel();
             };
-            
-            $scope.izmeniProjekciju = function() {
-            	$scope.iniciraoIzmenuProjekcije = true;
-            	
-            }
         }
 		
 		$scope.promenaStatusa = function(){
