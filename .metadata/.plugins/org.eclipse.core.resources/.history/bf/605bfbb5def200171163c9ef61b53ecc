@@ -1,0 +1,46 @@
+<div>
+    <div ng-controller="PregledBioskopaController">
+        <md-autocomplete
+                md-no-cache="true"
+                md-selected-item="bioskop"
+                md-items="b in bioskopi | filter : search | orderBy: ['naziv']"
+                md-search-text="searchText"
+                md-item-text="b.naziv"
+                placeholder="Unesite naziv bioskopa"
+                md-min-length="0"
+                md-menu-class="autocomplete-custom-template"
+                md-selected-item-change="prikaziBioskopePretraga(b)">
+            <md-item-template>
+                <span class="item-title">
+                    <span md-highlight-text="searchText" md-highlight-flags="^i">{{b.naziv}}</span>
+                </span>
+                
+            <md-not-found>            
+                Ne postoji bioskop sa unetim podacima. Proverite podatke.
+            </md-not-found>
+        </md-autocomplete>
+        
+        <md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm>
+    		<md-subheader class="md-no-sticky">Bioskop:</md-subheader>
+            <md-divider style="border-top: 1px solid black !important;"></md-divider>
+        	<md-list-item class="md-3-line" ng-repeat="b in bioskopiPretraga">
+        		<div layout="row" layout-align="start center" flex>
+				    <div class="md-list-item-text" layout="column" flex>
+				        <h3><b>Bioskop {{b.id}} </b></h3>
+				        <h4><b>Naziv:</b> {{b.naziv}} </h4>
+				        <p><b>Adresa:</b> {{b.adresaBioskopa.nazivUlice}} {{b.adresaBioskopa.broj}} {{b.adresaBioskopa.nazivNaseljenogMesta}} </p>
+				        <p><b>Tip korisnika:</b> {{k.tipKorisnika}}, <b>Status korisnika:</b> {{k.statusKorisnika}}</p>
+				        <p><b>Datum registracije:</b> {{k.datumRegistracije | date:'dd.MM.yyyy.'}}</p>
+				    </div>
+                </div>
+               <md-divider style="border-top: 1px solid black !important;"></md-divider>
+		    </md-list-item>
+		    
+		    <md-list-item class="md-1-line" ng-if="korisniciPretraga.length == 0">
+                <div class="md-list-item-text">
+                    <h3>Niste odabrali bioskop</h3>
+                </div>
+            </md-list-item>
+    	</md-list>
+    </div>
+</div>
