@@ -115,6 +115,7 @@ angular.module('rezervacijaApp.RezervacijaController',[])
                 clickOutsideToClose:false
             })
             .then(function(menjanaRezervacija){
+            	
             	if(menjanaRezervacija != null) {
             		for(i=0; i<$scope.korisnici.length; i++){
 						if(menjanaRezervacija.idKorisnika == $scope.korisnici[i].id){
@@ -122,6 +123,25 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 								$scope.korisnici[i].korisnickoIme;
 						}
 					}
+            		
+    				for(i=0; i<$scope.bioskopi.length;i++){
+    					if($scope.bioskopi[i].id == menjanaRezervacija.projekcija.idBioskopa){
+    						menjanaRezervacija.projekcija.nazivBioskopa = 
+    							$scope.bioskopi[i].naziv;
+    					}
+    				}
+    				
+    				BioskopService.getSaleZaBioskop(menjanaRezervacija.projekcija.idBioskopa)
+    				.success(function (data) {
+    					$scope.saleKodIzmene = data;
+        				for(i=0; i<$scope.saleKodIzmene.length;i++){
+        					if($scope.saleKodIzmene[i].id == menjanaRezervacija.projekcija.idSale){
+        						menjanaRezervacija.projekcija.oznakaSale = 
+        							$scope.saleKodIzmene[i].oznakaSale;
+        					}
+        				}
+    				});
+
 
 					for(i=0; i<$scope.listaRezervacija.length; i++){
             			if($scope.listaRezervacija[i].id == menjanaRezervacija.id){
@@ -198,6 +218,7 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 						break;
 					}
 				}
+								
 				$scope.menjanaRezervacija.projekcija.idSale = null;
 				$scope.salaObjekatIzmena = null;
 				$scope.menjanaRezervacija.brojSedista = null;
@@ -260,7 +281,8 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			                    );
 						} else {
 			        		RezervacijaService.izmeniRezervaciju($scope.menjanaRezervacija).success(function(data){
-			                	$mdDialog.hide($scope.menjanaRezervacija);
+			                	alert($scope.menjanaRezervacija.projekcija.nazivBioskopa);
+			        			$mdDialog.hide($scope.menjanaRezervacija);
 			                })
 						}
 					});
