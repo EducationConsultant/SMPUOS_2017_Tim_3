@@ -1,5 +1,5 @@
 angular.module('rezervacijaApp.RezervacijaController',[])
-    .controller('RezervacijaController', function ($scope, $location, $rootScope, $mdDialog, 
+    .controller('RezervacijaController', function ($scope, $location, $rootScope, $mdDialog, $window,
     		RezervacijaService, BioskopService, KorisnikService, ProjekcijaService, $localStorage, $mdToast) {
  
 		$scope.statusRezervacije="Aktivne";
@@ -502,6 +502,9 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			rezervacija.datumIstekaRezervacije = new Date("2018-12-12"); //???
 			
 			RezervacijaService.kreirajRezervaciju(rezervacija).success(function(data) {
+				$window.scrollTo(0, 0);
+				$scope.filter={};
+				$scope.brojSlobodnihMesta = null;
 				$mdToast.show(
                         $mdToast.simple()
                             .textContent('Uspešno kreirana rezervacija!')
