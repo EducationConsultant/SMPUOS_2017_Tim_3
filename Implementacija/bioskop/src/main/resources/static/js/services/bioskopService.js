@@ -19,6 +19,9 @@ angular.module('bioskopApp.BioskopService', [])
             return $http.put('/bioskop-service/bioskop/koordinate', adresa);
         }
 		
-
+		factory.ocjeniBioskop= function(bioskop){
+			return $http.put('/bioskop-service/bioskop/ocena/'+bioskop.id, bioskop);
+		}
+		
         return factory;
     });

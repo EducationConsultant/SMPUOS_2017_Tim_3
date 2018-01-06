@@ -140,6 +140,13 @@ angular.module('filmApp.FilmController',[])
 		FilmoviService.ocjeniFilm(film)
 			.success(
 				function(data){
+					$mdDialog.show (
+			                  $mdDialog.alert()
+			                     .parent(angular.element(document.querySelector('#dialogContainer')))
+			                     .clickOutsideToClose(true)
+			                     .title('Uspiješno ste ocjenili film.')
+			                     .ok('Ok!')
+			               ); 
 					$scope.prikaziIzmjenjenSadrzaj(data);
 				});
 	}
@@ -231,8 +238,7 @@ angular.module('filmApp.FilmController',[])
 	}
 	
 	$scope.pregledPoOcjeni=function(ocjenaMin,ocjenaMax){
-		//alert("Oc "+$scope.ocjenaMin + " "+ $scope.ocjenaMax);
-		alert("Ocjene "+ ocjenaMin +" "+ ocjenaMax);
+
 		FilmoviService.filmoviPoOcjeni(ocjenaMin, ocjenaMax)
 		.success(
 				function(data) {

@@ -22,10 +22,11 @@
 				</table>
 			</div>
 			<div>
- 				<md-button class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="izmeniBioskop(b, $event)">
+				<div ng-include="'html/panelZaOcjenjivanje.html'"></div>
+ 				<md-button ng-if="isAdmin" class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="izmeniBioskop(b, $event)">
 	                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
 	            </md-button> 
-				<md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="obrisiBioskop(b.id)">
+				<md-button ng-if="isAdmin" class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="obrisiBioskop(b.id)">
 				
 	                 <md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon>
 	            </md-button>

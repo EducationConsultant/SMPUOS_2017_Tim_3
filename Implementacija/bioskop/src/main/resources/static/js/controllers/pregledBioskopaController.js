@@ -36,4 +36,6 @@ angular.module('bioskopApp.PregledBioskopaController',[])
         		$scope.bioskopiPretraga = [];
         	}
         }
+        
+        
     });

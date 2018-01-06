@@ -78,4 +78,49 @@ angular.module('bioskopApp.BioskopController',[])
     	$mdDialog.cancel();
     };
 	
+  //ocjenjivanje
+    idRegUser=function(){
+		$scope.isRegular = $localStorage.tip == 'REGKORISNIK';
+	}
+	
+	
+	isAdmin=function(){
+		$scope.isAdmin= $localStorage.tip =='ADMIN';
+		var value=$scope.isAdmin;
+	};
+	
+	$scope.ocjeniBioskop=function(bioskop){
+		BioskopService.ocjeniBioskop(bioskop)
+			.success(function(data){
+			/*	$mdDialog.show (
+		                  $mdDialog.alert()
+		                     .parent(angular.element(document.querySelector('#dialogContainer')))
+		                     .clickOutsideToClose(true)
+		                     .title('Uspiješno ste ocjenili bioskop.')
+		                     .ok('Ok!')
+		               ); */
+				 $scope.prikaziIzmjenjenSadrzaj(data);
+				 
+			});
+	}
+	
+	
+	 $scope.prikaziIzmjenjenSadrzaj=function(data){
+		 var foundIndex=-1;
+		 angular.forEach($scope.listaBioskopa, function(value, index){
+			 
+			 if(value.id==data.id){
+				 foundIndex=index;
+			 }
+		 });
+		 
+		 if(foundIndex!=-1){
+			 $scope.listaBioskopa.splice(foundIndex,1);
+			 $scope.listaBioskopa.splice(foundIndex,0, data);
+			 $scope.$applay;
+			// $scope.$applay();
+		 }
+	 }
+	idRegUser();
+	isAdmin();
 });
