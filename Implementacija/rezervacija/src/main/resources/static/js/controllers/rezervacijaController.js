@@ -400,17 +400,7 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 		
 		$scope.dobaviBioskope();
 		
-		$scope.deaktivirajRezervaciju = function(id){
-			RezervacijaService.deaktivirajRezervaciju(id).success(function(data){
-				for(i=0;i<$scope.listaRezervacijaKorisnika.length;i++){
-					var r = $scope.listaRezervacijaKorisnika[i];
-					if(r.id==id){
-						r.tip='OTKAZANA';
-						break;
-					}
-				}
-			})
-		}
+
 		
 		$scope.pronadjiSlobodnaMesta = function(){
 			ProjekcijaService.getBrojZauzetihMestaPoRedu($scope.filter.projekcija, $scope.filter.brojRedaSedista)
@@ -470,8 +460,22 @@ angular.module('rezervacijaApp.RezervacijaController',[])
                     );
 				return;
 			}
-			
-			
+			if($scope.filter.zeljeniBrojSedista==null ||
+				$scope.filter.bioskop==null ||
+				$scope.filter.sala == null ||
+				$scope.filter.datum == null ||
+				$scope.filter.projekcija == null ||
+				$scope.filter.brojRedaSedista == null ) 
+			{
+				$mdToast.show(
+                        $mdToast.simple()
+                            .textContent('Molimo Vas da popunite sva polja!')
+                            .hideDelay(3000)
+                            .position('top center')
+                            .theme('warning-toast')
+                    );
+				return;
+			}
 			var rezervacija = {};
 			rezervacija.idKorisnika = $localStorage.logged.id;
 			rezervacija.datumRezervacije = new Date();
@@ -502,9 +506,24 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			});
 		}
 		
+
+		$scope.deaktivirajRezervaciju = function(id){
+			
+			RezervacijaService.deaktivirajRezervaciju(id).success(function(data){
+				for(i=0;i<$scope.listaRezervacijaKorisnika.length;i++){
+					var r = $scope.listaRezervacijaKorisnika[i];
+					if(r.id == id){
+						r.tip = 'OTKAZANA';
+						break;
+					}
+				}
+			})
+		}
+		
 		$scope.obrisiRezervaciju = function(id) {
 			RezervacijaService.obrisiRezervaciju(id).success(function(data){
 				$scope.prikaziRezervacije();
 			})
 		}
+		
 });

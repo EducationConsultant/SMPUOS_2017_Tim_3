@@ -54,7 +54,8 @@
             	<label>Broj reda sedišta: </label>
             	<input ng-model="filter.brojRedaSedista" type="number" step="1" 
             			min=1 max={{ogranicenjeBrojSedista}}
-            			ng-readonly="filter.salaObjekat==null" ng-change="brojSlobodnihMesta=null">
+            			ng-readonly="filter.salaObjekat==null" ng-change="brojSlobodnihMesta=null;
+            			filter.zeljeniBrojSedista=null">
             </md-input-container>
             <md-button ng-click="pronadjiSlobodnaMesta()" class="md-raised md-primary"
             ng-disabled="filter.projekcija==null">Pronađi slobodna mesta</md-button>
@@ -79,7 +80,4 @@
  		
 	 </div>
 	 
-	 
-
-
  </div>
