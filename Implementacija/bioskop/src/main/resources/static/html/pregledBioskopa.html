@@ -1,5 +1,9 @@
 <div ng-controller="BioskopController">
 		
+	<div align="right">
+      <md-button class="md-raised">Dodaj bioskop</md-button>
+    </div>
+    		
 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
 		<md-list-item class="md-3-line" ng-repeat="b in listaBioskopa"> 
@@ -15,6 +19,7 @@
 	                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
 	            </md-button> 
 				<md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="obrisiBioskop(b.id)">
+				
 	                 <md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon>
 	            </md-button>
 			</div>
