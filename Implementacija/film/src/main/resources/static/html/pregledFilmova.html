@@ -6,7 +6,7 @@
 <br>
  	
  	<div ng-if="listaFilmova == null || listaFilmova.length == 0">
- 		Nisu pronađeni filmovi po zadatom kriterijumu.
+ 		Nisu pronaÄ‘eni filmovi po zadatom kriterijumu.
  	</div>
  	<div ng-if="listaFilmova != null || listaFilmova.length > 0">
  	<md-list style="border: 1px solid black !important;" class="md-block"   flex-gt-sm> 
@@ -31,10 +31,11 @@
 							<h4>Glumci: <span ng-repeat="glumac in film.glumci" >
 								{{glumac.ime}} {{glumac.prezime}} ,
 							</span> ... </h4>
-						 	<!-- <div ng-include="html/panelZaOcjenjivanje.html"></div>  -->
-							</div>  
-							<div ng-include="html/panelZaOcjenjivanje.html">
-							</div>
+
+						</div> 
+						 
+						<div ng-include="'html/panelZaOcjenjivanje.html'">
+						</div>
 						
 						<div style="float: right; width: 30%; text-align: center; vertical-align: middle" style="margin: 55px;" >
 							<md-button class="md-fab md-mini md-primary md-raised md-hue-2" ng-if="isAdmin" ng-click="izmjeniFilm(film)"><md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon></md-button>

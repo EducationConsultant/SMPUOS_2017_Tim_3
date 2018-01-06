@@ -7,23 +7,20 @@
 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
 		<md-list-item class="md-3-line" ng-repeat="b in listaBioskopa"> 
-		<md-list-item class="md-3-line" ng-repeat="s in b.sale">
+			<div layout="row" layout-align="start center" flex>
 			<div class="md-list-item-text" layout="column">
 				<h3><b>Bioskop {{b.id}} </b></h3>
 				<h4><b>Naziv:</b> {{b.naziv}} </h4>
 				<h4><b>Adresa:</b> {{b.adresaBioskopa.nazivUlice}} {{b.adresaBioskopa.broj}} {{b.adresaBioskopa.nazivNaseljenogMesta}} </h4>				
 				<h4><b>Ocena:</b> {{b.ocena}} </h4>	
-			 <br />
-			<h3><b>Sale koje poseduje bioskop {{b.naziv}}:</b></h3>
-				<h4><b>Sala {{s.id}} </b></h4>
-				<h4><b>Oznaka sale:</b> {{s.oznakaSale}} </h4>
-				<h4><b>Kapacitet:</b> {{s.kapacitet}} </h4>				
-				<h4><b>Broj sedišta- redovi:</b> {{s.brojSedistaRedovi}} </h4>
-				<h4><b>Broj sedišta- kolone:</b> {{s.brojSedistaKolone}} </h4>
-				<h4><b>Tip:</b> {{s.tip}} </h4>	
-									
-			</div>		
-			
+			 	<br />
+				<h3><b>Sale koje poseduje bioskop {{b.naziv}}:</b></h3>
+				
+				<table>
+					<tr ng-repeat="s in b.sale"><td><h4><b>Oznaka sale:</b> {{s.oznakaSale}} <b>Tip:</b> {{s.tip}} <b>Kapacitet:</b> {{s.kapacitet}} <b>Broj sedišta- redovi:</b> {{s.brojSedistaRedovi}} <b>Broj sedišta- kolone:</b> {{s.brojSedistaKolone}} </h4>									
+					</td></tr>
+				</table>
+			</div>
 			<div>
  				<md-button class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="izmeniBioskop(b, $event)">
 	                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
@@ -32,11 +29,9 @@
 				
 	                 <md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon>
 	            </md-button>
+	        </div>
 			</div>
-			
 		<md-divider style="border-top: 1px solid black !important;"></md-divider>
-		</md-list-item>
 		</md-list-item> 
 	</md-list>
-
 </div>
