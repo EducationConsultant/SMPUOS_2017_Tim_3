@@ -1,4 +1,5 @@
 angular.module('bioskopApp.controllers',[
     'bioskopApp.NavigationController',
-    'bioskopApp.BioskopController'  
-]);
+    'bioskopApp.BioskopController',
+    'bioskopApp.PregledBioskopaController'
+]); 
