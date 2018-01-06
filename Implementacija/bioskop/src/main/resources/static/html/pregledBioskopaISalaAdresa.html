@@ -14,36 +14,44 @@
 	                <label>Poluprečnik</label>
 	                <input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="adresa.poluprecnik" required/>
 	            </md-input-container>
-	            <md-button ng-click="getKorisniciPoKoordinatama()" class="md-raised md-primary">Pretraži</md-button>
+	            <md-button ng-click="getBioskopiPoKoordinatama()" class="md-raised md-primary">Pretraži</md-button>
 	        </div>
         </form>
     
     	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm>
-    		<md-subheader class="md-no-sticky">Korisnici:</md-subheader>
+    		<md-subheader class="md-no-sticky">Bioskopi i sale koje poseduju:</md-subheader>
             <md-divider style="border-top: 1px solid black !important;"></md-divider>
-        	<md-list-item class="md-3-line" ng-repeat="k in korisnici | orderBy: ['prezime', 'ime']">
+        	<md-list-item class="md-3-line" ng-repeat="b in bioskopi | orderBy: ['naziv']">
         		<div layout="row" layout-align="start center" flex>
-				    <div class="md-list-item-text" layout="column" flex>
-				        <h3><b>Korisnik {{k.id}}</b></h3>
-				        <h4><b>Prezime i ime:</b> {{k.prezime}} {{k.ime}}, <b>Korisničko ime:</b> {{k.korisnickoIme}}</h4>
-				        <p><b>Pol:</b> {{k.pol}}, <b>Datum rođenja:</b> {{k.datumRodjenja | date:'dd.MM.yyyy.'}}</p>
-				        <p><b>Adresa stanovanja:</b> {{k.adresaStanovanja.nazivUlice}} {{k.adresaStanovanja.broj}} {{k.adresaStanovanja.nazivNaseljenogMesta}}</p>
-				        <p><b>Tip korisnika:</b> {{k.tipKorisnika}}, <b>Status korisnika:</b> {{k.statusKorisnika}}, <b>Datum registracije:</b> {{k.datumRegistracije | date:'dd.MM.yyyy.'}}</p>
-				    </div>
-                </div>
-               <md-divider style="border-top: 1px solid black !important;"></md-divider>
+				<div class="md-list-item-text" layout="column">
+					<h3><b>Bioskop {{b.id}} </b></h3>
+					<h4><b>Naziv:</b> {{b.naziv}} </h4>
+					<h4><b>Adresa:</b> {{b.adresaBioskopa.nazivUlice}} {{b.adresaBioskopa.broj}} {{b.adresaBioskopa.nazivNaseljenogMesta}} </h4>				
+					<h4><b>Prosečna ocena:</b> {{b.prosecnaOcena | number: 2}} </h4>	
+				 	<br />
+					<h3><b>Sale koje poseduje bioskop {{b.naziv}}:</b></h3>
+					
+					<table>
+						<tr ng-repeat="s in b.sale"><td><h4><b>Oznaka sale:</b> {{s.oznakaSale}} <b>Tip:</b> {{s.tip}} <b>Kapacitet:</b> {{s.kapacitet}} <b>Broj sedišta- redovi:</b> {{s.brojSedistaRedovi}} <b>Broj sedišta- kolone:</b> {{s.brojSedistaKolone}} </h4>									
+						</td></tr>
+					</table>
+				</div>
+				</div>
+				<md-divider style="border-top: 1px solid black !important;"></md-divider>
 		    </md-list-item>
+
 		    
-            <md-list-item class="md-1-line" ng-if="korisnici.length == 0 && prikaziKoord">
+            <md-list-item class="md-1-line" ng-if="bioskopi.length == 0 && prikaziKoord">
                 <div class="md-list-item-text">
-                    <h3>Nema korisnika u zadatom poluprečniku</h3>
+                    <h3>Nema bioskopa u zadatom poluprečniku</h3>
                 </div>
             </md-list-item>
-            <md-list-item class="md-1-line" ng-if="korisnici.length == 0 && !prikaziKoord">
+            
+            <md-list-item class="md-1-line" ng-if="bioskopi.length == 0 && !prikaziKoord">
                 <div class="md-list-item-text">
                     <h3>Unesite koordinate i poluprečnik</h3>
                 </div>
             </md-list-item>
-    	</md-list>
+       </md-list>
     </div>
 </div>

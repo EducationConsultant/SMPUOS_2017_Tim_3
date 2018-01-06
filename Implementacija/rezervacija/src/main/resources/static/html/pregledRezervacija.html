@@ -1,7 +1,10 @@
 <div ng-controller="RezervacijaController">
 		
 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
-		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		
+		<md-divider style="border-top: 1px solid black !important;">
+		</md-divider>
+		
 		<md-list-item class="md-3-line" ng-repeat="rez in listaRezervacija"> 
 			<div class="md-list-item-text" layout="column">
 				<h3><b>Rezervacija {{rez.id}}</b></h3>
@@ -19,9 +22,10 @@
 			<div>
  				<md-button class="md-fab md-mini md-primary md-raised md-hue-2" 
  					ng-click="izmeniRezervaciju(rez, $event)">
-	                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
+	                 	<md-icon md-svg-icon="icons/ic_update_white_36px.svg">
+	                 	</md-icon>
 	            </md-button> 
-	            </a>
+	            
 				<md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-click="obrisiRezervaciju(rez.id)">
 	                 <md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon>
 	            </md-button>

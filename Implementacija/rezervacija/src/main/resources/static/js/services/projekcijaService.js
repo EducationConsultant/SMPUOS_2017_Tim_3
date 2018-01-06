@@ -8,8 +8,7 @@ angular.module('rezervacijaApp.ProjekcijaService', [])
 		}
 		
 		factory.getBrojZauzetihMestaPoReduIzmena = function(rezervacijaId, projekcijaId, red) {
-			return $http.get('/rezervacija-service/projekcija/zauzetaIzmena/'
-					+rezervacijaId+'/'+projekcijaId+'/'+red);	
+			return $http.get('/rezervacija-service/projekcija/zauzetaIzmena/'+rezervacijaId+'/'+projekcijaId+'/'+red);	
 		}
 	
 		return factory;

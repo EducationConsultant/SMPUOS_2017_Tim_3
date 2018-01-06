@@ -22,6 +22,10 @@ app.config(['$routeProvider','$httpProvider', function ($routeProvider, $httpPro
     		templateUrl : 'html/pregledSala.html'
     	})
     	
+    	.when('/rangiranjeBioskopa',{
+    		templateUrl : 'html/rangiranjeBioskopa.html'
+    	});
+    	
    
         
         

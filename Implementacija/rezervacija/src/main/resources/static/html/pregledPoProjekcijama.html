@@ -29,7 +29,8 @@
 	 <div class='md-inline-form'>
  		<md-content layout-padding>
  			<md-input-container class="md-block" flex-gt-sm>
- 				<md-datepicker ng-model="filter.datum" md-placeholder="Datum" ng-change="odaberiDatum()"></md-datepicker>
+ 				<md-datepicker ng-model="filter.datum" md-placeholder="Datum"
+ 				 ng-change="odaberiDatum()"></md-datepicker>
  			</md-input-container>
  		</md-content>
 	 </div>
@@ -48,7 +49,8 @@
 	 </div>
 
 	 <div>
-     	<md-radio-group ng-model="statusFilter" layout="row" style="padding: 1%" layout-align="center center" ng-change="promenaStatusaFilter()">
+     	<md-radio-group ng-model="statusFilter" layout="row" style="padding: 1%" 
+     	layout-align="center center" ng-change="promenaStatusaFilter()">
         	<md-radio-button value="Aktivne" class="md-primary" >Aktivne</md-radio-button>
         	<md-radio-button value="Otkazane" class="md-primary" >Otkazane</md-radio-button>
     	</md-radio-group>
@@ -56,11 +58,17 @@
 
 
 	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
-		<p><b>
-			<p ng-if="statusFilter=='Aktivne'"> Ukupno aktivnih:</p>
-			<p ng-if="statusFilter=='Otkazane'"> Ukupno otkazanih:</p>
-			</b>{{filterRezervacija.length}}</p>
-		<md-divider style="border-top: 1px solid black !important"></md-divider>
+		<p>
+			<b>
+				<p ng-if="statusFilter=='Aktivne'"> Ukupno aktivnih:</p>
+				<p ng-if="statusFilter=='Otkazane'"> Ukupno otkazanih:</p>
+			</b>
+			{{filterRezervacija.length}}
+		</p>
+			
+		<md-divider style="border-top: 1px solid black !important">
+		</md-divider>
+		
 		<md-list-item class="md-3-line" ng-repeat="rez in filterRezervacija"> 
 			<div class="md-list-item-text" layout="column">
 				<h3><b>Rezervacija {{rez.id}}</b></h3>
@@ -69,7 +77,9 @@
 				<h4><b>Film:</b> {{rez.projekcija.nazivFilma}}</h4>
 				<h4><b>Datum projekcije:</b> {{rez.projekcija.datumProjekcije}}</h4>
 			</div>
-		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		
+			<md-divider style="border-top: 1px solid black !important;">
+			</md-divider>
 		</md-list-item> 
 	</md-list>
 
