@@ -46,12 +46,12 @@ insert into kategorija (kategorija_id,naziv) values (13,'romansa');
 insert into kategorija (kategorija_id,naziv) values (14,'triler');
 insert into kategorija (kategorija_id,naziv) values (15,'vestern');
 
+insert into film (film_id,brojac,datum_premijere,naziv,ocena,opis,prosecna_ocena,suma_ocena,trajanje,jezik_id,kategorija_id,reditelj_id) 
+values (1,0,'2008-2-03','Film1',3,'Film opis',3,3,30,1,1,1);
 insert into film (film_id, brojac, datum_premijere, naziv, ocena, opis, prosecna_ocena, suma_ocena, trajanje, jezik_id, kategorija_id, reditelj_id ) 
-values (1, 0, '2008-2-03', 'Film1', 3,'Film opis', '3', '3', 30,1, 1, 1);
+values (2, 0, '2008-2-03', 'Film2', 3,'Film2 opis', 3, 3, 30,1, 1, 1);
 insert into film (film_id, brojac, datum_premijere, naziv, ocena, opis, prosecna_ocena, suma_ocena, trajanje, jezik_id, kategorija_id, reditelj_id ) 
-values (2, 0, '2008-2-03', 'Film2', 3,'Film2 opis', '3', '3', 30,1, 1, 1);
-insert into film (film_id, brojac, datum_premijere, naziv, ocena, opis, prosecna_ocena, suma_ocena, trajanje, jezik_id, kategorija_id, reditelj_id ) 
-values (3, 0, '2008-2-03', 'Film3', 3,'Film opis', '3', '3', 30,1, 1, 1);
+values (3, 0, '2008-2-03', 'Film3', 3,'Film opis', 3, 3, 30,1, 1, 1);
 
 insert into film_glumci(film_id, glumac_id) values (1,1);
 insert into film_glumci(film_id, glumac_id) values (1,2);

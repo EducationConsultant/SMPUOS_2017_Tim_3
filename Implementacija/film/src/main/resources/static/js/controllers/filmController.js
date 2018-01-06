@@ -108,6 +108,7 @@ angular.module('filmApp.FilmController',[])
 			function(data) {
 				var filmId=data.id;
 				$scope.noviFilm={};
+				$scope.izabraniGlumci=[];
 				$mdDialog.show (
 		                  $mdDialog.alert()
 		                     .parent(angular.element(document.querySelector('#dialogContainer')))
@@ -119,20 +120,22 @@ angular.module('filmApp.FilmController',[])
 	}
 	
 	$scope.potvrdaIzmjene=function(film){
-		alert("Film datum premijere "+film.datumPremijere );
+		
 		film.glumci=$scope.izabraniGlumci;
 		FilmoviService.izmjenaFilma(film)
 		.success(
 			function(data) {
-				alert("Uspijesna izmjena filma");
+			
 				var filmId=data.id;
 				$scope.noviFilm={};
-				$scope.izmjeniDialog.close();
+				
+				$mdDialog.cancel($scope.izmjeniDialog);
+				$mdDialog.hide();
 		});
 	}
 	
 	$scope.ocjeniFilm=function(film){
-		alert("Ocjena filma "+ film.ocena);
+		
 		FilmoviService.ocjeniFilm(film)
 			.success(
 				function(data){
@@ -184,11 +187,11 @@ angular.module('filmApp.FilmController',[])
 		$scope.init();
 		$scope.izmjenaFilm.datumPremijere=new Date(film.datumPremijere);
 		$scope.izabraniGlumci = $scope.izmjenaFilm.glumci;
-		$scope.izmjeniDialog=$mdDialog.show({
+		$scope.izmjeniDialog = $mdDialog.show({
 		    scope               : $scope,
 		    preserveScope       : true,
 		    templateUrl         : 'html/izmjenaFilma.html',
-		    
+		    scope: angular.extend($scope.$new(), { close: function() {$mdDialog.cancel();} }),
 		    clickOutsideToClose : true,
 		    fullscreen          : true,
 		  
@@ -264,7 +267,7 @@ angular.module('filmApp.FilmController',[])
 	
 	
 	isAdmin();
-	//$scope.init();
+	
 	
 		
 	$scope.slececaStrana=function(){
