@@ -1,0 +1,32 @@
+<div ng-controller="BioskopController">
+		
+	<div align="right">
+      <md-button class="md-raised">Dodaj bioskop</md-button>
+    </div>
+    		
+	<md-list style="border: 1px solid black !important;" class="md-block" flex-gt-sm> 
+		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		<md-list-item class="md-3-line" ng-repeat="b in listaBioskopa"> 
+			<div class="md-list-item-text" layout="column">
+				<h3><b>Bioskop {{b.id}} </b></h3>
+				<h4><b>Naziv:</b> {{b.naziv}} </h4>
+				<h4><b>Adresa:</b> {{b.adresaBioskopa.nazivUlice}} {{b.adresaBioskopa.broj}} {{b.adresaBioskopa.nazivNaseljenogMesta}} </h4>				
+				<h4><b>Ocena:</b> {{b.ocena}} </h4>
+				
+			</div>
+			<div>
+ 				<md-button class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="izmeniBioskop(b, $event)">
+	                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
+	            </md-button> 
+				<md-button class="md-fab md-mini md-warn md-raised md-hue-2" ng-if="isAdmin" ng-click="obrisiBioskop(b.id)">
+				
+				
+	                 <md-icon md-svg-icon="icons/ic_delete_forever_white_36px.svg"></md-icon>
+	            </md-button>
+			</div>
+			
+		<md-divider style="border-top: 1px solid black !important;"></md-divider>
+		</md-list-item> 
+	</md-list>
+
+</div>

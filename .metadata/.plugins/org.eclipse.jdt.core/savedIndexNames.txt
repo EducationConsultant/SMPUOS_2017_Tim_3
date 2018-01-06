@@ -190,7 +190,6 @@ INDEX VERSION 1.130+C:\Users\Iva\Documents\GitHub\SMPUOS_2017_Tim_3\.metadata\.p
 2292899129.index
 3883587399.index
 49757364.index
-2562831593.index
 1408211338.index
 881363576.index
 2623858116.index
