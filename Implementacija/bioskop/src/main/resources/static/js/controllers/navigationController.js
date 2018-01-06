@@ -3,14 +3,14 @@ angular.module('bioskopApp.NavigationController', []).controller(
 		function($scope, $location, $rootScope, $mdDialog, BioskopService,
 				$localStorage, $mdToast) {
 
-			if ($localStorage.curNav == null)
+			//if ($localStorage.curNav == null)
 				$scope.currentNavItem = 'Pocetna';
-			else
-				$scope.currentNavItem = $localStorage.curNav;
+			//else
+				//$scope.currentNavItem = $localStorage.curNav;
 
-			$scope.saveNav = function(data) {
+			/*$scope.saveNav = function(data) {
 				$localStorage.curNav = data;
-			}		
+			}*/		
 			
-			
+			$scope.currentNavItem1 = 'Bioskopi';
 		});

@@ -3,18 +3,18 @@
     	<form name="koordinateForm">
 	    	<div layout-gt-sm="row" layout-align="center center">
 	            <md-input-container class="md-block" flex-gt-sm>
-	                <label>Geografska duÅ¾ina</label>
+	                <label>Geografska dužina</label>
 	                <input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="adresa.geoDuzinaCentar" required/>
 	            </md-input-container>
 	            <md-input-container class="md-block" flex-gt-sm>
-	                <label>Geografska Å¡irina</label>
+	                <label>Geografska širina</label>
 	                <input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="adresa.geoSirinaCentar" required/>
 	            </md-input-container>
 	            <md-input-container class="md-block" flex-gt-sm>
-	                <label>PolupreÄ�nik</label>
+	                <label>Poluprečnik</label>
 	                <input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" ng-model="adresa.poluprecnik" required/>
 	            </md-input-container>
-	            <md-button ng-click="getKorisniciPoKoordinatama()" class="md-raised md-primary">PretraÅ¾i</md-button>
+	            <md-button ng-click="getKorisniciPoKoordinatama()" class="md-raised md-primary">Pretraži</md-button>
 	        </div>
         </form>
     
@@ -25,8 +25,8 @@
         		<div layout="row" layout-align="start center" flex>
 				    <div class="md-list-item-text" layout="column" flex>
 				        <h3><b>Korisnik {{k.id}}</b></h3>
-				        <h4><b>Prezime i ime:</b> {{k.prezime}} {{k.ime}}, <b>KorisniÄ�ko ime:</b> {{k.korisnickoIme}}</h4>
-				        <p><b>Pol:</b> {{k.pol}}, <b>Datum roÄ‘enja:</b> {{k.datumRodjenja | date:'dd.MM.yyyy.'}}</p>
+				        <h4><b>Prezime i ime:</b> {{k.prezime}} {{k.ime}}, <b>Korisničko ime:</b> {{k.korisnickoIme}}</h4>
+				        <p><b>Pol:</b> {{k.pol}}, <b>Datum rođenja:</b> {{k.datumRodjenja | date:'dd.MM.yyyy.'}}</p>
 				        <p><b>Adresa stanovanja:</b> {{k.adresaStanovanja.nazivUlice}} {{k.adresaStanovanja.broj}} {{k.adresaStanovanja.nazivNaseljenogMesta}}</p>
 				        <p><b>Tip korisnika:</b> {{k.tipKorisnika}}, <b>Status korisnika:</b> {{k.statusKorisnika}}, <b>Datum registracije:</b> {{k.datumRegistracije | date:'dd.MM.yyyy.'}}</p>
 				    </div>
@@ -36,12 +36,12 @@
 		    
             <md-list-item class="md-1-line" ng-if="korisnici.length == 0 && prikaziKoord">
                 <div class="md-list-item-text">
-                    <h3>Nema korisnika u zadatom polupreÄ�niku</h3>
+                    <h3>Nema korisnika u zadatom poluprečniku</h3>
                 </div>
             </md-list-item>
             <md-list-item class="md-1-line" ng-if="korisnici.length == 0 && !prikaziKoord">
                 <div class="md-list-item-text">
-                    <h3>Unesite koordinate i polupreÄ�nik</h3>
+                    <h3>Unesite koordinate i poluprečnik</h3>
                 </div>
             </md-list-item>
     	</md-list>
