@@ -12,5 +12,6 @@ public interface AdresaRepository extends JpaRepository<Adresa, Long> {
 
 	public List<Adresa> findByGeoDuzinaAndGeoSirina(float geoDuzina, float geoSirina);
 	public Adresa findByNazivNaseljenogMestaAndNazivUliceAndBroj(String nazivNaseljenogMesta, String nazivUlice, int broj);
-	
+	public Adresa findByNazivNaseljenogMestaAndNazivUliceAndBrojAndGeoDuzinaAndGeoSirina(String nazivNaseljenogMesta, 
+			String nazivUlice, int broj, float geoDuzina, float geoSirina);
 }

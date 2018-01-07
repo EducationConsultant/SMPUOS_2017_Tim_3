@@ -65,11 +65,33 @@ public class BioskopServiceJpa implements BioskopService {
 
 	@Override
 	public Bioskop update(Bioskop bioskop, Long id) {
-		Bioskop bioskopZaIzmenu = repository.findOne(id);
-		bioskopZaIzmenu.setAdresaBioskopa(bioskop.getAdresaBioskopa());
-		bioskopZaIzmenu.setNaziv(bioskop.getNaziv());
-		bioskopZaIzmenu.setSale(bioskop.getSale());
-		Bioskop sacuvan = repository.save(bioskopZaIzmenu);
+		Bioskop stariBioskop = repository.findOne(id);
+		Adresa staraAdresa = stariBioskop.getAdresaBioskopa();
+		Adresa novaAdresa = adresaRepository.findByNazivNaseljenogMestaAndNazivUliceAndBrojAndGeoDuzinaAndGeoSirina
+				(bioskop.getAdresaBioskopa().getNazivNaseljenogMesta(), 
+				 bioskop.getAdresaBioskopa().getNazivUlice(), 
+				 bioskop.getAdresaBioskopa().getBroj(),
+				 bioskop.getAdresaBioskopa().getGeoDuzina(),
+				 bioskop.getAdresaBioskopa().getGeoSirina());
+		
+		if(novaAdresa != null){
+			bioskop.setAdresaBioskopa(novaAdresa);
+		}else{
+			bioskop.getAdresaBioskopa().setId(null);
+			novaAdresa = adresaRepository.save(bioskop.getAdresaBioskopa());
+			bioskop.setAdresaBioskopa(novaAdresa);
+			novaAdresa.getBioskopi().add(bioskop);
+			staraAdresa.getBioskopi().remove(stariBioskop);
+			adresaRepository.save(novaAdresa);
+			adresaRepository.save(staraAdresa);
+			
+			System.out.println(staraAdresa.getBioskopi().size());
+			System.out.println(novaAdresa.getBioskopi().size());
+		}
+		stariBioskop.setAdresaBioskopa(bioskop.getAdresaBioskopa());
+		stariBioskop.setNaziv(bioskop.getNaziv());
+		stariBioskop.setSale(bioskop.getSale());
+		Bioskop sacuvan = repository.save(stariBioskop);
 		return sacuvan;
 	}
 	

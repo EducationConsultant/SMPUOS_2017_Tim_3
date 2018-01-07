@@ -31,4 +31,5 @@ public class AdresaServiceJpa implements AdresaService {
 	public Adresa findByNazivNaseljenogMestaAndNazivUliceAndBroj(String nazivNaseljenogMesta, String nazivUlice, int broj) {
 		return adresaRepository.findByNazivNaseljenogMestaAndNazivUliceAndBroj(nazivNaseljenogMesta, nazivUlice, broj);
 	}
+
 }

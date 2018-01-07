@@ -1,7 +1,7 @@
 <md-dialog flex="60" >
     <md-dialog-content layout-padding  >
         <div ng-controller="BioskopController">
-            <form name="IzmenaSaleForm">
+            <form name="IzmenaBioskopaForm">
                 <h3 layout-gt-md="" layout-align="center center" style="color: blue">
                 Izmena bioskopa</h3>
 				
@@ -12,7 +12,39 @@
 			             <label>Naziv bioskopa: </label>
 			           	 <input ng-model="menjanBioskop.naziv" type="text">
 			           </md-input-container>
-	 				
+	 					
+	 					 <md-input-container class="md-block" flex-gt-sm>
+			             <label>Naseljeno mesto: </label>
+			           	 <input ng-model="menjanBioskop.adresaBioskopa.nazivNaseljenogMesta" type="text"
+			           	 	ng-change="promeniAdresu()" required>
+			           </md-input-container>
+			           
+			           <div layout="row">
+				            <md-input-container class="md-block" flex-gt-sm>
+				             <label>Ulica: </label>
+				           	 <input ng-model="menjanBioskop.adresaBioskopa.nazivUlice" type="text" 
+				           		 ng-change="promeniAdresu()" required>
+				           </md-input-container>
+				           
+				           <md-input-container class="md-block" flex-gt-sm>
+	                        <label>Broj</label>
+	                        <input type="number" min="0" ng-model="menjanBioskop.adresaBioskopa.broj" 
+	                        	ng-change="promeniAdresu()" required/>
+	                   	   </md-input-container> 
+                     </div>
+	 					
+	 				 <div layout-gt-sm="row">
+	                    <md-input-container class="md-block" flex-gt-sm>
+	                        <label>Geografska dužina</label>
+	                        <input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" 
+	                        ng-model="menjanBioskop.adresaBioskopa.geoDuzina" required/>
+	                    </md-input-container>
+	                    <md-input-container class="md-block" flex-gt-sm>
+	                        <label>Geografska širina</label>
+	                        <input type="number" min="0" step="0.01" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" 
+	                        ng-model="menjanBioskop.adresaBioskopa.geoSirina" required/>
+	                    </md-input-container>
+               		 </div>
 	 					
 	 					
 				 	</md-content>
