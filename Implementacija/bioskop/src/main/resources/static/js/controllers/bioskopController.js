@@ -204,8 +204,8 @@ angular.module('bioskopApp.BioskopController',[])
             targetEvent: e,
             clickOutsideToClose:false
         })
-        .then(function(novaSala){
-        	
+        .then(function(bioskopIzmenjen){
+        	bioskop=bioskopIzmenjen;
         });
 	}
 	
@@ -214,7 +214,10 @@ angular.module('bioskopApp.BioskopController',[])
 		
 		
 		$scope.dodajSalu = function(){
-			
+			SalaService.dodajSalu(bioskop.id, $scope.novaSala).success(function(data){
+				bioskop.sale.push(data);
+				$mdDialog.hide(bioskop);
+			});
 		}
 		
         $scope.cancel = function() {

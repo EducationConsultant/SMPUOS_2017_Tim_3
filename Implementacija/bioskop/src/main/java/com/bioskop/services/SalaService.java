@@ -8,7 +8,7 @@ import com.bioskop.models.Sala;
 
 public interface SalaService {
 
-	public Bioskop saveSala(Long id, Sala sala);
+	public Sala saveSala(Long id, Sala sala);
 
 	public Bioskop deleteSala(Long idBioskopa, Long idSale);
 

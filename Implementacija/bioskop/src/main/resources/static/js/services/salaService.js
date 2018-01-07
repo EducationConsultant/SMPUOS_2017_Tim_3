@@ -3,6 +3,10 @@ angular.module('bioskopApp.SalaService', [])
        
     	var factory = {};
         
+    	factory.dodajSalu = function(bioskopId, sala){
+			return $http.post('/bioskop-service/sala/'+bioskopId, sala);	
+		}
+    	
     	factory.obrisiSalu = function(bioskopId, salaId){
 			return $http.delete('/bioskop-service/sala/'+bioskopId+'/'+salaId);	
 		}
