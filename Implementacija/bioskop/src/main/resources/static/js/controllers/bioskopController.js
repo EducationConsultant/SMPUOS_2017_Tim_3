@@ -63,16 +63,7 @@ angular.module('bioskopApp.BioskopController',[])
 	}
 	
     function IzmenaController($scope, $mdDialog, data) {
-    	$scope.menjanBioskop = data;
-        $scope.prihvatiIzmenu = function(){
-            BisokopService.izmeniBioskop($scope.menjanBioskop).success(function(data){
-            	$mdDialog.cancel();
-            })
-        };
 
-        $scope.cancel = function() {
-            $mdDialog.cancel();
-        };
     }
     
     

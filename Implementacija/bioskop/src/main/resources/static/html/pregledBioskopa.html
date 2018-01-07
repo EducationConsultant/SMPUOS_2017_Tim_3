@@ -48,10 +48,10 @@
 				
 				<div style="position:absolute; top:0; right:0;">
 					<div ng-include="'html/panelZaOcjenjivanje.html'"></div>
-					<md-button ng-if="isAdmin" class="md-fab md-mini md-primary md-raised md-hue-2" 
-					ng-click="dodajSalu(b)" aria-label="Dod.">
 					
-		                 
+					<md-button ng-if="isAdmin" class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="dodajSalu(b)" 
+						aria-label="Dod." style="background-color:green; !important;">
+						<md-icon md-svg-icon="icons/ic_add_white_36px.svg"></md-icon>
 		            </md-button>
 	 				<md-button ng-if="isAdmin" class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="izmeniBioskop(b, $event)">
 		                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
