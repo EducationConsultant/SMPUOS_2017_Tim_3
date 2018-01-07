@@ -15,7 +15,7 @@
 					<h4><b>Prosečna ocena:</b> {{b.prosecnaOcena | number: 2}} </h4>	
 				 	<br />
 				 	
-				 	<div ng-if="b.sale.length>1">
+				 	<div ng-if="b.sale.length>0">
 						<h3><b>Sale koje poseduje bioskop {{b.naziv}}:</b></h3>
 					</div>
 					
@@ -48,6 +48,10 @@
 				
 				<div style="position:absolute; top:0; right:0;">
 					<div ng-include="'html/panelZaOcjenjivanje.html'"></div>
+					<md-button ng-if="isAdmin" class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="dodajSalu(b)">
+					
+		                 
+		            </md-button>
 	 				<md-button ng-if="isAdmin" class="md-fab md-mini md-primary md-raised md-hue-2" ng-click="izmeniBioskop(b, $event)">
 		                 <md-icon md-svg-icon="icons/ic_update_white_36px.svg"></md-icon>
 		            </md-button> 

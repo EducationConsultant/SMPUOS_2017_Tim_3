@@ -183,9 +183,38 @@ angular.module('bioskopApp.BioskopController',[])
 			SalaService.izmeniSalu($scope.bioskopId, $scope.menjanaSala)
 				.success(function(data){
 					$scope.menjanaSala.kapacitet = 
-						$scope.menjanaSala.brojSedistaRedovi * $scope.menjanaSala.brojSedistaKolone;
+						$scope.menjanaSala.brojSedistaRedovi 
+							* $scope.menjanaSala.brojSedistaKolone;
 					$mdDialog.hide($scope.menjanaSala);
 				});
+		}
+		
+        $scope.cancel = function() {
+        	$mdDialog.cancel();
+        };
+	}
+	
+	$scope.dodajSalu = function(bioskop, e) {
+		
+		$mdDialog.show({
+			locals:{bioskop : bioskop},
+            controller: DodavanjeSaleController,
+            templateUrl: 'html/dodavanjeSale.html',
+            parent: angular.element(document.body),
+            targetEvent: e,
+            clickOutsideToClose:false
+        })
+        .then(function(novaSala){
+        	
+        });
+	}
+	
+	function DodavanjeSaleController($scope, $mdDialog, bioskop) {
+		$scope.novaSala = {};
+		
+		
+		$scope.dodajSalu = function(){
+			
 		}
 		
         $scope.cancel = function() {
