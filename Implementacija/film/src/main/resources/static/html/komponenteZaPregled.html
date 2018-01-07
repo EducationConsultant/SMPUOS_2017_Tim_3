@@ -76,15 +76,15 @@
 	            	<div style="display: inline-block; float: left">
 	            	<div style="text-align: center;">
 	            		<div style="float: left;">
-	            		<md-input-container>
+	            		<md-input-container class="md-input-has-value">
 	            			<label>Ocjena(min)</label>
-	            			<input ng-model="ocjenaMin" type="number" placeholder="0" style="width: 80px;" min="0" max="10"></input>
+	            			<input ng-model="ocjenaMin" type="number" placeholder="0" ng-value="ocjenaMin" min="0" max="10"></input>
 	            		</md-input-container>
 	            		</div>
 	            		<div style="float: right;">
-	            		<md-input-container> 
+	            		<md-input-container class="md-input-has-value"> 
 	            			<label>Ocjena(max)</label>
-	            			<input ng-model="ocjenaMax" type="number" placeholder="10" style="width: 80px;" min="0" max="10"></input>
+	            			<input ng-model="ocjenaMax" type="number" placeholder="10" ng-value="ocjenaMax" min="0" max="10"></input>
 	            		</md-input-container>
 	            		</div>
 	            	</div>

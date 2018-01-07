@@ -92,13 +92,13 @@ angular.module('bioskopApp.BioskopController',[])
 	$scope.ocjeniBioskop=function(bioskop){
 		BioskopService.ocjeniBioskop(bioskop)
 			.success(function(data){
-			/*	$mdDialog.show (
+				$mdDialog.show (
 		                  $mdDialog.alert()
 		                     .parent(angular.element(document.querySelector('#dialogContainer')))
 		                     .clickOutsideToClose(true)
 		                     .title('Uspiješno ste ocjenili bioskop.')
 		                     .ok('Ok!')
-		               ); */
+		               ); 
 				 $scope.prikaziIzmjenjenSadrzaj(data);
 				 
 			});

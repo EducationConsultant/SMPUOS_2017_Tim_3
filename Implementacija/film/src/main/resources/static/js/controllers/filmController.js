@@ -9,8 +9,8 @@ angular.module('filmApp.FilmController',[])
 	$scope.brojStavki=5;
 	$scope.trenutnaStranica = 1;
 	$scope.ukupanBrojStrana = 1;
-	$scope.ocjenaMin;
-	$scope.ocjenaMax;
+	//$scope.ocjenaMin;
+	//$scope.ocjenaMax;
 	
 	$scope.pregledFilmova = function() {
 		
@@ -43,6 +43,9 @@ angular.module('filmApp.FilmController',[])
 		
 		if(foundElement!=-1){
 			$scope.listaFilmova.splice(foundElement,1);
+			FilmoviService.brisanje(id).success(function(){
+				console.log("Uspjesno brisanje filma");
+			});
 		}
      }, function() {
         $scope.status = 'You decided to keep your record.';
