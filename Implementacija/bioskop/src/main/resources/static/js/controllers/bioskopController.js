@@ -141,7 +141,26 @@ angular.module('bioskopApp.BioskopController',[])
 					 }
 				 });
 				$scope.listaBioskopa[bioskopIndex].sale.splice(salaIndex,1);
-
 			});
+	}
+	
+	$scope.izmeniSalu = function(sala, e) {
+		var temp = angular.copy(sala);
+		
+		$mdDialog.show({
+			locals:{data: temp},
+            controller: IzmenaSaleController,
+            templateUrl: 'html/izmenaSale.html',
+            parent: angular.element(document.body),
+            targetEvent: e,
+            clickOutsideToClose:false
+        })
+        .then(function(menjanaRezervacija){
+        
+        });
+	}
+	
+	function IzmenaSaleController($scope, $mdDialog, data) {
+		$scope.menjanaSala = data;
 	}
 });
