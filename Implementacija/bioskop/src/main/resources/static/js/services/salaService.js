@@ -7,5 +7,9 @@ angular.module('bioskopApp.SalaService', [])
 			return $http.delete('/bioskop-service/sala/'+bioskopId+'/'+salaId);	
 		}
 		
+    	factory.izmeniSalu = function(bioskopId, sala){
+			return $http.put('/bioskop-service/sala/'+bioskopId+'/'+sala.id, sala);	
+		}
+		
         return factory;
     });

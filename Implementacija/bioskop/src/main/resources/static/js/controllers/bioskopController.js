@@ -144,25 +144,34 @@ angular.module('bioskopApp.BioskopController',[])
 			});
 	}
 	
-	$scope.izmeniSalu = function(sala, e) {
+	$scope.izmeniSalu = function(bioskopId, sala, e) {
 		var temp = angular.copy(sala);
 		
 		$mdDialog.show({
-			locals:{data: temp},
+			locals:{sala: temp, bioskopId : bioskopId},
             controller: IzmenaSaleController,
             templateUrl: 'html/izmenaSale.html',
             parent: angular.element(document.body),
             targetEvent: e,
             clickOutsideToClose:false
         })
-        .then(function(menjanaRezervacija){
-        
+        .then(function(menjanaSala){
+
         });
 	}
 	
-	function IzmenaSaleController($scope, $mdDialog, data) {
-		$scope.menjanaSala = data;
-		$scope.menjanaSala.novaOznakaSale = data.oznakaSale;
+	function IzmenaSaleController($scope, $mdDialog, sala, bioskopId) {
+		$scope.menjanaSala = sala;
+		$scope.menjanaSala.novaOznakaSale = sala.oznakaSale;
+		$scope.bioskopId = bioskopId;
+		
+		$scope.prihvatiIzmenu = function(){
+			$scope.menjanaSala.oznakaSale = $scope.menjanaSala.novaOznakaSale;
+			SalaService.izmeniSalu($scope.bioskopId, $scope.menjanaSala)
+				.success(function(){
+					$mdDialog.hide($scope.menjanaSala);
+				});
+		}
 		
         $scope.cancel = function() {
         	$mdDialog.cancel();
