@@ -1,5 +1,5 @@
 angular.module('bioskopApp.BioskopController',[])
-.controller('BioskopController', function ($scope, $location, $rootScope, $mdDialog, BioskopService, $localStorage, $mdToast, SalaService) {
+.controller('BioskopController', function ($scope, $location, $rootScope, $mdDialog, BioskopService, $localStorage, $mdToast, SalaService, $q) {
 	
 	
 	$scope.prikaziBioskope = function() {
@@ -13,24 +13,38 @@ angular.module('bioskopApp.BioskopController',[])
 	$scope.prikaziBioskope();
 	
 	
-	$scope.obrisiBioskop = function(id){
+	$scope.obrisiBioskop = function(b){
 		
 		var confirm = $mdDialog.confirm() 
         .title('Da li ste sigurni da želite obrisati bioskop?')
         .ok('Da')
         .cancel('Ne');
      $mdDialog.show(confirm).then(function() {
-        $scope.status = 'Record deleted successfully!';
-        var foundElement=-1;
-		angular.forEach($scope.listaBioskopa, function(value,index){
-			if(value.id==id){
-				foundElement=index;
-			}
-		});
-		
-		if(foundElement!=-1){
-			$scope.listaBioskopa.splice(foundElement,1);
-		}
+    	 
+    	 var requestPromise = [];
+    	 for(var i = 0; i < b.sale.length; i++){
+    		 var httpPromise = SalaService.obrisiSalu(b.id, b.sale[i].id).success(function(data){
+    			 
+    		 })
+    		 
+    		 requestPromise.push(httpPromise);
+    	 }
+    	 
+    	 $q.all(requestPromise).then(function () {
+			 BioskopService.obrisiBioskop(b.id).success(function(data){
+		         $scope.status = 'Record deleted successfully!';
+		         var foundElement=-1;
+				 angular.forEach($scope.listaBioskopa, function(value,index){
+				 	if(value.id==b.id){
+				 		foundElement=index;
+				 	}
+				 });
+				 
+				 if(foundElement!=-1){
+				 	$scope.listaBioskopa.splice(foundElement,1);
+				 }
+			})
+		})
      }, function() {
         $scope.status = 'You decided to keep your record.';
      });
