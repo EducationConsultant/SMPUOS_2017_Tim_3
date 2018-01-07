@@ -60,6 +60,7 @@ angular.module('filmApp.FilmController',[])
 		}else{
 			$scope.pregledAktuelnihFilmova();
 		}
+		$scope.preracunajUkupanBrojStrana();
 		$scope.trenutnaStranica=1;
 		
 		$scope.init();
@@ -216,6 +217,7 @@ angular.module('filmApp.FilmController',[])
 				function(data) {
 					$scope.listaFilmova=data;
 					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.preracunajUkupanBrojStrana();
 					$scope.stavkeZaPrikaz();
 			});
 	}
@@ -236,6 +238,7 @@ angular.module('filmApp.FilmController',[])
 				function(data) {
 					$scope.listaFilmova=data;
 					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.preracunajUkupanBrojStrana();
 					$scope.stavkeZaPrikaz();
 			});
 	}
@@ -247,6 +250,7 @@ angular.module('filmApp.FilmController',[])
 				function(data) {
 					$scope.listaFilmova=data;
 					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.preracunajUkupanBrojStrana();
 					$scope.stavkeZaPrikaz();
 			});
 	}
@@ -258,6 +262,7 @@ angular.module('filmApp.FilmController',[])
 				function(data) {
 					$scope.listaFilmova=data;
 					$scope.ucitaniFilmovi=$scope.listaFilmova;
+					$scope.preracunajUkupanBrojStrana();
 					$scope.stavkeZaPrikaz();
 			});
 	}
@@ -270,6 +275,7 @@ angular.module('filmApp.FilmController',[])
 					$scope.listaFilmova = data;
 					$scope.ucitaniFilmovi=$scope.listaFilmova;
 					var lista = $scope.listaAktuelnihFilmova;
+					$scope.preracunajUkupanBrojStrana();
 					$scope.stavkeZaPrikaz();
 				
 			})
@@ -340,8 +346,9 @@ angular.module('filmApp.FilmController',[])
 		});
 		
 		var value=$scope.title;
-		$scope.title="Pager";
+
 		$scope.listaFilmova=izabraniPodniz;
+		 $scope.$applay;
 	}
 	
 	 $scope.prikaziIzmjenjenSadrzaj=function(data){
