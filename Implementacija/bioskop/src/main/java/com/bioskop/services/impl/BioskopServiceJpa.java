@@ -84,9 +84,6 @@ public class BioskopServiceJpa implements BioskopService {
 			staraAdresa.getBioskopi().remove(stariBioskop);
 			adresaRepository.save(novaAdresa);
 			adresaRepository.save(staraAdresa);
-			
-			System.out.println(staraAdresa.getBioskopi().size());
-			System.out.println(novaAdresa.getBioskopi().size());
 		}
 		stariBioskop.setAdresaBioskopa(bioskop.getAdresaBioskopa());
 		stariBioskop.setNaziv(bioskop.getNaziv());

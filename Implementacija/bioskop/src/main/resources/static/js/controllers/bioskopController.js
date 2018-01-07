@@ -59,21 +59,26 @@ angular.module('bioskopApp.BioskopController',[])
             parent: angular.element(document.body),
             targetEvent: e,
             clickOutsideToClose:false
+        }).then(function(menjanBioskop){
+        	var bioskopIndex = 0;
+        	
+			angular.forEach($scope.listaBioskopa, function(value, index){
+				 if(value.id==menjanBioskop.id){
+					 bioskopIndex=index;	 
+				 }
+			 });
+
+			$scope.listaBioskopa[bioskopIndex] = menjanBioskop;
         });
 	}
 	
     function IzmenaController($scope, $mdDialog, data) {
     	$scope.menjanBioskop = data;
     	
-    	$scope.promeniAdresu = function() {
-    		$scope.menjanBioskop.adresaBioskopa.geoDuzina = null;
-    		$scope.menjanBioskop.adresaBioskopa.geoSirina = null;
-    	}
-    	
         $scope.prihvatiIzmenu = function(){
         	
             BioskopService.izmeniBioskop($scope.menjanBioskop).success(function(data){
-            	$mdDialog.cancel();
+            	$mdDialog.hide(data);
             })
         };
 
