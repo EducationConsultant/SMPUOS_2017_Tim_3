@@ -156,7 +156,20 @@ angular.module('bioskopApp.BioskopController',[])
             clickOutsideToClose:false
         })
         .then(function(menjanaSala){
-
+        	var bioskopIndex = 0;
+			var salaIndex = 0;
+			angular.forEach($scope.listaBioskopa, function(value, index){
+				 if(value.id==bioskopId){
+					 bioskopIndex=index;	 
+				 }
+			 });
+			
+			angular.forEach($scope.listaBioskopa[bioskopIndex].sale, function(value, index){
+				 if(value.id==menjanaSala.id){
+					 salaIndex=index;	 
+				 }
+			 });
+			$scope.listaBioskopa[bioskopIndex].sale[salaIndex]=menjanaSala;
         });
 	}
 	
@@ -168,7 +181,9 @@ angular.module('bioskopApp.BioskopController',[])
 		$scope.prihvatiIzmenu = function(){
 			$scope.menjanaSala.oznakaSale = $scope.menjanaSala.novaOznakaSale;
 			SalaService.izmeniSalu($scope.bioskopId, $scope.menjanaSala)
-				.success(function(){
+				.success(function(data){
+					$scope.menjanaSala.kapacitet = 
+						$scope.menjanaSala.brojSedistaRedovi * $scope.menjanaSala.brojSedistaKolone;
 					$mdDialog.hide($scope.menjanaSala);
 				});
 		}
