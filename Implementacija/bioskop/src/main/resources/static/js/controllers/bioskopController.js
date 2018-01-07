@@ -212,8 +212,25 @@ angular.module('bioskopApp.BioskopController',[])
 	function DodavanjeSaleController($scope, $mdDialog, bioskop) {
 		$scope.novaSala = {};
 		
-		
 		$scope.dodajSalu = function(){
+			
+			if($scope.novaSala.oznakaSale == null 
+				|| $scope.novaSala.oznakaSale == "" 
+				|| $scope.novaSala.tip == null
+				|| $scope.novaSala.brojSedistaRedovi == null
+				|| $scope.novaSala.brojSedistaKolone == null
+				|| $scope.novaSala.brojSedistaRedovi == 0
+				|| $scope.novaSala.brojSedistaKolone == 0) 
+			{
+				$mdToast.show(
+		                   $mdToast.simple()
+		                      .textContent('Molimo Vas da popunite sva polja!')
+		                      .hideDelay(3000)
+		                      .position('top center')
+		                      .theme('warning-toast')
+		         );
+				 return;
+			}
 			SalaService.dodajSalu(bioskop.id, $scope.novaSala).success(function(data){
 				bioskop.sale.push(data);
 				$mdDialog.hide(bioskop);
