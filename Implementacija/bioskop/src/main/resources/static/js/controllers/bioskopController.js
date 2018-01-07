@@ -162,5 +162,10 @@ angular.module('bioskopApp.BioskopController',[])
 	
 	function IzmenaSaleController($scope, $mdDialog, data) {
 		$scope.menjanaSala = data;
+		$scope.menjanaSala.novaOznakaSale = data.oznakaSale;
+		
+        $scope.cancel = function() {
+        	$mdDialog.cancel();
+        };
 	}
 });

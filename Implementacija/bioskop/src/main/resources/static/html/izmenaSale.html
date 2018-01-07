@@ -6,8 +6,33 @@
                 Izmena sale {{menjanaSala.oznakaSale}}</h3>
 				
 				<div class='md-inline-form'>
-	 					<md-content layout-padding>
-	 					
+	 				<md-content layout-padding>
+	 				
+	 				   <md-input-container class="md-block" flex-gt-sm>
+			             <label>Oznaka sale: </label>
+			           	 <input ng-model="menjanaSala.novaOznakaSale" type="text">
+			           </md-input-container>
+	 				
+	 					<md-input-container class="md-block" flex-gt-sm>
+	            			<label>Tip sale: </label>
+	            			<md-select ng-model="menjanaSala.tip">
+	              				<md-option value="OBICNA">Obična</md-option>
+	              				<md-option value="ZA3D">Za 3D</md-option>
+	              				<md-option value="ZA4D">Za 4D</md-option>
+	            			</md-select>
+	          			</md-input-container>
+	          			
+	 					<div layout="row">
+				 			<md-input-container class="md-block" flex-gt-sm>
+				           		<label>Broj redova sedišta: </label>
+				           		<input ng-model="menjanaSala.brojSedistaRedovi" type="number" step="1" min=1>
+				          	</md-input-container>
+		          					
+				          	<md-input-container class="md-block" flex-gt-sm>
+				            	<label>Broj sedišta u redu: </label>
+				           		<input ng-model="menjanaSala.brojSedistaKolone" type="number" step="1" min=1>
+				          	</md-input-container>
+			          	</div>
 	 					
 				 	</md-content>
 				</div>
