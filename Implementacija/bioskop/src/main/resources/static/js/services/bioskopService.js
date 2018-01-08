@@ -6,6 +6,9 @@ angular.module('bioskopApp.BioskopService', [])
 			return $http.get('/bioskop-service/bioskop/');	
 		}
         
+        factory.dodajBioskop = function(bioskop) {
+        	return $http.post('/bioskop-service/bioskop', bioskop);
+        }
         
         factory.obrisiBioskop = function(id){
 			return $http.delete('/bioskop-service/bioskop/'+id);	

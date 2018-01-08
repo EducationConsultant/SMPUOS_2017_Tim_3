@@ -260,4 +260,36 @@ angular.module('bioskopApp.BioskopController',[])
         	$mdDialog.cancel();
         };
 	}
+	
+	$scope.dodajBioskop = function(e) {
+		$mdDialog.show({
+            controller: DodavanjeBioskopaController,
+            templateUrl: 'html/dodavanjeBioskopa.html',
+            parent: angular.element(document.body),
+            targetEvent: e,
+            clickOutsideToClose:false
+        })
+        .then(function(noviBioskop){
+        	$scope.listaBioskopa.push(noviBioskop);
+        });
+	}
+	
+	function DodavanjeBioskopaController($scope, $mdDialog) {
+		$scope.noviBioskop = {};
+		$scope.noviBioskop.adresaBioskopa = {};
+		
+		$scope.dodajBioskop = function(){
+			$scope.noviBioskop.prosecnaOcena = $scope.noviBioskop.ocena;
+			$scope.noviBioskop.sumaOcena = $scope.noviBioskop.ocena;
+			
+			BioskopService.dodajBioskop($scope.noviBioskop).success(function(data){
+				$scope.noviBioskop.sale = [];
+				$mdDialog.hide(data);
+			});
+		}
+		
+        $scope.cancel = function() {
+        	$mdDialog.cancel();
+        };
+	}
 });

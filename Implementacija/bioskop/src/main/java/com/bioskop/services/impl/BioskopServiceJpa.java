@@ -40,14 +40,21 @@ public class BioskopServiceJpa implements BioskopService {
 
 	@Override
 	public Bioskop save(Bioskop bioskop) {
-		bioskop.setBrojac(0);
-		
-		Adresa novaAdresa = adresaRepository.findByNazivNaseljenogMestaAndNazivUliceAndBroj(bioskop.getAdresaBioskopa().getNazivNaseljenogMesta(), bioskop.getAdresaBioskopa().getNazivUlice(), bioskop.getAdresaBioskopa().getBroj());
+		//bioskop.setBrojac(0);
+		bioskop.setBrojac(1);
+		Adresa novaAdresa = adresaRepository.findByNazivNaseljenogMestaAndNazivUliceAndBrojAndGeoDuzinaAndGeoSirina
+				(bioskop.getAdresaBioskopa().getNazivNaseljenogMesta(), 
+				 bioskop.getAdresaBioskopa().getNazivUlice(), 
+				 bioskop.getAdresaBioskopa().getBroj(),
+				 bioskop.getAdresaBioskopa().getGeoDuzina(),
+				 bioskop.getAdresaBioskopa().getGeoSirina());
 		if(novaAdresa != null){
 			bioskop.setAdresaBioskopa(novaAdresa);
 		}else{
 			novaAdresa = adresaRepository.save(bioskop.getAdresaBioskopa());
 			bioskop.setAdresaBioskopa(novaAdresa);
+			novaAdresa.getBioskopi().add(bioskop);
+			adresaRepository.save(novaAdresa);
 		}
 		
 		return repository.save(bioskop);
