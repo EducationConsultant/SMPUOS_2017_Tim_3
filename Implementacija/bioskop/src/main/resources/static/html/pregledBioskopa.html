@@ -1,6 +1,6 @@
 <div ng-controller="BioskopController">
 		
-	<div align="right">
+	<div align="right" ng-if="isAdmin">
       <md-button class="md-raised md-primary" ng-click="dodajBioskop($event)">Dodaj bioskop</md-button>
     </div>
     		

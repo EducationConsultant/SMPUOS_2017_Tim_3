@@ -76,7 +76,23 @@ angular.module('bioskopApp.BioskopController',[])
     	$scope.menjanBioskop = data;
     	
         $scope.prihvatiIzmenu = function(){
-        	
+        	if($scope.menjanBioskop.naziv == null ||
+     		   $scope.menjanBioskop.ocena == null ||
+     		   $scope.menjanBioskop.adresaBioskopa.nazivNaseljenogMesta == null ||
+     		   $scope.menjanBioskop.adresaBioskopa.nazivUlice == null ||
+     		   $scope.menjanBioskop.adresaBioskopa.broj == null ||
+     		   $scope.menjanBioskop.adresaBioskopa.geoDuzina == null ||
+     		   $scope.menjanBioskop.adresaBioskopa.geoSirina == null) 
+     		{
+     			$mdToast.show(
+                   $mdToast.simple()
+     		             .textContent('Molimo Vas da popunite sva polja!')
+     		             .hideDelay(3000)
+     		             .position('top center')
+     		             .theme('warning-toast')
+     		       );
+     			return;
+     		}
             BioskopService.izmeniBioskop($scope.menjanBioskop).success(function(data){
             	$mdDialog.hide(data);
             })
@@ -198,6 +214,25 @@ angular.module('bioskopApp.BioskopController',[])
 		$scope.bioskopId = bioskopId;
 		
 		$scope.prihvatiIzmenu = function(){
+			if($scope.menjanaSala.oznakaSale == null 
+					|| $scope.menjanaSala.oznakaSale == "" 
+					|| $scope.menjanaSala.tip == null
+					|| $scope.menjanaSala.brojSedistaRedovi == null
+					|| $scope.menjanaSala.brojSedistaKolone == null
+					|| $scope.menjanaSala.brojSedistaRedovi == 0
+					|| $scope.menjanaSala.brojSedistaKolone == 0) 
+				{
+					$mdToast.show(
+			                   $mdToast.simple()
+			                      .textContent('Molimo Vas da popunite sva polja!')
+			                      .hideDelay(3000)
+			                      .position('top center')
+			                      .theme('warning-toast')
+			         );
+					 return;
+				}
+			
+			
 			$scope.menjanaSala.oznakaSale = $scope.menjanaSala.novaOznakaSale;
 			SalaService.izmeniSalu($scope.bioskopId, $scope.menjanaSala)
 				.success(function(data){
@@ -279,6 +314,25 @@ angular.module('bioskopApp.BioskopController',[])
 		$scope.noviBioskop.adresaBioskopa = {};
 		
 		$scope.dodajBioskop = function(){
+			if($scope.noviBioskop.naziv == null ||
+			   $scope.noviBioskop.ocena == null ||
+			   $scope.noviBioskop.adresaBioskopa.nazivNaseljenogMesta == null ||
+			   $scope.noviBioskop.adresaBioskopa.nazivUlice == null ||
+			   $scope.noviBioskop.adresaBioskopa.broj == null ||
+			   $scope.noviBioskop.adresaBioskopa.geoDuzina == null ||
+			   $scope.noviBioskop.adresaBioskopa.geoSirina == null) 
+			{
+				$mdToast.show(
+		                   $mdToast.simple()
+		                      .textContent('Molimo Vas da popunite sva polja!')
+		                      .hideDelay(3000)
+		                      .position('top center')
+		                      .theme('warning-toast')
+		         );
+				 return;
+			}
+			
+			
 			$scope.noviBioskop.prosecnaOcena = $scope.noviBioskop.ocena;
 			$scope.noviBioskop.sumaOcena = $scope.noviBioskop.ocena;
 			
