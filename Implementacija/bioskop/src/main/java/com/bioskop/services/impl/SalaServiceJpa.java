@@ -24,7 +24,7 @@ public class SalaServiceJpa implements SalaService {
 	public Sala saveSala(Long id, Sala sala) {
 		salaRepository.save(sala);
 		int kapacitet = 0;
-		kapacitet = sala.getBrojSedistaKolone() + sala.getBrojSedistaRedovi();
+		kapacitet = sala.getBrojSedistaKolone() * sala.getBrojSedistaRedovi();
 		sala.setKapacitet(kapacitet);
 		
 		Bioskop bioskop = bioskopRepository.findOne(id);
