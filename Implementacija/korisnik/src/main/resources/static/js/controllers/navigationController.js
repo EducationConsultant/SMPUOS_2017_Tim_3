@@ -82,18 +82,28 @@ angular.module('korisnikApp.NavigationController',[])
             $scope.login = function(){
                 LoginService.login($scope.user).success(function(data){
                     if(data){
-                        $localStorage.logged = data;
-                        $localStorage.tip = data.tipKorisnika;
-
-                        $mdToast.show(
-                            $mdToast.simple()
-                                .textContent('Uspešno ste se prijavili!')
-                                .hideDelay(3000)
-                                .position('top center')
-                                .theme('success-toast')
-                        );
-
-                        $mdDialog.hide(data.tipKorisnika);
+                    	if(data.statusKorisnika == 'AKTIVIRAN'){
+	                        $localStorage.logged = data;
+	                        $localStorage.tip = data.tipKorisnika;
+	
+	                        $mdToast.show(
+	                            $mdToast.simple()
+	                                .textContent('Uspešno ste se prijavili!')
+	                                .hideDelay(3000)
+	                                .position('top center')
+	                                .theme('success-toast')
+	                        );
+	
+	                        $mdDialog.hide(data.tipKorisnika);
+                    	}else{
+                    		$mdToast.show(
+                                    $mdToast.simple()
+                                        .textContent('Nalog nije aktivan!')
+                                        .hideDelay(3000)
+                                        .position('top center')
+                                        .theme('error-toast')
+                                );
+                    	}
                     }})
                     .error(function(data){
                         $scope.user.lozinka = '';
