@@ -10,7 +10,13 @@ angular.module('filmApp.NavigationController',[])
             $localStorage.curNavF = data;
         }*/
 
+        $scope.isAdmin=false;
         $scope.currentNavItem1 = 'Filmovi';
+        isAdmin=function(){
+    		$scope.isAdmin= $localStorage.tip =='ADMIN';
+    		var value=$scope.isAdmin;
+    	};
+    	isAdmin();
     });
 
         
