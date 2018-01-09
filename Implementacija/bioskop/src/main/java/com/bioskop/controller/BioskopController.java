@@ -70,9 +70,9 @@ public class BioskopController {
 	}
 
 	// ocenjivanje
-	@RequestMapping(value = "/ocena/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Bioskop> insertOcena(@PathVariable Long id, @RequestBody Bioskop bioskop) {
-		Bioskop ocenaZaBioskop = bioskopService.saveOcena(bioskop, id);
+	@RequestMapping(value = "/ocena/{id}/{username}", method = RequestMethod.PUT)
+	public ResponseEntity<Bioskop> insertOcena(@PathVariable("id") Long id, @PathVariable("username") String username, @RequestBody Bioskop bioskop) {
+		Bioskop ocenaZaBioskop = bioskopService.saveOcena(bioskop, id, username);
 		return new ResponseEntity<Bioskop>(ocenaZaBioskop, HttpStatus.CREATED);
 	}
 

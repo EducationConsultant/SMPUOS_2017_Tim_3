@@ -47,7 +47,8 @@ public class Bioskop {
 	private int brojac;
 	private float sumaOcena;
 	 
-	
+	@OneToMany(mappedBy="bioskop", cascade=CascadeType.ALL) 
+	private List<Ocjena> ocjene;
 	
 	// bioskop ima sale
 	@OneToMany(mappedBy = "bioskop", fetch = FetchType.EAGER)
@@ -137,10 +138,14 @@ public class Bioskop {
 		this.sumaOcena = sumaOcena;
 	}
 
-	
+
+	public List<Ocjena> getOcjene() {
+		return ocjene;
+	}
 
 
-	
-
+	public void setOcjene(List<Ocjena> ocjene) {
+		this.ocjene = ocjene;
+	}
 
 }

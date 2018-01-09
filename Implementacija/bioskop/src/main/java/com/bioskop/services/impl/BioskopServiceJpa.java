@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 import com.bioskop.models.Adresa;
 import com.bioskop.models.AdresaKoordinate;
 import com.bioskop.models.Bioskop;
-import com.bioskop.models.Sala;
+import com.bioskop.models.Ocjena;
 import com.bioskop.repository.AdresaRepository;
 import com.bioskop.repository.BioskopRepository;
-import com.bioskop.repository.SalaRepository;
+import com.bioskop.repository.OcjenaRepository;
 import com.bioskop.services.BioskopService;
 
 
@@ -25,6 +25,8 @@ public class BioskopServiceJpa implements BioskopService {
 	@Autowired 
 	private AdresaRepository adresaRepository;
 	
+	@Autowired
+	private OcjenaRepository ocjenaRepository;
 	
 	@Override
 	public Bioskop findOne(Long id) {
@@ -101,7 +103,7 @@ public class BioskopServiceJpa implements BioskopService {
 	
 	
 	@Override
-	public Bioskop saveOcena(Bioskop bioskop, Long id) {
+	public Bioskop saveOcena(Bioskop bioskop, Long id, String username) {
 		Bioskop bioskopZaOCeniti = repository.findOne(id);
 		
 		float sumaOcena = bioskopZaOCeniti.getSumaOcena() + bioskop.getOcena();
@@ -114,6 +116,13 @@ public class BioskopServiceJpa implements BioskopService {
 		bioskopZaOCeniti.setProsecnaOcena(prosecna);
 		
 		bioskopZaOCeniti.setOcena(bioskop.getOcena());
+		
+		Ocjena ocjena=new Ocjena();
+		ocjena.setBioskop(bioskopZaOCeniti);
+		ocjena.setOcjena(bioskop.getOcena());
+		ocjena.setUsername(username);
+		
+		ocjenaRepository.save(ocjena);
 		
 		return repository.save(bioskopZaOCeniti);
 	}

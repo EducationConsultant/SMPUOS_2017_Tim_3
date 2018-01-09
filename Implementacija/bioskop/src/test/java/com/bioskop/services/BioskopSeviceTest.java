@@ -130,7 +130,7 @@ public class BioskopSeviceTest {
 		
 		Long ocena = new Long(2);
 		bioskop.setOcena(ocena);
-		Bioskop bioskopZaOceniti = bioskopService.saveOcena(bioskop, bioskop.getId());
+		Bioskop bioskopZaOceniti = bioskopService.saveOcena(bioskop, bioskop.getId(),"marko123");
 		Assert.assertEquals(2, bioskopZaOceniti.getBrojac());
 		
 		Sala s = salaService.findSalaPoBioskopu(bioskop.getId(), new Long(1) );

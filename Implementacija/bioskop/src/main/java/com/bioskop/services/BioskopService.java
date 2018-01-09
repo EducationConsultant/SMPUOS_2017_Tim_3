@@ -20,7 +20,7 @@ public interface BioskopService {
 	public Bioskop update(Bioskop noviBioskop, Long id);
 	public Bioskop findByNaziv(String naziv);
 	public List<Bioskop> findByAdresaBioskopa(Adresa adresa);  // i bioskope i sale prikazi
-	public Bioskop saveOcena(Bioskop bioskop, Long id);
+	public Bioskop saveOcena(Bioskop bioskop, Long id, String username);
 	public List<Bioskop> rangiranje();
 	public List<Bioskop> findByLocation(AdresaKoordinate adresaKoordinate);
 

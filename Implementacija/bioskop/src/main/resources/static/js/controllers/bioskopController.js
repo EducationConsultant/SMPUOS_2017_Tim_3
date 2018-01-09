@@ -125,7 +125,8 @@ angular.module('bioskopApp.BioskopController',[])
 	};
 	
 	$scope.ocjeniBioskop=function(bioskop){
-		BioskopService.ocjeniBioskop(bioskop)
+		var korisnickoIme = $localStorage.logged.korisnickoIme;
+		BioskopService.ocjeniBioskop(bioskop, korisnickoIme)
 			.success(function(data){
 				$mdDialog.show (
 		                  $mdDialog.alert()
@@ -138,6 +139,24 @@ angular.module('bioskopApp.BioskopController',[])
 				 
 			});
 	}
+	
+	  $scope.ocjenjen=function(bioskop){
+   		 var indexFound=-1;
+   		
+   		 angular.forEach(bioskop.ocjene, function(value, index){
+   			 if($localStorage.logged.korisnickoIme==value.username){
+   				 indexFound=index;
+   			 }
+   		 });
+   		 
+   		 if(indexFound!=-1){
+   			
+   			 return false;
+   		 }else{
+   			
+   			 return true;
+   		 }
+   	 }
 	
 	
 	 $scope.prikaziIzmjenjenSadrzaj=function(data){
@@ -345,5 +364,7 @@ angular.module('bioskopApp.BioskopController',[])
         $scope.cancel = function() {
         	$mdDialog.cancel();
         };
+        
+      
 	}
 });
