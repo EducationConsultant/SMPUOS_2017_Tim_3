@@ -5,12 +5,15 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rezervacija.models.Rezervacija;
@@ -40,7 +43,13 @@ public class RezervacijaController {
 	// insert
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Rezervacija> insertRezervacija(@Valid @RequestBody Rezervacija rezervacija) {
-		Rezervacija sacuvanaRezervacija = rezervacijaService.save(rezervacija);
+		//String status = rezervacijaService.checkKorisnik(rezervacija.getIdKorisnika());
+		
+		//Rezervacija sacuvanaRezervacija  = new Rezervacija();
+		//if(status == "AKTIVIRAN" ) {
+			Rezervacija  sacuvanaRezervacija = rezervacijaService.save(rezervacija);
+		//}
+	  
 		return new ResponseEntity<Rezervacija>(sacuvanaRezervacija, HttpStatus.CREATED);
 	}
 
@@ -116,6 +125,20 @@ public class RezervacijaController {
 		List<Rezervacija> rezervacije = rezervacijaService.getOtkazaneRezervacijeZaProjekciju(id);
 		return new ResponseEntity<List<Rezervacija>>(rezervacije, HttpStatus.OK);
 		
+	}
+	
+	@RequestMapping(value="/proveriKorisnika/{idKorisnika}", method = RequestMethod.GET)
+	@ResponseBody
+	public String proveriKorisnika(@PathVariable Long idKorisnika) {
+		String rez = rezervacijaService.checkKorisnik(idKorisnika);
+		System.err.println(rez);
+		return "{\"response\":\""+rez+"\"}";
+	}
+	
+	@FeignClient("korisnik-service")//the application.name for the bioskop service
+	public interface KorisnikServiceClient {
+		@RequestMapping(value = "korisnik/checkKorisnik", method = RequestMethod.GET)// the endpoint which will be balanced over
+		String checkKorisnik(@RequestParam(name="korisnikId") Long korisnikId);// the method specification must be the same as for korisnik/checkKorisnik
 	}
 	
 }

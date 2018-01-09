@@ -11,14 +11,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.korisnik.models.Adresa;
 import com.korisnik.models.AdresaKoordinate;
 import com.korisnik.models.Korisnik;
 import com.korisnik.models.KorisnikLogin;
+import com.korisnik.models.TipStatusaKorisnika;
 import com.korisnik.services.AdresaService;
 import com.korisnik.services.KorisnikService;
+
 
 @RestController
 @RequestMapping("korisnik")
@@ -132,5 +135,15 @@ public class KorisnikController {
 		else
 			return new ResponseEntity<Boolean>(false, HttpStatus.OK);
 
+	}
+	
+	//povezivanje sa rezervacijom
+	@RequestMapping(value = "/checkKorisnik", method = RequestMethod.GET)
+	public String checkKorisnik(@RequestParam(name = "korisnikId") Long korisnikId){
+		Korisnik korisnik = korisnikService.findOne(korisnikId);
+		String rez = korisnik.getStatusKorisnika().toString();
+		System.err.println(rez);
+		return rez;
+		
 	}
 }
