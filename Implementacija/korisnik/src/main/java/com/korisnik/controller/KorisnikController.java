@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,6 +33,9 @@ public class KorisnikController {
 
 	@Autowired
 	private AdresaService adresaService;
+	
+	@Autowired
+	Environment environment;
 
 	// findOne adresa
 	@RequestMapping(value = "/adresa/{id}", method = RequestMethod.GET)
@@ -143,6 +147,9 @@ public class KorisnikController {
 		Korisnik korisnik = korisnikService.findOne(korisnikId);
 		String rez = korisnik.getStatusKorisnika().toString();
 		System.err.println(rez);
+		//[PORT: "+ environment.getProperty("local.server.port") + "]";
+		System.err.println("[PORT: "+ environment.getProperty("local.server.port") + "]");
+		
 		return rez;
 		
 	}
