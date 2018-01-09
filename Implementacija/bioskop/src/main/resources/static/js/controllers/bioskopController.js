@@ -324,6 +324,7 @@ angular.module('bioskopApp.BioskopController',[])
             clickOutsideToClose:false
         })
         .then(function(noviBioskop){
+			$scope.noviBioskop.sale = [];
         	$scope.listaBioskopa.push(noviBioskop);
         });
 	}
@@ -356,7 +357,6 @@ angular.module('bioskopApp.BioskopController',[])
 			$scope.noviBioskop.sumaOcena = $scope.noviBioskop.ocena;
 			
 			BioskopService.dodajBioskop($scope.noviBioskop).success(function(data){
-				$scope.noviBioskop.sale = [];
 				$mdDialog.hide(data);
 			});
 		}
