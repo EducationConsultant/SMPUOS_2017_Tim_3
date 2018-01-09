@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import com.rezervacija.controllers.ProjekcijaController.BioskopServiceClient;
+import com.rezervacija.controllers.RezervacijaController.KorisnikServiceClient;
 import com.rezervacija.models.Projekcija;
 import com.rezervacija.models.Rezervacija;
 import com.rezervacija.models.RezervacijaTip;
@@ -22,6 +25,11 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	@Autowired
 	private ProjekcijaRepository projekcijaRepository;
 
+	
+	@Autowired
+	private KorisnikServiceClient korisnikServiceClient; // feign client
+	
+	
 	@Override
 	public Rezervacija findOne(Long id) {
 		return repository.findOne(id);
@@ -142,5 +150,19 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	public List<Rezervacija> getOtkazaneRezervacijeZaProjekciju(Long idProjekcije) {
 		Projekcija projekcija = projekcijaRepository.findOne(idProjekcije);
 		return repository.findByProjekcijaAndTip(projekcija, RezervacijaTip.OTKAZANA);
+	}
+	
+	/*USING LOAD-BALANCING FOR KORISNIK*/
+	@Override
+	@HystrixCommand(fallbackMethod="fallbackCheckKorisnik")
+	public String checkKorisnik(Long idKorisnika) {
+		String status = korisnikServiceClient.checkKorisnik(idKorisnika);
+		return status;
+	}
+	
+	public String fallbackCheckKorisnik(Long idKorisnika){
+		System.out.println("NIJE KREIRANA REZERVACIJA!!!"); // difoltni naziv korisnika
+		String ispis = "NIJE KREIRANA REZERVACIJA JER JE KORISNIK DEAKTIVIRAN!";
+		return ispis;
 	}
 }

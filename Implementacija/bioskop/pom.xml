@@ -42,12 +42,12 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<!-- Dodatak za  slf4j -->
- 		<dependency>
-   			<groupId>ch.qos.logback</groupId>
-    		<artifactId>logback-classic</artifactId>
-   			<version>1.1.11</version>
-    		<scope>test</scope>
-		</dependency>
+<!--  		<dependency> -->
+<!--    			<groupId>ch.qos.logback</groupId> -->
+<!--     		<artifactId>logback-classic</artifactId> -->
+<!--    			<version>1.1.11</version> -->
+<!--     		<scope>test</scope> -->
+<!-- 		</dependency> -->
 		 
 		<!--Dodatak za  slf4j  -->
 		<dependency>
