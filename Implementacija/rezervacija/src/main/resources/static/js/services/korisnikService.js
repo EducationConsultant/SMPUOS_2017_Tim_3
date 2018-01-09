@@ -14,5 +14,9 @@ angular.module('rezervacijaApp.KorisnikService', [])
 			return $http.get('/rezervacija-service/rezervacija/aktivne/'+id);
 		}
 		
+		factory.proveriKorisnika = function(id) {
+			return $http.get('/rezervacija-service/rezervacija/proveriKorisnika/'+id);
+		}
+		
 		return factory;
 });

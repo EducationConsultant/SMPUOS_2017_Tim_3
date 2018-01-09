@@ -486,33 +486,52 @@ angular.module('rezervacijaApp.RezervacijaController',[])
 			rezervacija.idKorisnika = $localStorage.logged.id;
 			rezervacija.datumRezervacije = new Date();
 			
-			rezervacija.tip = "AKTIVNA";
-			rezervacija.brojSedista = $scope.filter.zeljeniBrojSedista;
-			rezervacija.brojRedaSedista = $scope.filter.brojRedaSedista;
-			
-			var p;
-			
-			for(i=0; i<$scope.projekcije.length; i++){
-				if($scope.projekcije[i].id == $scope.filter.projekcija){
-					p = $scope.projekcije[i];
-					break;
+			KorisnikService.proveriKorisnika(rezervacija.idKorisnika).success(function(data){
+				if(data.response=="DEAKTIVIRAN"){
+					$mdToast.show(
+			                   $mdToast.simple()
+			                      .textContent('Vaš nalog je deaktiviran!')
+			                      .hideDelay(3000)
+			                      .position('bottom center')
+			                      .theme('warning-toast')
+			                );
+					return;
+				} else {
+					
+					rezervacija.tip = "AKTIVNA";
+					rezervacija.brojSedista = $scope.filter.zeljeniBrojSedista;
+					rezervacija.brojRedaSedista = $scope.filter.brojRedaSedista;
+					
+					var p;
+					
+					for(i=0; i<$scope.projekcije.length; i++){
+						if($scope.projekcije[i].id == $scope.filter.projekcija){
+							p = $scope.projekcije[i];
+							break;
+						}
+					}
+					rezervacija.projekcija = p;
+					rezervacija.datumIstekaRezervacije = new Date("2018-12-12"); //???
+					
+					RezervacijaService.kreirajRezervaciju(rezervacija).success(function(data) {
+							$window.scrollTo(0, 0);
+							$scope.filter={};
+							$scope.brojSlobodnihMesta = null;
+							$mdToast.show(
+			                        $mdToast.simple()
+			                            .textContent('Uspešno kreirana rezervacija!')
+			                            .hideDelay(3000)
+			                            .position('top center')
+			                            .theme('success-toast')
+			                    );
+						});
+					
+					
+					
 				}
-			}
-			rezervacija.projekcija = p;
-			rezervacija.datumIstekaRezervacije = new Date("2018-12-12"); //???
+			})
 			
-			RezervacijaService.kreirajRezervaciju(rezervacija).success(function(data) {
-				$window.scrollTo(0, 0);
-				$scope.filter={};
-				$scope.brojSlobodnihMesta = null;
-				$mdToast.show(
-                        $mdToast.simple()
-                            .textContent('Uspešno kreirana rezervacija!')
-                            .hideDelay(3000)
-                            .position('top center')
-                            .theme('success-toast')
-                    );
-			});
+			
 		}
 		
 

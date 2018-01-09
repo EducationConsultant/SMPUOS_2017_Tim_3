@@ -162,7 +162,7 @@ public class RezervacijaServiceJpa implements RezervacijaService {
 	
 	public String fallbackCheckKorisnik(Long idKorisnika){
 		System.out.println("NIJE KREIRANA REZERVACIJA!!!"); // difoltni naziv korisnika
-		String ispis = "NIJE KREIRANA REZERVACIJA JER JE KORISNIK DEAKTIVIRAN!";
+		String ispis = "NEDOSTUPAN";
 		return ispis;
 	}
 }

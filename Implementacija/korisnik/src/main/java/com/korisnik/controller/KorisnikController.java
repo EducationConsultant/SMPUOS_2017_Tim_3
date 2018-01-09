@@ -139,11 +139,11 @@ public class KorisnikController {
 	
 	//povezivanje sa rezervacijom
 	@RequestMapping(value = "/checkKorisnik", method = RequestMethod.GET)
-	public String checkKorisnik(@RequestParam(name = "idKorisnika") Long idKorisnika){
-		
-		Korisnik korisnik = korisnikService.findOne(idKorisnika);
-	
-		return korisnik.getStatusKorisnika().toString();
+	public String checkKorisnik(@RequestParam(name = "korisnikId") Long korisnikId){
+		Korisnik korisnik = korisnikService.findOne(korisnikId);
+		String rez = korisnik.getStatusKorisnika().toString();
+		System.err.println(rez);
+		return rez;
 		
 	}
 }
