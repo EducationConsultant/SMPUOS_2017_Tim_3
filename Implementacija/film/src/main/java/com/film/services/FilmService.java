@@ -19,7 +19,7 @@ public interface FilmService {
 
 	public void delete(Film film);
 
-	public Film saveOcena(Film film, Long id);
+	public Film saveOcena(Film film, Long id, String username);
 
 	public Page<Film> findAllByPage(Pageable pageable);
 

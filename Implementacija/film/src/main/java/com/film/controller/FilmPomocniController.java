@@ -61,4 +61,8 @@ public class FilmPomocniController {
 		
 		return new ResponseEntity<List<Glumac>>(glumci, HttpStatus.OK);
 	}
+	
+	
+	//@RequestMapping(value = "/ocjeneKorisnika", method=RequestMethod.GET)
+	//public ResponeEntity
 }

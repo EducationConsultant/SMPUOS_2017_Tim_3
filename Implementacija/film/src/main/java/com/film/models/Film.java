@@ -1,8 +1,10 @@
 package com.film.models;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -68,6 +71,9 @@ public class Film {
 	@JoinColumn(name = "kategorija_id", referencedColumnName = "kategorija_id")
 	private Kategorija kategorija;
 
+	@OneToMany(mappedBy="film", cascade=CascadeType.ALL) 
+	private List<Ocjena> ocjene;
+	
 	public Film() {
 	}
 
@@ -174,5 +180,15 @@ public class Film {
 	public void setKategorija(Kategorija kategorija) {
 		this.kategorija = kategorija;
 	}
+
+	public List<Ocjena> getOcjene() {
+		return ocjene;
+	}
+
+	public void setOcjene(List<Ocjena> ocjene) {
+		this.ocjene = ocjene;
+	}
+	
+	
 
 }

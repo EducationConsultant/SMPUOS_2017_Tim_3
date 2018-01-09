@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.film.models.Film;
+import com.film.models.Ocjena;
 import com.film.services.FilmService;
 
 
@@ -27,6 +27,7 @@ import com.film.services.FilmService;
 public class FilmController {
 	@Autowired
 	private FilmService filmService;
+	
 
 	// getOne
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
@@ -38,6 +39,9 @@ public class FilmController {
 	// insert
 	@RequestMapping(value = "/dodaj", method = RequestMethod.POST)
 	public ResponseEntity<Film> save(@Valid @RequestBody Film film) {
+		//film.setOcjene(new List<Ocjena>);
+		//List<Ocjena> ocjene = new List<Ocjena>();
+		//film.setOcjene(ocjene);
 		Film savedFilm = filmService.save(film);
 		return new ResponseEntity<Film>(savedFilm, HttpStatus.CREATED);
 	}
@@ -60,9 +64,10 @@ public class FilmController {
 
 	// ocenjivanje filma
 	// id - id filma koji ocenjujemo
-	@RequestMapping(value = "/ocenjivanje/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Film> saveOcena(@PathVariable Long id, @RequestBody Film film) {
-		Film ocenjeniFilm = filmService.saveOcena(film, id);
+	@RequestMapping(value = "/ocenjivanje/{id}/{username}", method = RequestMethod.PUT)
+	public ResponseEntity<Film> saveOcena(@PathVariable("id") Long id, @PathVariable("username") String username, @RequestBody Film film) {
+		Film ocenjeniFilm = filmService.saveOcena(film, id, username);
+		
 		return new ResponseEntity<Film>(ocenjeniFilm, HttpStatus.OK);
 	}
 

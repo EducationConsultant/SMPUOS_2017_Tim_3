@@ -17,10 +17,12 @@ import com.film.models.Film;
 import com.film.models.Glumac;
 import com.film.models.Jezik;
 import com.film.models.Kategorija;
+import com.film.models.Ocjena;
 import com.film.models.Reditelj;
 import com.film.repository.FilmRepository;
 import com.film.repository.JezikRepository;
 import com.film.repository.KategorijaRepository;
+import com.film.repository.OcjenaRepository;
 import com.film.repository.RediteljRepository;
 import com.film.services.FilmService;
 
@@ -39,6 +41,10 @@ public class FilmServiceJpa implements FilmService {
 	@Autowired
 	private KategorijaRepository kategorijaRepository;
 
+	
+	@Autowired 
+	private OcjenaRepository ocjenaRepository;
+	
 	@Override
 	public Film save(Film film) {
 		Jezik jezik = jezikRepository.findOne(film.getJezik().getId());
@@ -89,7 +95,7 @@ public class FilmServiceJpa implements FilmService {
 	}
 
 	@Override
-	public Film saveOcena(Film film, Long id) {
+	public Film saveOcena(Film film, Long id, String username) {
 		Film filmZaOcenu = filmRepository.findOne(id);
 
 		int suma = filmZaOcenu.getSumaOcena() + film.getOcena();
@@ -101,8 +107,17 @@ public class FilmServiceJpa implements FilmService {
 		float prosek = (float) suma / (float) brojac;
 		filmZaOcenu.setProsecnaOcena(prosek);
 
+		Ocjena ocjena=new Ocjena();
+		ocjena.setFilm(film);
+		ocjena.setUserName(username);
+		ocjena.setOcjena(film.getOcena());
+		
+		ocjenaRepository.save(ocjena);
+		
 		filmRepository.save(filmZaOcenu);
-
+		
+		
+		
 		return filmZaOcenu;
 	}
 

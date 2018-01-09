@@ -5,12 +5,11 @@ angular.module('filmApp.FilmController',[])
 	$scope.title="Filmovi";
 	$scope.isAdmin=false;
 	$scope.izabraniKriterijum="svi";
-	//$scope.izabraniGlumci=[];
+
 	$scope.brojStavki=5;
 	$scope.trenutnaStranica = 1;
 	$scope.ukupanBrojStrana = 1;
-	//$scope.ocjenaMin;
-	//$scope.ocjenaMax;
+	
 	
 	$scope.pregledFilmova = function() {
 		
@@ -140,8 +139,8 @@ angular.module('filmApp.FilmController',[])
 	}
 	
 	$scope.ocjeniFilm=function(film){
-		
-		FilmoviService.ocjeniFilm(film)
+		var korisnickoIme = $localStorage.logged.korisnickoIme;
+		FilmoviService.ocjeniFilm(film, korisnickoIme)
 			.success(
 				function(data){
 					$mdDialog.show (
@@ -364,7 +363,26 @@ angular.module('filmApp.FilmController',[])
 			 $scope.listaFilmova.splice(foundIndex,1);
 			 $scope.listaFilmova.splice(foundIndex,0, data);
 			 $scope.$applay;
-			// $scope.$applay();
+			
+		 }
+	 }
+	 
+	 $scope.ocjenjen=function(film){
+		 var indexFound=-1;
+		// var brojac=1;
+		 angular.forEach(film.ocjene, function(value, index){
+			 if($localStorage.logged.korisnickoIme==value.userName){
+				 indexFound=index;
+			 }
+		 });
+		 
+		 if(indexFound!=-1){
+			/// alert("Ocjenjen ");
+			 
+			 return false;
+		 }else{
+			//alert("Nije ocjenjen");
+			 return true;
 		 }
 	 }
 });
